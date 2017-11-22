@@ -32,3 +32,25 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui
+
+# 32-bit Windows
+win32:contains(QT_ARCH, i386) {
+
+}
+
+#64-bit Windows
+win32:contains(QT_ARCH, x86_64) {
+
+}
+
+# MacOS
+unix:macos {
+
+}
+
+# Linux/Other
+unix:!macos {
+    LIBS += -L$$PWD/thirdparty/SFML/linux/lib -L$$PWD/thirdparty/Box2D/linux/lib -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio -lBox2D
+    INCLUDEPATH += $$PWD/thirdparty/SFML/linux/include $$PWD/thirdparty/Box2D
+    DEPENDPATH += $$PWD/thirdparty/SFML/linux/include $$PWD/thirdparty/Box2D
+}
