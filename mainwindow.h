@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <Box2D.h>
+#include <SFML/Graphics.hpp>
 
 namespace Ui {
 class MainWindow;
