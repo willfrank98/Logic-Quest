@@ -42,12 +42,16 @@ win32:contains(QT_ARCH, i386) {
 
 #64-bit Windows
 win32:contains(QT_ARCH, x86_64) {
-
+    LIBS += -L$$PWD/thirdparty/Box2D/windows/lib -lBox2D
+    INCLUDEPATH += $$PWD/thirdparty/Box2D
+    DEPENDPATH += $$PWD/thirdparty/Box2D
 }
 
 # MacOS
 unix:macos {
-
+    LIBS += -L$$PWD/thirdparty/SFML/linux/lib -L$$PWD/thirdparty/Box2D/mac/lib -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio -lBox2D
+    INCLUDEPATH += $$PWD/thirdparty/SFML/linux/include $$PWD/thirdparty/Box2D
+    DEPENDPATH += $$PWD/thirdparty/SFML/linux/include $$PWD/thirdparty/Box2D
 }
 
 # Linux/Other
