@@ -35,7 +35,9 @@ FORMS += \
 
 # 32-bit Windows
 win32:contains(QT_ARCH, i386) {
-
+    INCLUDEPATH += thirdparty/SFML/include
+    LIBS += -L"thirdparty/SFML/windows/lib" -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
+    DEPENDPATH += thirdparty/SFML/windows/include
 }
 
 #64-bit Windows
