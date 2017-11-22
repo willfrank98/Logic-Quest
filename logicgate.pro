@@ -35,23 +35,37 @@ FORMS += \
 
 # 32-bit Windows
 win32:contains(QT_ARCH, i386) {
-    INCLUDEPATH += thirdparty/SFML/include
-    LIBS += -L"thirdparty/SFML/windows/lib" -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
-    DEPENDPATH += thirdparty/SFML/windows/include
+    # No one is using a 32-bit machine, right?
 }
 
-#64-bit Windows
+# 64-bit Windows (Kit: MSVC2015 64bit)
+# I can't test the MinGW kit from the lab machines, but those would likely need a 'win32-g++' block or something.
+# Using the MSVC2015 64-bit kit would likelye be easiest at this point.
 win32:contains(QT_ARCH, x86_64) {
-    LIBS += -L$$PWD/thirdparty/Box2D/windows/lib -lBox2D
-    INCLUDEPATH += $$PWD/thirdparty/Box2D
-    DEPENDPATH += $$PWD/thirdparty/Box2D
+    # Box2D
+    CONFIG(debug, debug|release): LIBS += -L$$PWD/thirdparty/Box2D/win64/debug -lBox2D
+    CONFIG(release, debug|release): LIBS += -L$$PWD/thirdparty/Box2D/win64/release -lBox2D
+    INCLUDEPATH += $$PWD/thirdparty/Box2D/include
+    DEPENDPATH += $$PWD/thirdparty/Box2D/include
+
+    # SFML (DLLs are also in the lib directory)
+    CONFIG(debug, debug|release): LIBS += -L$$PWD/thirdparty/SFML/win64/lib  -lsfml-system-d -lsfml-window-d -lsfml-graphics-d -lsfml-audio-d
+    CONFIG(release, debug|release): LIBS += -L$$PWD/thirdparty/SFML/win64/lib  -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
+    INCLUDEPATH += $$PWD/thirdparty/SFML/win64/include
+    DEPENDPATH += $$PWD/thirdparty/SFML/win64/include
 }
 
-# MacOS
+# MacOS (Untested)
 unix:macos {
-    LIBS += -L$$PWD/thirdparty/SFML/linux/lib -L$$PWD/thirdparty/Box2D/mac/lib -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio -lBox2D
-    INCLUDEPATH += $$PWD/thirdparty/SFML/linux/include $$PWD/thirdparty/Box2D
-    DEPENDPATH += $$PWD/thirdparty/SFML/linux/include $$PWD/thirdparty/Box2D
+    # Box2D
+    LIBS += -L$$PWD/thirdparty/Box2D/mac/lib -lBox2D
+    INCLUDEPATH += $$PWD/thirdparty/Box2D/include
+    DEPENDPATH += $$PWD/thirdparty/Box2D/include
+
+    # SFML
+    LIBS += -L$$PWD/thirdparty/SFML/mac/lib -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
+    INCLUDEPATH += $$PWD/thirdparty/SFML/mac/include
+    DEPENDPATH += $$PWD/thirdparty/SFML/mac/include
 }
 
 # Linux/Other

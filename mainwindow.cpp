@@ -7,8 +7,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // Simple Box2D check
     b2Vec2 gravity = b2Vec2(0.0, 9.8);
     b2World world(gravity);
+
+    // Simple SFML check
+    sf::SoundBuffer sbuf;
+
 }
 
 MainWindow::~MainWindow()
