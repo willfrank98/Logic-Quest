@@ -40,7 +40,9 @@ win32:contains(QT_ARCH, i386) {
 
 #64-bit Windows
 win32:contains(QT_ARCH, x86_64) {
-
+    LIBS += -L$$PWD/thirdparty/Box2D/windows/lib -lBox2D
+    INCLUDEPATH += $$PWD/thirdparty/Box2D
+    DEPENDPATH += $$PWD/thirdparty/Box2D
 }
 
 # MacOS
