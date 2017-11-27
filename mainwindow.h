@@ -1,7 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QDebug>
 #include <QMainWindow>
+#include <QDesktopWidget>
+#include <sceneholder.h>
 #include <Box2D.h>
 #include <SFML/Audio.hpp>
 
@@ -19,6 +22,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    void swapScene(QString s);
+    SceneHolder *scenes = new SceneHolder();
 };
 
 #endif // MAINWINDOW_H
