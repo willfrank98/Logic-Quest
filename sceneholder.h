@@ -1,7 +1,8 @@
 #ifndef SCENEHOLDER_H
 #define SCENEHOLDER_H
 
-#include <titlescene.h>
+#include "titlescene.h"
+#include "tutorial.h"
 
 class SceneHolder
 {

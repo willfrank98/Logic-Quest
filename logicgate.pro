@@ -28,14 +28,16 @@ SOURCES += \
         mainwindow.cpp \
     sceneholder.cpp \
     titlescene.cpp \
-    physicsscene.cpp
+    physicsscene.cpp \
+    tutorial.cpp
 
 HEADERS += \
         mainwindow.h \
     sceneholder.h \
     titlescene.h \
     physicsscene.h \
-    itemdata.h
+    itemdata.h \
+    tutorial.h
 
 FORMS += \
         mainwindow.ui
