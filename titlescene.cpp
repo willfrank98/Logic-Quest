@@ -94,7 +94,7 @@ void TitleScene::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Space)
     {
-        // Just load the title scene again since we have nothing else yet.
-        emit changeScene("Title");
+		// Switch to the tutorial
+		emit changeScene("tutorial");
     }
 }

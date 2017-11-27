@@ -29,7 +29,8 @@ SOURCES += \
     sceneholder.cpp \
     titlescene.cpp \
     physicsscene.cpp \
-    basicscene.cpp
+    basicscene.cpp \
+	tutorial.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -37,7 +38,8 @@ HEADERS += \
     titlescene.h \
     physicsscene.h \
     itemdata.h \
-    basicscene.h
+    basicscene.h \
+	tutorial.h
 
 FORMS += \
         mainwindow.ui

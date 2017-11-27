@@ -10,6 +10,6 @@ SceneHolder::SceneHolder()
 QGraphicsScene* SceneHolder::getScene(QString sceneName)
 {
     if (sceneName.toLower() == "title") return new TitleScene();
-    else if (sceneName.toLower() == "level1") return new TitleScene();  // CHANGE THIS
+	else if (sceneName.toLower() == "tutorial") return new Tutorial();
     else return nullptr;
 }
