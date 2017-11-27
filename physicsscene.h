@@ -2,12 +2,7 @@
 #define PHYSICSSCENE_H
 
 #include <Box2D.h>
-#include <itemdata.h>
-#include <QGraphicsScene>
-#include <QMouseEvent>
-#include <QGraphicsSceneMouseEvent>
-#include <QTimer>
-#include <QElapsedTimer>
+#include <basicscene.h>
 
 class PhysicsScene : public QGraphicsScene
 {
@@ -32,11 +27,6 @@ private:
     virtual void onUpdate(qreal delta);
 
     virtual bool eventFilter(QObject *watched, QEvent *event);
-    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-    virtual void keyPressEvent(QKeyEvent *event);
-    virtual void keyReleaseEvent(QKeyEvent *event);
 
 signals:
     void changeScene(QString);

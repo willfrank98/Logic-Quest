@@ -23,6 +23,18 @@ PhysicsScene::~PhysicsScene()
 
 }
 
+// Runs this function when the scene is first shown
+void PhysicsScene::onInit()
+{
+    qDebug() << "Override the onInit method, dummy!";
+}
+
+// This gets called every 'tick'
+void PhysicsScene::onUpdate(qreal delta)
+{
+    qDebug() << "Override the onUpdate method, dummy!";
+}
+
 // Updates physics bodies
 void PhysicsScene::updateBodies()
 {
@@ -50,18 +62,6 @@ void PhysicsScene::updateBodies()
     }
     world->Step(0.25, 8, 4);
 //    qDebug() << "Bodies:" << world->GetBodyCount();
-}
-
-// Runs this function when the scene is first shown
-void PhysicsScene::onInit()
-{
-    qDebug() << "Override the onInit method, dummy!";
-}
-
-// This gets called every 'tick'
-void PhysicsScene::onUpdate(qreal delta)
-{
-    qDebug() << "Override the onUpdate method, dummy!";
 }
 
 // Creates a box and links it to a physics body
@@ -159,29 +159,4 @@ bool PhysicsScene::eventFilter(QObject *watched, QEvent *event)
 
     // Passes the event to be handled in the default manner
     return QGraphicsScene::eventFilter(watched, event);
-}
-
-void PhysicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-
-}
-
-void PhysicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-
-}
-
-void PhysicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-
-}
-
-void PhysicsScene::keyPressEvent(QKeyEvent *event)
-{
-
-}
-
-void PhysicsScene::keyReleaseEvent(QKeyEvent *event)
-{
-
 }

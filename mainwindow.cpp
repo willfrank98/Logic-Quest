@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionExit, &QAction::triggered, this, [=](){ QApplication::quit(); });
 
     // Swap the view to the scene that matches the emitted scene name
-    connect((PhysicsScene*)ui->graphicsView->scene(), &PhysicsScene::changeScene, this, &MainWindow::swapScene);
+    connect((BasicScene*)ui->graphicsView->scene(), &BasicScene::changeScene, this, &MainWindow::swapScene);
 }
 
 MainWindow::~MainWindow()
@@ -73,6 +73,6 @@ void MainWindow::swapScene(QString s)
     ui->graphicsView->show();
 
     // Reconnect
-    connect((PhysicsScene*)ui->graphicsView->scene(), &PhysicsScene::changeScene, this, &MainWindow::swapScene);
+    connect((BasicScene*)ui->graphicsView->scene(), &BasicScene::changeScene, this, &MainWindow::swapScene);
     qDebug() << "[INFO]" << "Scene changed to:" << s.replace("\"", "");
 }
