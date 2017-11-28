@@ -44,21 +44,23 @@ void PhysicsScene::updateBodies()
         item = static_cast<QGraphicsItem*>(body->GetUserData());
 
         // Update item positions from body data
-        if (body->GetType() == b2_dynamicBody)
-        {
-            qreal itemWidth = item->boundingRect().width();
-            qreal itemHeight = item->boundingRect().height();
-            if (!QRectF(0.0 - itemWidth, 0.0 - itemHeight, sceneRect().width() + itemWidth, sceneRect().height() + itemHeight).contains(item->pos()))
-            {
-                world->DestroyBody(body);
-                removeItem(item);
-                delete item;
-                continue;
-            }
+		if (body->GetType() == b2_dynamicBody)
+		{
+			qreal itemWidth = item->boundingRect().width();
+			qreal itemHeight = item->boundingRect().height();
+			timer.stop();
+			if (!QRectF(0.0 - itemWidth, 0.0 - itemHeight, sceneRect().width() + itemWidth, sceneRect().height() + itemHeight).contains(item->pos()))
+			{
+				//world->DestroyBody(body);
+				//removeItem(item);
+				//delete item;
+				//continue;
+			}
+			timer.start();
 
-            item->setPos(body->GetPosition().x, body->GetPosition().y);
-            item->setRotation(body->GetAngle() * 180/b2_pi);
-        }
+			item->setPos(body->GetPosition().x, body->GetPosition().y);
+			item->setRotation(body->GetAngle() * 180/b2_pi);
+		}
     }
     world->Step(0.25, 8, 4);
 //    qDebug() << "Bodies:" << world->GetBodyCount();
