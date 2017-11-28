@@ -76,7 +76,7 @@ unix:macos {
     DEPENDPATH += $$PWD/thirdparty/Box2D/include
 
     # SFML
-    LIBS += -L$$PWD/thirdparty/SFML/mac/lib -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
+    LIBS += -L$$PWD/thirdparty/SFML/mac/lib -L$$PWD/thirdparty/SFML/mac/Frameworks -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
     INCLUDEPATH += $$PWD/thirdparty/SFML/mac/include
     DEPENDPATH += $$PWD/thirdparty/SFML/mac/include
 }
