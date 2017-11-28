@@ -40,7 +40,7 @@ void TitleScene::onInit()
     prompt->setPos(sceneRect().width() / 2.0 - prompt->boundingRect().width() / 2.0, sceneRect().height() / 2.0);
     prompt->setZValue(1.0);
     prompt->setData(Name, "prompt");
-    prompt->setData(ScaleDir, 1.0);
+    prompt->setData(Direction, 1.0);
 }
 
 // This gets run every 'tick'
@@ -54,13 +54,13 @@ void TitleScene::onUpdate(qreal delta)
         {
             if (item->scale() >= 1.5 || item->scale() < 1.0)
             {
-                item->setData(ScaleDir, -item->data(ScaleDir).toFloat());
+                item->setData(Direction, -item->data(Direction).toFloat());
                 createBox(QRectF(10.0, -64.0, 64.0, 64.0),
                           QColor(0, 0, 0), QColor(128, 128, 128), Dynamic, true);
             }
-            item->moveBy(delta * -item->data(ScaleDir).toFloat() * item->boundingRect().width() / 2.0,
-                         delta * item->data(ScaleDir).toFloat());
-            item->setScale(item->scale() + delta * item->data(ScaleDir).toFloat());
+            item->moveBy(delta * -item->data(Direction).toFloat() * item->boundingRect().width() / 2.0,
+                         delta * item->data(Direction).toFloat());
+            item->setScale(item->scale() + delta * item->data(Direction).toFloat());
         }
     }
 }

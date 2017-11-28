@@ -10,7 +10,7 @@ PhysicsScene::PhysicsScene(QObject *parent) : QGraphicsScene(parent)
     gravity = b2Vec2(0.0, 9.8);
     world = new b2World(gravity);
 
-    timer.setInterval(8);
+    timer.setInterval(17);
     connect(&timer, &QTimer::timeout, this, [=](){
         onUpdate(deltaKeeper.elapsed() / 1000.0);
         updateBodies();

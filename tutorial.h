@@ -1,9 +1,9 @@
 #ifndef TUTORIAL_H
 #define TUTORIAL_H
 
-#include "physicsscene.h"
+#include "basicscene.h"
 
-class Tutorial : public PhysicsScene
+class Tutorial : public BasicScene
 {
 public:
 	Tutorial();
