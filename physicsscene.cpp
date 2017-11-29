@@ -51,10 +51,10 @@ void PhysicsScene::updateBodies()
 			timer.stop();
 			if (!QRectF(0.0 - itemWidth, 0.0 - itemHeight, sceneRect().width() + itemWidth, sceneRect().height() + itemHeight).contains(item->pos()))
 			{
-				//world->DestroyBody(body);
-				//removeItem(item);
-				//delete item;
-				//continue;
+                //world->DestroyBody(body);
+                //removeItem(item);
+                //delete item;
+                //continue;
 			}
 			timer.start();
 
