@@ -1,8 +1,4 @@
 #include "basicscene.h"
-#include <QDebug>
-#include <QGraphicsView>
-#include <QGraphicsItem>
-#include <QResizeEvent>
 
 // Initializes the world and such
 BasicScene::BasicScene(QObject *parent) : QGraphicsScene(parent)
@@ -107,4 +103,12 @@ void BasicScene::keyPressEvent(QKeyEvent *event)
 void BasicScene::keyReleaseEvent(QKeyEvent *event)
 {
 
+}
+
+void BasicScene::createUI()
+{
+	int width = sceneRect().width();
+	int height = sceneRect().height();
+
+	//createBox();
 }
