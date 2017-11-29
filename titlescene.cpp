@@ -1,7 +1,4 @@
 #include "titlescene.h"
-#include <QDebug>
-#include <QGraphicsRectItem>
-#include <QGraphicsView>
 
 
 // Simple example of a title scene
