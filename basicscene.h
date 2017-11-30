@@ -24,7 +24,7 @@ public:
                    bool draggable = false);
     void setItemPos(QGraphicsItem *item, QPointF pos);
 
-	void createUI();
+	void createBasicUI(int inputs, int outputs, int gridX, int gridY);
 
 private:
     QTimer timer;

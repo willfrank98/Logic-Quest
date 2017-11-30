@@ -105,13 +105,30 @@ void BasicScene::keyReleaseEvent(QKeyEvent *event)
 
 }
 
-void BasicScene::createUI()
+void BasicScene::createBasicUI(int inputs, int outputs, int gridX, int gridY)
 {
 	qreal width = sceneRect().width();
 	qreal height = sceneRect().height();
 
-	createBox(QRectF(0, 0, 100, height-100));
-	createBox(QRectF(width-100, 0, 100, height-100));
-	createBox(QRectF(0, height-100, width, 100));
+	int trayWidth = 100;
+	int trayHeight = 100;
+	createBox(QRectF(0, 0, trayWidth, height-trayWidth));	//draws input tray
+	createBox(QRectF(width-trayWidth, 0, trayWidth, height-trayWidth)); //draws output tray
+	createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
+
+	int gridWidth = (width - (2 * trayWidth)) / gridX;
+	int gridHeight = (height - trayHeight) / gridY;
+
+	for (int x = trayWidth; x < width - trayWidth; x += gridWidth)
+	{
+		for (int y = 0; y < height - trayHeight; y += gridHeight)
+		{
+			createBox(QRectF(x, y, gridWidth, gridHeight));
+		}
+	}
+
+
+
+
 
 }

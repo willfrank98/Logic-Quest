@@ -8,7 +8,7 @@ Tutorial::Tutorial()
 void Tutorial::onInit()
 {
 
-	createUI();
+	createBasicUI(1, 1, 5, 5);
 
 
 //	// Define a font
