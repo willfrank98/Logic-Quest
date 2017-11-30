@@ -1,7 +1,4 @@
 #include "tutorial.h"
-#include <QDebug>
-#include <QGraphicsRectItem>
-#include <QGraphicsView>
 
 Tutorial::Tutorial()
 {
@@ -10,24 +7,28 @@ Tutorial::Tutorial()
 
 void Tutorial::onInit()
 {
-	// Define a font
-	QFont font = QFont("Helvetica");
 
-	// Add some text, ignores physics
-	font.setPointSize(14);
-	QGraphicsTextItem *title = addText("Tutorial", font);
-	title->setPos(/*sceneRect().width() / 2.0 - title->boundingRect().width() / 2.0, 20.0*/ 0, 0);
-	title->setZValue(1.0);
-    title->setData(Name, "title");
+	createBasicUI(1, 1, 5, 5);
 
-    // The click to continue text
-    font.setPointSize(14);
-    QGraphicsTextItem *cont = addText("Click anywhere to continue ...", font);
-    cont->setPos(sceneRect().width() - cont->boundingRect().width(), sceneRect().height() - cont->boundingRect().height());
-    cont->setZValue(1.0);
-    cont->setData(Name, "cont_prompt");
-    cont->setData(StartPosition, cont->pos());  // Start position; this would be a good spot to use an enum
-    cont->setData(Direction, 1.0);          // Move direction
+
+//	// Define a font
+//	QFont font = QFont("Helvetica");
+
+//	// Add some text, ignores physics
+//	font.setPointSize(14);
+//	QGraphicsTextItem *title = addText("Tutorial", font);
+//	title->setPos(/*sceneRect().width() / 2.0 - title->boundingRect().width() / 2.0, 20.0*/ 0, 0);
+//	title->setZValue(1.0);
+//    title->setData(Name, "title");
+
+//    // The click to continue text
+//    font.setPointSize(14);
+//    QGraphicsTextItem *cont = addText("Click anywhere to continue ...", font);
+//    cont->setPos(sceneRect().width() - cont->boundingRect().width(), sceneRect().height() - cont->boundingRect().height());
+//    cont->setZValue(1.0);
+//    cont->setData(Name, "cont_prompt");
+//    cont->setData(StartPosition, cont->pos());  // Start position; this would be a good spot to use an enum
+//    cont->setData(Direction, 1.0);          // Move direction
 }
 
 void Tutorial::onUpdate(qreal delta)
@@ -50,7 +51,7 @@ void Tutorial::onUpdate(qreal delta)
 
 void Tutorial::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    emit changeScene("Level1");
+	//emit changeScene("Level1");
 }
 
 void Tutorial::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){

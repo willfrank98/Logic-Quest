@@ -7,6 +7,11 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QTimer>
 #include <QElapsedTimer>
+#include <QDebug>
+#include <QGraphicsView>
+#include <QGraphicsItem>
+#include <QResizeEvent>
+#include <QGraphicsRectItem>
 
 class BasicScene : public QGraphicsScene
 {
@@ -18,6 +23,8 @@ public:
     void createBox(QRectF rect, QColor line = QColor(0, 0, 0), QColor fill = QColor(255, 255, 255),
                    bool draggable = false);
     void setItemPos(QGraphicsItem *item, QPointF pos);
+
+	void createBasicUI(int inputs, int outputs, int gridX, int gridY);
 
 private:
     QTimer timer;

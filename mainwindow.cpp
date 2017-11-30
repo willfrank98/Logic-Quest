@@ -51,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Connects the 'Quit' action.
     connect(ui->actionExit, &QAction::triggered, this, [=](){ QApplication::quit(); });
+    connect((PhysicsScene*)ui->graphicsView->scene(), &PhysicsScene::endProgram, this, [=](){ QApplication::quit(); });
 
     // Swap the view to the scene that matches the emitted scene name
     connect((BasicScene*)ui->graphicsView->scene(), &BasicScene::changeScene, this, &MainWindow::swapScene);
