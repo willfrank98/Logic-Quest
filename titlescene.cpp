@@ -91,7 +91,9 @@ void TitleScene::onUpdate(qreal delta)
             if (item->scale() >= 1.5 || item->scale() < 1.0)
             {
                 item->setData(Direction, -item->data(Direction).toFloat());
-                createBox(QRectF(10.0, -64.0, 64.0, 64.0),
+                //createBox(QRectF(10.0, -64.0, 64.0, 64.0),
+                  //        QColor(0, 0, 0), QColor(128, 128, 128), Dynamic, true);
+                createGate(":/res/sprites/logic_gates_64x64.png", QRectF(10.0, -64.0, 64.0, 64.0),
                           QColor(0, 0, 0), QColor(128, 128, 128), Dynamic, true);
             }
             item->moveBy(delta * -item->data(Direction).toFloat() * item->boundingRect().width() / 2.0,
