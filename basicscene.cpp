@@ -107,8 +107,11 @@ void BasicScene::keyReleaseEvent(QKeyEvent *event)
 
 void BasicScene::createUI()
 {
-	int width = sceneRect().width();
-	int height = sceneRect().height();
+	qreal width = sceneRect().width();
+	qreal height = sceneRect().height();
 
-	//createBox();
+	createBox(QRectF(0, 0, 100, height-100));
+	createBox(QRectF(width-100, 0, 100, height-100));
+	createBox(QRectF(0, height-100, width, 100));
+
 }
