@@ -32,6 +32,7 @@ private:
 
 signals:
     void changeScene(QString);
+    void endProgram();
 
 public slots:
 };
