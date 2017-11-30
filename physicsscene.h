@@ -13,6 +13,8 @@ public:
 
     void createBox(QRectF rect, QColor line = QColor(0, 0, 0), QColor fill = QColor(255, 255, 255),
                    ItemVal physicsType = Static, bool draggable = false);
+    void createGate(const QString& resourceName, QRectF rect, QColor line, QColor fill,
+                   ItemVal physicsType = Static, bool draggable = false);
     void setItemPos(QGraphicsItem *item, QPointF pos);
 
 private:
