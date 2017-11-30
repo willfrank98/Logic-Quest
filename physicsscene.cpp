@@ -44,8 +44,8 @@ void PhysicsScene::updateBodies()
         item = static_cast<QGraphicsItem*>(body->GetUserData());
 
         // Update item positions from body data
-		if (body->GetType() == b2_dynamicBody)
-		{
+        if (body->GetType() == b2_dynamicBody)
+        {
 			qreal itemWidth = item->boundingRect().width();
 			qreal itemHeight = item->boundingRect().height();
 			timer.stop();
@@ -60,7 +60,7 @@ void PhysicsScene::updateBodies()
 
 			item->setPos(body->GetPosition().x, body->GetPosition().y);
 			item->setRotation(body->GetAngle() * 180/b2_pi);
-		}
+        }
     }
     world->Step(0.25, 8, 4);
 //    qDebug() << "Bodies:" << world->GetBodyCount();
