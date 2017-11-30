@@ -1,4 +1,9 @@
 #include "titlescene.h"
+#include <QDebug>
+#include <QGraphicsRectItem>
+#include <QGraphicsView>
+#include <QPushButton>
+#include <QGraphicsProxyWidget>
 
 
 // Simple example of a title scene
@@ -13,6 +18,8 @@ void TitleScene::onInit()
     // Create a static box representing the ground
     createBox(QRectF(0.0, sceneRect().height() - 16.0, sceneRect().width(), 16.0),
               QColor(0, 0, 0), QColor(128, 128, 128));
+
+
 
     // Create some dynamic boxes
 //    createBox(QRectF(sceneRect().width() / 2.0, sceneRect().height() / 2.0, 64.0, 64.0),
@@ -38,6 +45,38 @@ void TitleScene::onInit()
     prompt->setZValue(1.0);
     prompt->setData(Name, "prompt");
     prompt->setData(Direction, 1.0);
+
+    //Sets up menu buttons
+    QPushButton *startButton = new QPushButton();
+    startButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .25, sceneRect().width() * .30, sceneRect().height() * .10));
+    startButton->setText("Start Game");
+    startButtonProxy = addWidget(startButton);
+
+    QPushButton *levelSelectButton = new QPushButton();
+    levelSelectButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .40, sceneRect().width() * .30, sceneRect().height() * .10));
+    levelSelectButton->setText("Level Select");
+    QGraphicsProxyWidget *levelSelectButtonProxy = addWidget(levelSelectButton);
+
+    QPushButton *optionsButton = new QPushButton();
+    optionsButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .55, sceneRect().width() * .30, sceneRect().height() * .10));
+    optionsButton->setText("Options");
+    QGraphicsProxyWidget *optionsButtonProxy = addWidget(optionsButton);
+
+    QPushButton *exitButton = new QPushButton();
+    exitButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .70, sceneRect().width() * .30, sceneRect().height() * .10));
+    exitButton->setText("Exit");
+    QGraphicsProxyWidget *exitButtonProxy = addWidget(exitButton);
+
+    //Connects menu buttons
+    connect(startButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));});
+
+
+
+
+}
+
+void TitleScene::tutorial(){
+    emit(changeScene("tutorial"));
 }
 
 // This gets run every 'tick'
@@ -52,7 +91,9 @@ void TitleScene::onUpdate(qreal delta)
             if (item->scale() >= 1.5 || item->scale() < 1.0)
             {
                 item->setData(Direction, -item->data(Direction).toFloat());
-                createBox(QRectF(10.0, -64.0, 64.0, 64.0),
+                //createBox(QRectF(10.0, -64.0, 64.0, 64.0),
+                  //        QColor(0, 0, 0), QColor(128, 128, 128), Dynamic, true);
+                createGate(":/res/sprites/logic_gates_64x64.png", QRectF(10.0, -64.0, 64.0, 64.0),
                           QColor(0, 0, 0), QColor(128, 128, 128), Dynamic, true);
             }
             item->moveBy(delta * -item->data(Direction).toFloat() * item->boundingRect().width() / 2.0,
