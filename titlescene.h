@@ -3,14 +3,19 @@
 
 #include <physicsscene.h>
 
+
 class TitleScene : public PhysicsScene
 {
 public:
     TitleScene();
 
+private slots:
+    void tutorial();
+
 private:
     int currentButton = Qt::NoButton;
     QGraphicsItem *clickedItem;
+    QGraphicsProxyWidget *startButtonProxy;
 
     void onInit();
     void onUpdate(qreal delta);
