@@ -18,13 +18,13 @@ BasicScene::~BasicScene()
 // Runs this function when the scene is first shown
 void BasicScene::onInit()
 {
-    qDebug() << "Override the onInit method, dummy!";
+//    qDebug() << "Override the onInit method, dummy!";
 }
 
 // This gets called every 'tick'
 void BasicScene::onUpdate(qreal delta)
 {
-    qDebug() << "Override the onUpdate method, dummy!";
+//    qDebug() << "Override the onUpdate method, dummy!";
 }
 
 // Creates a box

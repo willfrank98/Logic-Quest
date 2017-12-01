@@ -3,6 +3,7 @@
 
 #include "titlescene.h"
 #include "tutorial.h"
+#include "levelmenu.h"
 #include "levelone.h"
 
 class SceneHolder
