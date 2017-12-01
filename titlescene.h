@@ -17,6 +17,7 @@ private slots:
 
 private:
     int currentButton = Qt::NoButton;
+    int tickCounter = 0;
     QGraphicsItem *clickedItem;
     QGraphicsProxyWidget *startButtonProxy;
     QGraphicsProxyWidget *levelSelectButtonProxy;

@@ -68,26 +68,9 @@ void PhysicsScene::updateBodies()
 
 // Creates a box and links it to a physics body
 // http://www.iforce2d.net/b2dtut/bodies
-void PhysicsScene::createBox(QRectF rect, QColor line, QColor fill, ItemVal physicsType, bool draggable)
+void PhysicsScene::createBox(QRectF rect, QColor line, QColor fill, PhysicsBodyType physicsType, bool draggable)
 {
     if (world->GetBodyCount() > 20) return;
-
-    // Defines a physics body
-    b2BodyDef bodyDef;
-    bodyDef.type = (physicsType == Static) ? b2_staticBody : b2_dynamicBody;
-    bodyDef.position.Set(rect.x(), rect.y());
-    bodyDef.angle = 0;
-    b2Body* dynBody = world->CreateBody(&bodyDef);
-
-    // Defines the shape of the body
-    b2PolygonShape bodyShape;
-    bodyShape.SetAsBox(rect.width() / 2.0, rect.height() / 2.0);
-
-    // Defines a fixture using the previously defined shape
-    b2FixtureDef bodyFixtureDef;
-    bodyFixtureDef.shape = &bodyShape;
-    bodyFixtureDef.density = 1.0;
-    dynBody->CreateFixture(&bodyFixtureDef);
 
     // Create the GraphicsItem (visual part of the body)
     QGraphicsRectItem *item = addRect(QRectF(0.0, 0.0, rect.width(), rect.height()), QPen(line), QBrush(fill));
@@ -100,31 +83,14 @@ void PhysicsScene::createBox(QRectF rect, QColor line, QColor fill, ItemVal phys
     item->setData(Draggable, draggable);
 
     // Store the item in the body for easier updating (Yay!)
-    dynBody->SetUserData(item);
+    attachBody(item, physicsType);
 }
 
 // Creates a Gate from the sprite sheet and links it to a physics body
 // http://www.iforce2d.net/b2dtut/bodies
-void PhysicsScene::createGate(const QString& resourceName, QRectF rect, QColor line, QColor fill, ItemVal physicsType, bool draggable)
+void PhysicsScene::createGate(const QString& resourceName, QRectF rect, QColor line, QColor fill, PhysicsBodyType physicsType, bool draggable)
 {
     if (world->GetBodyCount() > 20) return;
-
-    // Defines a physics body
-    b2BodyDef bodyDef;
-    bodyDef.type = (physicsType == Static) ? b2_staticBody : b2_dynamicBody;
-    bodyDef.position.Set(rect.x(), rect.y());
-    bodyDef.angle = 0;
-    b2Body* dynBody = world->CreateBody(&bodyDef);
-
-    // Defines the shape of the body
-    b2PolygonShape bodyShape;
-    bodyShape.SetAsBox(rect.width() / 2.0, rect.height() / 2.0);
-
-    // Defines a fixture using the previously defined shape
-    b2FixtureDef bodyFixtureDef;
-    bodyFixtureDef.shape = &bodyShape;
-    bodyFixtureDef.density = 1.0;
-    dynBody->CreateFixture(&bodyFixtureDef);
 
     // Create the GraphicsItem (visual part of the body)
     QPixmap gate = QPixmap(resourceName);
@@ -138,6 +104,29 @@ void PhysicsScene::createGate(const QString& resourceName, QRectF rect, QColor l
     item->setData(Draggable, draggable);
 
     // Store the item in the body for easier updating (Yay!)
+    attachBody(item, physicsType);
+}
+
+// Moved the physics stuff here so there's less duplication of code
+void PhysicsScene::attachBody(QGraphicsItem *item, PhysicsBodyType bodyType)
+{
+    // Defines a physics body
+    b2BodyDef bodyDef;
+    bodyDef.type = (bodyType == Static) ? b2_staticBody : b2_dynamicBody;
+    bodyDef.position.Set(item->pos().x(), item->pos().y());
+    bodyDef.angle = 0;
+    b2Body* dynBody = world->CreateBody(&bodyDef);
+
+    // Defines the shape of the body
+    b2PolygonShape bodyShape;
+    bodyShape.SetAsBox(item->boundingRect().width() / 2.0, item->boundingRect().height() / 2.0);
+
+    // Defines a fixture using the previously defined shape
+    b2FixtureDef bodyFixtureDef;
+    bodyFixtureDef.shape = &bodyShape;
+    bodyFixtureDef.density = 1.0;
+    dynBody->CreateFixture(&bodyFixtureDef);
+
     dynBody->SetUserData(item);
 }
 
