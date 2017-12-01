@@ -51,21 +51,25 @@ void TitleScene::onInit()
     startButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .25, sceneRect().width() * .30, sceneRect().height() * .10));
     startButton->setText("Start Game");
     startButtonProxy = addWidget(startButton);
+    startButtonProxy->setZValue(10.0);  // Makes the buttons appear in front of other things
 
     QPushButton *levelSelectButton = new QPushButton();
     levelSelectButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .40, sceneRect().width() * .30, sceneRect().height() * .10));
     levelSelectButton->setText("Level Select");
     levelSelectButtonProxy = addWidget(levelSelectButton);
+    levelSelectButtonProxy->setZValue(10.0);
 
     QPushButton *optionsButton = new QPushButton();
     optionsButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .55, sceneRect().width() * .30, sceneRect().height() * .10));
     optionsButton->setText("Options");
     optionsButtonProxy = addWidget(optionsButton);
+    optionsButtonProxy->setZValue(10.0);
 
     QPushButton *exitButton = new QPushButton();
     exitButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .70, sceneRect().width() * .30, sceneRect().height() * .10));
     exitButton->setText("Exit");
     exitButtonProxy = addWidget(exitButton);
+    exitButtonProxy->setZValue(10.0);
 
     //Connects menu buttons
     connect(startButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
@@ -81,25 +85,43 @@ void TitleScene::onInit()
 // This gets run every 'tick'
 void TitleScene::onUpdate(qreal delta)
 {
+    // Drops a gate every 50 ticks
+    // A tick is the length of the 'timer' interval in the BasicScene/PhysicsScene
+    if (tickCounter > 50)
+    {
+        createBox(QRectF(10.0, -64.0, 64.0, 64.0),
+                  QColor(0, 0, 0), QColor(128, 128, 128), Dynamic);
+        tickCounter = 0;
+    }
+
     for (QGraphicsItem *item : items())
     {
+        if (item->isWidget())
+        {
+//            QGraphicsProxyWidget *proxyItem = (QGraphicsProxyWidget*)item;
+//            proxyItem->setScale(proxyItem->scale() + 0.01);
+        }
+
+
         // Animate the "click to play!" text
-        // Perhaps move to some animateItem method that utilizes a timer, or something
+        // Since there's buttons now, we should probably just get rid of this.
         if (item->data(Name) == "prompt")
         {
-            if (item->scale() >= 1.5 || item->scale() < 1.0)
+
+            if (item->scale() > 1.5)
             {
-                item->setData(Direction, -item->data(Direction).toFloat());
-                //createBox(QRectF(10.0, -64.0, 64.0, 64.0),
-                  //        QColor(0, 0, 0), QColor(128, 128, 128), Dynamic, true);
-                //createGate(":/res/sprites/logic_gates_64x64.png", QRectF(10.0, -64.0, 64.0, 64.0),
-                //          QColor(0, 0, 0), QColor(128, 128, 128), Dynamic, true);
+                item->setData(Direction, -1.0);
             }
-            item->moveBy(delta * -item->data(Direction).toFloat() * item->boundingRect().width() / 2.0,
-                         delta * item->data(Direction).toFloat());
-            item->setScale(item->scale() + delta * item->data(Direction).toFloat());
+            else if (item->scale() < 1.0)
+            {
+                item->setData(Direction, 1.0);
+            }
+            item->moveBy(-1.0 * item->data(Direction).toFloat(), 0.0);
+            item->setScale(item->scale() + item->data(Direction).toFloat() * 0.01);
         }
     }
+
+    tickCounter++;
 }
 /*
 void TitleScene::mousePressEvent(QGraphicsSceneMouseEvent *event)

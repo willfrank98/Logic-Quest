@@ -12,9 +12,9 @@ public:
     ~PhysicsScene();
 
     void createBox(QRectF rect, QColor line = QColor(0, 0, 0), QColor fill = QColor(255, 255, 255),
-                   ItemVal physicsType = Static, bool draggable = false);
+                   PhysicsBodyType physicsType = Static, bool draggable = false);
     void createGate(const QString& resourceName, QRectF rect, QColor line, QColor fill,
-                   ItemVal physicsType = Static, bool draggable = false);
+                   PhysicsBodyType physicsType = Static, bool draggable = false);
     void setItemPos(QGraphicsItem *item, QPointF pos);
 
 private:
@@ -27,6 +27,7 @@ private:
     virtual void updateBodies();
     virtual void onInit();
     virtual void onUpdate(qreal delta);
+    void attachBody(QGraphicsItem *item, PhysicsBodyType bodyType);
 
     virtual bool eventFilter(QObject *watched, QEvent *event);
 
