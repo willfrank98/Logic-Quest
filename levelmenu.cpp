@@ -9,7 +9,7 @@ LevelMenu::LevelMenu()
 
     /* Header for the Easy levels */
     QGraphicsTextItem *easy = addText("Easy", font);
-    easy->setPos(sceneRect().width() / 2.0 - easy->boundingRect().width() / 2.0, sceneRect().height()/0.2);
+    easy->setPos(sceneRect().width() / 2.0, sceneRect().height()*0.2);
 
     /* Set the position, width, height, and color for EASY buttons*/
     levelOneEasy.setRect(sceneRect().width()/0.1, sceneRect().height()/0.3, 70, 50);
@@ -25,7 +25,7 @@ LevelMenu::LevelMenu()
 
     /* Header for the Medium levels */
     QGraphicsTextItem *medium = addText("Medium", font);
-    medium->setPos(sceneRect().width() / 2.0 - easy->boundingRect().width() / 2.0, sceneRect().height()/0.5);
+    medium->setPos(sceneRect().width() / 2.0, sceneRect().height()*0.5);
 
     /* Set the position, width, height, and color for MEDIUM buttons*/
     levelOneMedium.setRect(sceneRect().width()/0.1, sceneRect().height()/0.6, 70, 50);
@@ -41,7 +41,7 @@ LevelMenu::LevelMenu()
 
     /* Header for the Hard levels */
     QGraphicsTextItem *hard = addText("Hard", font);
-    hard->setPos(sceneRect().width() / 2.0 - easy->boundingRect().width() / 2.0, sceneRect().height()/0.75);
+    hard->setPos(sceneRect().width() / 2.0, sceneRect().height()*0.75);
 
     /* Set the position, width, height, and color for HARD buttons*/
     levelOneHard.setRect(sceneRect().width()/0.1, sceneRect().height()/0.85, 70, 50);
