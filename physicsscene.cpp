@@ -26,13 +26,13 @@ PhysicsScene::~PhysicsScene()
 // Runs this function when the scene is first shown
 void PhysicsScene::onInit()
 {
-    qDebug() << "Override the onInit method, dummy!";
+//    qDebug() << "Override the onInit method, dummy!";
 }
 
 // This gets called every 'tick'
 void PhysicsScene::onUpdate(qreal delta)
 {
-    qDebug() << "Override the onUpdate method, dummy!";
+//    qDebug() << "Override the onUpdate method, dummy!";
 }
 
 // Updates physics bodies
