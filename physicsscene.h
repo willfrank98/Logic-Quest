@@ -23,6 +23,8 @@ private:
 
     b2Vec2 gravity;
     b2World *world;
+    float ppm = 10.0;   // pixels-per-meter
+    float offsetX, offsetY;
 
     virtual void updateBodies();
     virtual void onInit();

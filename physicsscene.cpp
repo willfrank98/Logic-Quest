@@ -7,8 +7,9 @@
 // Initializes the world and such
 PhysicsScene::PhysicsScene(QObject *parent) : QGraphicsScene(parent)
 {
-    gravity = b2Vec2(0.0, 9.8);
+    gravity = b2Vec2(0.0, -9.8);
     world = new b2World(gravity);
+    world->ShiftOrigin(b2Vec2(0.0, 0.0));
 
     timer.setInterval(17);
     connect(&timer, &QTimer::timeout, this, [=](){
@@ -20,7 +21,7 @@ PhysicsScene::PhysicsScene(QObject *parent) : QGraphicsScene(parent)
 
 PhysicsScene::~PhysicsScene()
 {
-
+    delete world;
 }
 
 // Runs this function when the scene is first shown
@@ -46,8 +47,8 @@ void PhysicsScene::updateBodies()
         // Update item positions from body data
         if (body->GetType() == b2_dynamicBody)
         {
-			qreal itemWidth = item->boundingRect().width();
-			qreal itemHeight = item->boundingRect().height();
+            qreal itemWidth = item->boundingRect().width();
+            qreal itemHeight = item->boundingRect().height();
 			timer.stop();
 			if (!QRectF(0.0 - itemWidth, 0.0 - itemHeight, sceneRect().width() + itemWidth, sceneRect().height() + itemHeight).contains(item->pos()))
 			{
@@ -58,9 +59,10 @@ void PhysicsScene::updateBodies()
 			}
 			timer.start();
 
-			item->setPos(body->GetPosition().x, body->GetPosition().y);
-			item->setRotation(body->GetAngle() * 180/b2_pi);
         }
+        item->setPos(body->GetPosition().x - item->boundingRect().width() / 2.0,
+                     -body->GetPosition().y - item->boundingRect().height() / 2.0);
+        item->setRotation(-body->GetAngle() * 180/b2_pi);
     }
     world->Step(0.25, 8, 4);
 //    qDebug() << "Bodies:" << world->GetBodyCount();
@@ -79,7 +81,6 @@ void PhysicsScene::createBox(QRectF rect, QColor line, QColor fill, PhysicsBodyT
 
     // TODO: Make sure setting all of these is still necessary
     item->setData(Type, physicsType);
-    item->setData(Bounds, rect);
     item->setData(Draggable, draggable);
 
     // Store the item in the body for easier updating (Yay!)
@@ -113,7 +114,7 @@ void PhysicsScene::attachBody(QGraphicsItem *item, PhysicsBodyType bodyType)
     // Defines a physics body
     b2BodyDef bodyDef;
     bodyDef.type = (bodyType == Static) ? b2_staticBody : b2_dynamicBody;
-    bodyDef.position.Set(item->pos().x(), item->pos().y());
+    bodyDef.position.Set(item->pos().x() + item->boundingRect().width() / 2.0, -item->pos().y());
     bodyDef.angle = 0;
     b2Body* dynBody = world->CreateBody(&bodyDef);
 
@@ -127,10 +128,12 @@ void PhysicsScene::attachBody(QGraphicsItem *item, PhysicsBodyType bodyType)
     bodyFixtureDef.density = 1.0;
     dynBody->CreateFixture(&bodyFixtureDef);
 
+    // Store the item in the body for easy access when looping over bodies
     dynBody->SetUserData(item);
 }
 
 // Sets the position of a body (and by extension, an item)
+// TODO: Review if this is actually necessary.
 void PhysicsScene::setItemPos(QGraphicsItem *item, QPointF pos)
 {
     QGraphicsItem *temp;
@@ -166,23 +169,31 @@ bool PhysicsScene::eventFilter(QObject *watched, QEvent *event)
     // Center things upon window resize
     else if (event->type() == QEvent::Resize)
     {
+        // Stop the timer to (hopefully) prevent race conditions
         timer.stop();
+
         QGraphicsView *gView = static_cast<QGraphicsView*>(watched);
         QSizeF oldSize = sceneRect().size();
         setSceneRect(gView->rect());
         QSizeF offset = (sceneRect().size() - oldSize) / 2.0;
+
+        // Reposition items that don't have physics attached to them (buttons, labels, etc.)
         for (QGraphicsItem *item : items())
         {
             item->setPos(item->pos().x() + offset.width(),
                          item->pos().y() + offset.height());
         }
+
+        // Reposition physics bodies
         for (b2Body *body = world->GetBodyList(); body; body = body->GetNext())
         {
             QGraphicsItem *temp = static_cast<QGraphicsItem*>(body->GetUserData());
-            body->SetTransform(b2Vec2(temp->pos().x(),
-                                      temp->pos().y()),
+            body->SetTransform(b2Vec2(temp->pos().x() + temp->boundingRect().width() / 2.0,
+                                      -temp->pos().y()),
                                body->GetAngle());
         }
+
+        // Start the timer again
         timer.start();
     }
 

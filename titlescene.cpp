@@ -21,7 +21,6 @@ void TitleScene::onInit()
               QColor(0, 0, 0), QColor(128, 128, 128));
 
 
-
     // Create some dynamic boxes
 //    createBox(QRectF(sceneRect().width() / 2.0, sceneRect().height() / 2.0, 64.0, 64.0),
 //              QColor(0, 0, 0), QColor(128, 128, 128), Dynamic, true);
@@ -100,7 +99,7 @@ void TitleScene::onUpdate(qreal delta)
     // A tick is the length of the 'timer' interval in the BasicScene/PhysicsScene
     if (tickCounter > 50)
     {
-        createBox(QRectF(10.0, -64.0, 64.0, 64.0),
+        createBox(QRectF(10.0, 8.0, 64.0, 64.0),
                   QColor(0, 0, 0), QColor(128, 128, 128), Dynamic);
         tickCounter = 0;
     }
