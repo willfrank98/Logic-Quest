@@ -9,6 +9,7 @@ class LevelMenu : public BasicScene
 public:
     LevelMenu();
     void onUpdate(qreal delta);
+    void onInit();
 
 private:
     //All easy level buttons
