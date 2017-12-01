@@ -49,14 +49,12 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     });
 
-    // Connects the 'Quit' action. Maybe we should put these connects in a function so that after we swap scenes we can reconnect them all at once.
+    // Connects the menubar actions.
     connect(ui->actionExit, &QAction::triggered, this, [=](){ QApplication::quit(); });
-    connect((PhysicsScene*)ui->graphicsView->scene(), &PhysicsScene::endProgram, this, [=](){ QApplication::quit(); });
-
     connect(ui->actionMain_Menu, &QAction::triggered, this, [=](){swapScene("title");});
 
-    // Swap the view to the scene that matches the emitted scene name
-    connect((BasicScene*)ui->graphicsView->scene(), &BasicScene::changeScene, this, &MainWindow::swapScene);
+    // Hookup some connections to the scene
+    hookupScene();
 }
 
 MainWindow::~MainWindow()
@@ -75,7 +73,14 @@ void MainWindow::swapScene(QString s)
     ui->graphicsView->installEventFilter(ui->graphicsView->scene());
     ui->graphicsView->show();
 
-    // Reconnect
-    connect((BasicScene*)ui->graphicsView->scene(), &BasicScene::changeScene, this, &MainWindow::swapScene);
+    // Reconnect things
+    hookupScene();
     qDebug() << "[INFO]" << "Scene changed to:" << s.replace("\"", "");
+}
+
+// (Re)connects to some signals from a scene.
+void MainWindow::hookupScene()
+{
+    connect((BasicScene*)ui->graphicsView->scene(), &BasicScene::changeScene, this, &MainWindow::swapScene);
+    connect((PhysicsScene*)ui->graphicsView->scene(), &PhysicsScene::endProgram, this, [=](){ QApplication::quit(); });
 }
