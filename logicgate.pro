@@ -31,7 +31,8 @@ SOURCES += \
     physicsscene.cpp \
     basicscene.cpp \
 	tutorial.cpp \
-    levelone.cpp
+    levelone.cpp \
+    levelmenu.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -41,7 +42,8 @@ HEADERS += \
     itemdata.h \
     basicscene.h \
 	tutorial.h \
-    levelone.h
+    levelone.h \
+    levelmenu.h
 
 FORMS += \
         mainwindow.ui

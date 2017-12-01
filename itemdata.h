@@ -3,4 +3,4 @@
 
 #endif // ITEMDATA_H
 enum ItemKey { Type, Name, Bounds, Draggable, Direction, StartPosition };
-enum ItemVal { Static, Dynamic, Kinematic };
+enum PhysicsBodyType { Static, Dynamic, Kinematic };
