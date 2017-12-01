@@ -88,7 +88,6 @@ void PhysicsScene::createBox(QRectF rect, QColor line, QColor fill, PhysicsBodyT
 }
 
 // Creates a Gate from the sprite sheet and links it to a physics body
-// http://www.iforce2d.net/b2dtut/bodies
 void PhysicsScene::createGate(const QString& resourceName, QRectF rect, QColor line, QColor fill, PhysicsBodyType physicsType, bool draggable)
 {
     if (world->GetBodyCount() > 20) return;
@@ -109,6 +108,11 @@ void PhysicsScene::createGate(const QString& resourceName, QRectF rect, QColor l
 }
 
 // Moved the physics stuff here so there's less duplication of code
+// Helpful links follow
+//
+// Creating bodies:     http://www.iforce2d.net/b2dtut/bodies
+// Coordinate system:   http://www.box2d.org/forum/viewtopic.php?t=8198
+// More coord system:   http://box2d.org/forum/viewtopic.php?t=9295
 void PhysicsScene::attachBody(QGraphicsItem *item, PhysicsBodyType bodyType)
 {
     // Defines a physics body
