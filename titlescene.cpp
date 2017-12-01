@@ -39,12 +39,12 @@ void TitleScene::onInit()
     title->setData(Name, "title");
 
     // Adds more text
-    font.setPointSize(14);
-    QGraphicsTextItem *prompt = addText("Press SPACE to play!", font);
-    prompt->setPos(sceneRect().width() / 2.0 - prompt->boundingRect().width() / 2.0, sceneRect().height() / 2.0);
-    prompt->setZValue(1.0);
-    prompt->setData(Name, "prompt");
-    prompt->setData(Direction, 1.0);
+//    font.setPointSize(14);
+//    QGraphicsTextItem *prompt = addText("Press SPACE to play!", font);
+//    prompt->setPos(sceneRect().width() / 2.0 - prompt->boundingRect().width() / 2.0, sceneRect().height() / 2.0);
+//    prompt->setZValue(1.0);
+//    prompt->setData(Name, "prompt");
+//    prompt->setData(Direction, 1.0);
 
     //Sets up menu buttons
     QPushButton *startButton = new QPushButton();
@@ -98,26 +98,17 @@ void TitleScene::onUpdate(qreal delta)
     {
         if (item->isWidget())
         {
-//            QGraphicsProxyWidget *proxyItem = (QGraphicsProxyWidget*)item;
-//            proxyItem->setScale(proxyItem->scale() + 0.01);
-        }
-
-
-        // Animate the "click to play!" text
-        // Since there's buttons now, we should probably just get rid of this.
-        if (item->data(Name) == "prompt")
-        {
-
-            if (item->scale() > 1.5)
+            QGraphicsProxyWidget *proxyItem = (QGraphicsProxyWidget*)item;
+            if (proxyItem->scale() > 1.25)
             {
-                item->setData(Direction, -1.0);
+                proxyItem->setData(Direction, -1.0);
             }
-            else if (item->scale() < 1.0)
+            else if (proxyItem->scale() <= 1.0)
             {
-                item->setData(Direction, 1.0);
+                proxyItem->setData(Direction, 1.0);
             }
-            item->moveBy(-1.0 * item->data(Direction).toFloat(), 0.0);
-            item->setScale(item->scale() + item->data(Direction).toFloat() * 0.01);
+            proxyItem->moveBy(-0.25 * proxyItem->data(Direction).toFloat(), 0.0);
+            proxyItem->setScale(proxyItem->scale() + proxyItem->data(Direction).toFloat() * 0.0025);
         }
     }
 
@@ -137,6 +128,7 @@ void TitleScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     clickedItem = nullptr;
 }
 
+
 void TitleScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     if (currentButton == Qt::LeftButton && clickedItem != nullptr)
@@ -154,8 +146,8 @@ void TitleScene::keyPressEvent(QKeyEvent *event)
 
     if (event->key() == Qt::Key_Space)
     {
-		// Switch to the tutorial
-		emit changeScene("tutorial");
+        // Switch to the tutorial
+        emit changeScene("tutorial");
     }
 
     if (event->key() == Qt::Key_Return)
