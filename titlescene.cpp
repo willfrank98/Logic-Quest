@@ -27,25 +27,13 @@ void TitleScene::onInit()
     // Add some text, ignores physics
     // Perhaps move this to a 'createText' method or something
     font.setPointSize(28);
-//    QGraphicsTextItem *title = addText("Logic Quest", font);
-//    title->setPos(sceneRect().width() / 2.0 - title->boundingRect().width() / 2.0, sceneRect().height() * .05);
-//    title->setZValue(1.0);
-//    title->setData(Name, "title");
 
-    // This could also be done with something like:
-    // QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
-    // Doing so would get rid of the need for a labelProxy, but both work.
-    QLabel *logo_label = new QLabel();
+    //Logo
     QPixmap *logoPix = new QPixmap(":/images/logos/mainLogo.png");
-    logo_label->setStyleSheet("QLabel { background-color :white; }");
-    logo_label->setPixmap(*logoPix);
-    logo_label->setScaledContents(true);
-    logo_label->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored );
-    //logo_label->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .10, sceneRect().width() * .30, sceneRect().height() * .10));
-    logoLabelProxy = addWidget(logo_label);
+    QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
 
 
-    // Adds more text
+// Adds more text
 //    font.setPointSize(14);
 //    QGraphicsTextItem *prompt = addText("Press SPACE to play!", font);
 //    prompt->setPos(sceneRect().width() / 2.0 - prompt->boundingRect().width() / 2.0, sceneRect().height() / 2.0);
@@ -55,25 +43,25 @@ void TitleScene::onInit()
 
     //Sets up menu buttons
     QPushButton *startButton = new QPushButton();
-    startButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .25, sceneRect().width() * .30, sceneRect().height() * .10));
+    startButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .45, sceneRect().width() * .30, sceneRect().height() * .10));
     startButton->setText("Start Game");
     startButtonProxy = addWidget(startButton);
     startButtonProxy->setZValue(10.0);  // Makes the buttons appear in front of other things
 
     QPushButton *levelSelectButton = new QPushButton();
-    levelSelectButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .40, sceneRect().width() * .30, sceneRect().height() * .10));
+    levelSelectButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .57, sceneRect().width() * .30, sceneRect().height() * .10));
     levelSelectButton->setText("Level Select");
     levelSelectButtonProxy = addWidget(levelSelectButton);
     levelSelectButtonProxy->setZValue(10.0);
 
     QPushButton *optionsButton = new QPushButton();
-    optionsButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .55, sceneRect().width() * .30, sceneRect().height() * .10));
+    optionsButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .69, sceneRect().width() * .30, sceneRect().height() * .10));
     optionsButton->setText("Options");
     optionsButtonProxy = addWidget(optionsButton);
     optionsButtonProxy->setZValue(10.0);
 
     QPushButton *exitButton = new QPushButton();
-    exitButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .70, sceneRect().width() * .30, sceneRect().height() * .10));
+    exitButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .81, sceneRect().width() * .30, sceneRect().height() * .10));
     exitButton->setText("Exit");
     exitButtonProxy = addWidget(exitButton);
     exitButtonProxy->setZValue(10.0);
