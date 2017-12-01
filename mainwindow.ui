@@ -102,7 +102,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>600x480</string>
+    <string>640x480</string>
    </property>
   </action>
   <action name="action1280x720">
