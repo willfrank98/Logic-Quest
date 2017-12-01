@@ -22,6 +22,7 @@ private:
     QGraphicsProxyWidget *levelSelectButtonProxy;
     QGraphicsProxyWidget *optionsButtonProxy;
     QGraphicsProxyWidget *exitButtonProxy;
+    QGraphicsProxyWidget *logoLabelProxy;
 
     void onInit();
     void onUpdate(qreal delta);

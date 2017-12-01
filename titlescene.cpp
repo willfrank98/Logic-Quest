@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 #include <QPushButton>
 #include <QGraphicsProxyWidget>
+#include <QLabel>
 
 
 // Simple example of a title scene
@@ -33,10 +34,20 @@ void TitleScene::onInit()
     // Add some text, ignores physics
     // Perhaps move this to a 'createText' method or something
     font.setPointSize(28);
-    QGraphicsTextItem *title = addText("Logic Gate", font);
-    title->setPos(sceneRect().width() / 2.0 - title->boundingRect().width() / 2.0, sceneRect().height() * .05);
-    title->setZValue(1.0);
-    title->setData(Name, "title");
+//    QGraphicsTextItem *title = addText("Logic Quest", font);
+//    title->setPos(sceneRect().width() / 2.0 - title->boundingRect().width() / 2.0, sceneRect().height() * .05);
+//    title->setZValue(1.0);
+//    title->setData(Name, "title");
+
+    QLabel *logo_label = new QLabel();
+    QPixmap *logoPix = new QPixmap(":/images/logos/mainLogo.png");
+    logo_label->setStyleSheet("QLabel { background-color :white; }");
+    logo_label->setPixmap(*logoPix);
+    logo_label->setScaledContents(true);
+    logo_label->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored );
+    //logo_label->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .10, sceneRect().width() * .30, sceneRect().height() * .10));
+    logoLabelProxy = addWidget(logo_label);
+
 
     // Adds more text
     font.setPointSize(14);

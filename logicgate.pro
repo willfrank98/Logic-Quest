@@ -87,3 +87,6 @@ unix:!macos {
     INCLUDEPATH += $$PWD/thirdparty/SFML/linux/include $$PWD/thirdparty/Box2D/include
     DEPENDPATH += $$PWD/thirdparty/SFML/linux/include $$PWD/thirdparty/Box2D/include
 }
+
+RESOURCES += \
+    resourcefile.qrc

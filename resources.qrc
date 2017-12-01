@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>res/sprites/logic_gates_64x64.png</file>
+        <file>res/logos/logoWithoutGates.png</file>
+        <file>res/logos/mainLogo.png</file>
     </qresource>
 </RCC>
