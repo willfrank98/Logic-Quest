@@ -4,6 +4,7 @@
 #include "titlescene.h"
 #include "tutorial.h"
 #include "levelone.h"
+#include "levelmenu.h"
 
 class SceneHolder
 {

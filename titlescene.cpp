@@ -69,7 +69,7 @@ void TitleScene::onInit()
 
     //Connects menu buttons
     connect(startButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
-    connect(levelSelectButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
+    connect(levelSelectButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
     connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
 
@@ -129,9 +129,15 @@ void TitleScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 */
 void TitleScene::keyPressEvent(QKeyEvent *event)
 {
+
     if (event->key() == Qt::Key_Space)
     {
 		// Switch to the tutorial
 		emit changeScene("tutorial");
+    }
+
+    if (event->key() == Qt::Key_Return)
+    {
+        emit changeScene("levelmenu");
     }
 }

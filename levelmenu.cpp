@@ -3,6 +3,7 @@
 
 LevelMenu::LevelMenu()
 {
+
     QFont font = QFont("Helvetica");
     font.setPointSize(24);
 
@@ -22,6 +23,7 @@ LevelMenu::LevelMenu()
     levelFiveEasy.setRect(sceneRect().width()/0.9, sceneRect().height()/0.3, 70, 50);
     levelFiveEasy.setBrush(QBrush(Qt::green));
 
+    /* Header for the Medium levels */
     QGraphicsTextItem *medium = addText("Medium", font);
     medium->setPos(sceneRect().width() / 2.0 - easy->boundingRect().width() / 2.0, sceneRect().height()/0.5);
 
@@ -37,6 +39,7 @@ LevelMenu::LevelMenu()
     levelFiveMedium.setRect(sceneRect().width()/0.9, sceneRect().height()/0.6, 70, 50);
     levelFiveMedium.setBrush(QBrush(Qt::blue));
 
+    /* Header for the Hard levels */
     QGraphicsTextItem *hard = addText("Hard", font);
     hard->setPos(sceneRect().width() / 2.0 - easy->boundingRect().width() / 2.0, sceneRect().height()/0.75);
 
@@ -51,4 +54,9 @@ LevelMenu::LevelMenu()
     levelFourHard.setBrush(QBrush(Qt::red));
     levelFiveHard.setRect(sceneRect().width()/0.9, sceneRect().height()/0.85, 70, 50);
     levelFiveHard.setBrush(QBrush(Qt::red));
+}
+
+void LevelMenu::onUpdate(qreal delta) {
+
+
 }
