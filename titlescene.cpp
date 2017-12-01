@@ -151,9 +151,15 @@ void TitleScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 */
 void TitleScene::keyPressEvent(QKeyEvent *event)
 {
+
     if (event->key() == Qt::Key_Space)
     {
 		// Switch to the tutorial
 		emit changeScene("tutorial");
+    }
+
+    if (event->key() == Qt::Key_Return)
+    {
+        emit changeScene("levelmenu");
     }
 }
