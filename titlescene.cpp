@@ -105,23 +105,23 @@ void TitleScene::onUpdate(qreal delta)
         tickCounter = 0;
     }
 
-    for (QGraphicsItem *item : items())
-    {
-        if (item->isWidget())
-        {
-            QGraphicsProxyWidget *proxyItem = (QGraphicsProxyWidget*)item;
-            if (proxyItem->scale() > 1.25)
-            {
-                proxyItem->setData(Direction, -1.0);
-            }
-            else if (proxyItem->scale() <= 1.0)
-            {
-                proxyItem->setData(Direction, 1.0);
-            }
-            proxyItem->moveBy(-0.25 * proxyItem->data(Direction).toFloat(), 0.0);
-            proxyItem->setScale(proxyItem->scale() + proxyItem->data(Direction).toFloat() * 0.0025);
-        }
-    }
+//    for (QGraphicsItem *item : items())
+//    {
+//        if (item->isWidget())
+//        {
+//            QGraphicsProxyWidget *proxyItem = (QGraphicsProxyWidget*)item;
+//            if (proxyItem->scale() > 1.25)
+//            {
+//                proxyItem->setData(Direction, -1.0);
+//            }
+//            else if (proxyItem->scale() <= 1.0)
+//            {
+//                proxyItem->setData(Direction, 1.0);
+//            }
+//            proxyItem->moveBy(-0.25 * proxyItem->data(Direction).toFloat(), 0.0);
+//            proxyItem->setScale(proxyItem->scale() + proxyItem->data(Direction).toFloat() * 0.0025);
+//        }
+//    }
 
     tickCounter++;
 }
