@@ -2,7 +2,6 @@
 #define LEVELMENU_H
 
 #include "basicscene.h"
-#include <QGraphicsItem>
 
 class LevelMenu : public BasicScene
 {
@@ -12,26 +11,47 @@ public:
     void onInit();
 
 private:
-    //All easy level buttons
-    QGraphicsRectItem levelOneEasy;
-    QGraphicsRectItem levelTwoEasy;
-    QGraphicsRectItem levelThreeEasy;
-    QGraphicsRectItem levelFourEasy;
-    QGraphicsRectItem levelFiveEasy;
+//    //All easy level buttons
+//    QGraphicsRectItem levelOneEasy;
+//    QGraphicsRectItem levelTwoEasy;
+//    QGraphicsRectItem levelThreeEasy;
+//    QGraphicsRectItem levelFourEasy;
+//    QGraphicsRectItem levelFiveEasy;
 
-    //All medium level buttons
-    QGraphicsRectItem levelOneMedium;
-    QGraphicsRectItem levelTwoMedium;
-    QGraphicsRectItem levelThreeMedium;
-    QGraphicsRectItem levelFourMedium;
-    QGraphicsRectItem levelFiveMedium;
+//    //All medium level buttons
+//    QGraphicsRectItem levelOneMedium;
+//    QGraphicsRectItem levelTwoMedium;
+//    QGraphicsRectItem levelThreeMedium;
+//    QGraphicsRectItem levelFourMedium;
+//    QGraphicsRectItem levelFiveMedium;
 
-    //All hard level buttons
-    QGraphicsRectItem levelOneHard;
-    QGraphicsRectItem levelTwoHard;
-    QGraphicsRectItem levelThreeHard;
-    QGraphicsRectItem levelFourHard;
-    QGraphicsRectItem levelFiveHard;
+//    //All hard level buttons
+//    QGraphicsRectItem levelOneHard;
+//    QGraphicsRectItem levelTwoHard;
+//    QGraphicsRectItem levelThreeHard;
+//    QGraphicsRectItem levelFourHard;
+//    QGraphicsRectItem levelFiveHard;
+
+    //All easy level button proxies
+    QGraphicsProxyWidget* levelOneEasyProxy;
+    QGraphicsProxyWidget* levelTwoEasyProxy;
+    QGraphicsProxyWidget* levelThreeEasyProxy;
+    QGraphicsProxyWidget* levelFourEasyProxy;
+    QGraphicsProxyWidget* levelFiveEasyProxy;
+
+    //All medium level button proxies
+    QGraphicsProxyWidget* levelOneMediumProxy;
+    QGraphicsProxyWidget* levelTwoMediumProxy;
+    QGraphicsProxyWidget* levelThreeMediumProxy;
+    QGraphicsProxyWidget* levelFourMediumProxy;
+    QGraphicsProxyWidget* levelFiveMediumProxy;
+
+    //All hard level button proxies
+    QGraphicsProxyWidget* levelOneHardProxy;
+    QGraphicsProxyWidget* levelTwoHardProxy;
+    QGraphicsProxyWidget* levelThreeHardProxy;
+    QGraphicsProxyWidget* levelFourHardProxy;
+    QGraphicsProxyWidget* levelFiveHardProxy;
 };
 
 #endif // LEVELMENU_H
