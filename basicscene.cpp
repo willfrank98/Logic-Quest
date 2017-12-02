@@ -97,7 +97,7 @@ void BasicScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void BasicScene::keyPressEvent(QKeyEvent *event)
 {
-
+    qDebug("KPE in BASICC");
 }
 
 void BasicScene::keyReleaseEvent(QKeyEvent *event)
@@ -126,35 +126,37 @@ void BasicScene::createBasicUI(int inputs, int outputs, int gridX, int gridY)
 			createBox(QRectF(x, y, gridWidth, gridHeight));
 		}
 	}
-
     addGatesOnToolbar();
 }
 
+void BasicScene::gateClicked(){
+    qDebug("Gate Pressed!!!!!!!!!!!!!!!!!");
+}
+//  Create push button for each logic gate and place in tool bar
 void BasicScene::addGatesOnToolbar(){
     QPixmap pm(":res/sprites/logic_gates_64x64.png");
-    int loc = 50;
-    int left = 0;
-    int top = 0;
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < 2; j++){
-            QPushButton *butt = new QPushButton();
-            QRect rec(left, top, 64, 64);
+    qreal width = sceneRect().width();
+    qreal height = sceneRect().height();
+    int gateLocation = width/10;
+    int space = gateLocation;
+    int index = 0;
+    QPushButton *logicGates[6];
+    for (int row = 0; row < 3; row++){
+        for (int col = 0; col < 2; col++){
+            logicGates[index]  =  new QPushButton();
+            QRect rec(col*64, row*64, 64, 64);
             QPixmap pmc = pm.copy(rec);
             QIcon buttonIcon(pmc);
-            butt->setIcon(buttonIcon);
-            butt->setIconSize(pmc.rect().size());
-            butt->setVisible(true);
-            butt->setGeometry(QRect(QPoint(loc, 350), QSize(64, 64)));
-            this->addWidget(butt);
-            loc += 1;
-            if (left == 0){
-                left = 64;
-            }
-            else{
-                left = 0;
-            }
-            //top
-            loc+=70;
+            logicGates[index]->setIcon(buttonIcon);
+            logicGates[index]->setIconSize(pmc.rect().size());
+            logicGates[index]->setGeometry(QRect(QPoint(gateLocation+=space, height -  68), QSize(64, 64)));
+            logicGates[index]->setEnabled(true);
+            this->addWidget(logicGates[index]);
+            // Overridden by the mouse listener in current scene.. tutorial currently
+            connect(logicGates[index], SIGNAL(pressed()), this, SLOT(gateClicked()));
+            qDebug() << QByteArray::number(index);
+            index++;
         }
     }
 }
+

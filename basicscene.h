@@ -44,8 +44,8 @@ private:
 
 signals:
     void changeScene(QString);
-
 public slots:
+    void gateClicked();
 };
 
 #endif // BASICSCENE_H

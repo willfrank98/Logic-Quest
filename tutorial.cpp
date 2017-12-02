@@ -52,6 +52,8 @@ void Tutorial::onUpdate(qreal delta)
 void Tutorial::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	//emit changeScene("Level1");
+    qDebug("int mousePressevent (Tutorial.cpp)");
+    BasicScene::gateClicked();
 }
 
 void Tutorial::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
