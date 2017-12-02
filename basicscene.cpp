@@ -127,8 +127,34 @@ void BasicScene::createBasicUI(int inputs, int outputs, int gridX, int gridY)
 		}
 	}
 
+    addGatesOnToolbar();
+}
 
-
-
-
+void BasicScene::addGatesOnToolbar(){
+    QPixmap pm(":res/sprites/logic_gates_64x64.png");
+    int loc = 50;
+    int left = 0;
+    int top = 0;
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 2; j++){
+            QPushButton *butt = new QPushButton();
+            QRect rec(left, top, 64, 64);
+            QPixmap pmc = pm.copy(rec);
+            QIcon buttonIcon(pmc);
+            butt->setIcon(buttonIcon);
+            butt->setIconSize(pmc.rect().size());
+            butt->setVisible(true);
+            butt->setGeometry(QRect(QPoint(loc, 350), QSize(64, 64)));
+            this->addWidget(butt);
+            loc += 1;
+            if (left == 0){
+                left = 64;
+            }
+            else{
+                left = 0;
+            }
+            //top
+            loc+=70;
+        }
+    }
 }

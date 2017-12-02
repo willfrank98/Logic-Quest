@@ -2,4 +2,10 @@
     <qresource prefix="/images/logos">
         <file>mainLogo.png</file>
     </qresource>
+    <qresource prefix="/res/sprites">
+        <file>logic_gates_64x64.png</file>
+        <file>pipes_black_64x64.png</file>
+        <file>pipes_green_64x64.png</file>
+        <file>pipes_red_64x64.png</file>
+    </qresource>
 </RCC>

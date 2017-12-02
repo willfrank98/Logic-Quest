@@ -12,6 +12,7 @@
 #include <QGraphicsItem>
 #include <QResizeEvent>
 #include <QGraphicsRectItem>
+#include <QPushButton>
 
 class BasicScene : public QGraphicsScene
 {
@@ -25,6 +26,7 @@ public:
     void setItemPos(QGraphicsItem *item, QPointF pos);
 
 	void createBasicUI(int inputs, int outputs, int gridX, int gridY);
+    void addGatesOnToolbar();
 
 private:
     QTimer timer;
