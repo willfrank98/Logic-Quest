@@ -26,7 +26,7 @@ private slots:
 private:
     int currentButton = Qt::NoButton;
     int tickCounter = 0;
-    int lgIndex = 0;
+    int lgIndex = 0;    //used for alternating which logic block is dropped
     QGraphicsItem *clickedItem;
     QGraphicsProxyWidget *startButtonProxy;
     QGraphicsProxyWidget *levelSelectButtonProxy;
