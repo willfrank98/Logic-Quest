@@ -1,3 +1,10 @@
+/*
+ * Death Star IT Support
+ * CS3505 - A8: An Agile Educational Application
+ *
+ * basicscene.h
+ */
+
 #ifndef TUTORIAL_H
 #define TUTORIAL_H
 

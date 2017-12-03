@@ -1,3 +1,10 @@
+/*
+ * Death Star IT Support
+ * CS3505 - A8: An Agile Educational Application
+ *
+ * physicsscene.h
+ */
+
 #ifndef PHYSICSSCENE_H
 #define PHYSICSSCENE_H
 

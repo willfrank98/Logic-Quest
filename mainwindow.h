@@ -1,3 +1,10 @@
+/*
+ * Death Star IT Support
+ * CS3505 - A8: An Agile Educational Application
+ *
+ * mainwindow.h
+ */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
