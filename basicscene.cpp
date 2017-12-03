@@ -87,17 +87,17 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
     return QGraphicsScene::eventFilter(watched, event);
 }
 
-void BasicScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void BasicScene::mousePressEvent(QMouseEvent *event)
 {
 
 }
 
-void BasicScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+void BasicScene::mouseReleaseEvent(QMouseEvent *event)
 {
 
 }
 
-void BasicScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+void BasicScene::mouseMoveEvent(QMouseEvent *event)
 {
 
 }
@@ -160,7 +160,8 @@ void BasicScene::addGatesOnToolbar(){
             logicGates[index]->setEnabled(true);
             this->addWidget(logicGates[index]);
             // Overridden by the mouse listener in current scene.. tutorial currently
-            connect(logicGates[index], SIGNAL(pressed()), this, SLOT(gateClicked()));
+            // ^- Should be fixed now.
+            connect(logicGates[index], &QPushButton::pressed, this, [=](){ gateClicked(); });
             qDebug() << QByteArray::number(index);
             index++;
         }
