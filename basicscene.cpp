@@ -161,7 +161,7 @@ void BasicScene::addGatesOnToolbar(){
             this->addWidget(logicGates[index]);
             // Overridden by the mouse listener in current scene.. tutorial currently
             // ^- Should be fixed now.
-            connect(logicGates[index], &QPushButton::pressed, this, [=](){ gateClicked(); });
+            connect(logicGates[index], SIGNAL(pressed()), this, SLOT(gateClicked()));
             qDebug() << QByteArray::number(index);
             index++;
         }
