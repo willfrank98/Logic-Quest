@@ -1,3 +1,10 @@
+/*
+ * Death Star IT Support
+ * CS3505 - A8: An Agile Educational Application
+ *
+ * basicscene.cpp
+ */
+
 #include "basicscene.h"
 
 // Initializes the world and such

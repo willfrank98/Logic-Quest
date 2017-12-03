@@ -1,3 +1,10 @@
+/*
+ * Death Star IT Support
+ * CS3505 - A8: An Agile Educational Application
+ *
+ * levelmenu.cpp
+ */
+
 #include "levelmenu.h"
 #include <QGraphicsItem>
 #include <QGraphicsProxyWidget>

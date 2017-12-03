@@ -1,3 +1,10 @@
+/*
+ * Death Star IT Support
+ * CS3505 - A8: An Agile Educational Application
+ *
+ * physicsscene.cpp
+ */
+
 #include "physicsscene.h"
 #include <QDebug>
 #include <QGraphicsView>
