@@ -95,13 +95,12 @@ void PhysicsScene::createBox(QRectF rect, QColor line, QColor fill, PhysicsBodyT
 }
 
 // Creates a Gate from the sprite sheet and links it to a physics body
-void PhysicsScene::createGate(const QString& resourceName, QRectF rect, QColor line, QColor fill, PhysicsBodyType physicsType, bool draggable)
+void PhysicsScene::createGate(QPixmap& pm, QRectF rect, QColor line, QColor fill, PhysicsBodyType physicsType, bool draggable)
 {
     if (world->GetBodyCount() > 20) return;
 
     // Create the GraphicsItem (visual part of the body)
-    QPixmap gate = QPixmap(resourceName);
-    QGraphicsPixmapItem *item = addPixmap(gate);
+    QGraphicsPixmapItem *item = addPixmap(pm);
     item->setTransformOriginPoint(rect.width() / 2.0, rect.height() / 2.0);
     item->setPos(rect.x(), rect.y());
 

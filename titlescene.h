@@ -9,6 +9,7 @@
 #define TITLESCENE_H
 
 #include <physicsscene.h>
+#include <QVector>
 
 
 class TitleScene : public PhysicsScene
@@ -25,11 +26,13 @@ private slots:
 private:
     int currentButton = Qt::NoButton;
     int tickCounter = 0;
+    int lgIndex = 0;
     QGraphicsItem *clickedItem;
     QGraphicsProxyWidget *startButtonProxy;
     QGraphicsProxyWidget *levelSelectButtonProxy;
     QGraphicsProxyWidget *optionsButtonProxy;
     QGraphicsProxyWidget *exitButtonProxy;
+    QVector<QPixmap> logicGatesPM;
 
     void onInit();
     void onUpdate(qreal delta);

@@ -10,6 +10,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
 #include <QPushButton>
+#include <QPainter>
 #include <QGraphicsProxyWidget>
 #include <QLabel>
 
@@ -26,7 +27,7 @@ void TitleScene::onInit()
     // Create a static box representing the ground
     // Just gonna leave this enabled until the sprite loading is working
     createBox(QRectF(0.0, sceneRect().height() - 16.0, sceneRect().width(), 16.0),
-              QColor(0, 0, 0), QColor(128, 128, 128));
+              QColor(0, 0, 0), QColor(100, 120, 255));
 
     // Define a font
     QFont font = QFont("Helvetica");
@@ -38,6 +39,16 @@ void TitleScene::onInit()
     //Logo
     QPixmap *logoPix = new QPixmap(":/images/logos/mainLogo.png");
     QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
+
+    // Creates a vector that contains a pixmap of each logic gate.
+    QPixmap gatesPM(":res/sprites/logic_gates_64x64.png");
+    for (int row = 0; row < 3; row++){
+        for (int col = 0; col < 2; col++){
+            QRect rec(col*64, row*64, 64, 64);
+            QPixmap pmc = gatesPM.copy(rec);
+            logicGatesPM.append(pmc);
+        }
+    }
 
 
 // Adds more text
@@ -91,10 +102,14 @@ void TitleScene::onUpdate(qreal delta)
     // A tick is the length of the 'timer' interval in the BasicScene/PhysicsScene
     if (tickCounter > 50)
     {
-        // TODO: Make it drop a gate, not a box.
-        createBox(QRectF(10.0, 8.0, 64.0, 64.0),
-                  QColor(0, 0, 0), QColor(128, 128, 128), Dynamic);
+        // generates a random index used to grab a pixmap.
+        createGate(logicGatesPM[lgIndex] , QRectF(10.0, 8.0, 64.0, 64.0),
+                  QColor(0, 0, 0, 0), QColor(0, 0, 0, 0), Dynamic);
         tickCounter = 0;
+        lgIndex++;
+        if(lgIndex > 5) {
+            lgIndex = 0;
+        }
     }
 
 //    for (QGraphicsItem *item : items())
