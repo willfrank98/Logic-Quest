@@ -32,8 +32,8 @@ public:
     void setItemPos(QGraphicsItem *item, QPointF pos);
 
 	void createBasicUI(int inputs, int outputs, int gridX, int gridY);
-    void addGatesOnToolbar();
-
+//    void addGatesOnToolbar();
+//    void gateClicked(int row, int col);
 private:
     QTimer timer;
     QElapsedTimer deltaKeeper;
@@ -47,11 +47,20 @@ private:
     virtual void mouseMoveEvent(QMouseEvent *event);
     virtual void keyPressEvent(QKeyEvent *event);
     virtual void keyReleaseEvent(QKeyEvent *event);
+    void addGatesOnToolbar();
+    void gateClicked(int row, int col);
+    QPixmap getGatePixmap(int row, int col);
+    QPushButton *setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc);
 
 signals:
     void changeScene(QString);
 public slots:
-    void gateClicked();
+    void gate0();
+    void gate1();
+    void gate2();
+    void gate3();
+    void gate4();
+    void gate5();
 };
 
 #endif // BASICSCENE_H
