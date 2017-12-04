@@ -33,7 +33,8 @@ SOURCES += \
 	tutorial.cpp \
     levelone.cpp \
     levelmenu.cpp \
-    gatenode.cpp
+    gatenode.cpp \
+    level.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,7 +46,8 @@ HEADERS += \
 	tutorial.h \
     levelone.h \
     levelmenu.h \
-    gatenode.h
+    gatenode.h \
+    level.h
 
 FORMS += \
         mainwindow.ui
