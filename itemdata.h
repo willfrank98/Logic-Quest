@@ -11,3 +11,4 @@
 #endif // ITEMDATA_H
 enum ItemKey { Type, Name, Bounds, Draggable, Direction, StartPosition };
 enum PhysicsBodyType { Static, Dynamic, Kinematic };
+enum GateNodeType {START, END, UNSET, AND, OR, NAND, NOR, XOR, NOT};

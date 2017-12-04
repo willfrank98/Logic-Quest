@@ -32,7 +32,8 @@ SOURCES += \
     basicscene.cpp \
 	tutorial.cpp \
     levelone.cpp \
-    levelmenu.cpp
+    levelmenu.cpp \
+    gatenode.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -43,7 +44,8 @@ HEADERS += \
     basicscene.h \
 	tutorial.h \
     levelone.h \
-    levelmenu.h
+    levelmenu.h \
+    gatenode.h
 
 FORMS += \
         mainwindow.ui
