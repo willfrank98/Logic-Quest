@@ -15,11 +15,6 @@ LevelMenu::LevelMenu()
 
 }
 
-void LevelMenu::onUpdate(qreal delta) {
-
-
-}
-
 void LevelMenu::onInit() {
 
     QFont font = QFont("Helvetica");
