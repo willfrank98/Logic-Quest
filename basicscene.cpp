@@ -102,7 +102,21 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
         QMouseEvent* mev = (QMouseEvent*)event;
         if (itemAt(mev->localPos(), QTransform()) != nullptr)
         {
-            qDebug() << "Dimensions of clicked box:" << itemAt(mev->localPos(), QTransform())->boundingRect();
+            //qDebug() << "Dimensions of clicked box:" << itemAt(mev->localPos(), QTransform())->boundingRect();
+            //qDebug() << "x, y :" << mev->x() << mev->y();
+            qreal width = sceneRect().width();
+            qreal height = sceneRect().height();
+
+            int trayWidth = width/12;
+            int trayHeight = 100;
+
+            int gridWidth = (width - (2 * trayWidth)) / x;
+            int gridHeight = (height - trayHeight) / y;
+
+            int x = (mev->x() - trayWidth)/gridWidth;
+            int y = mev->y()/gridHeight;
+
+            qDebug() << "x, y :" << x << y;
         }
     }
 
