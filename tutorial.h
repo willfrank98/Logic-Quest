@@ -20,7 +20,7 @@ private:
 //	QGraphicsItem *clickedItem;
 
 	void onInit();
-	void onUpdate(qreal delta);
+	void onUpdate(/*qreal delta*/);
 
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);

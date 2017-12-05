@@ -33,7 +33,7 @@ public:
     void setItemPos(QGraphicsItem *item, QPointF pos);
 
 	void createBasicUI(int inputs, int outputs, int gridX, int gridY);
-//    void addGatesOnToolbar();
+	void addGatesOnToolbar();
 //    void gateClicked(int row, int col);
 private:
     QTimer timer;
@@ -47,8 +47,8 @@ private:
     virtual void mouseReleaseEvent(QMouseEvent *event);
     virtual void mouseMoveEvent(QMouseEvent *event);
     virtual void keyPressEvent(QKeyEvent *event);
-    virtual void keyReleaseEvent(QKeyEvent *event);
-    void addGatesOnToolbar();
+	virtual void keyReleaseEvent(QKeyEvent *event);
+//    void addGatesOnToolbar();
     void gateClicked(int row, int col);
     QPixmap getGatePixmap(int row, int col);
     QPushButton *setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc);

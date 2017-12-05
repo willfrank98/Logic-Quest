@@ -15,8 +15,8 @@ Tutorial::Tutorial()
 void Tutorial::onInit()
 {
 
-	createBasicUI(1, 1, 5, 5);
-
+	createBasicUI(3, 2, 5, 5);
+	addGatesOnToolbar();
 
 //	// Define a font
 //	QFont font = QFont("Helvetica");
@@ -38,22 +38,22 @@ void Tutorial::onInit()
 //    cont->setData(Direction, 1.0);          // Move direction
 }
 
-void Tutorial::onUpdate(qreal delta)
+void Tutorial::onUpdate(/*qreal delta*/)
 {
-    for (QGraphicsItem *item : items())
-    {
-        // Animate the "click to continue" text
-        // Perhaps move to some animateItem method that utilizes a timer, or something
-        if (item->data(Name) == "cont_prompt")
-        {
-            if (item->pos().x() < item->data(StartPosition).toPointF().x() - delta * 1000.0
-                    || item->pos().x() > item->data(StartPosition).toPointF().x())
-            {
-                item->setData(Direction, -item->data(Direction).toFloat());
-            }
-            item->moveBy(delta * 0.2 * -item->data(Direction).toFloat() * item->boundingRect().width(), 0.0);
-        }
-    }
+//    for (QGraphicsItem *item : items())
+//    {
+//        // Animate the "click to continue" text
+//        // Perhaps move to some animateItem method that utilizes a timer, or something
+//        if (item->data(Name) == "cont_prompt")
+//        {
+//            if (item->pos().x() < item->data(StartPosition).toPointF().x() - delta * 1000.0
+//                    || item->pos().x() > item->data(StartPosition).toPointF().x())
+//            {
+//                item->setData(Direction, -item->data(Direction).toFloat());
+//            }
+//            item->moveBy(delta * 0.2 * -item->data(Direction).toFloat() * item->boundingRect().width(), 0.0);
+//        }
+//    }
 }
 
 void Tutorial::mousePressEvent(QMouseEvent *event)

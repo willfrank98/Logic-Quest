@@ -120,7 +120,7 @@ void BasicScene::createBasicUI(int inputs, int outputs, int gridX, int gridY)
 	qreal width = sceneRect().width();
 	qreal height = sceneRect().height();
 
-	int trayWidth = 100;
+	int trayWidth = width/12;
 	int trayHeight = 100;
 	createBox(QRectF(0, 0, trayWidth, height-trayWidth));	//draws input tray
 	createBox(QRectF(width-trayWidth, 0, trayWidth, height-trayWidth)); //draws output tray
@@ -129,14 +129,30 @@ void BasicScene::createBasicUI(int inputs, int outputs, int gridX, int gridY)
 	int gridWidth = (width - (2 * trayWidth)) / gridX;
 	int gridHeight = (height - trayHeight) / gridY;
 
-	for (int x = trayWidth; x < width - trayWidth; x += gridWidth)
+	//TODO: make grid fill available space better
+	for (int x = trayWidth; x < width - trayWidth - 5; x += gridWidth)
 	{
-		for (int y = 0; y < height - trayHeight; y += gridHeight)
+		for (int y = 0; y < height - trayHeight - 5; y += gridHeight)
 		{
 			createBox(QRectF(x, y, gridWidth, gridHeight));
 		}
 	}
-    addGatesOnToolbar();
+
+	int inBuf = ((gridY - inputs) / 2) * gridHeight + (gridHeight / 2) - 5; //calculates the space between the top of the window and the first input indicator
+
+	for (int i = 0; i < inputs; i++)
+	{
+		createBox(QRectF(trayWidth - 10, inBuf, 10, 10), QColor(0, 0, 0), QColor(0, 0, 0));
+		inBuf += gridHeight;
+	}
+
+	int outBuf = ((gridY - outputs) / 2) * gridHeight + (gridHeight / 2) - 5;
+
+	for (int i = 0; i < outputs; i++)
+	{
+		createBox(QRectF(width - trayWidth, outBuf, 10, 10), QColor(0, 0, 0), QColor(0, 0, 0));
+		outBuf += gridHeight;
+	}
 }
 
 // drag and drop for logic gate buttons
