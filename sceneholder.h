@@ -8,8 +8,7 @@
 #ifndef SCENEHOLDER_H
 #define SCENEHOLDER_H
 
-#include "titlescene.h"
-#include "tutorial.h"
+#include "titlescene.h".
 #include "levelmenu.h"
 #include "levelone.h"
 #include "levelmenu.h"
