@@ -203,12 +203,13 @@ void BasicScene::addGatesOnToolbar()
 
         // It might be easier to just toggle the active gate to place in a spot
         // Would just have to store the currently selected gate and check against it
-        connect(logicGates[index], &QPushButton::pressed, this, [=](){
+        QPushButton* currentButton = logicGates[index];
+        connect(currentButton, &QPushButton::pressed, this, [=](){
             for (QAbstractButton *btn : btnGroup->buttons())
             {
                 btn->setEnabled(true);
             }
-            logicGates[index]->setEnabled(false);
+            currentButton->setEnabled(false);
         });
     }
 
