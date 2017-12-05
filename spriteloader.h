@@ -9,7 +9,7 @@ class SpriteLoader
 public:
     SpriteLoader();
     QPixmap getSprite(QString);
-    QList<QPixmap> getSprites();
+    QList<QPixmap> getGates();
 
 private:
     QMap<QString, QPixmap> sprites;
