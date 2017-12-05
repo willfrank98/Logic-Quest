@@ -12,13 +12,18 @@
 #include <QButtonGroup>
 
 // Initializes the world and such
-BasicScene::BasicScene(QObject *parent) : QGraphicsScene(parent)
+BasicScene::BasicScene(QObject *parent, int inputs, int outputs, int x, int y) : QGraphicsScene(parent)
 {
     timer.setInterval(8);
     connect(&timer, &QTimer::timeout, this, [=](){
         onUpdate(deltaKeeper.elapsed() / 1000.0);
         deltaKeeper.restart();
     });
+
+    this->inputs = inputs;
+    this->outputs = outputs;
+    this->x = x;
+    this->y = y;
 }
 
 BasicScene::~BasicScene()
@@ -29,7 +34,9 @@ BasicScene::~BasicScene()
 // Runs this function when the scene is first shown
 void BasicScene::onInit()
 {
-//    qDebug() << "Override the onInit method, dummy!";
+    createBasicUI();
+    addGatesOnToolbar();
+
 }
 
 // This gets called every 'tick'
@@ -128,7 +135,7 @@ void BasicScene::keyReleaseEvent(QKeyEvent *event)
 
 }
 
-void BasicScene::createBasicUI(int inputs, int outputs, int gridX, int gridY)
+void BasicScene::createBasicUI()
 {
 	qreal width = sceneRect().width();
 	qreal height = sceneRect().height();
@@ -139,8 +146,8 @@ void BasicScene::createBasicUI(int inputs, int outputs, int gridX, int gridY)
 	createBox(QRectF(width-trayWidth, 0, trayWidth, height-trayWidth)); //draws output tray
 	createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
 
-	int gridWidth = (width - (2 * trayWidth)) / gridX;
-	int gridHeight = (height - trayHeight) / gridY;
+    int gridWidth = (width - (2 * trayWidth)) / x;
+    int gridHeight = (height - trayHeight) / y;
 
 	//TODO: make grid fill available space better
 	for (int x = trayWidth; x < width - trayWidth - 5; x += gridWidth)
@@ -151,7 +158,7 @@ void BasicScene::createBasicUI(int inputs, int outputs, int gridX, int gridY)
 		}
 	}
 
-	int inBuf = ((gridY - inputs) / 2) * gridHeight + (gridHeight / 2) - 5; //calculates the space between the top of the window and the first input indicator
+    int inBuf = ((y - inputs) / 2) * gridHeight + (gridHeight / 2) - 5; //calculates the space between the top of the window and the first input indicator
 
 	for (int i = 0; i < inputs; i++)
 	{
@@ -159,7 +166,7 @@ void BasicScene::createBasicUI(int inputs, int outputs, int gridX, int gridY)
 		inBuf += gridHeight;
 	}
 
-	int outBuf = ((gridY - outputs) / 2) * gridHeight + (gridHeight / 2) - 5;
+    int outBuf = ((y - outputs) / 2) * gridHeight + (gridHeight / 2) - 5;
 
 	for (int i = 0; i < outputs; i++)
 	{

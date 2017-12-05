@@ -26,14 +26,14 @@ class BasicScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    explicit BasicScene(QObject *parent = nullptr);
+    explicit BasicScene(QObject *parent = nullptr, int inputs = 1, int outputs = 1, int x = 5, int y = 5);
     ~BasicScene();
 
     QGraphicsItem* createBox(QRectF rect, QColor line = QColor(0, 0, 0), QColor fill = QColor(255, 255, 255),
                    bool draggable = false);
     void setItemPos(QGraphicsItem *item, QPointF pos);
 
-	void createBasicUI(int inputs, int outputs, int gridX, int gridY);
+    void createBasicUI();
     void addGatesOnToolbar();
 //    void gateClicked(int row, int col);
 private:
@@ -50,6 +50,11 @@ private:
     virtual void mouseMoveEvent(QMouseEvent *event);
     virtual void keyPressEvent(QKeyEvent *event);
 	virtual void keyReleaseEvent(QKeyEvent *event);
+
+    int inputs;
+    int outputs;
+    int x;
+    int y;
 //    void addGatesOnToolbar();
 //    void gateClicked(int row, int col);
 //    QPixmap getGatePixmap(int row, int col);
