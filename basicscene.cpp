@@ -39,7 +39,7 @@ void BasicScene::onUpdate(qreal delta)
 }
 
 // Creates a box
-void BasicScene::createBox(QRectF rect, QColor line, QColor fill, bool draggable)
+QGraphicsItem* BasicScene::createBox(QRectF rect, QColor line, QColor fill, bool draggable)
 {
     // Create the GraphicsItem
     QGraphicsRectItem *item = addRect(QRectF(0.0, 0.0, rect.width(), rect.height()), QPen(line), QBrush(fill));
@@ -49,6 +49,8 @@ void BasicScene::createBox(QRectF rect, QColor line, QColor fill, bool draggable
     // TODO: Make sure setting all of these is still necessary
     item->setData(Bounds, rect);
     item->setData(Draggable, draggable);
+
+    return item;
 }
 
 // Sets the position of a body (and by extension, an item)
@@ -85,6 +87,16 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
                          item->pos().y() + offset.height());
         }
         timer.start();
+    }
+
+    // Handles clicks on the scene, can't click through ProxyWidgets
+    else if (event->type() == QEvent::MouseButtonPress)
+    {
+        QMouseEvent* mev = (QMouseEvent*)event;
+        if (itemAt(mev->localPos(), QTransform()) != nullptr)
+        {
+            qDebug() << "Dimensions of clicked box:" << itemAt(mev->localPos(), QTransform())->boundingRect();
+        }
     }
 
     // Passes the event to be handled in the default manner
@@ -135,7 +147,7 @@ void BasicScene::createBasicUI(int inputs, int outputs, int gridX, int gridY)
 	{
 		for (int y = 0; y < height - trayHeight - 5; y += gridHeight)
 		{
-			createBox(QRectF(x, y, gridWidth, gridHeight));
+            createBox(QRectF(x, y, gridWidth, gridHeight));
 		}
 	}
 
@@ -189,7 +201,8 @@ void BasicScene::addGatesOnToolbar()
         btnGroup->addButton(logicGates[index]);
         addWidget(logicGates[index]);
 
-        // I might be easier to just toggle the active gate to place in a spot
+        // It might be easier to just toggle the active gate to place in a spot
+        // Would just have to store the currently selected gate and check against it
         connect(logicGates[index], &QPushButton::pressed, this, [=](){
             for (QAbstractButton *btn : btnGroup->buttons())
             {

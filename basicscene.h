@@ -29,7 +29,7 @@ public:
     explicit BasicScene(QObject *parent = nullptr);
     ~BasicScene();
 
-    void createBox(QRectF rect, QColor line = QColor(0, 0, 0), QColor fill = QColor(255, 255, 255),
+    QGraphicsItem* createBox(QRectF rect, QColor line = QColor(0, 0, 0), QColor fill = QColor(255, 255, 255),
                    bool draggable = false);
     void setItemPos(QGraphicsItem *item, QPointF pos);
 
