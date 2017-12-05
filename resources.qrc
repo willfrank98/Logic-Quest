@@ -1,7 +1,11 @@
 <RCC>
-    <qresource prefix="/">
-        <file>res/sprites/logic_gates_64x64.png</file>
-        <file>res/logos/logoWithoutGates.png</file>
-        <file>res/logos/mainLogo.png</file>
+    <qresource prefix="/images/logos">
+        <file alias="mainLogo.png">res/logos/mainLogo.png</file>
+    </qresource>
+    <qresource prefix="/images/sprites">
+        <file alias="gatesSheet.png">res/sprites/logic_gates_64x64.png</file>
+        <file alias="pipesBlack.png">res/sprites/pipes_black_64x64.png</file>
+        <file alias="pipesGreen.png">res/sprites/pipes_green_64x64.png</file>
+        <file alias="pipesRed.png">res/sprites/pipes_red_64x64.png</file>
     </qresource>
 </RCC>

@@ -34,7 +34,8 @@ SOURCES += \
     levelone.cpp \
     levelmenu.cpp \
     gatenode.cpp \
-    level.cpp
+    level.cpp \
+    spriteloader.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -47,7 +48,8 @@ HEADERS += \
     levelone.h \
     levelmenu.h \
     gatenode.h \
-    level.h
+    level.h \
+    spriteloader.h
 
 FORMS += \
         mainwindow.ui
@@ -95,4 +97,4 @@ unix:!macos {
 }
 
 RESOURCES += \
-    resourcefile.qrc
+    resources.qrc

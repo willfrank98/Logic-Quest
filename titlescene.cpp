@@ -41,7 +41,7 @@ void TitleScene::onInit()
     QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
 
     // Creates a vector that contains a pixmap of each logic gate.
-    QPixmap gatesPM(":res/sprites/logic_gates_64x64.png");
+    QPixmap gatesPM(":images/sprites/gatesSheet.png");
     for (int row = 0; row < 3; row++){
         for (int col = 0; col < 2; col++){
             QRect rec(col*64, row*64, 64, 64);

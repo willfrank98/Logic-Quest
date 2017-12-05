@@ -191,7 +191,7 @@ QPushButton *BasicScene::setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc
 // returns desired log gate pixmap from sheet
 QPixmap BasicScene::getGatePixmap(int row, int col)
 {
-    QPixmap pm(":res/sprites/logic_gates_64x64.png");
+    QPixmap pm(":/images/sprites/gatesSheet.png");
     QRect rec(64*col, 64*row, 64, 64);
     return pm.copy(rec);
 }

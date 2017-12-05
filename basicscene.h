@@ -9,6 +9,7 @@
 #define BASICSCENE_H
 
 #include <itemdata.h>
+#include <spriteloader.h>
 #include <QGraphicsScene>
 #include <QMouseEvent>
 #include <QTimer>
