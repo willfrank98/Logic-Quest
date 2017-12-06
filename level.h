@@ -24,6 +24,7 @@ public:
     Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<GateNode> newGates, QVector<int> newGoals);
     void checkOutputs();
     void setGateType(int gateIndex, GateNodeType type);
+    QVector<QString> getLayout();
 };
 
 #endif // LEVEL_H
