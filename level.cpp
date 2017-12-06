@@ -37,3 +37,13 @@ void Level::setGateType(int gateIndex, GateNodeType type)
     gates[gateIndex].setGateType(type);
     gates[gateIndex].processGate();
 }
+
+QVector<QString> Level::getLayout()
+{
+    return layout;
+}
+
+int Level::getRowSize()
+{
+    return rowSize;
+}

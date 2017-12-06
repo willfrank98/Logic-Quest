@@ -19,11 +19,16 @@ private:
     QVector<GateNode> outputs;
     QVector<GateNode> gates;
     QVector<int> goals;
+    int rowSize;
+    QVector<QString> layout;
 
 public:
-    Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<GateNode> newGates, QVector<int> newGoals);
+    Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<GateNode> newGates,
+          QVector<int> newGoals, int newRowSize, QVector<QString> newLayout);
     void checkOutputs();
     void setGateType(int gateIndex, GateNodeType type);
+    QVector<QString> getLayout();
+    int getRowSize();
 };
 
 #endif // LEVEL_H
