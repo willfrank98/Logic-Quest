@@ -9,7 +9,6 @@
 #define LEVEL_H
 
 #include <QVector>
-#include <itemdata.h>
 #include <gatenode.h>
 
 class Level

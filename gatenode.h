@@ -28,6 +28,7 @@ private:
     int xorGate(); //Takes the output from the two inputs and calculates the XOR boolean value
 
 public:
+    GateNode();
     GateNode(GateNode* _inputNode1, GateNode* _inputNode2, GateNode* _outputNode, GateNodeType type, int value);
     ~GateNode();
     int getOutput();    //returns the output of this node

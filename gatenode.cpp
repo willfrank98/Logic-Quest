@@ -7,6 +7,11 @@
 
 #include "gatenode.h"
 
+GateNode::GateNode()
+{
+
+}
+
 GateNode::GateNode(GateNode* _inputNode1, GateNode* _inputNode2, GateNode* _outputNode, GateNodeType type, int value)
 {
     gType = type;
