@@ -7,9 +7,10 @@ SpriteLoader::SpriteLoader()
     QPixmap *blackPipes = new QPixmap(":/images/sprites/pipesBlack.png");
     QPixmap *bluePipes = new QPixmap(":/images/sprites/pipesBlue.png");
     QPixmap *redPipes = new QPixmap(":/images/sprites/pipesRed.png");
+    QPixmap *otherGates = new QPixmap(":/images/sprites/otherGates.png");
 
     sprites.insert("empty", QPixmap(":/images/sprites/transparent.png"));
-    sprites.insert("gatespot", QPixmap(":/images/sprite/gateSpot.png"));
+    sprites.insert("gatespot", otherGates->copy(64, 128, 64, 64));
 
     sprites.insert("andgate", gateSheet->copy(0, 0, 64, 64));
     sprites.insert("orgate", gateSheet->copy(0, 64, 64, 64));
