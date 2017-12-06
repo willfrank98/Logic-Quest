@@ -18,7 +18,7 @@ QGraphicsScene* SceneHolder::getScene(QString sceneName)
 {
 	int tut1Ins[5] = {-1, -1, 0, -1, -1};
 	int tut1Outs[5] = {-1, -1, 1, -1, -1};
-	int tut1Grid[25] = {0, 0, 0, 0, 0,
+    int tut1Grid[25] = {0, 0, 0, 0, 0,
 						0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0,
 						0, 0, 0, 0, 0,

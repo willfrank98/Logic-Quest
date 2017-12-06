@@ -175,6 +175,7 @@ void BasicScene::createUI()
     int gridHeight = (height - trayHeight) / y;
 
 	//TODO: make grid fill available space better
+    int itemNum = 0;
 	for (int x = trayWidth; x < width - trayWidth - 5; x += gridWidth)
 	{
 		for (int y = 0; y < height - trayHeight - 5; y += gridHeight)
@@ -182,19 +183,18 @@ void BasicScene::createUI()
 			//make this a pixmap?
 //            createBox(QRectF(x, y, gridWidth, gridHeight));
             QString tag;
-            switch(grid[x * y + y])
+            switch(grid[itemNum])
             {
-            case 0:
-                // draw nothing
-                tag = "empty";
-                break;
             case 1:
                 tag = "gatespot";
                 break;
+            default:
+                tag = "empty";
+                break;
             }
 
-            qDebug() << x * y + y;
-//            createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), tag);
+            createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), tag);
+            itemNum++;
 		}
 	}
 
