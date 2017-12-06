@@ -12,7 +12,7 @@
 #include <QButtonGroup>
 
 // Initializes the world and such
-BasicScene::BasicScene(QObject *parent, int inputs, int outputs, int x, int y) : QGraphicsScene(parent)
+BasicScene::BasicScene(QObject *parent, int x, int y, int *inputs, int *outputs, int *grid) : QGraphicsScene(parent)
 {
     timer.setInterval(8);
     connect(&timer, &QTimer::timeout, this, [=](){
@@ -20,10 +20,11 @@ BasicScene::BasicScene(QObject *parent, int inputs, int outputs, int x, int y) :
         deltaKeeper.restart();
     });
 
-    this->inputs = inputs;
-    this->outputs = outputs;
-    this->x = x;
-    this->y = y;
+	this->x = x;
+	this->y = y;
+	this->inputs = inputs;
+	this->outputs = outputs;
+	this->grid = grid;
 }
 
 BasicScene::~BasicScene()
@@ -34,7 +35,7 @@ BasicScene::~BasicScene()
 // Runs this function when the scene is first shown
 void BasicScene::onInit()
 {
-    createBasicUI();
+	createUI();
     addGatesOnToolbar();
 
 }
@@ -149,7 +150,7 @@ void BasicScene::keyReleaseEvent(QKeyEvent *event)
 
 }
 
-void BasicScene::createBasicUI()
+void BasicScene::createUI()
 {
 	qreal width = sceneRect().width();
 	qreal height = sceneRect().height();
@@ -168,24 +169,41 @@ void BasicScene::createBasicUI()
 	{
 		for (int y = 0; y < height - trayHeight - 5; y += gridHeight)
 		{
+			//make this a pixmap?
             createBox(QRectF(x, y, gridWidth, gridHeight));
 		}
 	}
 
-    int inBuf = ((y - inputs) / 2) * gridHeight + (gridHeight / 2) - 5; //calculates the space between the top of the window and the first input indicator
-
-	for (int i = 0; i < inputs; i++)
+	for (int i = 0; i < x; i++)
 	{
-		createBox(QRectF(trayWidth - 10, inBuf, 10, 10), QColor(0, 0, 0), QColor(0, 0, 0));
-		inBuf += gridHeight;
+		switch (inputs[i])
+		{
+		case -1:
+			//draw no input
+			break;
+		case 0:
+			//draw 0 input
+			break;
+		case 1:
+			//draw 1 input
+			break;
+		}
 	}
 
-    int outBuf = ((y - outputs) / 2) * gridHeight + (gridHeight / 2) - 5;
-
-	for (int i = 0; i < outputs; i++)
+	for (int i = 0; i < y; i++)
 	{
-		createBox(QRectF(width - trayWidth, outBuf, 10, 10), QColor(0, 0, 0), QColor(0, 0, 0));
-		outBuf += gridHeight;
+		switch (outputs[i])
+		{
+		case -1:
+			//draw no output
+			break;
+		case 0:
+			//draw 0 output
+			break;
+		case 1:
+			//draw 1 output
+			break;
+		}
 	}
 }
 

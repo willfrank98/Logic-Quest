@@ -30,7 +30,6 @@ SOURCES += \
     titlescene.cpp \
     physicsscene.cpp \
     basicscene.cpp \
-    levelone.cpp \
     levelmenu.cpp \
     gatenode.cpp \
     level.cpp \
@@ -43,7 +42,6 @@ HEADERS += \
     physicsscene.h \
     itemdata.h \
     basicscene.h \
-    levelone.h \
     levelmenu.h \
     gatenode.h \
     level.h \
