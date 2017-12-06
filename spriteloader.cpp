@@ -8,6 +8,9 @@ SpriteLoader::SpriteLoader()
     QPixmap *bluePipes = new QPixmap(":/images/sprites/pipesBlue.png");
     QPixmap *redPipes = new QPixmap(":/images/sprites/pipesRed.png");
 
+    sprites.insert("empty", QPixmap(":/images/sprites/transparent.png"));
+    sprites.insert("gatespot", QPixmap(":/images/sprite/gateSpot.png"));
+
     sprites.insert("andgate", gateSheet->copy(0, 0, 64, 64));
     sprites.insert("orgate", gateSheet->copy(0, 64, 64, 64));
     sprites.insert("nandgate", gateSheet->copy(64, 0, 64, 64));
@@ -18,15 +21,18 @@ SpriteLoader::SpriteLoader()
 
 QPixmap SpriteLoader::getSprite(QString tag)
 {
-    return sprites.value(tag);
+    return sprites.value(tag.toLower());
 }
 
 QList<QPixmap> SpriteLoader::getGates()
 {
     QList<QPixmap> gates;
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < sprites.values().size(); i++)
     {
-        gates.append(sprites.values().at(i));
+        if (sprites.keys().at(i).endsWith("gate"))
+        {
+            gates.append(sprites.values().at(i));
+        }
     }
     return gates;
 }

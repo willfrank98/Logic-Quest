@@ -55,8 +55,17 @@ QGraphicsItem* BasicScene::createBox(QRectF rect, QColor line, QColor fill, bool
     item->setPos(rect.x(), rect.y());
 
     // TODO: Make sure setting all of these is still necessary
-    item->setData(Bounds, rect);
-    item->setData(Draggable, draggable);
+//    item->setData(Bounds, rect);
+//    item->setData(Draggable, draggable);
+
+    return item;
+}
+
+QGraphicsPixmapItem* BasicScene::createSprite(QPointF pos, QSize size, QString tag)
+{
+    QGraphicsPixmapItem *item = addPixmap(sl->getSprite(tag).scaled(size));
+    item->setPos(pos);
+    item->setData(Name, tag);
 
     return item;
 }
@@ -118,6 +127,7 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
             int y = mev->y()/gridHeight;
 
             qDebug() << "x, y :" << x << y;
+            qDebug() << itemAt(mev->localPos(), QTransform())->data(Name);
         }
     }
 
@@ -170,7 +180,21 @@ void BasicScene::createUI()
 		for (int y = 0; y < height - trayHeight - 5; y += gridHeight)
 		{
 			//make this a pixmap?
-            createBox(QRectF(x, y, gridWidth, gridHeight));
+//            createBox(QRectF(x, y, gridWidth, gridHeight));
+            QString tag;
+            switch(grid[x * y + y])
+            {
+            case 0:
+                // draw nothing
+                tag = "empty";
+                break;
+            case 1:
+                tag = "gatespot";
+                break;
+            }
+
+            qDebug() << x * y + y;
+//            createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), tag);
 		}
 	}
 

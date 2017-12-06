@@ -7,5 +7,7 @@
         <file alias="pipesBlack.png">res/sprites/pipes_black_64x64.png</file>
         <file alias="pipesRed.png">res/sprites/pipes_red_64x64.png</file>
         <file alias="pipesBlue.png">res/sprites/pipes_blue_64x64.png</file>
+        <file alias="transparent.png">res/sprites/transparent.png</file>
+        <file alias="gateSpot.png">res/sprites/gateSpot.png</file>
     </qresource>
 </RCC>
