@@ -7,13 +7,16 @@
 
 #include "level.h"
 
-Level::Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<GateNode> newGates, QVector<int> newGoals)
+Level::Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<GateNode> newGates,
+             QVector<int> newGoals, int newRowSize, QVector<QString> newLayout)
 {
     isComplete = false;
     inputs = newInputs;
     outputs = newOutputs;
     gates = newGates;
     goals = newGoals;
+    rowSize = newRowSize;
+    layout = newLayout;
 }
 
 void Level::checkOutputs()
@@ -33,5 +36,4 @@ void Level::setGateType(int gateIndex, GateNodeType type)
 {
     gates[gateIndex].setGateType(type);
     gates[gateIndex].processGate();
-
 }
