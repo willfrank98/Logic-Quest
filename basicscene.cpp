@@ -205,6 +205,11 @@ void BasicScene::createUI()
 			break;
 		}
 	}
+
+	for (int i = 0; i < (x * y); i ++)
+	{
+
+	}
 }
 
 // drag and drop for logic gate buttons
