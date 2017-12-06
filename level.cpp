@@ -7,7 +7,31 @@
 
 #include "level.h"
 
-Level::Level()
+Level::Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<GateNode> newGates, QVector<int> newGoals)
 {
+    isComplete = false;
+    inputs = newInputs;
+    outputs = newOutputs;
+    gates = newGates;
+    goals = newGoals;
+}
+
+void Level::checkOutputs()
+{
+    for (int i = 0; i < goals.size(); i++)
+    {
+        if(goals[i] != outputs[i].getOutput())
+        {
+            isComplete = false;
+            return;
+        }
+    }
+    isComplete = true;
+}
+
+void Level::setGateType(int gateIndex, GateNodeType type)
+{
+    gates[gateIndex].setGateType(type);
+    gates[gateIndex].processGate();
 
 }
