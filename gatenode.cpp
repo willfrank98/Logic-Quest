@@ -7,13 +7,28 @@
 
 #include "gatenode.h"
 
-GateNode::GateNode(GateNode* inputNode1, GateNode* inputNode2, GateNodeType type, int value)
+GateNode::GateNode(GateNode* _inputNode1, GateNode* _inputNode2, GateNode* _outputNode, GateNodeType type, int value)
 {
-    input1 = inputNode1;
-    input2 = inputNode2;
     gType = type;
-    if(gType == START) {
-            output = value;
+    if(gType != START)
+    {
+        inputNode1 = _inputNode1;
+        if(gType != END)
+        {
+            inputNode2 = _inputNode2;
+        }
+    }
+    if(gType != END)
+    {
+        outputNode = _outputNode;
+    }
+    if(gType == START)
+    {
+        output = value;
+    }
+    else if(gType == END || gType == UNSET)
+    {
+        output = -1;
     }
 }
 
@@ -29,8 +44,13 @@ int GateNode::getOutput()
 
 int GateNode::andGate()
 {
+    //checks if output from input nodes are set
+    if(inputNode1->getOutput() < 0 || inputNode2->getOutput() < 0) {
+        return -1;
+    }
+
     //Adds the output for the two inputs
-    int output = input1->getOutput() + input2->getOutput();
+    int output = inputNode1->getOutput() + inputNode2->getOutput();
 
     //If both inputs are 1 then return 1, otherwise returns 0
     if(output == 2) {
@@ -41,8 +61,13 @@ int GateNode::andGate()
 
 int GateNode::nandGate()
 {
+    //checks if output from input nodes are set
+    if(inputNode1->getOutput() < 0 || inputNode2->getOutput() < 0) {
+        return -1;
+    }
+
     //Adds the output for the two inputs
-    int output = input1->getOutput() + input2->getOutput();
+    int output = inputNode1->getOutput() + inputNode2->getOutput();
 
     //If both inpts are 1 return 0, otherwise returns 1
     if(output == 2) {
@@ -53,8 +78,13 @@ int GateNode::nandGate()
 
 int GateNode::norGate()
 {
+    //checks if output from input nodes are set
+    if(inputNode1->getOutput() < 0 || inputNode2->getOutput() < 0) {
+        return -1;
+    }
+
     //Adds the output for the two inputs
-    int output = input1->getOutput() + input2->getOutput();
+    int output = inputNode1->getOutput() + inputNode2->getOutput();
 
     //If both inputs are 0 return 1, otherwise returns 0
     if(output == 0) {
@@ -65,8 +95,13 @@ int GateNode::norGate()
 
 int GateNode::notGate()
 {
+    //checks if output from input nodes are set
+    if(inputNode1->getOutput() < 0 || inputNode2->getOutput() < 0) {
+        return -1;
+    }
+
     //Grabs the output from the input.
-    int output = input1->getOutput();
+    int output = inputNode1->getOutput();
 
     //If input is 0 return 1, if input is 1 return 0
     if(output == 0) {
@@ -77,8 +112,13 @@ int GateNode::notGate()
 
 int GateNode::orGate()
 {
+    //checks if output from input nodes are set
+    if(inputNode1->getOutput() < 0 || inputNode2->getOutput() < 0) {
+        return -1;
+    }
+
     //Adds the output for the two inputs
-    int output = input1->getOutput()+ input2->getOutput();
+    int output = inputNode1->getOutput()+ inputNode2->getOutput();
 
     //If both inputs are 0 return 0, otherwise return 1
     if(output == 0) {
@@ -89,8 +129,13 @@ int GateNode::orGate()
 
 int GateNode::xorGate()
 {
+    //checks if output from input nodes are set
+    if(inputNode1->getOutput() < 0 || inputNode2->getOutput() < 0) {
+        return -1;
+    }
+
     //Adds the output for the two inputs
-    int output = input1->getOutput() + input2->getOutput();
+    int output = inputNode1->getOutput() + inputNode2->getOutput();
 
     //If one input is 1 and the other input is 0 return 1, otherwise return 0
     if(output == 1) {
@@ -122,11 +167,13 @@ void GateNode::processGate()
         output = xorGate();
         break;
     case END:
-        output = input1->getOutput();
-        break;
+        output = inputNode1->getOutput();
+        return;
     default:
         break;
     }
+
+    outputNode->processGate();
 }
 
 void GateNode::setGateType(GateNodeType type)
@@ -135,7 +182,7 @@ void GateNode::setGateType(GateNodeType type)
     if(type == NOT)
     {
         //checks if there are two inputs and the specified type is NOT, the GateNodeType is not changed.
-        if(input2 != nullptr)
+        if(inputNode2 != nullptr)
         {
             return;
         }
