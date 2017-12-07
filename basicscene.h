@@ -21,6 +21,8 @@
 #include <QGraphicsRectItem>
 #include <QPushButton>
 #include <QGraphicsProxyWidget>
+#include <QApplication>
+#include <QGraphicsSceneDragDropEvent>
 
 class BasicScene : public QGraphicsScene
 {
@@ -54,14 +56,18 @@ private:
     virtual void keyPressEvent(QKeyEvent *event);
 	virtual void keyReleaseEvent(QKeyEvent *event);
 
+    virtual void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+    virtual void dropEvent(QGraphicsSceneDragDropEvent *event);
+
 	int x;
 	int y;
     int *inputs;
     QVector<int> goals;
     QVector<GatePipeTags> grid;
+    QPushButton *currentSelectedGate;
 //    void addGatesOnToolbar();
 //    void gateClicked(int row, int col);
-//    QPixmap getGatePixmap(int row, int col);
+    QPixmap getGatePixmap(int row, int col);
 //    QPushButton *setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc);
 
 signals:

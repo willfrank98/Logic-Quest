@@ -93,6 +93,36 @@ void BasicScene::setItemPos(QGraphicsItem *item, QPointF pos)
         item->setPos(pos);
     }
 }
+// drag for palcing buttons
+void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
+    // maybe highlight something or set somehting active if over certain space, etc
+    QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
+    g->setDropAction(Qt::CopyAction); // not sure about this
+    //qDebug() << "posit of mouse is: " << g->scenePos();
+}
+// drop event for buttons
+void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
+    QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
+    qDebug() << "posit of mouse on drop is: " << g->scenePos();
+    // ..and it emerges again..
+    qreal width = sceneRect().width();
+    qreal height = sceneRect().height();
+    int trayWidth = width/12;
+    int trayHeight = 100;
+    int gridWidth = (width - (2 * trayWidth)) / x;
+    int gridHeight = (height - trayHeight) / y;
+
+    int xOff = ((int)(trayWidth + g->scenePos().x())) % gridWidth;
+    int yOff = ((int)(g->scenePos().y())) % gridHeight;
+    int xL = g->scenePos().x() - xOff;
+    int yL = g->scenePos().y() - yOff;
+    qDebug() << "posit of mouse on drop is division: " << xL << yL;
+    qDebug() << currentSelectedGate->objectName();
+    // TODO (if validPLacementOnScreen) ie not bottom tray area, aetc
+        createSprite(QPointF(xL, yL), QSize(gridWidth, gridHeight),  "andgate");
+    //TODO update back end..add gate to vecctor of in use gates?
+}
+
 
 // Intercept events from the GraphicsView and do things with them.
 bool BasicScene::eventFilter(QObject *watched, QEvent *event)
@@ -127,8 +157,6 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
         QMouseEvent* mev = (QMouseEvent*)event;
         if (itemAt(mev->localPos(), QTransform()) != nullptr)
         {
-            //qDebug() << "Dimensions of clicked box:" << itemAt(mev->localPos(), QTransform())->boundingRect();
-            //qDebug() << "x, y :" << mev->x() << mev->y();
             qreal width = sceneRect().width();
             qreal height = sceneRect().height();
 
@@ -232,7 +260,6 @@ void BasicScene::createUI()
                 tag = "empty";
                 break;
             }
-
             createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), tag);
             itemNum++;
 		}
@@ -298,6 +325,12 @@ void BasicScene::addGatesOnToolbar()
     int index = 0;
     QPushButton *logicGates[6];
     QButtonGroup *btnGroup = new QButtonGroup();
+
+    int trayWidth = width/12;
+    int trayHeight = 100;
+    int gridWidth = (width - (2 * trayWidth)) / x;
+    int gridHeight = (height - trayHeight) / y;
+
     for (QPixmap gate : sl->getGates())
     {
         logicGates[index] = new QPushButton();
@@ -318,6 +351,18 @@ void BasicScene::addGatesOnToolbar()
                 btn->setEnabled(true);
             }
             currentButton->setEnabled(false);
+            // need to set name property of QPush button logic gates
+            currentButton->setAccessibleName("nandgate");    // TODO needs to be done correcctly..at time of setting buttons on bottom of sreen
+            currentSelectedGate = currentButton;
+            // drag for log gate onto game space
+            QDrag *drag = new QDrag(this);
+            QMimeData *mimeData = new QMimeData;
+            QPixmap pmc = getGatePixmap(0, 0); //change row and col
+            drag->setMimeData(mimeData);
+            drag->setPixmap(pmc);
+            QApplication::setOverrideCursor(Qt::ClosedHandCursor);
+            Qt::DropAction da = drag->exec(Qt::MoveAction);//???
+            QApplication::restoreOverrideCursor();
         });
     }
 
@@ -341,13 +386,13 @@ void BasicScene::addGatesOnToolbar()
 //    return pb;
 //}
 
-//// returns desired log gate pixmap from sheet
-//QPixmap BasicScene::getGatePixmap(int row, int col)
-//{
-//    QPixmap pm(":/images/sprites/gatesSheet.png");
-//    QRect rec(64*col, 64*row, 64, 64);
-//    return pm.copy(rec);
-//}
+// returns desired log gate pixmap from sheet
+QPixmap BasicScene::getGatePixmap(int row, int col)
+{
+    QPixmap pm(":/images/sprites/gatesSheet.png");
+    QRect rec(64*col, 64*row, 64, 64);
+    return pm.copy(rec);
+}
 
 //// forwarding methods for dragging gates
 //void BasicScene::gate0(){gateClicked(0, 0);}
