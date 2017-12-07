@@ -20,14 +20,14 @@ BasicScene::BasicScene(QObject *parent, int x, int y, int *inputs, QVector<int> 
         deltaKeeper.restart();
     });
 
-	this->x = x;
-	this->y = y;
-	this->inputs = inputs;
+    this->x = x;
+    this->y = y;
+    this->inputs = inputs;
     this->goals = goals;
-	this->grid = grid;
+    this->grid = grid;
 }
 
-BasicScene::BasicScene(Level level, int x, int y)
+BasicScene::BasicScene(Level level)
 {
     timer.setInterval(8);
     connect(&timer, &QTimer::timeout, this, [=](){
@@ -35,8 +35,8 @@ BasicScene::BasicScene(Level level, int x, int y)
         deltaKeeper.restart();
     });
 
-    this->x = x;
-    this->y = y;
+    this->x = level.getNumColumns();
+    this->y = level.getNumRows();
     this->goals = level.getGoals();
     this->grid = level.getLayout();
 

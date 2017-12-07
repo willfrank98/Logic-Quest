@@ -30,7 +30,8 @@ public:
     void setGateType(int gateIndex, GateNodeType type);
     QVector<int> getGoals();
     QVector<GatePipeTags> getLayout();
-    int getRowSize();
+    int getNumColumns();
+    int getNumRows();
 };
 
 #endif // LEVEL_H

@@ -6,6 +6,8 @@
  */
 
 #include "level.h"
+#include <QFile>
+#include <QDebug>
 
 Level::Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<GateNode> newGates,
              QVector<int> newGoals, int newRowSize, QVector<GatePipeTags> newLayout)
@@ -21,7 +23,32 @@ Level::Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<
 
 Level::Level(QString filename)
 {
+    QFile file(filename);
 
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "failed to open file " << filename;
+        return;
+    }
+
+    QTextStream in(&file);
+
+    in >> this->rowSize;
+
+    int y;
+    in >> y;
+
+    QVector<int> inputs(y);
+    for (int i = 0; i < y; ++i) {
+        in >> inputs[i];
+    }
+    //this->inputs = inputs;
+
+    QVector<int> goals(y);
+    for (int i = 0; i < y; ++i) {
+        in >> goals[i];
+    }
+    //this->goals = goals;
 }
 
 void Level::checkOutputs()
@@ -53,7 +80,12 @@ QVector<GatePipeTags> Level::getLayout()
     return layout;
 }
 
-int Level::getRowSize()
+int Level::getNumColumns()
 {
     return rowSize;
+}
+
+int Level::getNumRows()
+{
+    return goals.size();
 }
