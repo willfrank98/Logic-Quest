@@ -17,7 +17,7 @@ Level::Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<
     outputs = newOutputs;
     gates = newGates;
     goals = newGoals;
-    rowSize = newRowSize;
+    numCols = newRowSize;
     layout = newLayout;
 }
 
@@ -29,7 +29,7 @@ Level::Level(QString filename)
 
     QTextStream in(&file);
 
-    in >> this->rowSize;
+    in >> this->numCols;
 
     int y;
     in >> y;
@@ -78,7 +78,7 @@ QVector<GatePipeTags> Level::getLayout()
 
 int Level::getNumColumns()
 {
-    return rowSize;
+    return numCols;
 }
 
 int Level::getNumRows()

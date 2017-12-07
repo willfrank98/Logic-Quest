@@ -28,7 +28,7 @@ class BasicScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    explicit BasicScene(QObject *parent = nullptr, int x = 0, int y = 0, int *inputs = nullptr, QVector<int> goals = QVector<int>(), QVector<GatePipeTags> grid = QVector<GatePipeTags>());
+    explicit BasicScene(QObject *parent = nullptr, int numCols = 0, int numRows = 0, int *inputs = nullptr, QVector<int> goals = QVector<int>(), QVector<GatePipeTags> grid = QVector<GatePipeTags>());
     ~BasicScene();
 
     BasicScene(Level level);
@@ -59,8 +59,8 @@ private:
     virtual void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
     virtual void dropEvent(QGraphicsSceneDragDropEvent *event);
 
-	int x;
-	int y;
+    int numCols;
+    int numRows;
     int *inputs;
     QVector<int> goals;
     QVector<GatePipeTags> grid;

@@ -19,7 +19,7 @@ private:
     QVector<GateNode> outputs;
     QVector<GateNode> gates;
     QVector<int> goals;
-    int rowSize;
+    int numCols;
     QVector<GatePipeTags> layout;
 
 public:

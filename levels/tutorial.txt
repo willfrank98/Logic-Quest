@@ -1,8 +1,9 @@
-5 5
--1 -1 1 -1 -1
--1 -1 0 -1 -1
-0 0 0 0 0
-0 0 0 0 0
-0 0 0 0 0
-0 0 0 0 0
-0 0 0 0 0
+5 4
+NL NL NL NL NL
+S1 WE UG WE EG
+SO WE WN NL NL
+NL NL NL NL NL
+1
+S 0 1 G 0
+S 1 0 G 0
+G 0 E 0

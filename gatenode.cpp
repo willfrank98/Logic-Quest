@@ -194,3 +194,22 @@ void GateNode::setGateType(GateNodeType type)
     }
     gType = type;
 }
+
+void GateNode::addInput(int inputNum, GateNode *node)
+{
+    if(gType != START)
+    {
+        if(inputNum == 1)
+        {
+            inputNode1 = node;
+            node->outputNode = this;
+            return;
+        }
+        if(inputNum = 2 && gType != NOT && gType != END)
+        {
+            inputNode2 = node;
+            node->outputNode = this;
+            return;
+        }
+    }
+}

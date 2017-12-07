@@ -12,7 +12,7 @@
 #include <QButtonGroup>
 
 // Initializes the world and such
-BasicScene::BasicScene(QObject *parent, int x, int y, int *inputs, QVector<int> goals, QVector<GatePipeTags> grid) : QGraphicsScene(parent)
+BasicScene::BasicScene(QObject *parent, int cols, int rows, int *inputs, QVector<int> goals, QVector<GatePipeTags> grid) : QGraphicsScene(parent)
 {
     timer.setInterval(8);
     connect(&timer, &QTimer::timeout, this, [=](){
@@ -20,8 +20,8 @@ BasicScene::BasicScene(QObject *parent, int x, int y, int *inputs, QVector<int> 
         deltaKeeper.restart();
     });
 
-    this->x = x;
-    this->y = y;
+    this->numCols = cols;
+    this->numRows = rows;
     this->inputs = inputs;
     this->goals = goals;
     this->grid = grid;
@@ -35,8 +35,8 @@ BasicScene::BasicScene(Level level)
         deltaKeeper.restart();
     });
 
-    this->x = level.getNumColumns();
-    this->y = level.getNumRows();
+    this->numCols = level.getNumColumns();
+    this->numRows = level.getNumRows();
     this->goals = level.getGoals();
     this->grid = level.getLayout();
 
@@ -109,8 +109,8 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
     qreal height = sceneRect().height();
     int trayWidth = width/12;
     int trayHeight = 100;
-    int gridWidth = (width - (2 * trayWidth)) / x;
-    int gridHeight = (height - trayHeight) / y;
+    int gridWidth = (width - (2 * trayWidth)) / numCols;
+    int gridHeight = (height - trayHeight) / numRows;
 
     int xOff = ((int)(trayWidth + g->scenePos().x())) % gridWidth;
     int yOff = ((int)(g->scenePos().y())) % gridHeight;
@@ -163,8 +163,8 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
             int trayWidth = width/12;
             int trayHeight = 100;
 
-            int gridWidth = (width - (2 * trayWidth)) / x;
-            int gridHeight = (height - trayHeight) / y;
+            int gridWidth = (width - (2 * trayWidth)) / numCols;
+            int gridHeight = (height - trayHeight) / numRows;
 
             int x = (mev->x() - trayWidth)/gridWidth;
             int y = mev->y()/gridHeight;
@@ -214,14 +214,14 @@ void BasicScene::createUI()
 	createBox(QRectF(width-trayWidth, 0, trayWidth, height-trayWidth)); //draws output tray
 	createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
 
-    int gridWidth = (width - (2 * trayWidth)) / x;
-    int gridHeight = (height - trayHeight) / y;
+    int gridWidth = (width - (2 * trayWidth)) / numCols;
+    int gridHeight = (height - trayHeight) / numRows;
 
     //TODO: make grid fill available space better
     int itemNum = 0;
-    for (int y = 0; y < height - trayHeight - 5; y += gridHeight)
+    for (int y = 0; y < height - trayHeight - numRows; y += gridHeight)
     {
-        for (int x = trayWidth; x < width - trayWidth - 5; x += gridWidth)
+        for (int x = trayWidth; x < width - trayWidth - numCols; x += gridWidth)
         {
             QString tag;
             switch(grid[itemNum])
@@ -265,7 +265,7 @@ void BasicScene::createUI()
 		}
 	}
 
-	for (int i = 0; i < x; i++)
+    for (int i = 0; i < numCols; i++)
 	{
 		switch (inputs[i])
 		{
@@ -281,7 +281,7 @@ void BasicScene::createUI()
 		}
 	}
 
-	for (int i = 0; i < y; i++)
+    for (int i = 0; i < numRows; i++)
 	{
         switch (goals[i])
 		{
@@ -297,7 +297,7 @@ void BasicScene::createUI()
 		}
 	}
 
-	for (int i = 0; i < (x * y); i ++)
+    for (int i = 0; i < (numCols * numRows); i ++)
 	{
 
 	}
@@ -328,8 +328,8 @@ void BasicScene::addGatesOnToolbar()
 
     int trayWidth = width/12;
     int trayHeight = 100;
-    int gridWidth = (width - (2 * trayWidth)) / x;
-    int gridHeight = (height - trayHeight) / y;
+    int gridWidth = (width - (2 * trayWidth)) / numCols;
+    int gridHeight = (height - trayHeight) / numRows;
 
     for (QPixmap gate : sl->getGates())
     {
