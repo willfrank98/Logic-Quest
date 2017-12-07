@@ -13,6 +13,7 @@
 #include <QPainter>
 #include <QGraphicsProxyWidget>
 #include <QLabel>
+#include <QMediaPlayer>
 
 
 // Simple example of a title scene
@@ -39,6 +40,12 @@ void TitleScene::onInit()
     //Logo
     QPixmap *logoPix = new QPixmap(":/images/logos/mainLogo.png");
     QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
+
+    //Commented out for now
+//    QMediaPlayer *musicPlayer = new QMediaPlayer;
+//    musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_02_-_Royal_Entrance.mp3"));
+//    musicPlayer->setVolume(50);
+//    musicPlayer->play();
 
     // Creates a vector that contains a pixmap of each logic gate.
     QPixmap gatesPM(":images/sprites/gatesSheet.png");

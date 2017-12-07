@@ -195,8 +195,8 @@ void BasicScene::createUI()
 	{
 		for (int y = 0; y < height - trayHeight - 5; y += gridHeight)
 		{
-			//make this a pixmap?
-//            createBox(QRectF(x, y, gridWidth, gridHeight));
+            // this seems to be all wrong
+            // probably need the Level.cpp file to be integrated
             QString tag;
             switch(grid[itemNum])
             {
