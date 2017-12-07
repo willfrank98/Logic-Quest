@@ -13,4 +13,7 @@
     <qresource prefix="/sounds">
         <file alias="Visager_-_02_-_Royal_Entrance.mp3">res/sounds/Visager_-_02_-_Royal_Entrance.mp3</file>
     </qresource>
+    <qresource prefix="/levels">
+        <file alias="tutorial.txt">levels/tutorial.txt</file>
+    </qresource>
 </RCC>

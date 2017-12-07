@@ -25,11 +25,7 @@ Level::Level(QString filename)
 {
     QFile file(filename);
 
-    if(!file.open(QIODevice::ReadOnly))
-    {
-        qDebug() << "failed to open file " << filename;
-        return;
-    }
+    file.open(QIODevice::ReadOnly);
 
     QTextStream in(&file);
 

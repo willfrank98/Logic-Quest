@@ -36,7 +36,7 @@ QGraphicsScene* SceneHolder::getScene(QString sceneName)
 //    tut1Grid[8] = WE;
 
     if (sceneName.toLower() == "title") return new TitleScene();
-    else if (sceneName.toLower() == "tutorial") return new BasicScene(Level(QString("/levels/tutorial.txt")));
+    else if (sceneName.toLower() == "tutorial") return new BasicScene(Level(QString(":/levels/tutorial.txt")));
 	//else if (sceneName.toLower() == "level1" || sceneName.toLower() == "levelone") return new LevelOne();
     else if (sceneName.toLower() == "levelmenu") return new LevelMenu();
     else return nullptr;
