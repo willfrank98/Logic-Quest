@@ -9,9 +9,7 @@
 #define SCENEHOLDER_H
 
 #include "titlescene.h"
-#include "tutorial.h"
 #include "levelmenu.h"
-#include "levelone.h"
 #include "levelmenu.h"
 
 class SceneHolder

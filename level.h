@@ -9,16 +9,26 @@
 #define LEVEL_H
 
 #include <QVector>
+#include <gatenode.h>
 
 class Level
 {
 private:
-    bool complete;
+    bool isComplete;
+    QVector<GateNode> inputs;
+    QVector<GateNode> outputs;
+    QVector<GateNode> gates;
+    QVector<int> goals;
+    int rowSize;
+    QVector<QString> layout;
 
 public:
-    Level();
-    bool isComplete();
-
+    Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<GateNode> newGates,
+          QVector<int> newGoals, int newRowSize, QVector<QString> newLayout);
+    void checkOutputs();
+    void setGateType(int gateIndex, GateNodeType type);
+    QVector<QString> getLayout();
+    int getRowSize();
 };
 
 #endif // LEVEL_H

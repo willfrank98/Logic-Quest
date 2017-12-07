@@ -31,8 +31,6 @@ SOURCES += \
     titlescene.cpp \
     physicsscene.cpp \
     basicscene.cpp \
-	tutorial.cpp \
-    levelone.cpp \
     levelmenu.cpp \
     gatenode.cpp \
     level.cpp \
@@ -45,8 +43,6 @@ HEADERS += \
     physicsscene.h \
     itemdata.h \
     basicscene.h \
-	tutorial.h \
-    levelone.h \
     levelmenu.h \
     gatenode.h \
     level.h \

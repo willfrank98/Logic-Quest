@@ -13,8 +13,9 @@
 class GateNode
 {
 private:
-    GateNode* input1;
-    GateNode* input2;
+    GateNode* inputNode1;
+    GateNode* inputNode2;
+    GateNode* outputNode;
     int output;
     GateNodeType gType;
 
@@ -27,7 +28,8 @@ private:
     int xorGate(); //Takes the output from the two inputs and calculates the XOR boolean value
 
 public:
-    GateNode(GateNode* inputNode1, GateNode* inputNode2, GateNodeType type, int value);
+    GateNode();
+    GateNode(GateNode* _inputNode1, GateNode* _inputNode2, GateNode* _outputNode, GateNodeType type, int value);
     ~GateNode();
     int getOutput();    //returns the output of this node
     void processGate(); //processes the input to set the output based on the type of the GateNode

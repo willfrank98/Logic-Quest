@@ -12,13 +12,19 @@
 #include <QButtonGroup>
 
 // Initializes the world and such
-BasicScene::BasicScene(QObject *parent) : QGraphicsScene(parent)
+BasicScene::BasicScene(QObject *parent, int x, int y, int *inputs, int *outputs, int *grid) : QGraphicsScene(parent)
 {
     timer.setInterval(8);
     connect(&timer, &QTimer::timeout, this, [=](){
         onUpdate(deltaKeeper.elapsed() / 1000.0);
         deltaKeeper.restart();
     });
+
+	this->x = x;
+	this->y = y;
+	this->inputs = inputs;
+	this->outputs = outputs;
+	this->grid = grid;
 }
 
 BasicScene::~BasicScene()
@@ -29,7 +35,9 @@ BasicScene::~BasicScene()
 // Runs this function when the scene is first shown
 void BasicScene::onInit()
 {
-//    qDebug() << "Override the onInit method, dummy!";
+	createUI();
+    addGatesOnToolbar();
+
 }
 
 // This gets called every 'tick'
@@ -47,8 +55,17 @@ QGraphicsItem* BasicScene::createBox(QRectF rect, QColor line, QColor fill, bool
     item->setPos(rect.x(), rect.y());
 
     // TODO: Make sure setting all of these is still necessary
-    item->setData(Bounds, rect);
-    item->setData(Draggable, draggable);
+//    item->setData(Bounds, rect);
+//    item->setData(Draggable, draggable);
+
+    return item;
+}
+
+QGraphicsPixmapItem* BasicScene::createSprite(QPointF pos, QSize size, QString tag)
+{
+    QGraphicsPixmapItem *item = addPixmap(sl->getSprite(tag).scaled(size));
+    item->setPos(pos);
+    item->setData(Name, tag);
 
     return item;
 }
@@ -95,7 +112,22 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
         QMouseEvent* mev = (QMouseEvent*)event;
         if (itemAt(mev->localPos(), QTransform()) != nullptr)
         {
-            qDebug() << "Dimensions of clicked box:" << itemAt(mev->localPos(), QTransform())->boundingRect();
+            //qDebug() << "Dimensions of clicked box:" << itemAt(mev->localPos(), QTransform())->boundingRect();
+            //qDebug() << "x, y :" << mev->x() << mev->y();
+            qreal width = sceneRect().width();
+            qreal height = sceneRect().height();
+
+            int trayWidth = width/12;
+            int trayHeight = 100;
+
+            int gridWidth = (width - (2 * trayWidth)) / x;
+            int gridHeight = (height - trayHeight) / y;
+
+            int x = (mev->x() - trayWidth)/gridWidth;
+            int y = mev->y()/gridHeight;
+
+            qDebug() << "x, y :" << x << y;
+            qDebug() << itemAt(mev->localPos(), QTransform())->data(Name);
         }
     }
 
@@ -128,7 +160,7 @@ void BasicScene::keyReleaseEvent(QKeyEvent *event)
 
 }
 
-void BasicScene::createBasicUI(int inputs, int outputs, int gridX, int gridY)
+void BasicScene::createUI()
 {
 	qreal width = sceneRect().width();
 	qreal height = sceneRect().height();
@@ -139,32 +171,68 @@ void BasicScene::createBasicUI(int inputs, int outputs, int gridX, int gridY)
 	createBox(QRectF(width-trayWidth, 0, trayWidth, height-trayWidth)); //draws output tray
 	createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
 
-	int gridWidth = (width - (2 * trayWidth)) / gridX;
-	int gridHeight = (height - trayHeight) / gridY;
+    int gridWidth = (width - (2 * trayWidth)) / x;
+    int gridHeight = (height - trayHeight) / y;
 
 	//TODO: make grid fill available space better
+    int itemNum = 0;
 	for (int x = trayWidth; x < width - trayWidth - 5; x += gridWidth)
 	{
 		for (int y = 0; y < height - trayHeight - 5; y += gridHeight)
 		{
-            createBox(QRectF(x, y, gridWidth, gridHeight));
+            // this seems to be all wrong
+            // probably need the Level.cpp file to be integrated
+            QString tag;
+            switch(grid[itemNum])
+            {
+            case 1:
+                tag = "gatespot";
+                break;
+            default:
+                tag = "empty";
+                break;
+            }
+
+            createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), tag);
+            itemNum++;
 		}
 	}
 
-	int inBuf = ((gridY - inputs) / 2) * gridHeight + (gridHeight / 2) - 5; //calculates the space between the top of the window and the first input indicator
-
-	for (int i = 0; i < inputs; i++)
+	for (int i = 0; i < x; i++)
 	{
-		createBox(QRectF(trayWidth - 10, inBuf, 10, 10), QColor(0, 0, 0), QColor(0, 0, 0));
-		inBuf += gridHeight;
+		switch (inputs[i])
+		{
+		case -1:
+			//draw no input
+			break;
+		case 0:
+			//draw 0 input
+			break;
+		case 1:
+			//draw 1 input
+			break;
+		}
 	}
 
-	int outBuf = ((gridY - outputs) / 2) * gridHeight + (gridHeight / 2) - 5;
-
-	for (int i = 0; i < outputs; i++)
+	for (int i = 0; i < y; i++)
 	{
-		createBox(QRectF(width - trayWidth, outBuf, 10, 10), QColor(0, 0, 0), QColor(0, 0, 0));
-		outBuf += gridHeight;
+		switch (outputs[i])
+		{
+		case -1:
+			//draw no output
+			break;
+		case 0:
+			//draw 0 output
+			break;
+		case 1:
+			//draw 1 output
+			break;
+		}
+	}
+
+	for (int i = 0; i < (x * y); i ++)
+	{
+
 	}
 }
 
@@ -203,12 +271,13 @@ void BasicScene::addGatesOnToolbar()
 
         // It might be easier to just toggle the active gate to place in a spot
         // Would just have to store the currently selected gate and check against it
-        connect(logicGates[index], &QPushButton::pressed, this, [=](){
+        QPushButton* currentButton = logicGates[index];
+        connect(currentButton, &QPushButton::pressed, this, [=](){
             for (QAbstractButton *btn : btnGroup->buttons())
             {
                 btn->setEnabled(true);
             }
-            logicGates[index]->setEnabled(false);
+            currentButton->setEnabled(false);
         });
     }
 
