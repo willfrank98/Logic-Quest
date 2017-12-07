@@ -189,14 +189,12 @@ void BasicScene::createUI()
     int gridWidth = (width - (2 * trayWidth)) / x;
     int gridHeight = (height - trayHeight) / y;
 
-	//TODO: make grid fill available space better
+    //TODO: make grid fill available space better
     int itemNum = 0;
-	for (int x = trayWidth; x < width - trayWidth - 5; x += gridWidth)
-	{
-		for (int y = 0; y < height - trayHeight - 5; y += gridHeight)
-		{
-            // this seems to be all wrong
-            // probably need the Level.cpp file to be integrated
+    for (int y = 0; y < height - trayHeight - 5; y += gridHeight)
+    {
+        for (int x = trayWidth; x < width - trayWidth - 5; x += gridWidth)
+        {
             QString tag;
             switch(grid[itemNum])
             {

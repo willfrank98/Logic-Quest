@@ -31,6 +31,9 @@ QGraphicsScene* SceneHolder::getScene(QString sceneName)
             tut1Grid.append(NL);
         }
     }
+    tut1Grid[1] = WS;
+    tut1Grid[7] = WE;
+    tut1Grid[8] = WE;
 
     if (sceneName.toLower() == "title") return new TitleScene();
     else if (sceneName.toLower() == "tutorial") return new BasicScene(nullptr, 5, 5, tut1Ins, tut1Goals, tut1Grid);
