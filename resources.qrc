@@ -8,4 +8,7 @@
         <file alias="pipesRed.png">res/sprites/pipes_red_64x64.png</file>
         <file alias="pipesBlue.png">res/sprites/pipes_blue_64x64.png</file>
     </qresource>
+    <qresource prefix="/sounds">
+        <file>Visager_-_02_-_Royal_Entrance.mp3</file>
+    </qresource>
 </RCC>
