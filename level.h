@@ -20,14 +20,15 @@ private:
     QVector<GateNode> gates;
     QVector<int> goals;
     int rowSize;
-    QVector<QString> layout;
+    QVector<GatePipeTags> layout;
 
 public:
     Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<GateNode> newGates,
-          QVector<int> newGoals, int newRowSize, QVector<QString> newLayout);
+          QVector<int> newGoals, int newRowSize, QVector<GatePipeTags> newLayout);
     void checkOutputs();
     void setGateType(int gateIndex, GateNodeType type);
-    QVector<QString> getLayout();
+    QVector<int> getGoals();
+    QVector<GatePipeTags> getLayout();
     int getRowSize();
 };
 

@@ -17,15 +17,23 @@ SceneHolder::SceneHolder()
 QGraphicsScene* SceneHolder::getScene(QString sceneName)
 {
 	int tut1Ins[5] = {-1, -1, 0, -1, -1};
-	int tut1Outs[5] = {-1, -1, 1, -1, -1};
-    int tut1Grid[25] = {0, 0, 0, 0, 0,
-						0, 0, 0, 0, 0,
-                        0, 0, 0, 0, 0,
-						0, 0, 0, 0, 0,
-						0, 0, 0, 0, 0};
+    QVector<int> tut1Goals;
+    tut1Goals.append(1);
+    QVector<GatePipeTags> tut1Grid;
+    for (int i = 0; i < 25; i++)
+    {
+        if(i % 3 == 0)
+        {
+            tut1Grid.append(UG);
+        }
+        else
+        {
+            tut1Grid.append(NL);
+        }
+    }
 
     if (sceneName.toLower() == "title") return new TitleScene();
-	else if (sceneName.toLower() == "tutorial") return new BasicScene(nullptr, 5, 5, tut1Ins, tut1Outs, tut1Grid);
+    else if (sceneName.toLower() == "tutorial") return new BasicScene(nullptr, 5, 5, tut1Ins, tut1Goals, tut1Grid);
 	//else if (sceneName.toLower() == "level1" || sceneName.toLower() == "levelone") return new LevelOne();
     else if (sceneName.toLower() == "levelmenu") return new LevelMenu();
     else return nullptr;

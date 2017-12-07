@@ -19,7 +19,8 @@ enum GatePipeTags {
     ES, // Bend from East to South
     WE, // Horizontal
     NS, // Vertical
-    SG, // Start gate
+    S0, // Start gate for 0 input
+    S1, // Start gate for 1 input
     EG, // End gate
     UG, // Unset gate
     NL  // Empty/null space

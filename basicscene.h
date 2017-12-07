@@ -8,8 +8,8 @@
 #ifndef BASICSCENE_H
 #define BASICSCENE_H
 
-#include <itemdata.h>
 #include <spriteloader.h>
+#include <level.h>
 #include <QGraphicsScene>
 #include <QMouseEvent>
 #include <QTimer>
@@ -26,8 +26,10 @@ class BasicScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-	explicit BasicScene(QObject *parent = nullptr, int x = 0, int y = 0, int *inputs = nullptr, int *outputs = nullptr, int *grid = nullptr);
+    explicit BasicScene(QObject *parent = nullptr, int x = 0, int y = 0, int *inputs = nullptr, QVector<int> goals = QVector<int>(), QVector<GatePipeTags> grid = QVector<GatePipeTags>());
     ~BasicScene();
+
+    BasicScene(Level level, int x, int y);
 
     QGraphicsItem* createBox(QRectF rect, QColor line = QColor(0, 0, 0), QColor fill = QColor(255, 255, 255),
                    bool draggable = false);
@@ -55,8 +57,8 @@ private:
 	int x;
 	int y;
 	int *inputs;
-	int *outputs;
-	int *grid;
+    QVector<int> goals;
+    QVector<GatePipeTags> grid;
 //    void addGatesOnToolbar();
 //    void gateClicked(int row, int col);
 //    QPixmap getGatePixmap(int row, int col);

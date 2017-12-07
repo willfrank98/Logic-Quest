@@ -12,7 +12,7 @@
 #include <QButtonGroup>
 
 // Initializes the world and such
-BasicScene::BasicScene(QObject *parent, int x, int y, int *inputs, int *outputs, int *grid) : QGraphicsScene(parent)
+BasicScene::BasicScene(QObject *parent, int x, int y, int *inputs, QVector<int> goals, QVector<GatePipeTags> grid) : QGraphicsScene(parent)
 {
     timer.setInterval(8);
     connect(&timer, &QTimer::timeout, this, [=](){
@@ -23,8 +23,23 @@ BasicScene::BasicScene(QObject *parent, int x, int y, int *inputs, int *outputs,
 	this->x = x;
 	this->y = y;
 	this->inputs = inputs;
-	this->outputs = outputs;
+    this->goals = goals;
 	this->grid = grid;
+}
+
+BasicScene::BasicScene(Level level, int x, int y)
+{
+    timer.setInterval(8);
+    connect(&timer, &QTimer::timeout, this, [=](){
+        onUpdate(deltaKeeper.elapsed() / 1000.0);
+        deltaKeeper.restart();
+    });
+
+    this->x = x;
+    this->y = y;
+    this->goals = level.getGoals();
+    this->grid = level.getLayout();
+
 }
 
 BasicScene::~BasicScene()
@@ -185,7 +200,34 @@ void BasicScene::createUI()
             QString tag;
             switch(grid[itemNum])
             {
-            case 1:
+            case WN:
+                tag = "wnpipe";
+                break;
+            case EN:
+                tag = "enpipe";
+                break;
+            case WS:
+                tag = "wspipe";
+                break;
+            case ES:
+                tag = "espipe";
+                break;
+            case WE:
+                tag = "wepipe";
+                break;
+            case NS:
+                tag = "nspipe";
+                break;
+            case S0:
+                tag = "s0gate";
+                break;
+            case S1:
+                tag = "s1gate";
+                break;
+            case EG:
+                tag = "eegate";
+                break;
+            case UG:
                 tag = "gatespot";
                 break;
             default:
@@ -216,7 +258,7 @@ void BasicScene::createUI()
 
 	for (int i = 0; i < y; i++)
 	{
-		switch (outputs[i])
+        switch (goals[i])
 		{
 		case -1:
 			//draw no output
