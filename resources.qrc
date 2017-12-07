@@ -11,6 +11,6 @@
         <file alias="otherGates.png">res/sprites/other_gates_64x64.png</file>
     </qresource>
     <qresource prefix="/sounds">
-        <file>Visager_-_02_-_Royal_Entrance.mp3</file>
+        <file alias="Visager_-_02_-_Royal_Entrance.mp3">res/sounds/Visager_-_02_-_Royal_Entrance.mp3</file>
     </qresource>
 </RCC>

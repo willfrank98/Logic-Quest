@@ -19,6 +19,11 @@ Level::Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<
     layout = newLayout;
 }
 
+Level::Level(QString filename)
+{
+
+}
+
 void Level::checkOutputs()
 {
     for (int i = 0; i < goals.size(); i++)
