@@ -20,6 +20,7 @@ private:
     QVector<GateNode> gates;
     QVector<int> goals;
     int numCols;
+    int numRows;
     QVector<GatePipeTags> layout;
 
 public:

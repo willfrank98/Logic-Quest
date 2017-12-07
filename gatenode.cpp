@@ -175,7 +175,7 @@ void GateNode::processGate()
         output = inputNode1->getOutput();
         return;
     default:
-        break;
+        return;
     }
 
     outputNode->processGate();
