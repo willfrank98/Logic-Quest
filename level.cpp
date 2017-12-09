@@ -35,19 +35,60 @@ Level::Level(QString filename)
         while (!indata.atEnd())
         {
             line = indata.readLine().simplified();
-            list = line.split(' ');
+            list = line.split(" ");
+
+            //Parse the numRows and numCols
             if(currentLine == 0)
             {
                 numRows = list[0].toInt();
                 numCols = list[1].toInt();
                 currentLine++;
-                continue;
             }
+
+            //Parse the layout
             if(currentLine > 0 && currentLine < numRows + 1)
             {
-
+                for (QString s : list)
+                {
+                    layout.append(getLayOutEnum(s));
+                }
+                currentLine++;
+                continue;
             }
 
+            //Parse the goal values
+            if(currentLine == numRows + 1)
+            {
+
+                for (QString s : list)
+                {
+                    goals.append(s.toInt());
+                }
+                currentLine++;
+                continue;
+            }
+
+            //Parse the gate connections
+            if(list[0] == "S")
+            {
+                int sgIndex = list[1].toInt();
+                int sgValue = list[2].toInt();
+                int gIndex = list[3].toInt();
+                addGateWithStartGateInput(gIndex, sgIndex, sgValue);
+
+            }
+            else if(list[0] == "G")
+            {
+                int igIndex = list[2].toInt();
+                int gIndex = list[1].toInt();
+                addGateWithGateInput(gIndex, igIndex);
+            }
+            else if(list[0] == "E")
+            {
+                int egIndex = list[2].toInt();
+                int gIndex = list[1].toInt();
+                addEndGateWithGateInput(egIndex, gIndex);
+            }
 
         }
     }
