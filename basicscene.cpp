@@ -35,7 +35,7 @@ BasicScene::BasicScene(Level level)
         deltaKeeper.restart();
     });
 
-    this->level = level;
+    currentLevel = level;
     this->numCols = level.getNumColumns();
     this->numRows = level.getNumRows();
     this->goals = level.getGoals();
