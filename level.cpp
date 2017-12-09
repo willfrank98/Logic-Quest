@@ -9,7 +9,7 @@
 #include <QFile>
 #include <QDebug>
 
-Level::Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<GateNode> newGates,
+Level::Level(QVector<GateNode*> newInputs, QVector<GateNode*> newOutputs, QVector<GateNode*> newGates,
              QVector<int> newGoals, int newRowSize, QVector<GatePipeTags> newLayout)
 {
     isComplete = false;
@@ -38,8 +38,8 @@ Level::Level(QString filename)
             list = line.split(' ');
             if(currentLine == 0)
             {
-                numRows = list[0];
-                numCols = list[1];
+                numRows = list[0].toInt();
+                numCols = list[1].toInt();
                 currentLine++;
                 continue;
             }
@@ -58,7 +58,7 @@ void Level::checkOutputs()
 {
     for (int i = 0; i < goals.size(); i++)
     {
-        if(goals[i] != endGates[i].getOutput())
+        if(goals[i] != endGates[i]->getOutput())
         {
             isComplete = false;
             return;
@@ -69,8 +69,8 @@ void Level::checkOutputs()
 
 void Level::setGateType(int gateIndex, GateNodeType type)
 {
-    gates[gateIndex].setGateType(type);
-    gates[gateIndex].processGate();
+    gates[gateIndex]->setGateType(type);
+    gates[gateIndex]->processGate();
 }
 
 QVector<int> Level::getGoals()
@@ -96,37 +96,42 @@ int Level::getNumRows()
 void Level::addGateWithStartGateInput(int gIndex, int sgIndex, int sgValue)
 {
     bool isNewGate = false;
-    if(gates.size() = gIndex)
+    GateNode *gate, *startGate;
+    if(gates.size() == gIndex)
     {
-        gates.append(new GateNode(UNSET, -1));
+        gate = new GateNode(UNSET, -1);
+        gates.append(gate);
         isNewGate = true;
     }
-    if(startGates.size() = sgIndex)
+    if(startGates.size() == sgIndex)
     {
-        startGates.append(new GateNode(START, sgValue));
+        startGate = new GateNode(START, sgValue);
+        startGates.append(startGate);
     }
 
     //If the gate at gIndex is new, add startGate at sgIndex as input 1
     if(isNewGate)
     {
-        gates[gIndex].addInput(1, startGates[sgInde]);
+        gates[gIndex]->addInput(1, startGates[sgIndex]);
     }
     //Otherwise add startGate at sgIndex as input 2
     else
     {
-        gates[gIndex].addInput(2, startGates[sgInde]);
+        gates[gIndex]->addInput(2, startGates[sgIndex]);
     }
 }
 
 void Level::addGateWithGateInput(int gIndex, int igIndex)
 {
     bool isNewGate = false;
+    GateNode *gate;
 
     //If the a gate with index gIndex does not already exist in gates,
     //A new gate is created and added
-    if(gates.size() = gIndex)
+    if(gates.size() == gIndex)
     {
-        gates.append(new GateNode(UNSET, -1));
+        gate = new GateNode(UNSET, -1);
+        gates.append(gate);
         isNewGate = true;
     }
 
@@ -135,12 +140,12 @@ void Level::addGateWithGateInput(int gIndex, int igIndex)
     //If the gate at gIndex is new, add gate at igIndex as input 1
     if(isNewGate)
     {
-        gates[gIndex].addInput(1, gates[igIndex]);
+        gates[gIndex]->addInput(1, gates[igIndex]);
     }
     //Otherwise add gate at igIndex as input 2
     else
     {
-        gates[gIndex].addInput(2, gates[igIndex]);
+        gates[gIndex]->addInput(2, gates[igIndex]);
     }
 }
 
@@ -150,9 +155,10 @@ void Level::addEndGateWithGateInput(int egIndex, int gIndex)
 
     //Since an endGate can only have 1 input, it is assumed that the endGate
     //does not already exist and needs to be created and added to endGates.
-    endGates.append(new GateNode(END, -1));
+    GateNode *endGate = new GateNode(END, -1);
+    endGates.append(endGate);
 
-    endGates[egIndex].addInput(1, gates[gIndex]);
+    endGates[egIndex]->addInput(1, gates[gIndex]);
 
 }
 

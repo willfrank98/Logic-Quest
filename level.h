@@ -15,9 +15,9 @@ class Level
 {
 private:
     bool isComplete;
-    QVector<GateNode> startGates;
-    QVector<GateNode> endGates;
-    QVector<GateNode> gates;
+    QVector<GateNode*> startGates;
+    QVector<GateNode*> endGates;
+    QVector<GateNode*> gates;
     QVector<int> goals;
     int numCols;
     int numRows;
@@ -28,7 +28,7 @@ private:
     GatePipeTags getLayOutEnum(QString str);
 
 public:
-    Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<GateNode> newGates,
+    Level(QVector<GateNode*> newInputs, QVector<GateNode*> newOutputs, QVector<GateNode*> newGates,
           QVector<int> newGoals, int newRowSize, QVector<GatePipeTags> newLayout);
     Level(QString filename);
     void checkOutputs();
