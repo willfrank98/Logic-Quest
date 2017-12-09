@@ -80,8 +80,8 @@ Level::Level(QString filename)
             }
             else if(list[0] == "G")
             {
-                int igIndex = list[2].toInt();
-                int gIndex = list[1].toInt();
+                int igIndex = list[1].toInt();
+                int gIndex = list[2].toInt();
                 addGateWithGateInput(gIndex, igIndex);
             }
             else if(list[0] == "E")
