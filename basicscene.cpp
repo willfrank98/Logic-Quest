@@ -245,13 +245,13 @@ void BasicScene::createUI()
                 tag = "nspipe";
                 break;
             case S0:
-                tag = "s0gate";
+                tag = "s0";
                 break;
             case S1:
-                tag = "s1gate";
+                tag = "s1";
                 break;
             case EG:
-                tag = "eegate";
+                tag = "ee";
                 break;
             case UG:
                 tag = "gatespot";
