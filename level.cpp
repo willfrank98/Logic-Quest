@@ -9,16 +9,11 @@
 #include <QFile>
 #include <QDebug>
 
-Level::Level(QVector<GateNode*> newInputs, QVector<GateNode*> newOutputs, QVector<GateNode*> newGates,
-             QVector<int> newGoals, int newRowSize, QVector<GatePipeTags> newLayout)
+Level::Level()
 {
     isComplete = false;
-    startGates = newInputs;
-    endGates = newOutputs;
-    gates = newGates;
-    goals = newGoals;
-    numCols = newRowSize;
-    layout = newLayout;
+    numCols = 0;
+    numRows = 0;
 }
 
 Level::Level(QString filename)
