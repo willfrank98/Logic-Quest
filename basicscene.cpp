@@ -29,17 +29,18 @@ BasicScene::BasicScene(QObject *parent, int cols, int rows, int *inputs, QVector
 
 BasicScene::BasicScene(Level level)
 {
+    qDebug() << level.getNumRows();
+    qDebug() << level.getNumColumns();
     timer.setInterval(8);
     connect(&timer, &QTimer::timeout, this, [=](){
         onUpdate(deltaKeeper.elapsed() / 1000.0);
         deltaKeeper.restart();
     });
-
     this->numCols = level.getNumColumns();
     this->numRows = level.getNumRows();
     this->goals = level.getGoals();
     this->grid = level.getLayout();
-
+    //this->inputs = level.inputs;
 }
 
 BasicScene::~BasicScene()

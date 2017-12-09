@@ -34,10 +34,14 @@ QGraphicsScene* SceneHolder::getScene(QString sceneName)
 //    tut1Grid[1] = WS;
 //    tut1Grid[7] = WE;
 //    tut1Grid[8] = WE;
-
+    Level l = Level(QString(":/levels/tutorial.txt"));
+    int in1[4] = {1,1,1,1};
+    QVector<int> out2 = {1,1,1,1,1};
+    int grid3[20] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     if (sceneName.toLower() == "title") return new TitleScene();
-    else if (sceneName.toLower() == "tutorial") return new BasicScene(Level(QString(":/levels/tutorial.txt")));
-	//else if (sceneName.toLower() == "level1" || sceneName.toLower() == "levelone") return new LevelOne();
+//    else if (sceneName.toLower() == "tutorial") return new BasicScene(Level(QString(":/levels/tutorial.txt")));
+    else if (sceneName.toLower() == "tutorial") return new BasicScene(nullptr, l.numRows, l.numCols, in1, out2, l.getLayout());
+    //else if (sceneName.toLower() == "level1" || sceneName.toLower() == "levelone") return new LevelOne();
     else if (sceneName.toLower() == "levelmenu") return new LevelMenu();
     else return nullptr;
 }
