@@ -62,6 +62,7 @@ private:
     int numCols;
     int numRows;
     int *inputs;
+    Level currentLevel;
     QVector<int> goals;
     QVector<GatePipeTags> grid;
     QPushButton *currentSelectedGate;
