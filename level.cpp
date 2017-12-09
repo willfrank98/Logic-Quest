@@ -25,26 +25,23 @@ Level::Level(QString filename)
 {
     QFile file(filename);
 
-    file.open(QIODevice::ReadOnly);
+    if(file.open(QIODevice::ReadOnly))
+    {
 
-    QTextStream in(&file);
+        QTextStream indata(&file);
+        QString line;
+        int currentLine = 0;
+        while (!indata.atEnd())
+        {
+            line = indata.readLine().simplified();
 
-    in >> this->numCols;
+            if(currentLine == 0)
+            {
 
-    int y;
-    in >> y;
-
-    QVector<int> inputs(y);
-    for (int i = 0; i < y; ++i) {
-        in >> inputs[i];
+            }
+        }
     }
-    //this->inputs = inputs;
-
-    QVector<int> goals(y);
-    for (int i = 0; i < y; ++i) {
-        in >> goals[i];
-    }
-    //this->goals = goals;
+    file.close();
 }
 
 void Level::checkOutputs()
@@ -147,4 +144,59 @@ void Level::addEndGateWithGateInput(int egIndex, int gIndex)
 
     endGates[egIndex].addInput(1, gates[gIndex]);
 
+}
+
+GatePipeTags Level::getLayOutEnum(QString str)
+{
+    if(str.startsWith('W'))
+    {
+        if(str == "WE")
+        {
+            return WE;
+        }
+        if(str == "WN")
+        {
+            return WN;
+        }
+        if(str == "WS")
+        {
+            return WS;
+        }
+    }
+    if(str.startsWith('E'))
+    {
+        if(str == "EG")
+        {
+            return EG;
+        }
+        if(str == "EN")
+        {
+            return EN;
+        }
+        if(str == "ES")
+        {
+            return ES;
+        }
+    }
+    if(str == "NL")
+    {
+        return NL;
+    }
+    if(str == "UG")
+    {
+        return UG;
+    }
+    if(str == "S1")
+    {
+        return S1;
+    }
+    if(str == "S0")
+    {
+        return S0;
+    }
+    if(str == "NS")
+    {
+        return NS;
+    }
+    return NL;
 }

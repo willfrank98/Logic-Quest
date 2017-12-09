@@ -169,8 +169,10 @@ void GateNode::processGate()
     default:
         return;
     }
-
-    outputNode->processGate();
+    if(output > -1)
+    {
+            outputNode->processGate();
+    }
 }
 
 void GateNode::setGateType(GateNodeType type)

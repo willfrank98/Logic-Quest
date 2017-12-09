@@ -15,8 +15,8 @@ class Level
 {
 private:
     bool isComplete;
-    QVector<GateNode> inputs;
-    QVector<GateNode> outputs;
+    QVector<GateNode> startGates;
+    QVector<GateNode> endGates;
     QVector<GateNode> gates;
     QVector<int> goals;
     int numCols;
@@ -25,6 +25,7 @@ private:
     void addGateWithStartGateInput(int gIndex, int sgIndex, int sgValue);
     void addGateWithGateInput(int gIndex, int igIndex);
     void addEndGateWithGateInput(int egIndex, int gIndex);
+    GatePipeTags getLayOutEnum(QString str);
 
 public:
     Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<GateNode> newGates,
