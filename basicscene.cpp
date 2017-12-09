@@ -265,42 +265,26 @@ void BasicScene::createUI()
 		}
 	}
 
-    for (int i = 0; i < numCols; i++)
-	{
-		switch (inputs[i])
-		{
-		case -1:
-			//draw no input
-			break;
-		case 0:
-			//draw 0 input
-			break;
-		case 1:
-			//draw 1 input
-			break;
-		}
-	}
-
-    for (int i = 0; i < numRows; i++)
-	{
-        switch (goals[i])
-		{
-		case -1:
-			//draw no output
-			break;
-		case 0:
-			//draw 0 output
-			break;
-		case 1:
-			//draw 1 output
-			break;
-		}
-	}
-
-    for (int i = 0; i < (numCols * numRows); i ++)
-	{
-
-	}
+//    for (int i = 0; i < numRows; i++)
+//	{
+//        switch (goals[i])
+//		{
+//		case -1:
+//			//draw no output
+//			break;
+//		case 0:
+//			//draw 0 output
+//			break;
+//		case 1:
+//			//draw 1 output
+//			break;
+//		}
+//	}
+//
+//   for (int i = 0; i < (numCols * numRows); i ++)
+//	{
+//
+//	}
 }
 
 // drag and drop for logic gate buttons

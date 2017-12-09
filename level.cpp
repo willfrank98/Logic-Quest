@@ -132,7 +132,7 @@ int Level::getNumColumns()
 
 int Level::getNumRows()
 {
-    return goals.size();
+    return numRows;
 }
 
 void Level::addGateWithStartGateInput(int gIndex, int sgIndex, int sgValue)
