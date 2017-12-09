@@ -13,8 +13,6 @@
 #include <QPainter>
 #include <QGraphicsProxyWidget>
 #include <QLabel>
-#include <QMediaPlayer>
-
 
 // Simple example of a title scene
 TitleScene::TitleScene()
@@ -32,6 +30,7 @@ void TitleScene::onInit()
 
     // Define a font
     QFont font = QFont("Helvetica");
+    toggleSound = false;
 
     // Add some text, ignores physics
     // Perhaps move this to a 'createText' method or something
@@ -42,10 +41,10 @@ void TitleScene::onInit()
     QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
 
     //Commented out for now
-//    QMediaPlayer *musicPlayer = new QMediaPlayer;
-//    musicPlayer->setMedia(QUrl(":/sounds/Visager_-_02_-_Royal_Entrance.mp3"));
-//    musicPlayer->setVolume(50);
-//    musicPlayer->play();
+    musicPlayer = new QMediaPlayer;
+    musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_02_-_Royal_Entrance.mp3"));
+    musicPlayer->setVolume(50);
+    musicPlayer->play();
 
     // Creates a vector that contains a pixmap of each logic gate.
     QPixmap gatesPM(":images/sprites/gatesSheet.png");
@@ -65,6 +64,22 @@ void TitleScene::onInit()
 //    prompt->setZValue(1.0);
 //    prompt->setData(Name, "prompt");
 //    prompt->setData(Direction, 1.0);
+
+    QPushButton *soundButton = new QPushButton();
+    soundButton->setGeometry(QRect(sceneRect().width() * .75, sceneRect().height() * .81, sceneRect().width() * .10, sceneRect().height() * .10));
+    soundButton->setText("Sound");
+    soundButton->setAttribute(Qt::WA_TranslucentBackground);
+    soundButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 16px;"
+                               "border-style: solid;"
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}");
+    soundButtonProxy = addWidget(soundButton);
 
     //Sets up menu buttons
     QPushButton *startButton = new QPushButton();
@@ -140,6 +155,7 @@ void TitleScene::onInit()
     connect(levelSelectButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
     connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
+    connect(soundButton, &QPushButton::clicked, this, &TitleScene::enableDisableSound);
 
 
 
@@ -210,6 +226,20 @@ void TitleScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     }
 }
 */
+
+void TitleScene::enableDisableSound() {
+
+    if(toggleSound) {
+    musicPlayer->stop();
+    toggleSound = true;
+    }
+    else {
+        musicPlayer->play();
+        toggleSound = false;
+    }
+}
+
+
 void TitleScene::keyPressEvent(QKeyEvent *event)
 {
 
