@@ -30,15 +30,25 @@ Level::Level(QString filename)
 
         QTextStream indata(&file);
         QString line;
+        QStringList list;
         int currentLine = 0;
         while (!indata.atEnd())
         {
             line = indata.readLine().simplified();
-
+            list = line.split(' ');
             if(currentLine == 0)
+            {
+                numRows = list[0];
+                numCols = list[1];
+                currentLine++;
+                continue;
+            }
+            if(currentLine > 0 && currentLine < numRows + 1)
             {
 
             }
+
+
         }
     }
     file.close();
