@@ -107,12 +107,11 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
     // ..and it emerges again..
     qreal width = sceneRect().width();
     qreal height = sceneRect().height();
-    int trayWidth = width/12;
     int trayHeight = 100;
-    int gridWidth = (width - (2 * trayWidth)) / numCols;
+	int gridWidth = width / numCols;
     int gridHeight = (height - trayHeight) / numRows;
 
-    int xOff = ((int)(trayWidth + g->scenePos().x())) % gridWidth;
+	int xOff = ((int)(g->scenePos().x())) % gridWidth;
     int yOff = ((int)(g->scenePos().y())) % gridHeight;
     int xL = g->scenePos().x() - xOff;
     int yL = g->scenePos().y() - yOff;
@@ -178,30 +177,30 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
     return QGraphicsScene::eventFilter(watched, event);
 }
 
-void BasicScene::mousePressEvent(QMouseEvent *event)
-{
+//void BasicScene::mousePressEvent(QMouseEvent *event)
+//{
 
-}
+//}
 
-void BasicScene::mouseReleaseEvent(QMouseEvent *event)
-{
+//void BasicScene::mouseReleaseEvent(QMouseEvent *event)
+//{
 
-}
+//}
 
-void BasicScene::mouseMoveEvent(QMouseEvent *event)
-{
+//void BasicScene::mouseMoveEvent(QMouseEvent *event)
+//{
 
-}
+//}
 
-void BasicScene::keyPressEvent(QKeyEvent *event)
-{
+//void BasicScene::keyPressEvent(QKeyEvent *event)
+//{
 
-}
+//}
 
-void BasicScene::keyReleaseEvent(QKeyEvent *event)
-{
+//void BasicScene::keyReleaseEvent(QKeyEvent *event)
+//{
 
-}
+//}
 
 void BasicScene::createUI()
 {
@@ -210,8 +209,6 @@ void BasicScene::createUI()
 
 	//int trayWidth = width/12;
 	int trayHeight = 100;
-	//createBox(QRectF(0, 0, trayWidth, height-trayWidth));	//draws input tray
-	//createBox(QRectF(width-trayWidth, 0, trayWidth, height-trayWidth)); //draws output tray
 	createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
 
 	int gridWidth = width / numCols;
@@ -264,27 +261,6 @@ void BasicScene::createUI()
             itemNum++;
 		}
 	}
-
-//    for (int i = 0; i < numRows; i++)
-//	{
-//        switch (goals[i])
-//		{
-//		case -1:
-//			//draw no output
-//			break;
-//		case 0:
-//			//draw 0 output
-//			break;
-//		case 1:
-//			//draw 1 output
-//			break;
-//		}
-//	}
-//
-//   for (int i = 0; i < (numCols * numRows); i ++)
-//	{
-//
-//	}
 }
 
 // drag and drop for logic gate buttons
@@ -305,22 +281,17 @@ void BasicScene::addGatesOnToolbar()
     qreal width = sceneRect().width();
     qreal height = sceneRect().height();
     int gateLocation = width/10;
-    int space = gateLocation;
+	//int space = gateLocation;
     int index = 0;
     QPushButton *logicGates[6];
     QButtonGroup *btnGroup = new QButtonGroup();
-
-    int trayWidth = width/12;
-    int trayHeight = 100;
-    int gridWidth = (width - (2 * trayWidth)) / numCols;
-    int gridHeight = (height - trayHeight) / numRows;
 
     for (QPixmap gate : sl->getGates())
     {
         logicGates[index] = new QPushButton();
         logicGates[index]->setIcon(QIcon(gate));
         logicGates[index]->setIconSize(gate.size());
-        logicGates[index]->setGeometry(gateLocation+=gate.width(), height-68, gate.width() + 2, gate.height() + 2);
+		logicGates[index]->setGeometry(gateLocation+=gate.width(), height-68, gate.width() + 2, gate.height() + 2);
         logicGates[index]->setEnabled(true);
         logicGates[index]->setCheckable(true);
         btnGroup->addButton(logicGates[index]);
@@ -345,7 +316,7 @@ void BasicScene::addGatesOnToolbar()
             drag->setMimeData(mimeData);
             drag->setPixmap(pmc);
             QApplication::setOverrideCursor(Qt::ClosedHandCursor);
-            Qt::DropAction da = drag->exec(Qt::MoveAction);//???
+			/*Qt::DropAction da = */drag->exec(Qt::MoveAction);//???
             QApplication::restoreOverrideCursor();
         });
     }
