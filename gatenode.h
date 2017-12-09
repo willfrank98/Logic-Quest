@@ -29,7 +29,7 @@ private:
 
 public:
     GateNode();
-    GateNode(GateNode* _inputNode1, GateNode* _inputNode2, GateNode* _outputNode, GateNodeType type, int value);
+    GateNode(GateNodeType type, int value);
     ~GateNode();
     int getOutput();    //returns the output of this node
     void processGate(); //processes the input to set the output based on the type of the GateNode

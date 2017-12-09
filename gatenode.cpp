@@ -12,28 +12,20 @@ GateNode::GateNode()
 
 }
 
-GateNode::GateNode(GateNode* _inputNode1, GateNode* _inputNode2, GateNode* _outputNode, GateNodeType type, int value)
+GateNode::GateNode(GateNodeType type, int value)
 {
     gType = type;
-    if(gType != START)
-    {
-        inputNode1 = _inputNode1;
-        if(gType != END)
-        {
-            inputNode2 = _inputNode2;
-        }
-    }
-    if(gType != END)
-    {
-        outputNode = _outputNode;
-    }
+    inputNode1 = nullptr;
+    inputNode2 = nullptr;
+    outputNode = nullptr;
+    output = -1;
     if(gType == START)
     {
         output = value;
-    }
-    else if(gType == END || gType == UNSET)
-    {
-        output = -1;
+        if(output > 1)
+        {
+            output = 1;
+        }
     }
 }
 

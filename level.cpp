@@ -13,8 +13,8 @@ Level::Level(QVector<GateNode> newInputs, QVector<GateNode> newOutputs, QVector<
              QVector<int> newGoals, int newRowSize, QVector<GatePipeTags> newLayout)
 {
     isComplete = false;
-    inputs = newInputs;
-    outputs = newOutputs;
+    startGates = newInputs;
+    endGates = newOutputs;
     gates = newGates;
     goals = newGoals;
     numCols = newRowSize;
@@ -51,7 +51,7 @@ void Level::checkOutputs()
 {
     for (int i = 0; i < goals.size(); i++)
     {
-        if(goals[i] != outputs[i].getOutput())
+        if(goals[i] != endGates[i].getOutput())
         {
             isComplete = false;
             return;
@@ -88,15 +88,63 @@ int Level::getNumRows()
 
 void Level::addGateWithStartGateInput(int gIndex, int sgIndex, int sgValue)
 {
+    bool isNewGate = false;
+    if(gates.size() = gIndex)
+    {
+        gates.append(new GateNode(UNSET, -1));
+        isNewGate = true;
+    }
+    if(startGates.size() = sgIndex)
+    {
+        startGates.append(new GateNode(START, sgValue));
+    }
 
+    //If the gate at gIndex is new, add startGate at sgIndex as input 1
+    if(isNewGate)
+    {
+        gates[gIndex].addInput(1, startGates[sgInde]);
+    }
+    //Otherwise add startGate at sgIndex as input 2
+    else
+    {
+        gates[gIndex].addInput(2, startGates[sgInde]);
+    }
 }
 
 void Level::addGateWithGateInput(int gIndex, int igIndex)
 {
+    bool isNewGate = false;
 
+    //If the a gate with index gIndex does not already exist in gates,
+    //A new gate is created and added
+    if(gates.size() = gIndex)
+    {
+        gates.append(new GateNode(UNSET, -1));
+        isNewGate = true;
+    }
+
+    //It is assumed that a gate already exists in gates at index igIndex.
+
+    //If the gate at gIndex is new, add gate at igIndex as input 1
+    if(isNewGate)
+    {
+        gates[gIndex].addInput(1, gates[igIndex]);
+    }
+    //Otherwise add gate at igIndex as input 2
+    else
+    {
+        gates[gIndex].addInput(2, gates[igIndex]);
+    }
 }
 
 void Level::addEndGateWithGateInput(int egIndex, int gIndex)
 {
+    //It is assumed that a gate already exists in gates at index gIndex.
+
+    //Since an endGate can only have 1 input, it is assumed that the endGate
+    //does not already exist and needs to be created and added to endGates.
+    endGates.append(new GateNode(END, -1));
+
+    endGates[egIndex].addInput(1, gates[gIndex]);
 
 }
