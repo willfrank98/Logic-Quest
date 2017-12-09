@@ -208,20 +208,20 @@ void BasicScene::createUI()
 	qreal width = sceneRect().width();
 	qreal height = sceneRect().height();
 
-	int trayWidth = width/12;
+	//int trayWidth = width/12;
 	int trayHeight = 100;
-	createBox(QRectF(0, 0, trayWidth, height-trayWidth));	//draws input tray
-	createBox(QRectF(width-trayWidth, 0, trayWidth, height-trayWidth)); //draws output tray
+	//createBox(QRectF(0, 0, trayWidth, height-trayWidth));	//draws input tray
+	//createBox(QRectF(width-trayWidth, 0, trayWidth, height-trayWidth)); //draws output tray
 	createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
 
-    int gridWidth = (width - (2 * trayWidth)) / numCols;
+	int gridWidth = width / numCols;
     int gridHeight = (height - trayHeight) / numRows;
 
     //TODO: make grid fill available space better
     int itemNum = 0;
     for (int y = 0; y < height - trayHeight - numRows; y += gridHeight)
     {
-        for (int x = trayWidth; x < width - trayWidth - numCols; x += gridWidth)
+		for (int x = 0; x < width - numCols; x += gridWidth)
         {
             QString tag;
             switch(grid[itemNum])
