@@ -330,11 +330,7 @@ void BasicScene::addGatesOnToolbar()
         // Would just have to store the currently selected gate and check against it
         QPushButton* currentButton = logicGates[index];
         connect(currentButton, &QPushButton::pressed, this, [=](){
-            for (QAbstractButton *btn : btnGroup->buttons())
-            {
-                btn->setEnabled(true);
-            }
-            currentButton->setEnabled(false);
+            currentButton->setChecked(true);
             // need to set name property of QPush button logic gates
             currentButton->setAccessibleName("nandgate");    // TODO needs to be done correcctly..at time of setting buttons on bottom of sreen
             currentSelectedGate = currentButton;
