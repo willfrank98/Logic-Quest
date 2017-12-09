@@ -23,12 +23,12 @@ void LevelMenu::onInit() {
     QPushButton* backButton = new QPushButton();
     backButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.05, 60, 40));
     backButton->setText("Back");
+    backButton->setAttribute(Qt::WA_TranslucentBackground);
     backButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
                                "color: white;"
                                "font-size: 16px;"
                                "border-style: solid;"
-                               /*"border-width: 2px;"*/
                                "border-radius: 10px;"
                                "}"
                               "QPushButton:pressed {"
@@ -47,12 +47,12 @@ void LevelMenu::onInit() {
     QPushButton* levelOneEasyButton = new QPushButton();
     levelOneEasyButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.2, 70, 50));
     levelOneEasyButton->setText("1");
+    levelOneEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelOneEasyButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 249, 158);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"
@@ -64,12 +64,12 @@ void LevelMenu::onInit() {
     QPushButton* levelTwoEasyButton = new QPushButton();
     levelTwoEasyButton->setGeometry(QRect(sceneRect().width()*0.25, sceneRect().height()*0.2, 70, 50));
     levelTwoEasyButton->setText("2");
+    levelTwoEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelTwoEasyButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 249, 158);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"
@@ -81,12 +81,12 @@ void LevelMenu::onInit() {
     QPushButton* levelThreeEasyButton = new QPushButton();
     levelThreeEasyButton->setGeometry(QRect(sceneRect().width()*0.45, sceneRect().height()*0.2, 70, 50));
     levelThreeEasyButton->setText("3");
+    levelThreeEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelThreeEasyButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 249, 158);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"
@@ -98,12 +98,12 @@ void LevelMenu::onInit() {
     QPushButton* levelFourEasyButton = new QPushButton();
     levelFourEasyButton->setGeometry(QRect(sceneRect().width()*0.65, sceneRect().height()*0.2, 70, 50));
     levelFourEasyButton->setText("4");
+    levelFourEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFourEasyButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 249, 158);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"
@@ -115,12 +115,12 @@ void LevelMenu::onInit() {
     QPushButton* levelFiveEasyButton = new QPushButton();
     levelFiveEasyButton->setGeometry(QRect(sceneRect().width()*0.85, sceneRect().height()*0.2, 70, 50));
     levelFiveEasyButton->setText("5");
+    levelFiveEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFiveEasyButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 249, 158);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"
@@ -137,12 +137,12 @@ void LevelMenu::onInit() {
     QPushButton* levelOneMediumButton = new QPushButton();
     levelOneMediumButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.45, 70, 50));
     levelOneMediumButton->setText("1");
+    levelOneMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelOneMediumButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 235, 249);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"
@@ -154,12 +154,12 @@ void LevelMenu::onInit() {
     QPushButton* levelTwoMediumButton = new QPushButton();
     levelTwoMediumButton->setGeometry(QRect(sceneRect().width()*0.25, sceneRect().height()*0.45, 70, 50));
     levelTwoMediumButton->setText("2");
+    levelTwoMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelTwoMediumButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 235, 249);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"
@@ -171,12 +171,12 @@ void LevelMenu::onInit() {
     QPushButton* levelThreeMediumButton = new QPushButton();
     levelThreeMediumButton->setGeometry(QRect(sceneRect().width()*0.45, sceneRect().height()*0.45, 70, 50));
     levelThreeMediumButton->setText("3");
+    levelThreeMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelThreeMediumButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 235, 249);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"
@@ -188,12 +188,12 @@ void LevelMenu::onInit() {
     QPushButton* levelFourMediumButton = new QPushButton();
     levelFourMediumButton->setGeometry(QRect(sceneRect().width()*0.65, sceneRect().height()*0.45, 70, 50));
     levelFourMediumButton->setText("4");
+    levelFourMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFourMediumButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 235, 249);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"
@@ -205,12 +205,12 @@ void LevelMenu::onInit() {
     QPushButton* levelFiveMediumButton = new QPushButton();
     levelFiveMediumButton->setGeometry(sceneRect().width()*0.85, sceneRect().height()*0.45, 70, 50);
     levelFiveMediumButton->setText("5");
+    levelFiveMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFiveMediumButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 235, 249);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"
@@ -227,12 +227,12 @@ void LevelMenu::onInit() {
     QPushButton* levelOneHardButton = new QPushButton();
     levelOneHardButton->setGeometry(sceneRect().width()*0.05, sceneRect().height()*0.7, 70, 50);
     levelOneHardButton->setText("1");
+    levelOneHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelOneHardButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(249, 92, 131);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"
@@ -244,12 +244,12 @@ void LevelMenu::onInit() {
     QPushButton* levelTwoHardButton = new QPushButton();
     levelTwoHardButton->setGeometry(sceneRect().width()*0.25, sceneRect().height()*0.7, 70, 50);
     levelTwoHardButton->setText("2");
+    levelTwoHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelTwoHardButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(249, 92, 131);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"
@@ -261,12 +261,12 @@ void LevelMenu::onInit() {
     QPushButton* levelThreeHardButton = new QPushButton();
     levelThreeHardButton->setGeometry(sceneRect().width()*0.45, sceneRect().height()*0.7, 70, 50);
     levelThreeHardButton->setText("3");
+    levelThreeHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelThreeHardButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(249, 92, 131);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"
@@ -278,12 +278,12 @@ void LevelMenu::onInit() {
     QPushButton* levelFourHardButton = new QPushButton();
     levelFourHardButton->setGeometry(sceneRect().width()*0.65, sceneRect().height()*0.7, 70, 50);
     levelFourHardButton->setText("4");
+    levelFourHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFourHardButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(249, 92, 131);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"
@@ -295,12 +295,12 @@ void LevelMenu::onInit() {
     QPushButton* levelFiveHardButton = new QPushButton();
     levelFiveHardButton->setGeometry(sceneRect().width()*0.85, sceneRect().height()*0.7, 70, 50);
     levelFiveHardButton->setText("5");
+    levelFiveHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFiveHardButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(249, 92, 131);"
                                       "color: white;"
                                       "font-size: 16px;"
                                       "border-style: solid;"
-                                      /*"border-width: 2px;"*/
                                       "border-radius: 10px;"
                                       "}"
                                       "QPushButton:pressed {"

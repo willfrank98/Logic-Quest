@@ -70,12 +70,12 @@ void TitleScene::onInit()
     QPushButton *startButton = new QPushButton();
     startButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .45, sceneRect().width() * .30, sceneRect().height() * .10));
     startButton->setText("Start Game");
+    startButton->setAttribute(Qt::WA_TranslucentBackground);
     startButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
                                "color: white;"
                                "font-size: 16px;"
                                "border-style: solid;"
-                               /*"border-width: 2px;"*/
                                "border-radius: 10px;"
                                "}"
                               "QPushButton:pressed {"
@@ -87,12 +87,12 @@ void TitleScene::onInit()
     QPushButton *levelSelectButton = new QPushButton();
     levelSelectButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .57, sceneRect().width() * .30, sceneRect().height() * .10));
     levelSelectButton->setText("Level Select");
+    levelSelectButton->setAttribute(Qt::WA_TranslucentBackground);
     levelSelectButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
                                "color: white;"
                                "font-size: 16px;"
                                "border-style: solid;"
-                               /*"border-width: 2px;"*/
                                "border-radius: 10px;"
                                "}"
                               "QPushButton:pressed {"
@@ -104,12 +104,12 @@ void TitleScene::onInit()
     QPushButton *optionsButton = new QPushButton();
     optionsButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .69, sceneRect().width() * .30, sceneRect().height() * .10));
     optionsButton->setText("Options");
+    optionsButton->setAttribute(Qt::WA_TranslucentBackground);
     optionsButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
                                "color: white;"
                                "font-size: 16px;"
                                "border-style: solid;"
-                               /*"border-width: 2px;"*/
                                "border-radius: 10px;"
                                "}"
                               "QPushButton:pressed {"
@@ -121,12 +121,12 @@ void TitleScene::onInit()
     QPushButton *exitButton = new QPushButton();
     exitButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .81, sceneRect().width() * .30, sceneRect().height() * .10));
     exitButton->setText("Exit");
+    exitButton->setAttribute(Qt::WA_TranslucentBackground);
     exitButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
                                "color: white;"
                                "font-size: 16px;"
                                "border-style: solid;"
-                               /*"border-width: 2px;"*/
                                "border-radius: 10px;"
                                "}"
                               "QPushButton:pressed {"
