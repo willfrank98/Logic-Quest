@@ -85,3 +85,18 @@ int Level::getNumRows()
 {
     return goals.size();
 }
+
+void Level::addGateWithStartGateInput(int gIndex, int sgIndex, int sgValue)
+{
+
+}
+
+void Level::addGateWithGateInput(int gIndex, int igIndex)
+{
+
+}
+
+void Level::addEndGateWithGateInput(int egIndex, int gIndex)
+{
+
+}
