@@ -43,6 +43,7 @@ Level::Level(QString filename)
                 numRows = list[0].toInt();
                 numCols = list[1].toInt();
                 currentLine++;
+                continue;
             }
 
             //Parse the layout
