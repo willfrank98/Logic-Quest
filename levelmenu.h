@@ -17,6 +17,9 @@ public:
     void onInit();
 
 private:
+    //Back button to redirect to main menu
+    QGraphicsProxyWidget* backToHomeProxy;
+
     //All easy level button proxies
     QGraphicsProxyWidget* levelOneEasyProxy;
     QGraphicsProxyWidget* levelTwoEasyProxy;

@@ -70,24 +70,68 @@ void TitleScene::onInit()
     QPushButton *startButton = new QPushButton();
     startButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .45, sceneRect().width() * .30, sceneRect().height() * .10));
     startButton->setText("Start Game");
+    startButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 16px;"
+                               "border-style: solid;"
+                               /*"border-width: 2px;"*/
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}");
     startButtonProxy = addWidget(startButton);
     startButtonProxy->setZValue(10.0);  // Makes the buttons appear in front of other things
 
     QPushButton *levelSelectButton = new QPushButton();
     levelSelectButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .57, sceneRect().width() * .30, sceneRect().height() * .10));
     levelSelectButton->setText("Level Select");
+    levelSelectButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 16px;"
+                               "border-style: solid;"
+                               /*"border-width: 2px;"*/
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}");
     levelSelectButtonProxy = addWidget(levelSelectButton);
     levelSelectButtonProxy->setZValue(10.0);
 
     QPushButton *optionsButton = new QPushButton();
     optionsButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .69, sceneRect().width() * .30, sceneRect().height() * .10));
     optionsButton->setText("Options");
+    optionsButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 16px;"
+                               "border-style: solid;"
+                               /*"border-width: 2px;"*/
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}");
     optionsButtonProxy = addWidget(optionsButton);
     optionsButtonProxy->setZValue(10.0);
 
     QPushButton *exitButton = new QPushButton();
     exitButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .81, sceneRect().width() * .30, sceneRect().height() * .10));
     exitButton->setText("Exit");
+    exitButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 16px;"
+                               "border-style: solid;"
+                               /*"border-width: 2px;"*/
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}");
     exitButtonProxy = addWidget(exitButton);
     exitButtonProxy->setZValue(10.0);
 

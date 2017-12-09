@@ -20,6 +20,25 @@ void LevelMenu::onInit() {
     QFont font = QFont("Helvetica");
     font.setPointSize(24);
 
+    QPushButton* backButton = new QPushButton();
+    backButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.05, 60, 40));
+    backButton->setText("Back");
+    backButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 16px;"
+                               "border-style: solid;"
+                               /*"border-width: 2px;"*/
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}"
+                              );
+    backToHomeProxy = addWidget(backButton);
+    backToHomeProxy->setZValue(10.0);
+
+
     /* Header for the Easy levels */
     QGraphicsTextItem *easy = addText("Easy", font);
     easy->setPos(sceneRect().width() / 2.0 - easy->boundingRect().width()/2.0, sceneRect().height()*0.1);
@@ -29,9 +48,15 @@ void LevelMenu::onInit() {
     levelOneEasyButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.2, 70, 50));
     levelOneEasyButton->setText("1");
     levelOneEasyButton->setStyleSheet("QPushButton {"
-                                      "background-color: green;"
+                                      "background-color: rgb(92, 249, 158);"
                                       "color: white;"
                                       "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(66, 191, 118);"
                                       "}");
     levelOneEasyProxy = addWidget(levelOneEasyButton);
     levelOneEasyProxy->setZValue(10.0);
@@ -40,9 +65,15 @@ void LevelMenu::onInit() {
     levelTwoEasyButton->setGeometry(QRect(sceneRect().width()*0.25, sceneRect().height()*0.2, 70, 50));
     levelTwoEasyButton->setText("2");
     levelTwoEasyButton->setStyleSheet("QPushButton {"
-                                      "background-color: green;"
+                                      "background-color: rgb(92, 249, 158);"
                                       "color: white;"
                                       "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(66, 191, 118);"
                                       "}");
     levelTwoEasyProxy = addWidget(levelTwoEasyButton);
     levelTwoEasyProxy->setZValue(10.0);
@@ -51,9 +82,15 @@ void LevelMenu::onInit() {
     levelThreeEasyButton->setGeometry(QRect(sceneRect().width()*0.45, sceneRect().height()*0.2, 70, 50));
     levelThreeEasyButton->setText("3");
     levelThreeEasyButton->setStyleSheet("QPushButton {"
-                                      "background-color: green;"
+                                      "background-color: rgb(92, 249, 158);"
                                       "color: white;"
                                       "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(66, 191, 118);"
                                       "}");
     levelThreeEasyProxy = addWidget(levelThreeEasyButton);
     levelThreeEasyProxy->setZValue(10.0);
@@ -62,9 +99,15 @@ void LevelMenu::onInit() {
     levelFourEasyButton->setGeometry(QRect(sceneRect().width()*0.65, sceneRect().height()*0.2, 70, 50));
     levelFourEasyButton->setText("4");
     levelFourEasyButton->setStyleSheet("QPushButton {"
-                                      "background-color: green;"
+                                      "background-color: rgb(92, 249, 158);"
                                       "color: white;"
                                       "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(66, 191, 118);"
                                       "}");
     levelFourEasyProxy = addWidget(levelFourEasyButton);
     levelFourEasyProxy->setZValue(10.0);
@@ -73,9 +116,15 @@ void LevelMenu::onInit() {
     levelFiveEasyButton->setGeometry(QRect(sceneRect().width()*0.85, sceneRect().height()*0.2, 70, 50));
     levelFiveEasyButton->setText("5");
     levelFiveEasyButton->setStyleSheet("QPushButton {"
-                                      "background-color: green;"
-                                       "color: white;"
-                                       "font-size: 16px;"
+                                      "background-color: rgb(92, 249, 158);"
+                                      "color: white;"
+                                      "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(66, 191, 118);"
                                       "}");
     levelFiveEasyProxy = addWidget(levelFiveEasyButton);
     levelFiveEasyProxy->setZValue(10.0);
@@ -89,9 +138,15 @@ void LevelMenu::onInit() {
     levelOneMediumButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.45, 70, 50));
     levelOneMediumButton->setText("1");
     levelOneMediumButton->setStyleSheet("QPushButton {"
-                                      "background-color: blue;"
+                                      "background-color: rgb(92, 235, 249);"
                                       "color: white;"
                                       "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(76, 191, 201)"
                                       "}");
     levelOneMediumProxy = addWidget(levelOneMediumButton);
     levelOneMediumProxy->setZValue(10.0);
@@ -100,9 +155,15 @@ void LevelMenu::onInit() {
     levelTwoMediumButton->setGeometry(QRect(sceneRect().width()*0.25, sceneRect().height()*0.45, 70, 50));
     levelTwoMediumButton->setText("2");
     levelTwoMediumButton->setStyleSheet("QPushButton {"
-                                      "background-color: blue;"
+                                      "background-color: rgb(92, 235, 249);"
                                       "color: white;"
                                       "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(76, 191, 201)"
                                       "}");
     levelTwoMediumProxy = addWidget(levelTwoMediumButton);
     levelTwoMediumProxy->setZValue(10.0);
@@ -111,9 +172,15 @@ void LevelMenu::onInit() {
     levelThreeMediumButton->setGeometry(QRect(sceneRect().width()*0.45, sceneRect().height()*0.45, 70, 50));
     levelThreeMediumButton->setText("3");
     levelThreeMediumButton->setStyleSheet("QPushButton {"
-                                      "background-color: blue;"
+                                      "background-color: rgb(92, 235, 249);"
                                       "color: white;"
                                       "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(76, 191, 201)"
                                       "}");
     levelThreeMediumProxy = addWidget(levelThreeMediumButton);
     levelThreeMediumProxy->setZValue(10.0);
@@ -122,9 +189,15 @@ void LevelMenu::onInit() {
     levelFourMediumButton->setGeometry(QRect(sceneRect().width()*0.65, sceneRect().height()*0.45, 70, 50));
     levelFourMediumButton->setText("4");
     levelFourMediumButton->setStyleSheet("QPushButton {"
-                                      "background-color: blue;"
+                                      "background-color: rgb(92, 235, 249);"
                                       "color: white;"
                                       "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(76, 191, 201)"
                                       "}");
     levelFourMediumProxy = addWidget(levelFourMediumButton);
     levelFourMediumProxy->setZValue(10.0);
@@ -133,9 +206,15 @@ void LevelMenu::onInit() {
     levelFiveMediumButton->setGeometry(sceneRect().width()*0.85, sceneRect().height()*0.45, 70, 50);
     levelFiveMediumButton->setText("5");
     levelFiveMediumButton->setStyleSheet("QPushButton {"
-                                      "background-color: blue;"
+                                      "background-color: rgb(92, 235, 249);"
                                       "color: white;"
                                       "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(76, 191, 201)"
                                       "}");
     levelFiveMediumProxy = addWidget(levelFiveMediumButton);
     levelFiveMediumProxy->setZValue(10.0);
@@ -149,9 +228,15 @@ void LevelMenu::onInit() {
     levelOneHardButton->setGeometry(sceneRect().width()*0.05, sceneRect().height()*0.7, 70, 50);
     levelOneHardButton->setText("1");
     levelOneHardButton->setStyleSheet("QPushButton {"
-                                      "background-color: red;"
+                                      "background-color: rgb(249, 92, 131);"
                                       "color: white;"
                                       "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(188, 69, 99)"
                                       "}");
     levelOneHardProxy = addWidget(levelOneHardButton);
     levelOneHardProxy->setZValue(10.0);
@@ -160,9 +245,15 @@ void LevelMenu::onInit() {
     levelTwoHardButton->setGeometry(sceneRect().width()*0.25, sceneRect().height()*0.7, 70, 50);
     levelTwoHardButton->setText("2");
     levelTwoHardButton->setStyleSheet("QPushButton {"
-                                      "background-color: red;"
+                                      "background-color: rgb(249, 92, 131);"
                                       "color: white;"
                                       "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(188, 69, 99)"
                                       "}");
     levelTwoHardProxy = addWidget(levelTwoHardButton);
     levelTwoHardProxy->setZValue(10.0);
@@ -171,9 +262,15 @@ void LevelMenu::onInit() {
     levelThreeHardButton->setGeometry(sceneRect().width()*0.45, sceneRect().height()*0.7, 70, 50);
     levelThreeHardButton->setText("3");
     levelThreeHardButton->setStyleSheet("QPushButton {"
-                                      "background-color: red;"
+                                      "background-color: rgb(249, 92, 131);"
                                       "color: white;"
                                       "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(188, 69, 99)"
                                       "}");
     levelThreeHardProxy = addWidget(levelThreeHardButton);
     levelThreeHardProxy->setZValue(10.0);
@@ -182,9 +279,15 @@ void LevelMenu::onInit() {
     levelFourHardButton->setGeometry(sceneRect().width()*0.65, sceneRect().height()*0.7, 70, 50);
     levelFourHardButton->setText("4");
     levelFourHardButton->setStyleSheet("QPushButton {"
-                                      "background-color: red;"
+                                      "background-color: rgb(249, 92, 131);"
                                       "color: white;"
                                       "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(188, 69, 99)"
                                       "}");
     levelFourHardProxy = addWidget(levelFourHardButton);
     levelFourHardProxy->setZValue(10.0);
@@ -193,12 +296,21 @@ void LevelMenu::onInit() {
     levelFiveHardButton->setGeometry(sceneRect().width()*0.85, sceneRect().height()*0.7, 70, 50);
     levelFiveHardButton->setText("5");
     levelFiveHardButton->setStyleSheet("QPushButton {"
-                                      "background-color: red;"
+                                      "background-color: rgb(249, 92, 131);"
                                       "color: white;"
                                       "font-size: 16px;"
+                                      "border-style: solid;"
+                                      /*"border-width: 2px;"*/
+                                      "border-radius: 10px;"
+                                      "}"
+                                      "QPushButton:pressed {"
+                                      "background-color: rgb(188, 69, 99)"
                                       "}");
     levelFiveHardProxy = addWidget(levelFiveHardButton);
     levelFiveHardProxy->setZValue(10.0);
+
+    /* Back button connection to link back to main menu */
+    connect(backButton, &QPushButton::clicked, this, [=](){emit(changeScene("title"));}, Qt::QueuedConnection);
 
     /*All easy level button connections (defaults to tutorial scene for now)*/
     connect(levelOneEasyButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
