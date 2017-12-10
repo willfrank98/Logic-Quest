@@ -1,3 +1,10 @@
+/*
+ * Death Star IT Support
+ * CS3505 - A8: An Agile Educational Application
+ *
+ * spriteloader.cpp
+ */
+
 #include "spriteloader.h"
 #include <QDebug>
 
