@@ -157,7 +157,7 @@ void TitleScene::onInit()
     exitButtonProxy->setZValue(10.0);
 
     //Connects menu buttons
-    connect(startButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
+	connect(startButton, &QPushButton::clicked, this, [=](){emit(changeScene(":/levels/tutorial.txt"));}, Qt::QueuedConnection);
     connect(levelSelectButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
     connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("options"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
@@ -246,11 +246,11 @@ void TitleScene::endMusic() {
 void TitleScene::keyPressEvent(QKeyEvent *event)
 {
 
-    if (event->key() == Qt::Key_Space)
-    {
-        // Switch to the tutorial
-        emit changeScene("tutorial");
-    }
+//    if (event->key() == Qt::Key_Space)
+//    {
+//        // Switch to the tutorial
+//        emit changeScene("tutorial");
+//    }
 
     if (event->key() == Qt::Key_Return)
     {
