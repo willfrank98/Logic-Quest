@@ -52,7 +52,7 @@ void LevelMenu::onInit() {
 
     /* Set the position, width, height, and color for EASY buttons*/
     QPushButton* levelOneEasyButton = new QPushButton();
-    levelOneEasyButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.2, 70, 50));
+    levelOneEasyButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.2, sceneRect().width()*0.1, sceneRect().height()*0.12));
     levelOneEasyButton->setText("1");
     levelOneEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelOneEasyButton->setStyleSheet("QPushButton {"
@@ -69,7 +69,7 @@ void LevelMenu::onInit() {
     levelOneEasyProxy->setZValue(10.0);
 
     QPushButton* levelTwoEasyButton = new QPushButton();
-    levelTwoEasyButton->setGeometry(QRect(sceneRect().width()*0.25, sceneRect().height()*0.2, 70, 50));
+    levelTwoEasyButton->setGeometry(QRect(sceneRect().width()*0.25, sceneRect().height()*0.2, sceneRect().width()*0.1, sceneRect().height()*0.12));
     levelTwoEasyButton->setText("2");
     levelTwoEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelTwoEasyButton->setStyleSheet("QPushButton {"
@@ -86,7 +86,7 @@ void LevelMenu::onInit() {
     levelTwoEasyProxy->setZValue(10.0);
 
     QPushButton* levelThreeEasyButton = new QPushButton();
-    levelThreeEasyButton->setGeometry(QRect(sceneRect().width()*0.45, sceneRect().height()*0.2, 70, 50));
+    levelThreeEasyButton->setGeometry(QRect(sceneRect().width()*0.45, sceneRect().height()*0.2, sceneRect().width()*0.1, sceneRect().height()*0.12));
     levelThreeEasyButton->setText("3");
     levelThreeEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelThreeEasyButton->setStyleSheet("QPushButton {"
@@ -103,7 +103,7 @@ void LevelMenu::onInit() {
     levelThreeEasyProxy->setZValue(10.0);
 
     QPushButton* levelFourEasyButton = new QPushButton();
-    levelFourEasyButton->setGeometry(QRect(sceneRect().width()*0.65, sceneRect().height()*0.2, 70, 50));
+    levelFourEasyButton->setGeometry(QRect(sceneRect().width()*0.65, sceneRect().height()*0.2, sceneRect().width()*0.1, sceneRect().height()*0.12));
     levelFourEasyButton->setText("4");
     levelFourEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFourEasyButton->setStyleSheet("QPushButton {"
@@ -120,7 +120,7 @@ void LevelMenu::onInit() {
     levelFourEasyProxy->setZValue(10.0);
 
     QPushButton* levelFiveEasyButton = new QPushButton();
-    levelFiveEasyButton->setGeometry(QRect(sceneRect().width()*0.85, sceneRect().height()*0.2, 70, 50));
+    levelFiveEasyButton->setGeometry(QRect(sceneRect().width()*0.85, sceneRect().height()*0.2, sceneRect().width()*0.1, sceneRect().height()*0.12));
     levelFiveEasyButton->setText("5");
     levelFiveEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFiveEasyButton->setStyleSheet("QPushButton {"
@@ -142,7 +142,7 @@ void LevelMenu::onInit() {
 
     /* Set the position, width, height, and color for MEDIUM buttons*/
     QPushButton* levelOneMediumButton = new QPushButton();
-    levelOneMediumButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.45, 70, 50));
+    levelOneMediumButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.45, sceneRect().width()*0.1, sceneRect().height()*0.12));
     levelOneMediumButton->setText("1");
     levelOneMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelOneMediumButton->setStyleSheet("QPushButton {"
@@ -159,7 +159,7 @@ void LevelMenu::onInit() {
     levelOneMediumProxy->setZValue(10.0);
 
     QPushButton* levelTwoMediumButton = new QPushButton();
-    levelTwoMediumButton->setGeometry(QRect(sceneRect().width()*0.25, sceneRect().height()*0.45, 70, 50));
+    levelTwoMediumButton->setGeometry(QRect(sceneRect().width()*0.25, sceneRect().height()*0.45, sceneRect().width()*0.1, sceneRect().height()*0.12));
     levelTwoMediumButton->setText("2");
     levelTwoMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelTwoMediumButton->setStyleSheet("QPushButton {"
@@ -176,7 +176,7 @@ void LevelMenu::onInit() {
     levelTwoMediumProxy->setZValue(10.0);
 
     QPushButton* levelThreeMediumButton = new QPushButton();
-    levelThreeMediumButton->setGeometry(QRect(sceneRect().width()*0.45, sceneRect().height()*0.45, 70, 50));
+    levelThreeMediumButton->setGeometry(QRect(sceneRect().width()*0.45, sceneRect().height()*0.45, sceneRect().width()*0.1, sceneRect().height()*0.12));
     levelThreeMediumButton->setText("3");
     levelThreeMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelThreeMediumButton->setStyleSheet("QPushButton {"
@@ -193,7 +193,7 @@ void LevelMenu::onInit() {
     levelThreeMediumProxy->setZValue(10.0);
 
     QPushButton* levelFourMediumButton = new QPushButton();
-    levelFourMediumButton->setGeometry(QRect(sceneRect().width()*0.65, sceneRect().height()*0.45, 70, 50));
+    levelFourMediumButton->setGeometry(QRect(sceneRect().width()*0.65, sceneRect().height()*0.45, sceneRect().width()*0.1, sceneRect().height()*0.12));
     levelFourMediumButton->setText("4");
     levelFourMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFourMediumButton->setStyleSheet("QPushButton {"
@@ -210,7 +210,7 @@ void LevelMenu::onInit() {
     levelFourMediumProxy->setZValue(10.0);
 
     QPushButton* levelFiveMediumButton = new QPushButton();
-    levelFiveMediumButton->setGeometry(sceneRect().width()*0.85, sceneRect().height()*0.45, 70, 50);
+    levelFiveMediumButton->setGeometry(sceneRect().width()*0.85, sceneRect().height()*0.45, sceneRect().width()*0.1, sceneRect().height()*0.12);
     levelFiveMediumButton->setText("5");
     levelFiveMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFiveMediumButton->setStyleSheet("QPushButton {"
@@ -232,7 +232,7 @@ void LevelMenu::onInit() {
 
     /* Set the position, width, height, and color for HARD buttons*/
     QPushButton* levelOneHardButton = new QPushButton();
-    levelOneHardButton->setGeometry(sceneRect().width()*0.05, sceneRect().height()*0.7, 70, 50);
+    levelOneHardButton->setGeometry(sceneRect().width()*0.05, sceneRect().height()*0.7, sceneRect().width()*0.1, sceneRect().height()*0.12);
     levelOneHardButton->setText("1");
     levelOneHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelOneHardButton->setStyleSheet("QPushButton {"
@@ -249,7 +249,7 @@ void LevelMenu::onInit() {
     levelOneHardProxy->setZValue(10.0);
 
     QPushButton* levelTwoHardButton = new QPushButton();
-    levelTwoHardButton->setGeometry(sceneRect().width()*0.25, sceneRect().height()*0.7, 70, 50);
+    levelTwoHardButton->setGeometry(sceneRect().width()*0.25, sceneRect().height()*0.7, sceneRect().width()*0.1, sceneRect().height()*0.12);
     levelTwoHardButton->setText("2");
     levelTwoHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelTwoHardButton->setStyleSheet("QPushButton {"
@@ -266,7 +266,7 @@ void LevelMenu::onInit() {
     levelTwoHardProxy->setZValue(10.0);
 
     QPushButton* levelThreeHardButton = new QPushButton();
-    levelThreeHardButton->setGeometry(sceneRect().width()*0.45, sceneRect().height()*0.7, 70, 50);
+    levelThreeHardButton->setGeometry(sceneRect().width()*0.45, sceneRect().height()*0.7, sceneRect().width()*0.1, sceneRect().height()*0.12);
     levelThreeHardButton->setText("3");
     levelThreeHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelThreeHardButton->setStyleSheet("QPushButton {"
@@ -283,7 +283,7 @@ void LevelMenu::onInit() {
     levelThreeHardProxy->setZValue(10.0);
 
     QPushButton* levelFourHardButton = new QPushButton();
-    levelFourHardButton->setGeometry(sceneRect().width()*0.65, sceneRect().height()*0.7, 70, 50);
+    levelFourHardButton->setGeometry(sceneRect().width()*0.65, sceneRect().height()*0.7, sceneRect().width()*0.1, sceneRect().height()*0.12);
     levelFourHardButton->setText("4");
     levelFourHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFourHardButton->setStyleSheet("QPushButton {"
@@ -300,7 +300,7 @@ void LevelMenu::onInit() {
     levelFourHardProxy->setZValue(10.0);
 
     QPushButton* levelFiveHardButton = new QPushButton();
-    levelFiveHardButton->setGeometry(sceneRect().width()*0.85, sceneRect().height()*0.7, 70, 50);
+    levelFiveHardButton->setGeometry(sceneRect().width()*0.85, sceneRect().height()*0.7, sceneRect().width()*0.1, sceneRect().height()*0.12);
     levelFiveHardButton->setText("5");
     levelFiveHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFiveHardButton->setStyleSheet("QPushButton {"

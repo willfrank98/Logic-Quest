@@ -128,6 +128,10 @@ QVector<int> Level::getGoals()
     return goals;
 }
 
+QVector<GateNode*> Level::getEndGates() {
+    return endGates;
+}
+
 QVector<GatePipeTags> Level::getLayout()
 {
     return layout;

@@ -23,6 +23,7 @@
 #include <QGraphicsProxyWidget>
 #include <QApplication>
 #include <QGraphicsSceneDragDropEvent>
+#include <QActionGroup>
 #include <QtGlobal>
 #include <QMediaPlayer>
 
@@ -51,6 +52,8 @@ private:
     QElapsedTimer deltaKeeper;
     QMediaPlayer *soundEffect, *musicPlayer;
     SpriteLoader *sl = new SpriteLoader();
+    QGraphicsProxyWidget* backToHomeProxy;
+    QGraphicsProxyWidget* selectMenuProxy;
 
     virtual void onInit();
     virtual void onUpdate(qreal delta);
@@ -79,6 +82,14 @@ private:
 
 signals:
     void changeScene(QString);
+	void changeResolution(QString);
+public slots:
+//    void gate0();
+//    void gate1();
+//    void gate2();
+//    void gate3();
+//    void gate4();
+//    void gate5();
 };
 
 #endif // BASICSCENE_H
