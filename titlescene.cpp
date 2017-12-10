@@ -43,7 +43,7 @@ void TitleScene::onInit()
 
     //Intro music.
     musicPlayer = new QMediaPlayer;
-    musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_02_-_Royal_Entrance.mp3"));
+    musicPlayer->setMedia(QUrl("qrc:/sounds/Africa.mp3"));
     musicPlayer->setVolume(50);
     if(enableMusic) musicPlayer->play();
 
