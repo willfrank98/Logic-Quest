@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>1280</width>
+    <height>720</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1280</width>
+    <height>720</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1280</width>
+    <height>720</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Logic Gate</string>
@@ -57,7 +69,7 @@
      <x>0</x>
      <y>0</y>
      <width>640</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -67,24 +79,7 @@
     <addaction name="actionMain_Menu"/>
     <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menuSettings">
-    <property name="title">
-     <string>Settings</string>
-    </property>
-    <widget class="QMenu" name="menuResolution">
-     <property name="title">
-      <string>Resolution</string>
-     </property>
-     <addaction name="action600x480"/>
-     <addaction name="action1280x720"/>
-     <addaction name="action1366x720"/>
-     <addaction name="action1920x1080"/>
-     <addaction name="actionFullscreen"/>
-    </widget>
-    <addaction name="menuResolution"/>
-   </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuSettings"/>
   </widget>
   <action name="actionExit">
    <property name="text">

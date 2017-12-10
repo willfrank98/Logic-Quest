@@ -3,6 +3,7 @@
 
 SpriteLoader::SpriteLoader()
 {
+    // TODO: Remove these definitions to make more tool-like
     QPixmap *gateSheet = new QPixmap(":/images/sprites/gatesSheet.png");
     QPixmap *blackPipes = new QPixmap(":/images/sprites/pipesBlack.png");
     QPixmap *bluePipes = new QPixmap(":/images/sprites/pipesBlue.png");
@@ -53,9 +54,28 @@ SpriteLoader::SpriteLoader()
     sprites.insert("r_nspipe", redPipes->copy(64, 128, 64, 64));
 }
 
-QPixmap SpriteLoader::getSprite(QString tag)
+// Returns a pixmap from the passed spritesheet.
+QPixmap SpriteLoader::getSprite(QString sheetName, QSize frameSize, int frame)
 {
-    return sprites.value(tag.toLower());
+    QPixmap sheet = QPixmap(sheetName);
+    QSize sheetDimen = QSize(sheet.width() / frameSize.width(), sheet.height() / frameSize.height());
+    QRect frameRect = QRect();
+    int currentFrame = 0;
+    for (int y = 0; y < sheetDimen.height(); y++)
+    {
+        for (int x = 0; x < sheetDimen.width(); x++)
+        {
+            if (currentFrame == frame)
+            {
+                frameRect = QRect(x * frameSize.width(), y * frameSize.height(), frameSize.width(), frameSize.height());
+                return sheet.copy(frameRect);
+            }
+            currentFrame++;
+        }
+    }
+
+    // Returns the last frame in the sheet if the desired one was not found.
+    return sheet.copy(QRect());
 }
 
 QList<QPixmap> SpriteLoader::getGates()

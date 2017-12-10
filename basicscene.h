@@ -23,6 +23,7 @@
 #include <QGraphicsProxyWidget>
 #include <QApplication>
 #include <QGraphicsSceneDragDropEvent>
+#include <QActionGroup>
 #include <QtGlobal>
 
 extern bool enableMusic;
@@ -38,7 +39,8 @@ public:
 
     QGraphicsItem* createBox(QRectF rect, QColor line = QColor(0, 0, 0), QColor fill = QColor(255, 255, 255),
                    bool draggable = false);
-    QGraphicsPixmapItem* createSprite(QPointF pos, QSize size, QString tag);
+    QGraphicsPixmapItem* createSprite(QPointF pos, QSize scale, QString sheet, QSize frameSize, int frame);
+    QGraphicsPixmapItem* createGate(QPointF pos, QSize scale, QString gate);
     void setItemPos(QGraphicsItem *item, QPointF pos);
 
 	void createUI();
@@ -54,11 +56,6 @@ private:
     virtual void onUpdate(qreal delta);
 
     virtual bool eventFilter(QObject *watched, QEvent *event);
-//    virtual void mousePressEvent(QMouseEvent *event);
-//    virtual void mouseReleaseEvent(QMouseEvent *event);
-//    virtual void mouseMoveEvent(QMouseEvent *event);
-//    virtual void keyPressEvent(QKeyEvent *event);
-//	virtual void keyReleaseEvent(QKeyEvent *event);
 
     virtual void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
     virtual void dropEvent(QGraphicsSceneDragDropEvent *event);
@@ -80,6 +77,7 @@ private:
 
 signals:
     void changeScene(QString);
+	void changeResolution(QString);
 public slots:
 //    void gate0();
 //    void gate1();
