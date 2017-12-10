@@ -150,8 +150,9 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
     //TODO update back end..add gate to vecctor of in use gates?
 }
 
-GateNodeType getGateNodeType(QString name) {
-
+GateNodeType getGateNodeType(QString name)
+{
+    return GateNodeType();
 }
 
 
