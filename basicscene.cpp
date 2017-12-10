@@ -53,7 +53,6 @@ BasicScene::BasicScene(Level level)
     this->numRows = level.getNumRows();
     this->goals = level.getGoals();
     this->grid = level.getLayout();
-
 }
 
 BasicScene::~BasicScene()
@@ -186,9 +185,9 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
     }
 
 	//LEVEL COMPLETE
-	if (currentLevel.checkOutputs())
-	{
-		emit changeScene(currentLevel.nextLevel());
+    if (currentLevel.checkOutputs())
+    {
+        emit changeScene(currentLevel.nextLevel());
 	}
 
     //TODO update back end..add gate to vecctor of in use gates?
@@ -365,14 +364,13 @@ void BasicScene::createUI()
                 break;
             }
 
-            createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), sheet, QSize(64, 64), frame);
             if (sheet != "")
             {
                 createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), sheet, QSize(64, 64), frame);
             }
             itemNum++;
 		}
-	}
+    }
 }
 
 //  create push button for each logic gate and place in tool bar

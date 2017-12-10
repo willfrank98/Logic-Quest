@@ -43,5 +43,10 @@
         <file alias="medium3.txt">levels/medium3.txt</file>
         <file alias="medium4.txt">levels/medium4.txt</file>
         <file alias="medium5.txt">levels/medium5.txt</file>
+        <file alias="hard1.txt">levels/hard1.txt</file>
+        <file alias="hard2.txt">levels/hard2.txt</file>
+        <file alias="hard3.txt">levels/hard3.txt</file>
+        <file alias="hard4.txt">levels/hard4.txt</file>
+        <file alias="hard5.txt">levels/hard5.txt</file>
     </qresource>
 </RCC>
