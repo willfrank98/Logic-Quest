@@ -446,7 +446,6 @@ void BasicScene::updateEndGateSprite(int location, int value, int gridWidth, int
 {
     int y = (location/numCols)*gridHeight;
     int x = (location - ((y/gridHeight)*numCols))*gridWidth;
-    qDebug() << y << x;
     int frame;
     if(value == 0)
     {

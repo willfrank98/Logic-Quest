@@ -1,3 +1,10 @@
+/*
+ * Death Star IT Support
+ * CS3505 - A8: An Agile Educational Application
+ *
+ * spriteloader.h
+ */
+
 #ifndef SPRITELOADER_H
 #define SPRITELOADER_H
 
