@@ -227,7 +227,7 @@ void BasicScene::createUI()
     QPixmap *backPix = new QPixmap(":/images/icons/BackArrow.png");
     QIcon *backIcon = new QIcon(*backPix);
     QPushButton* backButton = new QPushButton();
-    backButton->setGeometry(QRect(10, sceneRect().height()*0.9, 60, 40));
+    backButton->setGeometry(QRect(10, sceneRect().height()*0.87, 60, 40));
     backButton->setIcon(*backIcon);
     backButton->setAttribute(Qt::WA_TranslucentBackground);
     backButton->setStyleSheet("QPushButton {"
@@ -244,8 +244,27 @@ void BasicScene::createUI()
     backToHomeProxy = addWidget(backButton);
     backToHomeProxy->setZValue(10.0);
 
+    QPushButton* selectMenuButton = new QPushButton();
+    selectMenuButton->setGeometry(QRect(10, sceneRect().height()*0.93, 60, 40));
+    selectMenuButton->setAttribute(Qt::WA_TranslucentBackground);
+    selectMenuButton->setText("Level Menu");
+    selectMenuButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 10px;"
+                               "border-style: solid;"
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}"
+                              );
+    selectMenuProxy = addWidget(selectMenuButton);
+    selectMenuProxy->setZValue(10.0);
+
     /* Add Connection to get Back to home screen */
     connect(backButton, &QPushButton::clicked, this, [=](){emit(changeScene("title"));}, Qt::QueuedConnection);
+    connect(selectMenuButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
 
 	int gridWidth = width / numCols;
     int gridHeight = (height - trayHeight) / numRows;
