@@ -233,7 +233,7 @@ void BasicScene::createUI()
 //    createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
     createBox(QRectF(0, height-trayHeight, width, trayHeight), QColor(166, 170, 178), QColor(166, 170, 178), false);
 
-    QPixmap *backPix = new QPixmap(":/images/icons/BackArrow.png");
+    QPixmap *backPix = new QPixmap(":/images/icons/Home.png");
     QIcon *backIcon = new QIcon(*backPix);
     QPushButton* backButton = new QPushButton();
     backButton->setGeometry(QRect(10, sceneRect().height()*0.87, 60, 40));
@@ -253,10 +253,12 @@ void BasicScene::createUI()
     backToHomeProxy = addWidget(backButton);
     backToHomeProxy->setZValue(10.0);
 
-    QPushButton* selectMenuButton = new QPushButton();
+    QPixmap *levelPix = new QPixmap(":/images/icons/BackArrow.png");
+    QIcon *levelIcon = new QIcon(*levelPix);
+    QPushButton* selectMenuButton = new QPushButton(); 
     selectMenuButton->setGeometry(QRect(10, sceneRect().height()*0.93, 60, 40));
+    selectMenuButton->setIcon(*levelIcon);
     selectMenuButton->setAttribute(Qt::WA_TranslucentBackground);
-    selectMenuButton->setText("Level Menu");
     selectMenuButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
                                "color: white;"

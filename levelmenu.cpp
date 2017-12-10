@@ -25,7 +25,7 @@ void LevelMenu::onInit() {
     musicPlayer->setVolume(50);
     if(enableMusic) musicPlayer->play();
 
-    QPixmap *backPix = new QPixmap(":/images/icons/BackArrow.png");
+    QPixmap *backPix = new QPixmap(":/images/icons/Home.png");
     QIcon *backIcon = new QIcon(*backPix);
     QPushButton* backButton = new QPushButton();
     backButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.05, 60, 40));
@@ -44,6 +44,11 @@ void LevelMenu::onInit() {
                               );
     backToHomeProxy = addWidget(backButton);
     backToHomeProxy->setZValue(10.0);
+
+    QPixmap *logoPix = new QPixmap(":/images/icons/logoWithoutGates.png");
+    QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
+    pixItem->setScale(0.5);
+    pixItem->setPos(pixItem->boundingRect().width() * 1.60, 40);
 
 
     /* Header for the Easy levels */
