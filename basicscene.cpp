@@ -131,13 +131,20 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
     g->setDropAction(Qt::CopyAction); // not sure about this
     qDebug() << g->scenePos();
 }
-
+void BasicScene::setScore(int points){
+    score+=points;
+}
 // drop event for buttons
 void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
-{
-    // if (checkOutPuts is true)
-        //uppdate isComplete
-        //update score accordingly (bonus from ticker too?)
+{        qDebug() << "gg";
+         qDebug() << currentLevel.checkOutputs();
+    if (currentLevel.checkOutputs()){
+        setScore(3);
+        int gg = getScore();
+        qDebug() << "gg";
+        qDebug() << gg;
+    }
+    //update score accordingly (bonus from ticker too?)
     currentSelectedGate->setEnabled(true);
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
     qreal width = sceneRect().width();
