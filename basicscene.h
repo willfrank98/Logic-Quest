@@ -23,6 +23,9 @@
 #include <QGraphicsProxyWidget>
 #include <QApplication>
 #include <QGraphicsSceneDragDropEvent>
+#include <QtGlobal>
+
+extern bool enableMusic;
 
 class BasicScene : public QGraphicsScene
 {
@@ -68,7 +71,10 @@ private:
     QPushButton *currentSelectedGate;
 //    void addGatesOnToolbar();
 //    void gateClicked(int row, int col);
-    QPixmap getGatePixmap(int row, int col);
+    QPixmap getGatePixmap(QString string);
+    QString gateNames[6] = {"andgate", "nandgate", "norgate", "notgate", "orgate", "xorgate"};
+    GateNodeType gateDes[9] = {START, END, UNSET, AND, OR, NAND, NOR, XOR, NOT};
+    GateNodeType getGateNodeType(QString name);
 //    QPushButton *setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc);
 
 signals:
