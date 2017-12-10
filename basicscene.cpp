@@ -25,6 +25,7 @@ BasicScene::BasicScene(QObject *parent, int cols, int rows, int *inputs, QVector
         deltaKeeper.restart();
     });
 
+    this->score = 0;
     this->numCols = cols;
     this->numRows = rows;
     this->inputs = inputs;
@@ -37,6 +38,7 @@ BasicScene::BasicScene(Level level)
     timer.setInterval(8);
     connect(&timer, &QTimer::timeout, this, [=](){
         onUpdate(deltaKeeper.elapsed() / 1000.0);
+        // update bonus
         deltaKeeper.restart();
     });
 
@@ -131,9 +133,9 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
 }
 // drop event for buttons
 void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
-
-    qDebug()<< currentLevel.getGoals().size() << ",,:pppp";
-    qDebug()<< currentLevel.getEndGates().size() <<"<gg";
+    // if (checkOutPuts is true)
+        //uppdate isComplete
+        //update score accordingly (bonus from ticker too?)
     currentSelectedGate->setEnabled(true);
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
     qreal width = sceneRect().width();
@@ -166,13 +168,6 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
 
     //TODO update back end..add gate to vecctor of in use gates?
 }
-
-
-//GateNodeType getGateNodeType(QString name) {
-//	return nullptr;
-//}
-
-
 
 // Intercept events from the GraphicsView and do things with them.
 bool BasicScene::eventFilter(QObject *watched, QEvent *event)
@@ -238,7 +233,7 @@ void BasicScene::createUI()
 //    createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
     createBox(QRectF(0, height-trayHeight, width, trayHeight), QColor(166, 170, 178), QColor(166, 170, 178), false);
 
-    QPixmap *backPix = new QPixmap(":/images/icons/BackArrow.png");
+    QPixmap *backPix = new QPixmap(":/images/icons/Home.png");
     QIcon *backIcon = new QIcon(*backPix);
     QPushButton* backButton = new QPushButton();
     backButton->setGeometry(QRect(10, sceneRect().height()*0.87, 60, 40));
@@ -258,10 +253,12 @@ void BasicScene::createUI()
     backToHomeProxy = addWidget(backButton);
     backToHomeProxy->setZValue(10.0);
 
-    QPushButton* selectMenuButton = new QPushButton();
+    QPixmap *levelPix = new QPixmap(":/images/icons/BackArrow.png");
+    QIcon *levelIcon = new QIcon(*levelPix);
+    QPushButton* selectMenuButton = new QPushButton(); 
     selectMenuButton->setGeometry(QRect(10, sceneRect().height()*0.93, 60, 40));
+    selectMenuButton->setIcon(*levelIcon);
     selectMenuButton->setAttribute(Qt::WA_TranslucentBackground);
-    selectMenuButton->setText("Level Menu");
     selectMenuButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
                                "color: white;"
@@ -461,10 +458,6 @@ void BasicScene::endMusic() {
     musicPlayer->stop();
 }
 
-// forwarding methods for dragging gates
-//void BasicScene::gate0(){gateClicked(0, 0);}
-//void BasicScene::gate1(){gateClicked(0, 1);}
-//void BasicScene::gate2(){gateClicked(1, 0);}
-//void BasicScene::gate3(){gateClicked(1, 1);}
-//void BasicScene::gate4(){gateClicked(2, 0);}
-//void BasicScene::gate5(){gateClicked(2, 1);}
+int BasicScene::getScore() {
+    return score;
+}
