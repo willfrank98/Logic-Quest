@@ -44,7 +44,7 @@ public:
     QGraphicsPixmapItem* createGate(QPointF pos, QSize scale, QString gate);
     void setItemPos(QGraphicsItem *item, QPointF pos);
 
-	void createUI();
+    void createUI();
     void addGatesOnToolbar();
 //    void gateClicked(int row, int col);
 private:
@@ -81,11 +81,12 @@ private:
     GateNodeType gateDes[6] = {AND, NAND, NOR, NOT, OR, XOR};
     GateNodeType getGateNodeType(QString name);
     void updateEndGateSprite(int location, int value, int gridWidth, int gridHeight);
+    int getScore();
 //    QPushButton *setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc);
 
 signals:
     void changeScene(QString);
-	void changeResolution(QString);
+    void changeResolution(QString);
 public slots:
 };
 
