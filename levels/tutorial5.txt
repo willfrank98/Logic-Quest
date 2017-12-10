@@ -7,7 +7,7 @@ S0 WE WE WS NL NL NL
 S1 WE WE UG WE WE EG
 S0 WE WE WS NL NL NL
 S0 WE WE UG WE WE EG
-0 1 1 0
+1 1 1 0
 S 0 1 0
 S 1 1 0
 S 2 1 1
@@ -20,3 +20,4 @@ E 0 0
 E 1 1
 E 2 2
 E 3 3
+N :/levels/tutorial6.txt

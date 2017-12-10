@@ -118,22 +118,29 @@ Level::Level(QString filename)
                 endGates[egIndex]->setEndGateLocation(endGateLocations[egIndex]);
             }
 
+			//gets the next level's address
+			if (list[0] == "N")
+			{
+				nextLevelAddress = list[1];
+			}
+
         }
     }
     file.close();
 }
 
-void Level::checkOutputs()
+bool Level::checkOutputs()
 {
     for (int i = 0; i < goals.size(); i++)
     {
         if(goals[i] != endGates[i]->getOutput())
         {
             isComplete = false;
-            return;
+            return isComplete;
         }
     }
     isComplete = true;
+    return isComplete;
 }
 
 QVector<int> Level::setGateType(int gateIndex, GateNodeType type)
@@ -307,4 +314,9 @@ int Level::getGateNodeIndex(int layoutIndex)
 bool Level::hasTwoInputs(int index)
 {
     return gates[index]->hasTwoInputs();
+}
+
+QString Level::nextLevel()
+{
+	return this->nextLevelAddress;
 }

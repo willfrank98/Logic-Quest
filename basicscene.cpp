@@ -135,9 +135,6 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
 // drop event for buttons
 void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
-    // if (checkOutPuts is true)
-        //uppdate isComplete
-        //update score accordingly (bonus from ticker too?)
     currentSelectedGate->setEnabled(true);
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
     qreal width = sceneRect().width();
@@ -187,6 +184,12 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
         //Sound for when the drag didnt work.
         SoundEffectSelect(2);
     }
+
+	//LEVEL COMPLETE
+	if (currentLevel.checkOutputs())
+	{
+		emit changeScene(currentLevel.nextLevel());
+	}
 
     //TODO update back end..add gate to vecctor of in use gates?
 }
@@ -397,6 +400,7 @@ void BasicScene::addGatesOnToolbar()
         logicGates[index]->setAccessibleDescription(QString::number(index));
         logicGates[index]->setToolTip(gateNames[index]);
         qDebug() << logicGates[index]->accessibleName();
+        logicGates[index]->setToolTip(gateNames[index].toUpper() + " Gate");
         btnGroup->addButton(logicGates[index]);
         addWidget(logicGates[index]);
 

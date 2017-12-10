@@ -157,11 +157,11 @@ void TitleScene::onInit()
     exitButtonProxy->setZValue(10.0);
 
     //Connects menu buttons
-    connect(startButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
+	connect(startButton, &QPushButton::clicked, this, [=](){emit(changeScene(":/levels/tutorial.txt"));}, Qt::QueuedConnection);
     connect(levelSelectButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
-	connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("options"));}, Qt::QueuedConnection);
+    connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("options"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
-    connect(soundButton, &QPushButton::clicked, this, &TitleScene::enableDisableSound);
+    connect(soundButton, &QPushButton::clicked, this, &TitleScene::enableDisableSound, Qt::QueuedConnection);
 
     connect(startButton, &QPushButton::clicked, this, &TitleScene::endMusic);
     connect(levelSelectButton, &QPushButton::clicked, this, &TitleScene::endMusic);
@@ -172,14 +172,14 @@ void TitleScene::onInit()
 // This gets run every 'tick'
 void TitleScene::onUpdate(qreal delta)
 {
-	//generates a random position to place the box
-	int pos = qrand()%(int)sceneRect().width();
+    //generates a random position to place the box
+    int pos = qrand()%(int)sceneRect().width();
     // Drops a gate every 50 ticks
     // A tick is the length of the 'timer' interval in the BasicScene/PhysicsScene
-	if (tickCounter > 50)
+    if (tickCounter > 50)
     {
         // generates a random index used to grab a pixmap.
-		createGate(logicGatesPM[lgIndex] , QRectF(pos, 8.0, 64.0, 64.0),
+        createGate(logicGatesPM[lgIndex] , QRectF(pos, 8.0, 64.0, 64.0),
                   QColor(0, 0, 0, 0), QColor(0, 0, 0, 0), Dynamic);
         tickCounter = 0;
         lgIndex++;
@@ -246,11 +246,11 @@ void TitleScene::endMusic() {
 void TitleScene::keyPressEvent(QKeyEvent *event)
 {
 
-    if (event->key() == Qt::Key_Space)
-    {
-        // Switch to the tutorial
-        emit changeScene("tutorial");
-    }
+//    if (event->key() == Qt::Key_Space)
+//    {
+//        // Switch to the tutorial
+//        emit changeScene("tutorial");
+//    }
 
     if (event->key() == Qt::Key_Return)
     {

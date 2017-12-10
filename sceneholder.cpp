@@ -17,8 +17,7 @@ SceneHolder::SceneHolder()
 QGraphicsScene* SceneHolder::getScene(QString sceneName)
 {
     if (sceneName.toLower() == "title") return new TitleScene();
-    else if (sceneName.toLower() == "tutorial") return new BasicScene(Level(QString(":/levels/tutorial.txt")));
     else if (sceneName.toLower() == "levelmenu") return new LevelMenu();
-	else if (sceneName.toLower() == "options") return new OptionsScene();
-    else return nullptr;
+    else if (sceneName.toLower() == "options") return new OptionsScene();
+    else return new BasicScene(Level(QString(sceneName)));
 }
