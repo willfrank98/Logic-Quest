@@ -145,13 +145,23 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 
     if (currentLevel.getLayout()[xL/gridWidth + yL/gridHeight*numCols] == UG) {
 
+        int gateNodeLocation = currentLevel.getGateNodeIndex(yL/gridHeight*numCols + xL/gridWidth);
+        qDebug() << currentSelectedGate->accessibleDescription();
+        if(currentSelectedGate->accessibleDescription() == "3")
+        {
+            if(currentLevel.hasTwoInputs(gateNodeLocation))
+            {
+                  return;
+            }
+
+        }
         createGate(QPointF(xL, yL), QSize(gridWidth, gridHeight),  currentSelectedGate->accessibleName());
         qDebug() << gateDes[currentSelectedGate->accessibleDescription().toInt()];
         qDebug() <<  yL/gridHeight << xL/gridWidth;
         qDebug() << yL/gridHeight*numCols+ xL/gridWidth;
         qDebug() << numCols;
      //  this
-        int gateNodeLocation = currentLevel.getGateNodeIndex(yL/gridHeight*numCols + xL/gridWidth);
+
         QVector<int> endGateUpdate;
         endGateUpdate = currentLevel.setGateType(gateNodeLocation,
                                                  gateDes[currentSelectedGate->accessibleDescription().toInt()]);
@@ -369,7 +379,7 @@ void BasicScene::addGatesOnToolbar()
         logicGates[index]->setCheckable(true);
         logicGates[index]->setAccessibleName(gateNames[index]);
         logicGates[index]->setAccessibleDescription(QString::number(index));
-        qDebug() << logicGates[index]->accessibleName();
+        qDebug() << logicGates[index]->accessibleName() << logicGates[index]->accessibleDescription();
         btnGroup->addButton(logicGates[index]);
         addWidget(logicGates[index]);
 
@@ -418,19 +428,19 @@ void BasicScene::addGatesOnToolbar()
 void BasicScene::updateEndGateSprite(int location, int value, int gridWidth, int gridHeight)
 {
     int y = (location/numCols)*gridHeight;
-    int x = (location + 1 - ((y/gridHeight)*numCols))*gridHeight;
+    int x = (location - ((y/gridHeight)*numCols))*gridHeight;
     qDebug() << y << x;
-    QString tag;
+    int frame;
     if(value == 0)
     {
-        tag = "e0";
+        frame = 3;
     }
     else
     {
-        tag = "e1";
+        frame = 1;
     }
 
-    createSprite(QPointF(x, y), QSize(gridWidth, gridHeight),  tag);
+    createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), ":/images/sprites/otherGates.png", QSize(64, 64), frame);
 }
 
 // returns desired log gate pixmap from sheet

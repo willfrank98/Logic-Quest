@@ -225,3 +225,8 @@ void GateNode::setEndGateLocation(int location)
         endGateLocation = location;
     }
 }
+
+bool GateNode::hasTwoInputs()
+{
+    return inputNode2 != nullptr;
+}

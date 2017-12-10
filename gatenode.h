@@ -39,6 +39,7 @@ public:
     void setGateType(GateNodeType type); //sets the GateNodeType to the specified type
     void addInput(int inputNum, GateNode *node);
     void setEndGateLocation(int location);
+    bool hasTwoInputs();
 };
 
 #endif // GATENODE_H

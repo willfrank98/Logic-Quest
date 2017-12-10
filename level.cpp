@@ -289,3 +289,8 @@ int Level::getGateNodeIndex(int layoutIndex)
 {
     return gateNodeIndex[layoutIndex];
 }
+
+bool Level::hasTwoInputs(int index)
+{
+    return gates[index]->hasTwoInputs();
+}

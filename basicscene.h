@@ -72,7 +72,7 @@ private:
 //    void gateClicked(int row, int col);
     QPixmap getGatePixmap(QString string);
     QString gateNames[6] = {"andgate", "nandgate", "norgate", "notgate", "orgate", "xorgate"};
-    GateNodeType gateDes[9] = {START, END, UNSET, AND, OR, NAND, NOR, XOR, NOT};
+    GateNodeType gateDes[6] = {AND, NAND, NOR, NOT, OR, XOR};
     GateNodeType getGateNodeType(QString name);
     void updateEndGateSprite(int location, int value, int gridWidth, int gridHeight);
 //    QPushButton *setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc);

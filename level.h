@@ -40,6 +40,7 @@ public:
     int getNumRows();
     int getGateNodeIndex(int layoutIndex);
     QVector<GateNode*> getEndGates();
+    bool hasTwoInputs(int index);
 };
 
 #endif // LEVEL_H
