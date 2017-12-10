@@ -38,6 +38,8 @@ void TitleScene::onInit()
     //Logo
     QPixmap *logoPix = new QPixmap(":/images/icons/mainLogo.png");
     QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
+    pixItem->setPos(sceneRect().width()/2.0 - pixItem->boundingRect().width()/2.0, 0);
+
 
     //Intro music.
     musicPlayer = new QMediaPlayer;
