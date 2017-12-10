@@ -464,12 +464,12 @@ void BasicScene::updateEndGateSprite(int location, int value, int gridWidth, int
 QPixmap BasicScene::getGatePixmap(QString string)
 {
     int frame = -1;
-    if (string == "andgate") frame = 0;
-    else if(string == "nandgate") frame = 1;
-    else if(string == "orgate") frame = 2;
-    else if(string == "xorgate") frame = 3;
-    else if(string == "norgate") frame = 4;
-    else if(string == "notgate") frame = 5;
+    if (string == "and") frame = 0;
+    else if(string == "nand") frame = 1;
+    else if(string == "or") frame = 2;
+    else if(string == "xor") frame = 3;
+    else if(string == "nor") frame = 4;
+    else if(string == "not") frame = 5;
     else qDebug() << "error in gate selection for dragMISTAKE!!!!!!";
 
     return sl->getSprite(":/images/sprites/gatesSheet.png", QSize(64, 64), frame);

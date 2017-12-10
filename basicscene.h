@@ -82,18 +82,13 @@ private:
     GateNodeType gateDes[6] = {AND, NAND, NOR, NOT, OR, XOR};
     GateNodeType getGateNodeType(QString name);
     void updateEndGateSprite(int location, int value, int gridWidth, int gridHeight);
+    int getScore();
 //    QPushButton *setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc);
 
 signals:
     void changeScene(QString);
 	void changeResolution(QString);
 public slots:
-//    void gate0();
-//    void gate1();
-//    void gate2();
-//    void gate3();
-//    void gate4();
-//    void gate5();
 };
 
 #endif // BASICSCENE_H
