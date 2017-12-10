@@ -106,7 +106,7 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
 }
 // drop event for buttons
 void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
-
+    currentSelectedGate->setEnabled(true);
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
     qreal width = sceneRect().width();
     qreal height = sceneRect().height();
@@ -323,11 +323,9 @@ void BasicScene::addGatesOnToolbar()
             {
                 btn->setEnabled(true);
             }
-            currentButton->setEnabled(false);
-            currentButton->setChecked(true);
-            // need to set name property of QPush button logic gates
-            //currentButton->setAccessibleName("nandgate");    // TODO needs to be done correcctly..at time of setting buttons on bottom of sreen
             currentSelectedGate = currentButton;
+            currentSelectedGate->setChecked(true);
+            currentSelectedGate->setEnabled(false);
             qDebug()<< "currentButton->accessibleName() = "+ currentButton->accessibleName();
             currentSelectedGate->setAccessibleName(currentButton->accessibleName());
             currentSelectedGate->setAccessibleDescription(currentButton->accessibleDescription());
