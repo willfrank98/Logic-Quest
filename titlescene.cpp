@@ -161,7 +161,7 @@ void TitleScene::onInit()
     connect(levelSelectButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
 	connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("options"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
-    connect(soundButton, &QPushButton::clicked, this, &TitleScene::enableDisableSound);
+    connect(soundButton, &QPushButton::clicked, this, &TitleScene::enableDisableSound, Qt::QueuedConnection);
 
     connect(startButton, &QPushButton::clicked, this, &TitleScene::endMusic);
     connect(levelSelectButton, &QPushButton::clicked, this, &TitleScene::endMusic);
