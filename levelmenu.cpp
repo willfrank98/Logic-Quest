@@ -25,7 +25,7 @@ void LevelMenu::onInit() {
     musicPlayer->setVolume(50);
     if(enableMusic) musicPlayer->play();
 
-    QPixmap *backPix = new QPixmap(":/images/icons/BackArrow.png");
+    QPixmap *backPix = new QPixmap(":/images/icons/Home.png");
     QIcon *backIcon = new QIcon(*backPix);
     QPushButton* backButton = new QPushButton();
     backButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.05, 60, 40));
