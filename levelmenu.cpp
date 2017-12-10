@@ -20,9 +20,11 @@ void LevelMenu::onInit() {
     QFont font = QFont("Helvetica");
     font.setPointSize(24);
 
+    QPixmap *backPix = new QPixmap(":/images/icons/BackArrow.png");
+    QIcon *backIcon = new QIcon(*backPix);
     QPushButton* backButton = new QPushButton();
     backButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.05, 60, 40));
-    backButton->setText("Back");
+    backButton->setIcon(*backIcon);
     backButton->setAttribute(Qt::WA_TranslucentBackground);
     backButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"

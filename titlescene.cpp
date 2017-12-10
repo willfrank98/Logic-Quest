@@ -66,6 +66,7 @@ void TitleScene::onInit()
 //    prompt->setData(Name, "prompt");
 //    prompt->setData(Direction, 1.0);
 
+    //Sound Enable/Disbale Icon.
     QPixmap *soundPix = new QPixmap(":/images/icons/EnableSound.png");
     if(!enableMusic)
     soundPix = new QPixmap(":/images/icons/DisableSound.png");
@@ -162,8 +163,6 @@ void TitleScene::onInit()
     connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
     connect(soundButton, &QPushButton::clicked, this, &TitleScene::enableDisableSound);
-    //connect(soundButton, &QPushButton::clicked, this, [=emit()]);
-    connect(soundButton, SIGNAL(clicked()), SLOT(&Sounds::enableDisableMusic));
 }
 
 // This gets run every 'tick'

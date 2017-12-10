@@ -32,7 +32,6 @@ private:
     void swapScene(QString s);
     void hookupScene();
     SceneHolder *scenes = new SceneHolder();
-    QMediaPlayer* musicPlayer;
 };
 
 #endif // MAINWINDOW_H
