@@ -32,7 +32,7 @@ public:
     GateNode(GateNodeType type, int value);
     ~GateNode();
     int getOutput();    //returns the output of this node
-    void processGate(); //processes the input to set the output based on the type of the GateNode
+    bool processGate(); //processes the input to set the output based on the type of the GateNode
     void setGateType(GateNodeType type); //sets the GateNodeType to the specified type
     void addInput(int inputNum, GateNode *node);
 };
