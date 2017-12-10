@@ -280,6 +280,11 @@ void BasicScene::createUI()
     connect(backButton, &QPushButton::clicked, this, [=](){emit(changeScene("title"));}, Qt::QueuedConnection);
     connect(selectMenuButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
 
+    /*End music*/
+    connect(backButton, &QPushButton::clicked, this, &BasicScene::endMusic);
+    connect(selectMenuButton, &QPushButton::clicked, this, &BasicScene::endMusic);
+
+
 	int gridWidth = width / numCols;
     int gridHeight = (height - trayHeight) / numRows;
 
@@ -447,6 +452,11 @@ void BasicScene::SoundEffectSelect(int sound) {
             break;
         }
     }
+}
+
+//Ends music when user exits Scene
+void BasicScene::endMusic() {
+    musicPlayer->stop();
 }
 
 // forwarding methods for dragging gates

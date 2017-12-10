@@ -64,6 +64,7 @@ private:
     virtual void dropEvent(QGraphicsSceneDragDropEvent *event);
 
     void SoundEffectSelect(int);
+    void endMusic();
 
     int numCols;
     int numRows;
