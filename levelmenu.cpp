@@ -45,6 +45,11 @@ void LevelMenu::onInit() {
     backToHomeProxy = addWidget(backButton);
     backToHomeProxy->setZValue(10.0);
 
+    QPixmap *logoPix = new QPixmap(":/images/icons/logoWithoutGates.png");
+    QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
+    pixItem->setScale(0.5);
+    pixItem->setPos(pixItem->boundingRect().width() * 1.60, 40);
+
 
     /* Header for the Easy levels */
     QGraphicsTextItem *easy = addText("EASY", font);
