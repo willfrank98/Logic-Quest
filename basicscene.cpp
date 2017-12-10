@@ -304,6 +304,7 @@ void BasicScene::addGatesOnToolbar()
     for (QPixmap gate : sl->getGates())
     {
         logicGates[index] = new QPushButton();
+        logicGates[index]->setAttribute(Qt::WA_TranslucentBackground);
         logicGates[index]->setIcon(QIcon(gate));
         logicGates[index]->setIconSize(gate.size());
 		logicGates[index]->setGeometry(gateLocation+=gate.width(), height-68, gate.width() + 2, gate.height() + 2);
