@@ -90,3 +90,17 @@ QList<QPixmap> SpriteLoader::getGates()
     }
     return gates;
 }
+
+QList<QString> SpriteLoader::getGateNames()
+{
+    QList<QString> gateNames;
+    for (int i = 0; i < sprites.values().size(); i++)
+    {
+        if (sprites.keys().at(i).endsWith("gate"))
+        {
+            QString key = sprites.keys().at(i);
+            gateNames.append(key.mid(0, key.size() - 4));
+        }
+    }
+    return gateNames;
+}
