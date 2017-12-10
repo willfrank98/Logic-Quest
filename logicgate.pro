@@ -34,7 +34,8 @@ SOURCES += \
     levelmenu.cpp \
     gatenode.cpp \
     level.cpp \
-    spriteloader.cpp
+    spriteloader.cpp \
+    optionsscene.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -46,7 +47,8 @@ HEADERS += \
     levelmenu.h \
     gatenode.h \
     level.h \
-    spriteloader.h
+    spriteloader.h \
+    optionsscene.h
 
 FORMS += \
         mainwindow.ui

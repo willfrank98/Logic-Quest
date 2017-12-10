@@ -10,7 +10,7 @@
 
 #include "titlescene.h"
 #include "levelmenu.h"
-#include "levelmenu.h"
+#include "optionsscene.h"
 
 class SceneHolder
 {

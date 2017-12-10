@@ -20,6 +20,11 @@ void LevelMenu::onInit() {
     QFont font = QFont("Helvetica");
     font.setPointSize(24);
 
+    musicPlayer = new QMediaPlayer;
+    musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_04_-_Factory_Time.mp3"));
+    musicPlayer->setVolume(50);
+    if(enableMusic) musicPlayer->play();
+
     QPixmap *backPix = new QPixmap(":/images/icons/BackArrow.png");
     QIcon *backIcon = new QIcon(*backPix);
     QPushButton* backButton = new QPushButton();
@@ -334,4 +339,27 @@ void LevelMenu::onInit() {
     connect(levelThreeHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
     connect(levelFourHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
     connect(levelFiveHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
+
+    /*Stops music on all buttons*/
+    connect(backButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelOneEasyButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelTwoEasyButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelThreeEasyButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelFourEasyButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelFiveEasyButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelOneMediumButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelTwoMediumButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelThreeMediumButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelFourMediumButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelFiveMediumButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelOneHardButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelTwoHardButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelThreeHardButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelFourHardButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelFiveHardButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+}
+
+//Ends music when user exits Scene
+void LevelMenu::endMusic() {
+    musicPlayer->stop();
 }

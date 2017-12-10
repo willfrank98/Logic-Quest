@@ -11,6 +11,8 @@
 #include <iostream>
 #include <QButtonGroup>
 #include <string>
+#include <QString>
+#include <QGraphicsItem>
 
 bool enableMusic = true;
 
@@ -80,13 +82,30 @@ QGraphicsItem* BasicScene::createBox(QRectF rect, QColor line, QColor fill, bool
     return item;
 }
 
-QGraphicsPixmapItem* BasicScene::createSprite(QPointF pos, QSize size, QString tag)
+QGraphicsPixmapItem* BasicScene::createSprite(QPointF pos, QSize scale, QString sheet, QSize frameSize, int frame)
 {
-    QGraphicsPixmapItem *item = addPixmap(sl->getSprite(tag).scaled(size));
+    QPixmap sprite = sl->getSprite(sheet, frameSize, frame).scaled(scale);
+    QGraphicsPixmapItem *item = addPixmap(sprite);
     item->setPos(pos);
-    item->setData(Name, tag);
+    item->setData(Sheet, sheet);
+    item->setData(FrameSize, frameSize);
+    item->setData(Frame, frame);
 
     return item;
+}
+
+QGraphicsPixmapItem* BasicScene::createGate(QPointF pos, QSize scale, QString gate)
+{
+    int frame = -1;
+    if (gate == "andgate") frame = 0;
+    else if(gate == "nandgate") frame = 1;
+    else if(gate == "orgate") frame = 2;
+    else if(gate == "xorgate") frame = 3;
+    else if(gate == "norgate") frame = 4;
+    else if(gate == "notgate") frame = 5;
+    else return new QGraphicsPixmapItem();
+
+    return createSprite(pos, scale, ":/images/sprites/gatesSheet.png", QSize(64, 64), frame);
 }
 
 // Sets the position of a body (and by extension, an item)
@@ -104,9 +123,12 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
     g->setDropAction(Qt::CopyAction); // not sure about this
     qDebug() << g->scenePos();
 }
+
 // drop event for buttons
 void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
+    qDebug()<< currentLevel.getGoals().size() << ",,:pppp";
+    qDebug()<< currentLevel.getEndGates().size() <<"<gg";
     currentSelectedGate->setEnabled(true);
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
     qreal width = sceneRect().width();
@@ -123,7 +145,7 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 
     if (currentLevel.getLayout()[xL/gridWidth + yL/gridHeight*numCols] == UG) {
 
-        createSprite(QPointF(xL, yL), QSize(gridWidth, gridHeight),  currentSelectedGate->accessibleName());
+        createGate(QPointF(xL, yL), QSize(gridWidth, gridHeight),  currentSelectedGate->accessibleName());
         qDebug() << gateDes[currentSelectedGate->accessibleDescription().toInt()];
         qDebug() <<  yL/gridHeight << xL/gridWidth;
         qDebug() << yL/gridHeight*numCols+ xL/gridWidth;
@@ -144,9 +166,9 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
     //TODO update back end..add gate to vecctor of in use gates?
 }
 
-GateNodeType getGateNodeType(QString name) {
-
-}
+//GateNodeType getGateNodeType(QString name) {
+//	return nullptr;
+//}
 
 
 // Intercept events from the GraphicsView and do things with them.
@@ -203,31 +225,6 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
     return QGraphicsScene::eventFilter(watched, event);
 }
 
-//void BasicScene::mousePressEvent(QMouseEvent *event)
-//{
-
-//}
-
-//void BasicScene::mouseReleaseEvent(QMouseEvent *event)
-//{
-
-//}
-
-//void BasicScene::mouseMoveEvent(QMouseEvent *event)
-//{
-
-//}
-
-//void BasicScene::keyPressEvent(QKeyEvent *event)
-//{
-
-//}
-
-//void BasicScene::keyReleaseEvent(QKeyEvent *event)
-//{
-
-//}
-
 void BasicScene::createUI()
 {
 	qreal width = sceneRect().width();
@@ -235,7 +232,31 @@ void BasicScene::createUI()
 
 	//int trayWidth = width/12;
 	int trayHeight = 100;
-	createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
+//    createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
+    createBox(QRectF(0, height-trayHeight, width, trayHeight), QColor(166, 170, 178), QColor(166, 170, 178), false);
+
+    QPixmap *backPix = new QPixmap(":/images/icons/BackArrow.png");
+    QIcon *backIcon = new QIcon(*backPix);
+    QPushButton* backButton = new QPushButton();
+    backButton->setGeometry(QRect(10, sceneRect().height()*0.9, 60, 40));
+    backButton->setIcon(*backIcon);
+    backButton->setAttribute(Qt::WA_TranslucentBackground);
+    backButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 16px;"
+                               "border-style: solid;"
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}"
+                              );
+    backToHomeProxy = addWidget(backButton);
+    backToHomeProxy->setZValue(10.0);
+
+    /* Add Connection to get Back to home screen */
+    connect(backButton, &QPushButton::clicked, this, [=](){emit(changeScene("title"));}, Qt::QueuedConnection);
 
 	int gridWidth = width / numCols;
     int gridHeight = (height - trayHeight) / numRows;
@@ -246,44 +267,60 @@ void BasicScene::createUI()
     {
 		for (int x = 0; x < width - numCols; x += gridWidth)
         {
-            QString tag;
+            // Switch case matching the desired data to pass to our SpriteLoader tool.
+            QString sheet;
+            int frame;
             switch(grid[itemNum])
             {
             case WN:
-                tag = "wnpipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 3;
                 break;
             case EN:
-                tag = "enpipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 2;
                 break;
             case WS:
-                tag = "wspipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 1;
                 break;
             case ES:
-                tag = "espipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 0;
                 break;
             case WE:
-                tag = "wepipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 4;
                 break;
             case NS:
-                tag = "nspipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 5;
                 break;
             case S0:
-                tag = "s0";
+                sheet = ":/images/sprites/otherGates.png";
+                frame = 2;
                 break;
             case S1:
-                tag = "s1";
+                sheet = ":/images/sprites/otherGates.png";
+                frame = 0;
                 break;
             case EG:
-                tag = "ee";
+                sheet = ":/images/sprites/otherGates.png";
+                frame = 4;
                 break;
             case UG:
-                tag = "gatespot";
+                sheet = ":/images/sprites/otherGates.png";
+                frame = 5;
                 break;
             default:
-                tag = "empty";
                 break;
             }
-            createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), tag);
+
+            createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), sheet, QSize(64, 64), frame);
+            if (sheet != "")
+            {
+                createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), sheet, QSize(64, 64), frame);
+            }
             itemNum++;
 		}
 	}
@@ -303,6 +340,7 @@ void BasicScene::addGatesOnToolbar()
     for (QPixmap gate : sl->getGates())
     {
         logicGates[index] = new QPushButton();
+        logicGates[index]->setAttribute(Qt::WA_TranslucentBackground);
         logicGates[index]->setIcon(QIcon(gate));
         logicGates[index]->setIconSize(gate.size());
 		logicGates[index]->setGeometry(gateLocation+=gate.width(), height-68, gate.width() + 2, gate.height() + 2);
@@ -318,10 +356,9 @@ void BasicScene::addGatesOnToolbar()
         // Would just have to store the currently selected gate and check against it
         QPushButton* currentButton = logicGates[index];
         connect(currentButton, &QPushButton::pressed, this, [=](){
-            for (QAbstractButton *btn : btnGroup->buttons())
-            {
-                btn->setEnabled(true);
-            }
+            currentButton->setChecked(true);
+            // need to set name property of QPush button logic gates
+            //currentButton->setAccessibleName("nandgate");    // TODO needs to be done correcctly..at time of setting buttons on bottom of sreen
             currentSelectedGate = currentButton;
             currentSelectedGate->setChecked(true);
             currentSelectedGate->setEnabled(false);
@@ -341,55 +378,20 @@ void BasicScene::addGatesOnToolbar()
         index++;
     }
 
+    QString goalSequence = "Goal: ";
+    int size = currentLevel.getGoals().size();
+    qDebug()<< size;
+    QVector<int> allGoals = currentLevel.getGoals();
 
-    // connect each logic gate button to forwarding method
-//    connect(logicGates[0], SIGNAL(pressed()), this, SLOT(gate0()));
-//    connect(logicGates[1], SIGNAL(pressed()), this, SLOT(gate1()));
-//    connect(logicGates[2], SIGNAL(pressed()), this, SLOT(gate2()));
-//    connect(logicGates[3], SIGNAL(pressed()), this, SLOT(gate3()));
-//    connect(logicGates[4], SIGNAL(pressed()), this, SLOT(gate4()));
-//    connect(logicGates[5], SIGNAL(pressed()), this, SLOT(gate5()));
-}
+    for (int i = 0; i < size; i ++) {
 
-// sets the location in the toolbar for the given logic gate
-//QPushButton *BasicScene::setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc)
-//{
-//    QIcon buttonIcon(*pm);
-//    pb->setIcon(buttonIcon);
-//    pb->setIconSize(pm->rect().size());
-//    pb->setGeometry(QRect(QPoint(xLoc, yLoc), QSize(64, 64)));
-//    pb->setEnabled(true);
-//    return pb;
-//}
-
-// returns desired log gate pixmap from sheet
-QPixmap BasicScene::getGatePixmap(QString string)
-{   int row, col;
-    if (string == "andgate"){
-        row = 0; col = 0;
-    }
-    else if(string == "nandgate"){
-        row = 0; col = 1;
-    }
-    else if(string == "orgate"){
-        row = 1; col = 0;
-    }
-    else if(string == "xorgate"){
-        row = 1; col = 1;
-    }
-    else if(string == "norgate"){
-        row = 2; col = 0;
-    }
-    else if(string == "notgate"){
-        row = 2; col = 1;
-    }
-    else{
-        qDebug() << "error in gate selection for dragMISTAKE!!!!!!";
+        goalSequence.append(QString::number(allGoals[i]));
     }
 
-    QPixmap pm(":/images/sprites/gatesSheet.png");
-    QRect rec(64*col, 64*row, 64, 64);
-    return pm.copy(rec);
+    QFont font = QFont("Helvetica");
+    font.setPointSize(24);
+    QGraphicsTextItem *easy = addText(goalSequence, font);
+    easy->setPos(sceneRect().width()*0.8, sceneRect().height()*0.88);
 }
 
 void BasicScene::updateEndGateSprite(int location, int value, int gridWidth, int gridHeight)
@@ -410,3 +412,17 @@ void BasicScene::updateEndGateSprite(int location, int value, int gridWidth, int
     createSprite(QPointF(x, y), QSize(gridWidth, gridHeight),  tag);
 }
 
+// returns desired log gate pixmap from sheet
+QPixmap BasicScene::getGatePixmap(QString string)
+{
+    int frame = -1;
+    if (string == "andgate") frame = 0;
+    else if(string == "nandgate") frame = 1;
+    else if(string == "orgate") frame = 2;
+    else if(string == "xorgate") frame = 3;
+    else if(string == "norgate") frame = 4;
+    else if(string == "notgate") frame = 5;
+    else qDebug() << "error in gate selection for dragMISTAKE!!!!!!";
+
+    return sl->getSprite(":/images/sprites/gatesSheet.png", QSize(64, 64), frame);
+}
