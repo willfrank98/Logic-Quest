@@ -34,10 +34,6 @@ private:
 public:
     Level();
     Level(QString filename);
-<<<<<<< HEAD
-=======
-    bool checkOutputs();
->>>>>>> origin/master
     QVector<int> setGateType(int gateIndex, GateNodeType type);
     QVector<int> getGoals();
     QVector<GatePipeTags> getLayout();
