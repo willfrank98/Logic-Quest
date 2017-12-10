@@ -44,7 +44,7 @@ public:
     QGraphicsPixmapItem* createGate(QPointF pos, QSize scale, QString gate);
     void setItemPos(QGraphicsItem *item, QPointF pos);
 
-	void createUI();
+    void createUI();
     void addGatesOnToolbar();
 //    void gateClicked(int row, int col);
 private:
@@ -86,7 +86,7 @@ private:
 
 signals:
     void changeScene(QString);
-	void changeResolution(QString);
+    void changeResolution(QString);
 public slots:
 };
 
