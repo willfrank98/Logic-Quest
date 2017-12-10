@@ -102,15 +102,16 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
     // maybe highlight something or set somehting active if over certain space, etc
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
     g->setDropAction(Qt::CopyAction); // not sure about this
+    qDebug() << g->scenePos();
 }
 // drop event for buttons
 void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
 
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
-
     qreal width = sceneRect().width();
     qreal height = sceneRect().height();
     int trayHeight = 100;
+    if (g->scenePos().y() > height - trayHeight) return;
 	int gridWidth = width / numCols;
     int gridHeight = (height - trayHeight) / numRows;
 
