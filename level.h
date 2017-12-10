@@ -33,7 +33,7 @@ private:
 public:
     Level();
     Level(QString filename);
-    void checkOutputs();
+    bool checkOutputs();
     QVector<int> setGateType(int gateIndex, GateNodeType type);
     QVector<int> getGoals();
     QVector<GatePipeTags> getLayout();
