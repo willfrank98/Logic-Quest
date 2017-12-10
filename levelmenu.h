@@ -9,6 +9,8 @@
 #define LEVELMENU_H
 
 #include "basicscene.h"
+#include "physicsscene.h"
+#include <QMediaPlayer>
 
 class LevelMenu : public BasicScene
 {
@@ -17,6 +19,9 @@ public:
     void onInit();
 
 private:
+
+    QMediaPlayer *musicPlayer;
+
     //Back button to redirect to main menu
     QGraphicsProxyWidget* backToHomeProxy;
 
@@ -40,6 +45,8 @@ private:
     QGraphicsProxyWidget* levelThreeHardProxy;
     QGraphicsProxyWidget* levelFourHardProxy;
     QGraphicsProxyWidget* levelFiveHardProxy;
+
+    void endMusic();
 };
 
 #endif // LEVELMENU_H

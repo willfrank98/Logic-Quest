@@ -31,8 +31,6 @@ void TitleScene::onInit()
     // Define a font
     QFont font = QFont("Helvetica");
 
-    soundDisabled = false;
-
     // Add some text, ignores physics
     // Perhaps move this to a 'createText' method or something
     font.setPointSize(28);
@@ -41,11 +39,11 @@ void TitleScene::onInit()
     QPixmap *logoPix = new QPixmap(":/images/icons/mainLogo.png");
     QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
 
+    //Intro music.
     musicPlayer = new QMediaPlayer;
     musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_02_-_Royal_Entrance.mp3"));
     musicPlayer->setVolume(50);
-    if(enableMusic)
-    musicPlayer->play();
+    if(enableMusic) musicPlayer->play();
 
     // Creates a vector that contains a pixmap of each logic gate.
     QPixmap gatesPM(":images/sprites/gatesSheet.png");
@@ -163,6 +161,11 @@ void TitleScene::onInit()
     connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
     connect(soundButton, &QPushButton::clicked, this, &TitleScene::enableDisableSound);
+
+    connect(startButton, &QPushButton::clicked, this, &TitleScene::endMusic);
+    connect(levelSelectButton, &QPushButton::clicked, this, &TitleScene::endMusic);
+    connect(optionsButton, &QPushButton::clicked, this, &TitleScene::endMusic);
+    connect(exitButton, &QPushButton::clicked, this, &TitleScene::endMusic);
 }
 
 // This gets run every 'tick'
@@ -231,6 +234,11 @@ void TitleScene::enableDisableSound() {
         musicPlayer->play();
         enableMusic = true;
     }
+}
+
+//Ends music when user exits Scene
+void TitleScene::endMusic() {
+    musicPlayer->stop();
 }
 
 

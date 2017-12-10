@@ -29,7 +29,6 @@ private:
     int currentButton = Qt::NoButton;
     int tickCounter = 0;
     int lgIndex = 0;    //used for alternating which logic block is dropped
-    bool soundDisabled;
     QIcon *soundItem;
     QPushButton *soundButton;
     QMediaPlayer* musicPlayer;
@@ -49,6 +48,7 @@ private:
     //void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
     void enableDisableSound();
+    void endMusic();
 };
 
 #endif // TITLESCENE_H
