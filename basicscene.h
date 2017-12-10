@@ -82,7 +82,6 @@ private:
     GateNodeType gateDes[6] = {AND, NAND, NOR, NOT, OR, XOR};
     GateNodeType getGateNodeType(QString name);
     void updateEndGateSprite(int location, int value, int gridWidth, int gridHeight);
-    int getScore();
 //    QPushButton *setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc);
 
 signals:

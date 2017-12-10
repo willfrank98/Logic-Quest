@@ -108,12 +108,11 @@ QGraphicsPixmapItem* BasicScene::createGate(QPointF pos, QSize scale, QString ga
     if (gate == "and") frame = 0;
     else if(gate == "nand") frame = 1;
     else if(gate == "or") frame = 2;
-    else if(gate == "xorgate") frame = 3;
-    else if(gate == "norgate") frame = 4;
-    else if(gate == "notgate") frame = 5;
+    else if(gate == "xor") frame = 3;
+    else if(gate == "nor") frame = 4;
+    else if(gate == "not") frame = 5;
     else return new QGraphicsPixmapItem();
 
-    qDebug() << gate;
     return createSprite(pos, scale, ":/images/sprites/gatesSheet.png", QSize(64, 64), frame);
 }
 
