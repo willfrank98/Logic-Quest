@@ -57,15 +57,6 @@ void TitleScene::onInit()
         }
     }
 
-
-// Adds more text
-//    font.setPointSize(14);
-//    QGraphicsTextItem *prompt = addText("Press SPACE to play!", font);
-//    prompt->setPos(sceneRect().width() / 2.0 - prompt->boundingRect().width() / 2.0, sceneRect().height() / 2.0);
-//    prompt->setZValue(1.0);
-//    prompt->setData(Name, "prompt");
-//    prompt->setData(Direction, 1.0);
-
     //Sets up menu buttons
     QPushButton *startButton = new QPushButton();
     startButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .45, sceneRect().width() * .30, sceneRect().height() * .10));
@@ -138,13 +129,14 @@ void TitleScene::onInit()
     //Connects menu buttons
     connect(startButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
     connect(levelSelectButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
-    connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
+	connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("options"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
 }
 
 // This gets run every 'tick'
 void TitleScene::onUpdate(qreal delta)
 {
+	//generates a random position to place the box
 	int pos = qrand()%(int)sceneRect().width();
     // Drops a gate every 50 ticks
     // A tick is the length of the 'timer' interval in the BasicScene/PhysicsScene

@@ -20,35 +20,35 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->graphicsView->setScene(scenes->getScene("Title"));
     ui->graphicsView->installEventFilter(ui->graphicsView->scene());
 
-    // Only allow one resolution option to be selected
-    QActionGroup *resSettings = new QActionGroup(nullptr);
-    for (QAction *action : ui->menuResolution->actions())
-    {
-        action->setActionGroup(resSettings);
-    }
+//    // Only allow one resolution option to be selected
+//    QActionGroup *resSettings = new QActionGroup(nullptr);
+//    for (QAction *action : ui->menuResolution->actions())
+//    {
+//        action->setActionGroup(resSettings);
+//    }
 
     // Handles resolution changes
-    connect(resSettings, &QActionGroup::triggered, this, [=](QAction *a){
+//    connect(resSettings, &QActionGroup::triggered, this, [=](QAction *a){
 
-        // Gets the width and height from the action name
-        QString newRes = a->text();
-        int width = newRes.split('x').first().toInt();
-        int height = newRes.split('x').last().toInt();
+//        // Gets the width and height from the action name
+//        QString newRes = a->text();
+//        int width = newRes.split('x').first().toInt();
+//        int height = newRes.split('x').last().toInt();
 
-        // Just make fullscreen if unable to parse correctly
-        if (width == 0 && height == 0)
-        {
-            setWindowState(Qt::WindowFullScreen);
-        }
-        else  // Resize things to the desired dimensions
-        {
-            setWindowState(Qt::WindowNoState);
-            resize(width, height);
-            setGeometry(QApplication::desktop()->size().width() / 2.0 - size().width() / 2.0,
-                        QApplication::desktop()->size().height() / 2.0 - size().height() / 2.0,
-                        size().width(), size().height());
-        }
-    });
+//        // Just make fullscreen if unable to parse correctly
+//        if (width == 0 && height == 0)
+//        {
+//            setWindowState(Qt::WindowFullScreen);
+//        }
+//        else  // Resize things to the desired dimensions
+//        {
+//            setWindowState(Qt::WindowNoState);
+//            resize(width, height);
+//            setGeometry(QApplication::desktop()->size().width() / 2.0 - size().width() / 2.0,
+//                        QApplication::desktop()->size().height() / 2.0 - size().height() / 2.0,
+//                        size().width(), size().height());
+//        }
+//    });
 
     // Connects the menubar actions.
     connect(ui->actionExit, &QAction::triggered, this, [=](){ QApplication::quit(); });

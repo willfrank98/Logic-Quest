@@ -23,6 +23,7 @@
 #include <QGraphicsProxyWidget>
 #include <QApplication>
 #include <QGraphicsSceneDragDropEvent>
+#include <QActionGroup>
 
 class BasicScene : public QGraphicsScene
 {
