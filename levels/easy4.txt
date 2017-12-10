@@ -5,3 +5,4 @@ S1 WE WS NL NS NL NL
 S0 WE UG WS UG WE EG
 S1 WE WE UG WN NL NL
 1
+N :/levels/easy5.txt

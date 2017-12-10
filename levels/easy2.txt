@@ -5,3 +5,4 @@ NL NL NL UG WE EG
 S0 WE UG WN NL NL
 S0 WE WN NL NL NL
 1
+N :/levels/easy3.txt

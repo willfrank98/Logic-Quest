@@ -8,3 +8,4 @@ S1 WE WE UG WE WE WN NL
 S0 WE UG WN NL NL NL NL
 S0 WE WN NL NL NL NL NL
 1
+N :/levels/hard1.txt

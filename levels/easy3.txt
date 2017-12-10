@@ -3,3 +3,4 @@ S1 WE UG WE WE WS NL NL
 S0 WE WS NL NL UG WE EG
 S0 WE UG WE UG WN NL NL
 0
+N :/levels/easy4.txt

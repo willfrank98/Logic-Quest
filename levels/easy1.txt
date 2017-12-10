@@ -3,3 +3,4 @@ S1 WE WS NL NL NL NL
 S1 WE UG WE WS NL NL
 S0 WE WE WE UG WE EG
 1
+N :/levels/easy2.txt

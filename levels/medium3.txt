@@ -6,3 +6,4 @@ S0 WE WE WE UG WS NL NL NL
 S0 WE WE WE WE UG WS NL NL
 S1 WE WE WE WE WE UG WE EG
 1
+N :/levels/medium4.txt
