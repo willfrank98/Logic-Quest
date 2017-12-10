@@ -10,6 +10,7 @@
 #include <QMimeData>
 #include <iostream>
 #include <QButtonGroup>
+#include <string>
 
 bool enableMusic = true;
 
@@ -101,13 +102,12 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
     // maybe highlight something or set somehting active if over certain space, etc
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
     g->setDropAction(Qt::CopyAction); // not sure about this
-    //qDebug() << "posit of mouse is: " << g->scenePos();
 }
 // drop event for buttons
 void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
+
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
-    qDebug() << "posit of mouse on drop is: " << g->scenePos();
-    // ..and it emerges again..
+
     qreal width = sceneRect().width();
     qreal height = sceneRect().height();
     int trayHeight = 100;
@@ -118,11 +118,22 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
     int yOff = ((int)(g->scenePos().y())) % gridHeight;
     int xL = g->scenePos().x() - xOff;
     int yL = g->scenePos().y() - yOff;
-    qDebug() << "posit of mouse on drop is division: " << xL << yL;
-    qDebug() << currentSelectedGate->objectName();
-    // TODO (if validPLacementOnScreen) ie not bottom tray area, aetc
-        createSprite(QPointF(xL, yL), QSize(gridWidth, gridHeight),  "andgate");
+
+    if (currentLevel.getLayout()[xL/gridWidth + yL/gridHeight*numCols] == UG) {
+
+        createSprite(QPointF(xL, yL), QSize(gridWidth, gridHeight),  currentSelectedGate->accessibleName());
+        qDebug() << gateDes[currentSelectedGate->accessibleDescription().toInt()];
+        qDebug() <<  yL/gridHeight << xL/gridWidth;
+        qDebug() << yL/gridWidth + xL/gridHeight*numCols;
+        qDebug() << numCols;
+     //  this
+       // currentLevel.setGateType(yL/gridWidth*numCols + xL/gridHeight, gateDes[currentSelectedGate->accessibleDescription().toInt()]);
+    }
     //TODO update back end..add gate to vecctor of in use gates?
+}
+
+GateNodeType getGateNodeType(QString name) {
+
 }
 
 
@@ -297,6 +308,9 @@ void BasicScene::addGatesOnToolbar()
 		logicGates[index]->setGeometry(gateLocation+=gate.width(), height-68, gate.width() + 2, gate.height() + 2);
         logicGates[index]->setEnabled(true);
         logicGates[index]->setCheckable(true);
+        logicGates[index]->setAccessibleName(gateNames[index]);
+        logicGates[index]->setAccessibleDescription(QString::number(index));
+        qDebug() << logicGates[index]->accessibleName();
         btnGroup->addButton(logicGates[index]);
         addWidget(logicGates[index]);
 
@@ -304,21 +318,31 @@ void BasicScene::addGatesOnToolbar()
         // Would just have to store the currently selected gate and check against it
         QPushButton* currentButton = logicGates[index];
         connect(currentButton, &QPushButton::pressed, this, [=](){
+            for (QAbstractButton *btn : btnGroup->buttons())
+            {
+                btn->setEnabled(true);
+            }
+            currentButton->setEnabled(false);
             currentButton->setChecked(true);
             // need to set name property of QPush button logic gates
-            currentButton->setAccessibleName("nandgate");    // TODO needs to be done correcctly..at time of setting buttons on bottom of sreen
+            //currentButton->setAccessibleName("nandgate");    // TODO needs to be done correcctly..at time of setting buttons on bottom of sreen
             currentSelectedGate = currentButton;
+            qDebug()<< "currentButton->accessibleName() = "+ currentButton->accessibleName();
+            currentSelectedGate->setAccessibleName(currentButton->accessibleName());
+            currentSelectedGate->setAccessibleDescription(currentButton->accessibleDescription());
             // drag for log gate onto game space
             QDrag *drag = new QDrag(this);
             QMimeData *mimeData = new QMimeData;
-            QPixmap pmc = getGatePixmap(0, 0); //change row and col
+            QPixmap pmc = getGatePixmap(currentButton->accessibleName()); //change row and col THIS IS WHERE DRAG GATE is made
             drag->setMimeData(mimeData);
             drag->setPixmap(pmc);
             QApplication::setOverrideCursor(Qt::ClosedHandCursor);
 			/*Qt::DropAction da = */drag->exec(Qt::MoveAction);//???
             QApplication::restoreOverrideCursor();
         });
+        index++;
     }
+
 
     // connect each logic gate button to forwarding method
 //    connect(logicGates[0], SIGNAL(pressed()), this, SLOT(gate0()));
@@ -329,7 +353,7 @@ void BasicScene::addGatesOnToolbar()
 //    connect(logicGates[5], SIGNAL(pressed()), this, SLOT(gate5()));
 }
 
-//// sets the location in the toolbar for the given logic gate
+// sets the location in the toolbar for the given logic gate
 //QPushButton *BasicScene::setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc)
 //{
 //    QIcon buttonIcon(*pm);
@@ -341,14 +365,36 @@ void BasicScene::addGatesOnToolbar()
 //}
 
 // returns desired log gate pixmap from sheet
-QPixmap BasicScene::getGatePixmap(int row, int col)
-{
+QPixmap BasicScene::getGatePixmap(QString string)
+{   int row, col;
+    if (string == "andgate"){
+        row = 0; col = 0;
+    }
+    else if(string == "nandgate"){
+        row = 0; col = 1;
+    }
+    else if(string == "orgate"){
+        row = 1; col = 0;
+    }
+    else if(string == "xorgate"){
+        row = 1; col = 1;
+    }
+    else if(string == "norgate"){
+        row = 2; col = 0;
+    }
+    else if(string == "notgate"){
+        row = 2; col = 1;
+    }
+    else{
+        qDebug() << "error in gate selection for dragMISTAKE!!!!!!";
+    }
+
     QPixmap pm(":/images/sprites/gatesSheet.png");
     QRect rec(64*col, 64*row, 64, 64);
     return pm.copy(rec);
 }
 
-//// forwarding methods for dragging gates
+// forwarding methods for dragging gates
 //void BasicScene::gate0(){gateClicked(0, 0);}
 //void BasicScene::gate1(){gateClicked(0, 1);}
 //void BasicScene::gate2(){gateClicked(1, 0);}
