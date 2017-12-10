@@ -9,16 +9,11 @@
 #include <QFile>
 #include <QDebug>
 
-Level::Level(QVector<GateNode*> newInputs, QVector<GateNode*> newOutputs, QVector<GateNode*> newGates,
-             QVector<int> newGoals, int newRowSize, QVector<GatePipeTags> newLayout)
+Level::Level()
 {
     isComplete = false;
-    startGates = newInputs;
-    endGates = newOutputs;
-    gates = newGates;
-    goals = newGoals;
-    numCols = newRowSize;
-    layout = newLayout;
+    numCols = 0;
+    numRows = 0;
 }
 
 Level::Level(QString filename)
@@ -80,8 +75,8 @@ Level::Level(QString filename)
             }
             else if(list[0] == "G")
             {
-                int igIndex = list[2].toInt();
-                int gIndex = list[1].toInt();
+                int igIndex = list[1].toInt();
+                int gIndex = list[2].toInt();
                 addGateWithGateInput(gIndex, igIndex);
             }
             else if(list[0] == "E")
@@ -112,7 +107,10 @@ void Level::checkOutputs()
 void Level::setGateType(int gateIndex, GateNodeType type)
 {
     gates[gateIndex]->setGateType(type);
-    gates[gateIndex]->processGate();
+    if(gates[gateIndex]->processGate())
+    {
+        checkOutputs();
+    }
 }
 
 QVector<int> Level::getGoals()

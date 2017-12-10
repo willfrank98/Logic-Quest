@@ -12,6 +12,8 @@
         <file alias="pipesBlue.png">res/sprites/pipes_blue_64x64.png</file>
         <file alias="transparent.png">res/sprites/transparent.png</file>
         <file alias="otherGates.png">res/sprites/other_gates_64x64.png</file>
+        <file>res/sprites/ds_1t_driving.png</file>
+        <file>res/sprites/ds_1t_talking.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file alias="Visager_-_02_-_Royal_Entrance.mp3">res/sounds/Visager_-_02_-_Royal_Entrance.mp3</file>

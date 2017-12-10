@@ -161,19 +161,18 @@ void TitleScene::onInit()
     connect(soundButton, &QPushButton::clicked, this, &TitleScene::enableDisableSound);
     //connect(soundButton, &QPushButton::clicked, this, [=emit()]);
     connect(soundButton, SIGNAL(clicked()), SLOT(&Sounds::enableDisableMusic));
-
-
 }
 
 // This gets run every 'tick'
 void TitleScene::onUpdate(qreal delta)
 {
+	int pos = qrand()%(int)sceneRect().width();
     // Drops a gate every 50 ticks
     // A tick is the length of the 'timer' interval in the BasicScene/PhysicsScene
-    if (tickCounter > 50)
+	if (tickCounter > 50)
     {
         // generates a random index used to grab a pixmap.
-        createGate(logicGatesPM[lgIndex] , QRectF(10.0, 8.0, 64.0, 64.0),
+		createGate(logicGatesPM[lgIndex] , QRectF(pos, 8.0, 64.0, 64.0),
                   QColor(0, 0, 0, 0), QColor(0, 0, 0, 0), Dynamic);
         tickCounter = 0;
         lgIndex++;
@@ -181,24 +180,6 @@ void TitleScene::onUpdate(qreal delta)
             lgIndex = 0;
         }
     }
-
-//    for (QGraphicsItem *item : items())
-//    {
-//        if (item->isWidget())
-//        {
-//            QGraphicsProxyWidget *proxyItem = (QGraphicsProxyWidget*)item;
-//            if (proxyItem->scale() > 1.25)
-//            {
-//                proxyItem->setData(Direction, -1.0);
-//            }
-//            else if (proxyItem->scale() <= 1.0)
-//            {
-//                proxyItem->setData(Direction, 1.0);
-//            }
-//            proxyItem->moveBy(-0.25 * proxyItem->data(Direction).toFloat(), 0.0);
-//            proxyItem->setScale(proxyItem->scale() + proxyItem->data(Direction).toFloat() * 0.0025);
-//        }
-//    }
 
     tickCounter++;
 }

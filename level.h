@@ -28,8 +28,7 @@ private:
     GatePipeTags getLayOutEnum(QString str);
 
 public:
-    Level(QVector<GateNode*> newInputs, QVector<GateNode*> newOutputs, QVector<GateNode*> newGates,
-          QVector<int> newGoals, int newRowSize, QVector<GatePipeTags> newLayout);
+    Level();
     Level(QString filename);
     void checkOutputs();
     void setGateType(int gateIndex, GateNodeType type);

@@ -16,13 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // Simple Box2D check
-//    b2Vec2 gravity = b2Vec2(0.0, 9.8);
-//    b2World world(gravity);
-
-    // Simple SFML check
-//    sf::SoundBuffer sbuf;
-
     // Set the initial scene to the title scene
     ui->graphicsView->setScene(scenes->getScene("Title"));
     ui->graphicsView->installEventFilter(ui->graphicsView->scene());

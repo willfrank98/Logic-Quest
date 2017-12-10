@@ -141,7 +141,7 @@ int GateNode::xorGate()
     else return 0;
 }
 
-void GateNode::processGate()
+bool GateNode::processGate()
 {
     switch(gType)
     {
@@ -165,14 +165,15 @@ void GateNode::processGate()
         break;
     case END:
         output = inputNode1->getOutput();
-        return;
+        return true;
     default:
-        return;
+        return false;
     }
     if(output > -1)
     {
             outputNode->processGate();
     }
+    return false;
 }
 
 void GateNode::setGateType(GateNodeType type)
