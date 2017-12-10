@@ -80,13 +80,30 @@ QGraphicsItem* BasicScene::createBox(QRectF rect, QColor line, QColor fill, bool
     return item;
 }
 
-QGraphicsPixmapItem* BasicScene::createSprite(QPointF pos, QSize size, QString tag)
+QGraphicsPixmapItem* BasicScene::createSprite(QPointF pos, QSize scale, QString sheet, QSize frameSize, int frame)
 {
-    QGraphicsPixmapItem *item = addPixmap(sl->getSprite(tag).scaled(size));
+    QPixmap sprite = sl->getSprite(sheet, frameSize, frame).scaled(scale);
+    QGraphicsPixmapItem *item = addPixmap(sprite);
     item->setPos(pos);
-    item->setData(Name, tag);
+    item->setData(Sheet, sheet);
+    item->setData(FrameSize, frameSize);
+    item->setData(Frame, frame);
 
     return item;
+}
+
+QGraphicsPixmapItem* BasicScene::createGate(QPointF pos, QSize scale, QString gate)
+{
+    int frame = -1;
+    if (gate == "andgate") frame = 0;
+    else if(gate == "nandgate") frame = 1;
+    else if(gate == "orgate") frame = 2;
+    else if(gate == "xorgate") frame = 3;
+    else if(gate == "norgate") frame = 4;
+    else if(gate == "notgate") frame = 5;
+    else return new QGraphicsPixmapItem();
+
+    return createSprite(pos, scale, ":/images/sprites/gatesSheet.png", QSize(64, 64), frame);
 }
 
 // Sets the position of a body (and by extension, an item)
@@ -122,7 +139,7 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
 
     if (currentLevel.getLayout()[xL/gridWidth + yL/gridHeight*numCols] == UG) {
 
-        createSprite(QPointF(xL, yL), QSize(gridWidth, gridHeight),  currentSelectedGate->accessibleName());
+        createGate(QPointF(xL, yL), QSize(gridWidth, gridHeight),  currentSelectedGate->accessibleName());
         qDebug() << gateDes[currentSelectedGate->accessibleDescription().toInt()];
         qDebug() <<  yL/gridHeight << xL/gridWidth;
         qDebug() << yL/gridHeight*numCols+ xL/gridWidth;
@@ -192,31 +209,6 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
     return QGraphicsScene::eventFilter(watched, event);
 }
 
-//void BasicScene::mousePressEvent(QMouseEvent *event)
-//{
-
-//}
-
-//void BasicScene::mouseReleaseEvent(QMouseEvent *event)
-//{
-
-//}
-
-//void BasicScene::mouseMoveEvent(QMouseEvent *event)
-//{
-
-//}
-
-//void BasicScene::keyPressEvent(QKeyEvent *event)
-//{
-
-//}
-
-//void BasicScene::keyReleaseEvent(QKeyEvent *event)
-//{
-
-//}
-
 void BasicScene::createUI()
 {
 	qreal width = sceneRect().width();
@@ -235,60 +227,64 @@ void BasicScene::createUI()
     {
 		for (int x = 0; x < width - numCols; x += gridWidth)
         {
-            QString tag;
+            // Switch case matching the desired data to pass to our SpriteLoader tool.
+            QString sheet;
+            int frame;
             switch(grid[itemNum])
             {
             case WN:
-                tag = "wnpipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 3;
                 break;
             case EN:
-                tag = "enpipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 2;
                 break;
             case WS:
-                tag = "wspipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 1;
                 break;
             case ES:
-                tag = "espipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 0;
                 break;
             case WE:
-                tag = "wepipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 4;
                 break;
             case NS:
-                tag = "nspipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 5;
                 break;
             case S0:
-                tag = "s0";
+                sheet = ":/images/sprites/otherGates.png";
+                frame = 2;
                 break;
             case S1:
-                tag = "s1";
+                sheet = ":/images/sprites/otherGates.png";
+                frame = 0;
                 break;
             case EG:
-                tag = "ee";
+                sheet = ":/images/sprites/otherGates.png";
+                frame = 4;
                 break;
             case UG:
-                tag = "gatespot";
+                sheet = ":/images/sprites/otherGates.png";
+                frame = 5;
                 break;
             default:
-                tag = "empty";
                 break;
             }
-            createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), tag);
+
+            if (sheet != "")
+            {
+                createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), sheet, QSize(64, 64), frame);
+            }
+
             itemNum++;
 		}
 	}
 }
-
-// drag and drop for logic gate buttons
-//void BasicScene::gateClicked(int row, int col)
-//{
-//    QDrag *drag = new QDrag(this);
-//    QMimeData *mimeData = new QMimeData;
-//    QPixmap pmc = getGatePixmap(row, col);
-//    drag->setMimeData(mimeData);
-//    drag->setPixmap(pmc);
-//    // im thinking about useing this to get loc on screen, when droped
-//    Qt::DropAction da = drag->exec();
-//}
 
 //  create push button for each logic gate and place in tool bar
 void BasicScene::addGatesOnToolbar()
@@ -320,10 +316,9 @@ void BasicScene::addGatesOnToolbar()
         // Would just have to store the currently selected gate and check against it
         QPushButton* currentButton = logicGates[index];
         connect(currentButton, &QPushButton::pressed, this, [=](){
-            for (QAbstractButton *btn : btnGroup->buttons())
-            {
-                btn->setEnabled(true);
-            }
+            currentButton->setChecked(true);
+            // need to set name property of QPush button logic gates
+            //currentButton->setAccessibleName("nandgate");    // TODO needs to be done correcctly..at time of setting buttons on bottom of sreen
             currentSelectedGate = currentButton;
             currentSelectedGate->setChecked(true);
             currentSelectedGate->setEnabled(false);
@@ -342,62 +337,19 @@ void BasicScene::addGatesOnToolbar()
         });
         index++;
     }
-
-
-    // connect each logic gate button to forwarding method
-//    connect(logicGates[0], SIGNAL(pressed()), this, SLOT(gate0()));
-//    connect(logicGates[1], SIGNAL(pressed()), this, SLOT(gate1()));
-//    connect(logicGates[2], SIGNAL(pressed()), this, SLOT(gate2()));
-//    connect(logicGates[3], SIGNAL(pressed()), this, SLOT(gate3()));
-//    connect(logicGates[4], SIGNAL(pressed()), this, SLOT(gate4()));
-//    connect(logicGates[5], SIGNAL(pressed()), this, SLOT(gate5()));
 }
-
-// sets the location in the toolbar for the given logic gate
-//QPushButton *BasicScene::setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc)
-//{
-//    QIcon buttonIcon(*pm);
-//    pb->setIcon(buttonIcon);
-//    pb->setIconSize(pm->rect().size());
-//    pb->setGeometry(QRect(QPoint(xLoc, yLoc), QSize(64, 64)));
-//    pb->setEnabled(true);
-//    return pb;
-//}
 
 // returns desired log gate pixmap from sheet
 QPixmap BasicScene::getGatePixmap(QString string)
-{   int row, col;
-    if (string == "andgate"){
-        row = 0; col = 0;
-    }
-    else if(string == "nandgate"){
-        row = 0; col = 1;
-    }
-    else if(string == "orgate"){
-        row = 1; col = 0;
-    }
-    else if(string == "xorgate"){
-        row = 1; col = 1;
-    }
-    else if(string == "norgate"){
-        row = 2; col = 0;
-    }
-    else if(string == "notgate"){
-        row = 2; col = 1;
-    }
-    else{
-        qDebug() << "error in gate selection for dragMISTAKE!!!!!!";
-    }
+{
+    int frame = -1;
+    if (string == "andgate") frame = 0;
+    else if(string == "nandgate") frame = 1;
+    else if(string == "orgate") frame = 2;
+    else if(string == "xorgate") frame = 3;
+    else if(string == "norgate") frame = 4;
+    else if(string == "notgate") frame = 5;
+    else qDebug() << "error in gate selection for dragMISTAKE!!!!!!";
 
-    QPixmap pm(":/images/sprites/gatesSheet.png");
-    QRect rec(64*col, 64*row, 64, 64);
-    return pm.copy(rec);
+    return sl->getSprite(":/images/sprites/gatesSheet.png", QSize(64, 64), frame);
 }
-
-// forwarding methods for dragging gates
-//void BasicScene::gate0(){gateClicked(0, 0);}
-//void BasicScene::gate1(){gateClicked(0, 1);}
-//void BasicScene::gate2(){gateClicked(1, 0);}
-//void BasicScene::gate3(){gateClicked(1, 1);}
-//void BasicScene::gate4(){gateClicked(2, 0);}
-//void BasicScene::gate5(){gateClicked(2, 1);}

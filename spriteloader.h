@@ -8,7 +8,7 @@ class SpriteLoader
 {
 public:
     SpriteLoader();
-    QPixmap getSprite(QString);
+    QPixmap getSprite(QString sheetName, QSize frameSize, int frame);
     QList<QPixmap> getGates();
 
 private:

@@ -1,9 +1,9 @@
 <RCC>
     <qresource prefix="/images/icons">
         <file alias="mainLogo.png">res/logos/mainLogo.png</file>
-        <file>DisableSound.png</file>
-        <file>EnableSound.png</file>
-        <file>BackArrow.png</file>
+        <file alias="BackArrow.png">res/icons/BackArrow.png</file>
+        <file alias="DisableSound.png">res/icons/DisableSound.png</file>
+        <file alias="EnableSound.png">res/icons/EnableSound.png</file>
     </qresource>
     <qresource prefix="/images/sprites">
         <file alias="gatesSheet.png">res/sprites/logic_gates_64x64.png</file>
@@ -17,7 +17,7 @@
     </qresource>
     <qresource prefix="/sounds">
         <file alias="Visager_-_02_-_Royal_Entrance.mp3">res/sounds/Visager_-_02_-_Royal_Entrance.mp3</file>
-        <file>Visager_-_04_-_Factory_Time.mp3</file>
+        <file alias="Visager_-_04_-_Factory_Time.mp3">res/sounds/Visager_-_04_-_Factory_Time.mp3</file>
     </qresource>
     <qresource prefix="/levels">
         <file alias="tutorial.txt">levels/tutorial.txt</file>
