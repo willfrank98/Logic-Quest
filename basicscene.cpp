@@ -11,6 +11,8 @@
 #include <iostream>
 #include <QButtonGroup>
 #include <string>
+#include <QString>
+#include <QGraphicsItem>
 
 bool enableMusic = true;
 
@@ -123,6 +125,9 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
 }
 // drop event for buttons
 void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
+
+    qDebug()<< currentLevel.getGoals().size() << ",,:pppp";
+    qDebug()<< currentLevel.getEndGates().size() <<"<gg";
     currentSelectedGate->setEnabled(true);
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
     qreal width = sceneRect().width();
@@ -150,10 +155,11 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
     //TODO update back end..add gate to vecctor of in use gates?
 }
 
-GateNodeType getGateNodeType(QString name)
-{
-    return GateNodeType();
-}
+
+//GateNodeType getGateNodeType(QString name) {
+//	return nullptr;
+//}
+
 
 
 // Intercept events from the GraphicsView and do things with them.
@@ -217,7 +223,50 @@ void BasicScene::createUI()
 
 	//int trayWidth = width/12;
 	int trayHeight = 100;
-	createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
+//    createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
+    createBox(QRectF(0, height-trayHeight, width, trayHeight), QColor(166, 170, 178), QColor(166, 170, 178), false);
+
+    QPixmap *backPix = new QPixmap(":/images/icons/BackArrow.png");
+    QIcon *backIcon = new QIcon(*backPix);
+    QPushButton* backButton = new QPushButton();
+    backButton->setGeometry(QRect(10, sceneRect().height()*0.87, 60, 40));
+    backButton->setIcon(*backIcon);
+    backButton->setAttribute(Qt::WA_TranslucentBackground);
+    backButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 16px;"
+                               "border-style: solid;"
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}"
+                              );
+    backToHomeProxy = addWidget(backButton);
+    backToHomeProxy->setZValue(10.0);
+
+    QPushButton* selectMenuButton = new QPushButton();
+    selectMenuButton->setGeometry(QRect(10, sceneRect().height()*0.93, 60, 40));
+    selectMenuButton->setAttribute(Qt::WA_TranslucentBackground);
+    selectMenuButton->setText("Level Menu");
+    selectMenuButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 10px;"
+                               "border-style: solid;"
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}"
+                              );
+    selectMenuProxy = addWidget(selectMenuButton);
+    selectMenuProxy->setZValue(10.0);
+
+    /* Add Connection to get Back to home screen */
+    connect(backButton, &QPushButton::clicked, this, [=](){emit(changeScene("title"));}, Qt::QueuedConnection);
+    connect(selectMenuButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
 
 	int gridWidth = width / numCols;
     int gridHeight = (height - trayHeight) / numRows;
@@ -277,11 +326,11 @@ void BasicScene::createUI()
                 break;
             }
 
+            createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), sheet, QSize(64, 64), frame);
             if (sheet != "")
             {
                 createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), sheet, QSize(64, 64), frame);
             }
-
             itemNum++;
 		}
 	}
@@ -338,6 +387,21 @@ void BasicScene::addGatesOnToolbar()
         });
         index++;
     }
+
+    QString goalSequence = "Goal: ";
+    int size = currentLevel.getGoals().size();
+    qDebug()<< size;
+    QVector<int> allGoals = currentLevel.getGoals();
+
+    for (int i = 0; i < size; i ++) {
+
+        goalSequence.append(QString::number(allGoals[i]));
+    }
+
+    QFont font = QFont("Helvetica");
+    font.setPointSize(24);
+    QGraphicsTextItem *easy = addText(goalSequence, font);
+    easy->setPos(sceneRect().width()*0.8, sceneRect().height()*0.88);
 }
 
 // returns desired log gate pixmap from sheet

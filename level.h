@@ -38,6 +38,7 @@ public:
     int getNumColumns();
     int getNumRows();
     int getGateNodeIndex(int layoutIndex);
+    QVector<GateNode*> getEndGates();
 };
 
 #endif // LEVEL_H
