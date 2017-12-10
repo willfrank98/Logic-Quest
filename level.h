@@ -27,6 +27,7 @@ private:
     void addGateWithGateInput(int gIndex, int igIndex);
     void addEndGateWithGateInput(int egIndex, int gIndex);
     GatePipeTags getLayOutEnum(QString str);
+    int difficulty;
 
 public:
     Level();
