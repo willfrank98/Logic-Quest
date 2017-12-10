@@ -241,7 +241,6 @@ void TitleScene::endMusic() {
     musicPlayer->stop();
 }
 
-
 void TitleScene::keyPressEvent(QKeyEvent *event)
 {
 
