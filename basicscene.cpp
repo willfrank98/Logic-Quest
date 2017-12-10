@@ -346,6 +346,7 @@ void BasicScene::addGatesOnToolbar()
     int index = 0;
     QPushButton *logicGates[6];
     QButtonGroup *btnGroup = new QButtonGroup();
+    QList<QString> gateNames = sl->getGateNames();
 
     for (QPixmap gate : sl->getGates())
     {
@@ -358,6 +359,7 @@ void BasicScene::addGatesOnToolbar()
         logicGates[index]->setCheckable(true);
         logicGates[index]->setAccessibleName(gateNames[index]);
         logicGates[index]->setAccessibleDescription(QString::number(index));
+        logicGates[index]->setToolTip(gateNames[index]);
         qDebug() << logicGates[index]->accessibleName();
         btnGroup->addButton(logicGates[index]);
         addWidget(logicGates[index]);

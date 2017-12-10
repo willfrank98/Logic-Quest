@@ -10,6 +10,7 @@ public:
     SpriteLoader();
     QPixmap getSprite(QString sheetName, QSize frameSize, int frame);
     QList<QPixmap> getGates();
+    QList<QString> getGateNames();
 
 private:
     QMap<QString, QPixmap> sprites;
