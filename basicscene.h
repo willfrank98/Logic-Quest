@@ -46,7 +46,6 @@ public:
 
 	void createUI();
     void addGatesOnToolbar();
-    int getScore();
 //    void gateClicked(int row, int col);
 private:
     QTimer timer;
