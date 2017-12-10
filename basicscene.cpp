@@ -155,9 +155,11 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
     //TODO update back end..add gate to vecctor of in use gates?
 }
 
+
 //GateNodeType getGateNodeType(QString name) {
 //	return nullptr;
 //}
+
 
 
 // Intercept events from the GraphicsView and do things with them.
