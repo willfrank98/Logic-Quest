@@ -29,11 +29,12 @@ private:
     void addEndGateWithGateInput(int egIndex, int gIndex);
     GatePipeTags getLayOutEnum(QString str);
     int difficulty;
+	QString nextLevelAddress;
 
 public:
     Level();
     Level(QString filename);
-    void checkOutputs();
+	bool checkOutputs();
     QVector<int> setGateType(int gateIndex, GateNodeType type);
     QVector<int> getGoals();
     QVector<GatePipeTags> getLayout();
@@ -42,6 +43,7 @@ public:
     int getGateNodeIndex(int layoutIndex);
     QVector<GateNode*> getEndGates();
     bool hasTwoInputs(int index);
+	QString nextLevel();
 };
 
 #endif // LEVEL_H
