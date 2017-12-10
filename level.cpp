@@ -107,7 +107,10 @@ void Level::checkOutputs()
 void Level::setGateType(int gateIndex, GateNodeType type)
 {
     gates[gateIndex]->setGateType(type);
-    gates[gateIndex]->processGate();
+    if(gates[gateIndex]->processGate())
+    {
+        checkOutputs();
+    }
 }
 
 QVector<int> Level::getGoals()
