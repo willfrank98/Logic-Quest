@@ -13,6 +13,7 @@
 #include <string>
 #include <QString>
 #include <QGraphicsItem>
+#include <QMessageBox>
 
 bool enableMusic = true;
 
@@ -38,22 +39,23 @@ BasicScene::BasicScene(Level level)
     timer.setInterval(8);
     connect(&timer, &QTimer::timeout, this, [=](){
         onUpdate(deltaKeeper.elapsed() / 1000.0);
-        // update bonus
+        currentLevel.tickIter++; // track level's tick iteration
+        if (currentLevel.tickIter % 101 == 0)
+            currentLevel.setbonus(currentLevel.getBonus() - 1);
         deltaKeeper.restart();
     });
 
     soundEffect = new QMediaPlayer;
     musicPlayer = new QMediaPlayer;
-    musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_05_-_Battle.mp3"));
-    musicPlayer->setVolume(50);
-    if(enableMusic) musicPlayer->play();
+    //musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_05_-_Battle.mp3"));
+    //musicPlayer->setVolume(50);  // jams
+    //if(enableMusic) musicPlayer->play();
 
     currentLevel = level;
     this->numCols = level.getNumColumns();
     this->numRows = level.getNumRows();
     this->goals = level.getGoals();
     this->grid = level.getLayout();
-
 }
 
 BasicScene::~BasicScene()
@@ -129,21 +131,12 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
     // maybe highlight something or set somehting active if over certain space, etc
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
     g->setDropAction(Qt::CopyAction); // not sure about this
-    qDebug() << g->scenePos();
+    //qDebug() << g->scenePos();
 }
-void BasicScene::setScore(int points){
-    score+=points;
-}
+
 // drop event for buttons
 void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
-{        qDebug() << "gg";
-         qDebug() << currentLevel.checkOutputs();
-    if (currentLevel.checkOutputs()){
-        setScore(3);
-        int gg = getScore();
-        qDebug() << "gg";
-        qDebug() << gg;
-    }
+{
     //update score accordingly (bonus from ticker too?)
     currentSelectedGate->setEnabled(true);
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
@@ -162,7 +155,7 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
     if (currentLevel.getLayout()[xL/gridWidth + yL/gridHeight*numCols] == UG) {
 
         int gateNodeLocation = currentLevel.getGateNodeIndex(yL/gridHeight*numCols + xL/gridWidth);
-        qDebug() << currentSelectedGate->accessibleDescription();
+        //qDebug() << currentSelectedGate->accessibleDescription();
         if(currentSelectedGate->accessibleDescription() == "3")
         {
             if(currentLevel.hasTwoInputs(gateNodeLocation))
@@ -172,11 +165,6 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 
         }
         createGate(QPointF(xL, yL), QSize(gridWidth, gridHeight),  currentSelectedGate->accessibleName());
-        qDebug() << gateDes[currentSelectedGate->accessibleDescription().toInt()];
-        qDebug() <<  yL/gridHeight << xL/gridWidth;
-        qDebug() << yL/gridHeight*numCols+ xL/gridWidth;
-        qDebug() << numCols;
-
 
         SoundEffectSelect(1);
         QVector<int> endGateUpdate;
@@ -194,8 +182,15 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
         //Sound for when the drag didnt work.
         SoundEffectSelect(2);
     }
-
-    //TODO update back end..add gate to vecctor of in use gates?
+    // check if the game has been successfully completed
+    if (currentLevel.isCompleted()){
+        this->setScore(this->getScore() + currentLevel.getBonus());
+        QMessageBox mBox;
+        mBox.setText("Level Complete with a score of: " + QString::number(currentLevel.getBonus()) + "\n");
+        if (currentLevel.completedPerfectLevel())
+            mBox.setInformativeText("Perfect level bonus: " + QString::number(currentLevel.getDifficulty() * 2));
+        mBox.exec();
+    }
 }
 
 // Intercept events from the GraphicsView and do things with them.
@@ -243,8 +238,6 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
             int x = (mev->x() - trayWidth)/gridWidth;
             int y = mev->y()/gridHeight;
 
-            qDebug() << "x, y :" << x << y;
-            qDebug() << itemAt(mev->localPos(), QTransform())->data(Name);
         }
     }
 
@@ -414,11 +407,9 @@ void BasicScene::addGatesOnToolbar()
         connect(currentButton, &QPushButton::pressed, this, [=](){
             currentButton->setChecked(true);
             // need to set name property of QPush button logic gates
-            //currentButton->setAccessibleName("nandgate");    // TODO needs to be done correcctly..at time of setting buttons on bottom of sreen
             currentSelectedGate = currentButton;
             currentSelectedGate->setChecked(true);
             currentSelectedGate->setEnabled(false);
-            qDebug()<< "currentButton->accessibleName() = "+ currentButton->accessibleName();
             currentSelectedGate->setAccessibleName(currentButton->accessibleName());
             currentSelectedGate->setAccessibleDescription(currentButton->accessibleDescription());
             // drag for log gate onto game space
@@ -428,7 +419,7 @@ void BasicScene::addGatesOnToolbar()
             drag->setMimeData(mimeData);
             drag->setPixmap(pmc);
             QApplication::setOverrideCursor(Qt::ClosedHandCursor);
-			/*Qt::DropAction da = */drag->exec(Qt::MoveAction);//???
+            drag->exec(Qt::MoveAction);//???
             QApplication::restoreOverrideCursor();
         });
         index++;
@@ -504,7 +495,11 @@ void BasicScene::SoundEffectSelect(int sound) {
 void BasicScene::endMusic() {
     musicPlayer->stop();
 }
-
+// set user's score
+void BasicScene::setScore(int points){
+    score += points;
+}
+// get user's score
 int BasicScene::getScore() {
     return score;
 }

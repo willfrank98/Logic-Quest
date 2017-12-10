@@ -24,7 +24,9 @@ private:
     int numCols;
     int numRows;
     int difficulty;
+    int bonus; // bonus based on speed of compeltion
     bool isComplete;
+    bool perfectLevel; // bonus points no incorrect gates
     void addGateWithStartGateInput(int gIndex, int sgIndex, int sgValue);
     void addGateWithGateInput(int gIndex, int igIndex);
     void addEndGateWithGateInput(int egIndex, int gIndex);
@@ -35,6 +37,7 @@ public:
     Level();
     Level(QString filename);
     bool checkOutputs();
+    bool isCompleted();
     QVector<int> setGateType(int gateIndex, GateNodeType type);
     QVector<int> getGoals();
     QVector<GatePipeTags> getLayout();
@@ -43,6 +46,11 @@ public:
     int getNumRows();
     int getGateNodeIndex(int layoutIndex);
     bool hasTwoInputs(int index);
+    int getBonus();
+    int getDifficulty();
+    void setbonus(int points);
+    bool completedPerfectLevel();
+    int tickIter;
 };
 
 #endif // LEVEL_H

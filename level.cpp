@@ -20,20 +20,21 @@ Level::Level()
 Level::Level(QString filename)
 {
     QFile file(filename);
-
-    std::regex easy("^easy");
-    std::regex medium("^medium");
-
-    if (std::regex_match(filename.toStdString(), easy)) {
+    // set difficulty depending on chosen level
+    if (std::regex_match(filename.toStdString(), std::regex("^easy"))){
         difficulty = 1;
+        bonus = 10;
     }
-    else if (std::regex_match(filename.toStdString(), medium)) {
+    else if (std::regex_match(filename.toStdString(), std::regex("^medium"))){
         difficulty = 2;
+        bonus = 20;
     }
     else {
         difficulty = 3;
+        bonus = 30;
     }
-
+    tickIter = 0;
+    perfectLevel = true;
     if(file.open(QIODevice::ReadOnly))
     {
 
@@ -124,19 +125,27 @@ Level::Level(QString filename)
 }
 
 bool Level::checkOutputs()
-{
+{   //qDebug() << "goals size ios: " << goals.size();
     for (int i = 0; i < goals.size(); i++)
     {
+        //qDebug() << "goals at 0 is: " << goals[0] << " and endGates at 0 is: " << endGates[0]->getOutput();
         if(goals[i] != endGates[i]->getOutput())
         {
+            perfectLevel = false;
             isComplete = false;
             return isComplete;
         }
     }
+    if (perfectLevel){
+        bonus += difficulty * 2;
+    }
+    bonus++; //inc for correct gate
     isComplete = true;
     return isComplete;
 }
-
+bool Level::isCompleted(){
+    return this->isComplete;
+}
 QVector<int> Level::setGateType(int gateIndex, GateNodeType type)
 {
     gates[gateIndex]->setGateType(type);
@@ -308,4 +317,20 @@ int Level::getGateNodeIndex(int layoutIndex)
 bool Level::hasTwoInputs(int index)
 {
     return gates[index]->hasTwoInputs();
+}
+int Level::getBonus()
+{
+    return bonus;
+}
+void Level::setbonus(int points)
+{
+    bonus = abs(points) + 1;
+}
+bool Level::completedPerfectLevel()
+{
+    return perfectLevel;
+}
+int Level::getDifficulty()
+{
+    return difficulty;
 }
