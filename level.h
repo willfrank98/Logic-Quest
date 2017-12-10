@@ -22,6 +22,7 @@ private:
     int numCols;
     int numRows;
     QVector<GatePipeTags> layout;
+    QVector<int> gateNodeIndex;
     void addGateWithStartGateInput(int gIndex, int sgIndex, int sgValue);
     void addGateWithGateInput(int gIndex, int igIndex);
     void addEndGateWithGateInput(int egIndex, int gIndex);
@@ -36,6 +37,7 @@ public:
     QVector<GatePipeTags> getLayout();
     int getNumColumns();
     int getNumRows();
+    int getGateNodeIndex(int layoutIndex);
 };
 
 #endif // LEVEL_H

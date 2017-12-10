@@ -26,6 +26,7 @@ Level::Level(QString filename)
         QTextStream indata(&file);
         QString line;
         QStringList list;
+        int gateIndex = 0;
         int currentLine = 0;
         while (!indata.atEnd())
         {
@@ -47,6 +48,15 @@ Level::Level(QString filename)
                 for (QString s : list)
                 {
                     layout.append(getLayOutEnum(s));
+                    if(s == "UG")
+                    {
+                        gateNodeIndex.append(gateIndex);
+                        gateIndex++;
+                    }
+                    else
+                    {
+                        gateNodeIndex.append(-1);
+                    }
                 }
                 currentLine++;
                 continue;
@@ -255,4 +265,9 @@ GatePipeTags Level::getLayOutEnum(QString str)
         return NS;
     }
     return NL;
+}
+
+int Level::getGateNodeIndex(int layoutIndex)
+{
+    return gateNodeIndex[layoutIndex];
 }
