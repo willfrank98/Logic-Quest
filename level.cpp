@@ -28,6 +28,7 @@ Level::Level(QString filename)
         QStringList list;
         int gateIndex = 0;
         int currentLine = 0;
+        int layoutIndex = 0;
         while (!indata.atEnd())
         {
             line = indata.readLine().simplified();
@@ -57,6 +58,12 @@ Level::Level(QString filename)
                     {
                         gateNodeIndex.append(-1);
                     }
+
+                    if(s == "EG")
+                    {
+                        endGateLocations.append(layoutIndex);
+                    }
+                    layoutIndex++;
                 }
                 currentLine++;
                 continue;
@@ -94,6 +101,7 @@ Level::Level(QString filename)
                 int egIndex = list[2].toInt();
                 int gIndex = list[1].toInt();
                 addEndGateWithGateInput(egIndex, gIndex);
+                endGates[egIndex]->setEndGateLocation(endGateLocations[egIndex]);
             }
 
         }
@@ -114,12 +122,18 @@ void Level::checkOutputs()
     isComplete = true;
 }
 
-void Level::setGateType(int gateIndex, GateNodeType type)
+QVector<int> Level::setGateType(int gateIndex, GateNodeType type)
 {
     gates[gateIndex]->setGateType(type);
-    if(gates[gateIndex]->processGate())
+    QVector<int> results = gates[gateIndex]->processGate();
+    if(results.size() > 0)
     {
         checkOutputs();
+        return results;
+    }
+    else
+    {
+        return results;
     }
 }
 

@@ -9,6 +9,7 @@
 #define GATENODE_H
 
 #include <itemdata.h>
+#include <QVector>
 
 class GateNode
 {
@@ -17,6 +18,7 @@ private:
     GateNode* inputNode2;
     GateNode* outputNode;
     int output;
+    int endGateLocation; //is the location in the layout of the endGate associated with this node
     GateNodeType gType;
 
     //helper methods for processGate()
@@ -32,9 +34,11 @@ public:
     GateNode(GateNodeType type, int value);
     ~GateNode();
     int getOutput();    //returns the output of this node
-    bool processGate(); //processes the input to set the output based on the type of the GateNode
+    int getEndGateLocation();
+    QVector<int> processGate(); //processes the input to set the output based on the type of the GateNode
     void setGateType(GateNodeType type); //sets the GateNodeType to the specified type
     void addInput(int inputNum, GateNode *node);
+    void setEndGateLocation(int location);
 };
 
 #endif // GATENODE_H

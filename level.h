@@ -19,6 +19,7 @@ private:
     QVector<GateNode*> endGates;
     QVector<GateNode*> gates;
     QVector<int> goals;
+    QVector<int> endGateLocations;
     int numCols;
     int numRows;
     QVector<GatePipeTags> layout;
@@ -32,7 +33,7 @@ public:
     Level();
     Level(QString filename);
     void checkOutputs();
-    void setGateType(int gateIndex, GateNodeType type);
+    QVector<int> setGateType(int gateIndex, GateNodeType type);
     QVector<int> getGoals();
     QVector<GatePipeTags> getLayout();
     int getNumColumns();

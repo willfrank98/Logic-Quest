@@ -105,7 +105,8 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
     qDebug() << g->scenePos();
 }
 // drop event for buttons
-void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
+void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
+{
     currentSelectedGate->setEnabled(true);
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
     qreal width = sceneRect().width();
@@ -128,7 +129,17 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
         qDebug() << yL/gridHeight*numCols+ xL/gridWidth;
         qDebug() << numCols;
      //  this
-        currentLevel.setGateType(currentLevel.getGateNodeIndex(yL/gridHeight*numCols + xL/gridWidth), gateDes[currentSelectedGate->accessibleDescription().toInt()]);
+        int gateNodeLocation = currentLevel.getGateNodeIndex(yL/gridHeight*numCols + xL/gridWidth);
+        QVector<int> endGateUpdate;
+        endGateUpdate = currentLevel.setGateType(gateNodeLocation,
+                                                 gateDes[currentSelectedGate->accessibleDescription().toInt()]);
+
+        //If the endGate is updated and returns a vector of the location and new value
+        //Update the endGate Sprite
+        if(endGateUpdate.size() > 0)
+        {
+            updateEndGateSprite(endGateUpdate[0], endGateUpdate[1], gridWidth, gridHeight);
+        }
     }
     //TODO update back end..add gate to vecctor of in use gates?
 }
@@ -278,18 +289,6 @@ void BasicScene::createUI()
 	}
 }
 
-// drag and drop for logic gate buttons
-//void BasicScene::gateClicked(int row, int col)
-//{
-//    QDrag *drag = new QDrag(this);
-//    QMimeData *mimeData = new QMimeData;
-//    QPixmap pmc = getGatePixmap(row, col);
-//    drag->setMimeData(mimeData);
-//    drag->setPixmap(pmc);
-//    // im thinking about useing this to get loc on screen, when droped
-//    Qt::DropAction da = drag->exec();
-//}
-
 //  create push button for each logic gate and place in tool bar
 void BasicScene::addGatesOnToolbar()
 {
@@ -393,10 +392,21 @@ QPixmap BasicScene::getGatePixmap(QString string)
     return pm.copy(rec);
 }
 
-// forwarding methods for dragging gates
-//void BasicScene::gate0(){gateClicked(0, 0);}
-//void BasicScene::gate1(){gateClicked(0, 1);}
-//void BasicScene::gate2(){gateClicked(1, 0);}
-//void BasicScene::gate3(){gateClicked(1, 1);}
-//void BasicScene::gate4(){gateClicked(2, 0);}
-//void BasicScene::gate5(){gateClicked(2, 1);}
+void BasicScene::updateEndGateSprite(int location, int value, int gridWidth, int gridHeight)
+{
+    int y = (location/numCols)*gridHeight;
+    int x = (location + 1 - ((y/gridHeight)*numCols))*gridHeight;
+    qDebug() << y << x;
+    QString tag;
+    if(value == 0)
+    {
+        tag = "e0";
+    }
+    else
+    {
+        tag = "e1";
+    }
+
+    createSprite(QPointF(x, y), QSize(gridWidth, gridHeight),  tag);
+}
+
