@@ -80,18 +80,13 @@ private:
     QString gateNames[6] = {"andgate", "nandgate", "norgate", "notgate", "orgate", "xorgate"};
     GateNodeType gateDes[9] = {START, END, UNSET, AND, OR, NAND, NOR, XOR, NOT};
     GateNodeType getGateNodeType(QString name);
+    int getScore();
 //    QPushButton *setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc);
 
 signals:
     void changeScene(QString);
 	void changeResolution(QString);
 public slots:
-//    void gate0();
-//    void gate1();
-//    void gate2();
-//    void gate3();
-//    void gate4();
-//    void gate5();
 };
 
 #endif // BASICSCENE_H
