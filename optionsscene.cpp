@@ -124,8 +124,10 @@ void OptionsScene::onInit()
 
 
 	// Handles resolution changes
-	connect(r600Button, &QPushButton::clicked, this, [=]()
-	{
-
-	}, Qt::QueuedConnection);
+	connect(r600Button, &QPushButton::clicked, this, [=](){emit(changeResolution("600x480"));}, Qt::QueuedConnection);
+	connect(r1280Button, &QPushButton::clicked, this, [=](){emit(changeResolution("1280x720"));}, Qt::QueuedConnection);
+	connect(r1366Button, &QPushButton::clicked, this, [=](){emit(changeResolution("1366x720"));}, Qt::QueuedConnection);
+	connect(r1920Button, &QPushButton::clicked, this, [=](){emit(changeResolution("1920x1080"));}, Qt::QueuedConnection);
+	connect(rFullscreenButton, &QPushButton::clicked, this, [=](){emit(changeResolution("Fullscreen"));}, Qt::QueuedConnection);
 }
+

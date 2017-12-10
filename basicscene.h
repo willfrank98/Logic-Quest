@@ -80,6 +80,7 @@ private:
 
 signals:
     void changeScene(QString);
+	void changeResolution(QString);
 public slots:
 //    void gate0();
 //    void gate1();

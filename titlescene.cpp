@@ -55,9 +55,6 @@ void TitleScene::onInit()
         }
     }
 
-<<<<<<< HEAD
-=======
-
 // Adds more text
 //    font.setPointSize(14);
 //    QGraphicsTextItem *prompt = addText("Press SPACE to play!", font);
@@ -88,7 +85,6 @@ void TitleScene::onInit()
     soundButtonProxy = addWidget(soundButton);
     soundButtonProxy->setZValue(10.0);
 
->>>>>>> 33456bb51ce40abe6541e17ff835661fd9bda157
     //Sets up menu buttons
     QPushButton *startButton = new QPushButton();
     startButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .45, sceneRect().width() * .30, sceneRect().height() * .10));
