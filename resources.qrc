@@ -20,6 +20,12 @@
     </qresource>
     <qresource prefix="/levels">
         <file alias="tutorial.txt">levels/tutorial.txt</file>
+        <file>levels/tutorial1.txt</file>
+        <file>levels/tutorial2.txt</file>
+        <file>levels/tutorial3.txt</file>
+        <file>levels/tutorial4.txt</file>
+        <file>levels/tutorial5.txt</file>
+        <file>levels/tutorial6.txt</file>
     </qresource>
     <qresource prefix="/images/logos"/>
 </RCC>
