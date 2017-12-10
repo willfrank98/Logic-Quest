@@ -14,6 +14,7 @@
 #include <sceneholder.h>
 #include <Box2D.h>
 #include <SFML/Audio.hpp>
+#include <QMediaPlayer>
 
 namespace Ui {
 class MainWindow;
@@ -32,6 +33,7 @@ private:
     void swapScene(QString s);
     void hookupScene();
     SceneHolder *scenes = new SceneHolder();
+    QMediaPlayer* musicPlayer;
 };
 
 #endif // MAINWINDOW_H
