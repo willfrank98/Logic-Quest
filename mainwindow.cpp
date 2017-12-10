@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Set the initial scene to the title scene
     ui->graphicsView->setScene(scenes->getScene("Title"));
     ui->graphicsView->installEventFilter(ui->graphicsView->scene());
+    this->setStyleSheet("background-color: qlineargradient( x1:0 y1:0, x2:0 y2:1, stop:0 lightblue, stop:1 black);");
 
     // Connects the menubar actions.
     connect(ui->actionExit, &QAction::triggered, this, [=](){ QApplication::quit(); });
