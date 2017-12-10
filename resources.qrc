@@ -14,8 +14,8 @@
         <file alias="pipesBlue.png">res/sprites/pipes_blue_64x64.png</file>
         <file alias="transparent.png">res/sprites/transparent.png</file>
         <file alias="otherGates.png">res/sprites/other_gates_64x64.png</file>
-        <file>res/sprites/ds_1t_driving.png</file>
-        <file>res/sprites/ds_1t_talking.png</file>
+        <file alias="da1t_driving.png">res/sprites/ds_1t_driving.png</file>
+        <file alias="ds1t_talking.png">res/sprites/ds_1t_talking.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file alias="Visager_-_02_-_Royal_Entrance.mp3">res/sounds/Visager_-_02_-_Royal_Entrance.mp3</file>
@@ -26,11 +26,11 @@
     </qresource>
     <qresource prefix="/levels">
         <file alias="tutorial.txt">levels/tutorial.txt</file>
-        <file>levels/tutorial1.txt</file>
-        <file>levels/tutorial2.txt</file>
-        <file>levels/tutorial3.txt</file>
-        <file>levels/tutorial4.txt</file>
-        <file>levels/tutorial5.txt</file>
-        <file>levels/tutorial6.txt</file>
+        <file alias="tutorial1.txt">levels/tutorial1.txt</file>
+        <file alias="tutorial2.txt">levels/tutorial2.txt</file>
+        <file alias="tutorial3.txt">levels/tutorial3.txt</file>
+        <file alias="tutorial4.txt">levels/tutorial4.txt</file>
+        <file alias="tutorial5.txt">levels/tutorial5.txt</file>
+        <file alias="tutorial6.txt">levels/tutorial6.txt</file>
     </qresource>
 </RCC>

@@ -85,6 +85,27 @@ QPixmap SpriteLoader::getSprite(QString sheetName, QSize frameSize, int frame)
     return sheet.copy(QRect());
 }
 
+// Return all the sprites from a sprite sheet
+QList<QPixmap> SpriteLoader::getSprites(QString sheetName, QSize frameSize)
+{
+    QList<QPixmap> sprites;
+    QPixmap sheet = QPixmap(sheetName);
+    QSize sheetDimen = QSize(sheet.width() / frameSize.width(), sheet.height() / frameSize.height());
+    QRect frameRect = QRect();
+    int currentFrame = 0;
+    for (int y = 0; y < sheetDimen.height(); y++)
+    {
+        for (int x = 0; x < sheetDimen.width(); x++)
+        {
+            frameRect = QRect(x * frameSize.width(), y * frameSize.height(), frameSize.width(), frameSize.height());
+            sprites.append(sheet.copy(frameRect));
+            currentFrame++;
+        }
+    }
+
+    return sprites;
+}
+
 //Returns a list of pixmaps that hold the sprites for gates.
 QList<QPixmap> SpriteLoader::getGates()
 {

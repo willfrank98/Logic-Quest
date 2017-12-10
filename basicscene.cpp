@@ -397,6 +397,7 @@ void BasicScene::addGatesOnToolbar()
         logicGates[index]->setAccessibleDescription(QString::number(index));
         logicGates[index]->setToolTip(gateNames[index]);
         qDebug() << logicGates[index]->accessibleName();
+        logicGates[index]->setToolTip(gateNames[index].toUpper() + " Gate");
         btnGroup->addButton(logicGates[index]);
         addWidget(logicGates[index]);
 
