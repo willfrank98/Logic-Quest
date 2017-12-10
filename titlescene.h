@@ -19,6 +19,7 @@ public:
     TitleScene();
 
 signals:
+    void musicSelected(int);
     //void endProgram();
 
 private slots:
@@ -28,7 +29,9 @@ private:
     int currentButton = Qt::NoButton;
     int tickCounter = 0;
     int lgIndex = 0;    //used for alternating which logic block is dropped
-    bool toggleSound;
+    bool soundDisabled;
+    QIcon *soundItem;
+    QPushButton *soundButton;
     QMediaPlayer* musicPlayer;
     QGraphicsItem *clickedItem;
     QGraphicsProxyWidget *startButtonProxy;

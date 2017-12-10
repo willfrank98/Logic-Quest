@@ -30,17 +30,18 @@ void TitleScene::onInit()
 
     // Define a font
     QFont font = QFont("Helvetica");
-    toggleSound = false;
+
+    soundDisabled = false;
 
     // Add some text, ignores physics
     // Perhaps move this to a 'createText' method or something
     font.setPointSize(28);
 
     //Logo
-    QPixmap *logoPix = new QPixmap(":/images/logos/mainLogo.png");
+    QPixmap *logoPix = new QPixmap(":/images/icons/mainLogo.png");
     QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
 
-    //Commented out for now
+//    //Commented out for now
     musicPlayer = new QMediaPlayer;
     musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_02_-_Royal_Entrance.mp3"));
     musicPlayer->setVolume(50);
@@ -65,10 +66,12 @@ void TitleScene::onInit()
 //    prompt->setData(Name, "prompt");
 //    prompt->setData(Direction, 1.0);
 
-    QPushButton *soundButton = new QPushButton();
-    soundButton->setGeometry(QRect(sceneRect().width() * .75, sceneRect().height() * .81, sceneRect().width() * .10, sceneRect().height() * .10));
-    soundButton->setText("Sound");
+    QPixmap *soundPix = new QPixmap(":/images/icons/EnableSound.png");
+    soundItem = new QIcon(*soundPix);
+    soundButton = new QPushButton();
+    soundButton->setGeometry(QRect(sceneRect().width() * .80, sceneRect().height() * .81, sceneRect().width() * .10, sceneRect().height() * .10));
     soundButton->setAttribute(Qt::WA_TranslucentBackground);
+    soundButton->setIcon(*soundItem);
     soundButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
                                "color: white;"
@@ -156,8 +159,8 @@ void TitleScene::onInit()
     connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
     connect(soundButton, &QPushButton::clicked, this, &TitleScene::enableDisableSound);
-
-
+    //connect(soundButton, &QPushButton::clicked, this, [=emit()]);
+    connect(soundButton, SIGNAL(clicked()), SLOT(&Sounds::enableDisableMusic));
 
 
 }
@@ -227,15 +230,23 @@ void TitleScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 }
 */
 
+
+//Handles the enabling and disabling of the title scene sound.
 void TitleScene::enableDisableSound() {
 
-    if(toggleSound) {
+    if(!soundDisabled) {
+    QPixmap *soundPix = new QPixmap(":/images/icons/DisableSound.png");
+    soundItem = new QIcon(*soundPix);
+    soundButton->setIcon(*soundItem);
     musicPlayer->stop();
-    toggleSound = true;
+    soundDisabled = true;
     }
     else {
+    QPixmap *soundPix = new QPixmap(":/images/icons/EnableSound.png");
+        soundItem = new QIcon(*soundPix);
+        soundButton->setIcon(*soundItem);
         musicPlayer->play();
-        toggleSound = false;
+        soundDisabled = false;
     }
 }
 
@@ -253,4 +264,5 @@ void TitleScene::keyPressEvent(QKeyEvent *event)
     {
         emit changeScene("levelmenu");
     }
+    musicPlayer->stop();
 }

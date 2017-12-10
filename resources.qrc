@@ -1,6 +1,9 @@
 <RCC>
-    <qresource prefix="/images/logos">
+    <qresource prefix="/images/icons">
         <file alias="mainLogo.png">res/logos/mainLogo.png</file>
+        <file>DisableSound.png</file>
+        <file>EnableSound.png</file>
+        <file>BackArrow.png</file>
     </qresource>
     <qresource prefix="/images/sprites">
         <file alias="gatesSheet.png">res/sprites/logic_gates_64x64.png</file>
@@ -16,4 +19,5 @@
     <qresource prefix="/levels">
         <file alias="tutorial.txt">levels/tutorial.txt</file>
     </qresource>
+    <qresource prefix="/images/logos"/>
 </RCC>
