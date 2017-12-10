@@ -123,17 +123,18 @@ Level::Level(QString filename)
     file.close();
 }
 
-void Level::checkOutputs()
+bool Level::checkOutputs()
 {
     for (int i = 0; i < goals.size(); i++)
     {
         if(goals[i] != endGates[i]->getOutput())
         {
             isComplete = false;
-            return;
+            return isComplete;
         }
     }
     isComplete = true;
+    return isComplete;
 }
 
 QVector<int> Level::setGateType(int gateIndex, GateNodeType type)
