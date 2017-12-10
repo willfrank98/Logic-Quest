@@ -209,31 +209,6 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
     return QGraphicsScene::eventFilter(watched, event);
 }
 
-//void BasicScene::mousePressEvent(QMouseEvent *event)
-//{
-
-//}
-
-//void BasicScene::mouseReleaseEvent(QMouseEvent *event)
-//{
-
-//}
-
-//void BasicScene::mouseMoveEvent(QMouseEvent *event)
-//{
-
-//}
-
-//void BasicScene::keyPressEvent(QKeyEvent *event)
-//{
-
-//}
-
-//void BasicScene::keyReleaseEvent(QKeyEvent *event)
-//{
-
-//}
-
 void BasicScene::createUI()
 {
 	qreal width = sceneRect().width();
@@ -311,18 +286,6 @@ void BasicScene::createUI()
 	}
 }
 
-// drag and drop for logic gate buttons
-//void BasicScene::gateClicked(int row, int col)
-//{
-//    QDrag *drag = new QDrag(this);
-//    QMimeData *mimeData = new QMimeData;
-//    QPixmap pmc = getGatePixmap(row, col);
-//    drag->setMimeData(mimeData);
-//    drag->setPixmap(pmc);
-//    // im thinking about useing this to get loc on screen, when droped
-//    Qt::DropAction da = drag->exec();
-//}
-
 //  create push button for each logic gate and place in tool bar
 void BasicScene::addGatesOnToolbar()
 {
@@ -374,27 +337,7 @@ void BasicScene::addGatesOnToolbar()
         });
         index++;
     }
-
-
-    // connect each logic gate button to forwarding method
-//    connect(logicGates[0], SIGNAL(pressed()), this, SLOT(gate0()));
-//    connect(logicGates[1], SIGNAL(pressed()), this, SLOT(gate1()));
-//    connect(logicGates[2], SIGNAL(pressed()), this, SLOT(gate2()));
-//    connect(logicGates[3], SIGNAL(pressed()), this, SLOT(gate3()));
-//    connect(logicGates[4], SIGNAL(pressed()), this, SLOT(gate4()));
-//    connect(logicGates[5], SIGNAL(pressed()), this, SLOT(gate5()));
 }
-
-// sets the location in the toolbar for the given logic gate
-//QPushButton *BasicScene::setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc)
-//{
-//    QIcon buttonIcon(*pm);
-//    pb->setIcon(buttonIcon);
-//    pb->setIconSize(pm->rect().size());
-//    pb->setGeometry(QRect(QPoint(xLoc, yLoc), QSize(64, 64)));
-//    pb->setEnabled(true);
-//    return pb;
-//}
 
 // returns desired log gate pixmap from sheet
 QPixmap BasicScene::getGatePixmap(QString string)
@@ -410,11 +353,3 @@ QPixmap BasicScene::getGatePixmap(QString string)
 
     return sl->getSprite(":/images/sprites/gatesSheet.png", QSize(64, 64), frame);
 }
-
-// forwarding methods for dragging gates
-//void BasicScene::gate0(){gateClicked(0, 0);}
-//void BasicScene::gate1(){gateClicked(0, 1);}
-//void BasicScene::gate2(){gateClicked(1, 0);}
-//void BasicScene::gate3(){gateClicked(1, 1);}
-//void BasicScene::gate4(){gateClicked(2, 0);}
-//void BasicScene::gate5(){gateClicked(2, 1);}
