@@ -13,6 +13,7 @@
 #include <string>
 #include <QString>
 #include <QGraphicsItem>
+#include <QMessageBox>
 
 bool enableMusic = true;
 
@@ -187,6 +188,11 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 	//LEVEL COMPLETE
     if (currentLevel.checkOutputs())
     {
+        QMessageBox mBox;
+        mBox.setText("Level Complete with a score of: " + QString::number(currentLevel.getScore()) + "\n");
+        if (currentLevel.completedPerfectLevel())
+            mBox.setInformativeText("Perfect level bonus!\n");
+        mBox.exec();
         emit changeScene(currentLevel.nextLevel());
 	}
 

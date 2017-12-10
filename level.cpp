@@ -15,6 +15,8 @@ Level::Level()
     isComplete = false;
     numCols = 0;
     numRows = 0;
+    levelScore = 0;
+    perfLevel = true;
 }
 
 Level::Level(QString filename)
@@ -33,7 +35,7 @@ Level::Level(QString filename)
     else {
         difficulty = 3;
     }
-
+    levelScore = 0;
     if(file.open(QIODevice::ReadOnly))
     {
 
@@ -136,9 +138,12 @@ bool Level::checkOutputs()
         if(goals[i] != endGates[i]->getOutput())
         {
             isComplete = false;
+            perfLevel = false;
+            levelScore = abs(--levelScore);
             return isComplete;
         }
     }
+    levelScore++;
     isComplete = true;
     return isComplete;
 }
@@ -310,12 +315,18 @@ int Level::getGateNodeIndex(int layoutIndex)
 {
     return gateNodeIndex[layoutIndex];
 }
-
 bool Level::hasTwoInputs(int index)
 {
     return gates[index]->hasTwoInputs();
 }
-
+bool Level::completedPerfectLevel()
+{
+    return perfLevel;
+}
+int Level::getScore()
+{
+    return levelScore;
+}
 QString Level::nextLevel()
 {
 	return this->nextLevelAddress;

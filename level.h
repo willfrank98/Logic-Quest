@@ -25,6 +25,8 @@ private:
     int numRows;
     int difficulty;
     bool isComplete;
+    bool perfLevel;
+    int levelScore;
     void addGateWithStartGateInput(int gIndex, int sgIndex, int sgValue);
     void addGateWithGateInput(int gIndex, int igIndex);
     void addEndGateWithGateInput(int egIndex, int gIndex);
@@ -42,7 +44,9 @@ public:
     int getNumColumns();
     int getNumRows();
     int getGateNodeIndex(int layoutIndex);
+    int getScore();
     bool hasTwoInputs(int index);
+    bool completedPerfectLevel();
 	QString nextLevel();
 };
 
