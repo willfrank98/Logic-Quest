@@ -20,9 +20,16 @@ void LevelMenu::onInit() {
     QFont font = QFont("Helvetica");
     font.setPointSize(24);
 
+    musicPlayer = new QMediaPlayer;
+    musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_04_-_Factory_Time.mp3"));
+    musicPlayer->setVolume(50);
+    if(enableMusic) musicPlayer->play();
+
+    QPixmap *backPix = new QPixmap(":/images/icons/BackArrow.png");
+    QIcon *backIcon = new QIcon(*backPix);
     QPushButton* backButton = new QPushButton();
     backButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.05, 60, 40));
-    backButton->setText("Back");
+    backButton->setIcon(*backIcon);
     backButton->setAttribute(Qt::WA_TranslucentBackground);
     backButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
@@ -40,7 +47,7 @@ void LevelMenu::onInit() {
 
 
     /* Header for the Easy levels */
-    QGraphicsTextItem *easy = addText("Easy", font);
+    QGraphicsTextItem *easy = addText("EASY", font);
     easy->setPos(sceneRect().width() / 2.0 - easy->boundingRect().width()/2.0, sceneRect().height()*0.1);
 
     /* Set the position, width, height, and color for EASY buttons*/
@@ -130,7 +137,7 @@ void LevelMenu::onInit() {
     levelFiveEasyProxy->setZValue(10.0);
 
     /* Header for the Medium levels */
-    QGraphicsTextItem *medium = addText("Medium", font);
+    QGraphicsTextItem *medium = addText("MEDIUM", font);
     medium->setPos(sceneRect().width() / 2.0 - medium->boundingRect().width()/2.0, sceneRect().height()*0.35);
 
     /* Set the position, width, height, and color for MEDIUM buttons*/
@@ -220,7 +227,7 @@ void LevelMenu::onInit() {
     levelFiveMediumProxy->setZValue(10.0);
 
     /* Header for the Hard levels */
-    QGraphicsTextItem *hard = addText("Hard", font);
+    QGraphicsTextItem *hard = addText("HARD", font);
     hard->setPos(sceneRect().width() / 2.0 - hard->boundingRect().width()/2.0, sceneRect().height()*0.6);
 
     /* Set the position, width, height, and color for HARD buttons*/
@@ -332,4 +339,27 @@ void LevelMenu::onInit() {
     connect(levelThreeHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
     connect(levelFourHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
     connect(levelFiveHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
+
+    /*Stops music on all buttons*/
+    connect(backButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelOneEasyButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelTwoEasyButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelThreeEasyButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelFourEasyButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelFiveEasyButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelOneMediumButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelTwoMediumButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelThreeMediumButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelFourMediumButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelFiveMediumButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelOneHardButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelTwoHardButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelThreeHardButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelFourHardButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+    connect(levelFiveHardButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
+}
+
+//Ends music when user exits Scene
+void LevelMenu::endMusic() {
+    musicPlayer->stop();
 }

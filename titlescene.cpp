@@ -13,8 +13,6 @@
 #include <QPainter>
 #include <QGraphicsProxyWidget>
 #include <QLabel>
-#include <QMediaPlayer>
-
 
 // Simple example of a title scene
 TitleScene::TitleScene()
@@ -38,14 +36,14 @@ void TitleScene::onInit()
     font.setPointSize(28);
 
     //Logo
-    QPixmap *logoPix = new QPixmap(":/images/logos/mainLogo.png");
+    QPixmap *logoPix = new QPixmap(":/images/icons/mainLogo.png");
     QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
 
-    //Commented out for now
-//    QMediaPlayer *musicPlayer = new QMediaPlayer;
-//    musicPlayer->setMedia(QUrl(":/sounds/Visager_-_02_-_Royal_Entrance.mp3"));
-//    musicPlayer->setVolume(50);
-//    musicPlayer->play();
+    //Intro music.
+    musicPlayer = new QMediaPlayer;
+    musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_02_-_Royal_Entrance.mp3"));
+    musicPlayer->setVolume(50);
+    if(enableMusic) musicPlayer->play();
 
     // Creates a vector that contains a pixmap of each logic gate.
     QPixmap gatesPM(":images/sprites/gatesSheet.png");
@@ -57,6 +55,40 @@ void TitleScene::onInit()
         }
     }
 
+<<<<<<< HEAD
+=======
+
+// Adds more text
+//    font.setPointSize(14);
+//    QGraphicsTextItem *prompt = addText("Press SPACE to play!", font);
+//    prompt->setPos(sceneRect().width() / 2.0 - prompt->boundingRect().width() / 2.0, sceneRect().height() / 2.0);
+//    prompt->setZValue(1.0);
+//    prompt->setData(Name, "prompt");
+//    prompt->setData(Direction, 1.0);
+
+    //Sound Enable/Disbale Icon.
+    QPixmap *soundPix = new QPixmap(":/images/icons/EnableSound.png");
+    if(!enableMusic)
+    soundPix = new QPixmap(":/images/icons/DisableSound.png");
+    soundItem = new QIcon(*soundPix);
+    soundButton = new QPushButton();
+    soundButton->setGeometry(QRect(sceneRect().width() * .80, sceneRect().height() * .81, sceneRect().width() * .10, sceneRect().height() * .10));
+    soundButton->setAttribute(Qt::WA_TranslucentBackground);
+    soundButton->setIcon(*soundItem);
+    soundButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 16px;"
+                               "border-style: solid;"
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}");
+    soundButtonProxy = addWidget(soundButton);
+    soundButtonProxy->setZValue(10.0);
+
+>>>>>>> 33456bb51ce40abe6541e17ff835661fd9bda157
     //Sets up menu buttons
     QPushButton *startButton = new QPushButton();
     startButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .45, sceneRect().width() * .30, sceneRect().height() * .10));
@@ -131,6 +163,12 @@ void TitleScene::onInit()
     connect(levelSelectButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
 	connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("options"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
+    connect(soundButton, &QPushButton::clicked, this, &TitleScene::enableDisableSound);
+
+    connect(startButton, &QPushButton::clicked, this, &TitleScene::endMusic);
+    connect(levelSelectButton, &QPushButton::clicked, this, &TitleScene::endMusic);
+    connect(optionsButton, &QPushButton::clicked, this, &TitleScene::endMusic);
+    connect(exitButton, &QPushButton::clicked, this, &TitleScene::endMusic);
 }
 
 // This gets run every 'tick'
@@ -181,6 +219,33 @@ void TitleScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     }
 }
 */
+
+
+//Handles the enabling and disabling of the title scene sound.
+void TitleScene::enableDisableSound() {
+
+    if(enableMusic) {
+    QPixmap *soundPix = new QPixmap(":/images/icons/DisableSound.png");
+    soundItem = new QIcon(*soundPix);
+    soundButton->setIcon(*soundItem);
+    musicPlayer->stop();
+    enableMusic = false;
+    }
+    else {
+    QPixmap *soundPix = new QPixmap(":/images/icons/EnableSound.png");
+        soundItem = new QIcon(*soundPix);
+        soundButton->setIcon(*soundItem);
+        musicPlayer->play();
+        enableMusic = true;
+    }
+}
+
+//Ends music when user exits Scene
+void TitleScene::endMusic() {
+    musicPlayer->stop();
+}
+
+
 void TitleScene::keyPressEvent(QKeyEvent *event)
 {
 
@@ -194,4 +259,5 @@ void TitleScene::keyPressEvent(QKeyEvent *event)
     {
         emit changeScene("levelmenu");
     }
+    musicPlayer->stop();
 }

@@ -10,6 +10,7 @@
 
 #include <physicsscene.h>
 #include <QVector>
+#include <QMediaPlayer>
 
 
 class TitleScene : public PhysicsScene
@@ -18,6 +19,7 @@ public:
     TitleScene();
 
 signals:
+    void musicSelected(int);
     //void endProgram();
 
 private slots:
@@ -27,11 +29,15 @@ private:
     int currentButton = Qt::NoButton;
     int tickCounter = 0;
     int lgIndex = 0;    //used for alternating which logic block is dropped
+    QIcon *soundItem;
+    QPushButton *soundButton;
+    QMediaPlayer* musicPlayer;
     QGraphicsItem *clickedItem;
     QGraphicsProxyWidget *startButtonProxy;
     QGraphicsProxyWidget *levelSelectButtonProxy;
     QGraphicsProxyWidget *optionsButtonProxy;
     QGraphicsProxyWidget *exitButtonProxy;
+    QGraphicsProxyWidget *soundButtonProxy;
     QVector<QPixmap> logicGatesPM;
 
     void onInit();
@@ -41,6 +47,8 @@ private:
     //void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     //void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
+    void enableDisableSound();
+    void endMusic();
 };
 
 #endif // TITLESCENE_H
