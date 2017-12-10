@@ -3,6 +3,7 @@
 
 SpriteLoader::SpriteLoader()
 {
+    // TODO: Remove these definitions to make more tool-like
     QPixmap *gateSheet = new QPixmap(":/images/sprites/gatesSheet.png");
     QPixmap *blackPipes = new QPixmap(":/images/sprites/pipesBlack.png");
     QPixmap *bluePipes = new QPixmap(":/images/sprites/pipesBlue.png");

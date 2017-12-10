@@ -92,6 +92,20 @@ QGraphicsPixmapItem* BasicScene::createSprite(QPointF pos, QSize scale, QString 
     return item;
 }
 
+QGraphicsPixmapItem* BasicScene::createGate(QPointF pos, QSize scale, QString gate)
+{
+    int frame = -1;
+    if (gate == "andgate") frame = 0;
+    else if(gate == "nandgate") frame = 1;
+    else if(gate == "orgate") frame = 2;
+    else if(gate == "xorgate") frame = 3;
+    else if(gate == "norgate") frame = 4;
+    else if(gate == "notgate") frame = 5;
+    else return new QGraphicsPixmapItem();
+
+    return createSprite(pos, scale, ":/images/sprites/gatesSheet.png", QSize(64, 64), frame);
+}
+
 // Sets the position of a body (and by extension, an item)
 void BasicScene::setItemPos(QGraphicsItem *item, QPointF pos)
 {
@@ -125,7 +139,7 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
 
     if (currentLevel.getLayout()[xL/gridWidth + yL/gridHeight*numCols] == UG) {
 
-        createSprite(QPointF(xL, yL), QSize(gridWidth, gridHeight),  currentSelectedGate->accessibleName());
+        createGate(QPointF(xL, yL), QSize(gridWidth, gridHeight),  currentSelectedGate->accessibleName());
         qDebug() << gateDes[currentSelectedGate->accessibleDescription().toInt()];
         qDebug() <<  yL/gridHeight << xL/gridWidth;
         qDebug() << yL/gridHeight*numCols+ xL/gridWidth;
@@ -238,44 +252,60 @@ void BasicScene::createUI()
     {
 		for (int x = 0; x < width - numCols; x += gridWidth)
         {
-            QString tag;
+            // Switch case matching the desired data to pass to our SpriteLoader tool.
+            QString sheet;
+            int frame;
             switch(grid[itemNum])
             {
             case WN:
-                tag = "wnpipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 3;
                 break;
             case EN:
-                tag = "enpipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 2;
                 break;
             case WS:
-                tag = "wspipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 1;
                 break;
             case ES:
-                tag = "espipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 0;
                 break;
             case WE:
-                tag = "wepipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 4;
                 break;
             case NS:
-                tag = "nspipe";
+                sheet = ":/images/sprites/pipesBlack.png";
+                frame = 5;
                 break;
             case S0:
-                tag = "s0";
+                sheet = ":/images/sprites/otherGates.png";
+                frame = 2;
                 break;
             case S1:
-                tag = "s1";
+                sheet = ":/images/sprites/otherGates.png";
+                frame = 0;
                 break;
             case EG:
-                tag = "ee";
+                sheet = ":/images/sprites/otherGates.png";
+                frame = 4;
                 break;
             case UG:
-                tag = "gatespot";
+                sheet = ":/images/sprites/otherGates.png";
+                frame = 5;
                 break;
             default:
-                tag = "empty";
                 break;
             }
-            createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), tag);
+
+            if (sheet != "")
+            {
+                createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), sheet, QSize(64, 64), frame);
+            }
+
             itemNum++;
 		}
 	}
@@ -367,32 +397,17 @@ void BasicScene::addGatesOnToolbar()
 
 // returns desired log gate pixmap from sheet
 QPixmap BasicScene::getGatePixmap(QString string)
-{   int row, col;
-    if (string == "andgate"){
-        row = 0; col = 0;
-    }
-    else if(string == "nandgate"){
-        row = 0; col = 1;
-    }
-    else if(string == "orgate"){
-        row = 1; col = 0;
-    }
-    else if(string == "xorgate"){
-        row = 1; col = 1;
-    }
-    else if(string == "norgate"){
-        row = 2; col = 0;
-    }
-    else if(string == "notgate"){
-        row = 2; col = 1;
-    }
-    else{
-        qDebug() << "error in gate selection for dragMISTAKE!!!!!!";
-    }
+{
+    int frame = -1;
+    if (string == "andgate") frame = 0;
+    else if(string == "nandgate") frame = 1;
+    else if(string == "orgate") frame = 2;
+    else if(string == "xorgate") frame = 3;
+    else if(string == "norgate") frame = 4;
+    else if(string == "notgate") frame = 5;
+    else qDebug() << "error in gate selection for dragMISTAKE!!!!!!";
 
-    QPixmap pm(":/images/sprites/gatesSheet.png");
-    QRect rec(64*col, 64*row, 64, 64);
-    return pm.copy(rec);
+    return sl->getSprite(":/images/sprites/gatesSheet.png", QSize(64, 64), frame);
 }
 
 // forwarding methods for dragging gates

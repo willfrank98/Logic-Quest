@@ -39,6 +39,7 @@ public:
     QGraphicsItem* createBox(QRectF rect, QColor line = QColor(0, 0, 0), QColor fill = QColor(255, 255, 255),
                    bool draggable = false);
     QGraphicsPixmapItem* createSprite(QPointF pos, QSize scale, QString sheet, QSize frameSize, int frame);
+    QGraphicsPixmapItem* createGate(QPointF pos, QSize scale, QString gate);
     void setItemPos(QGraphicsItem *item, QPointF pos);
 
 	void createUI();
