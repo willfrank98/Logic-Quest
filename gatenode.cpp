@@ -19,6 +19,7 @@ GateNode::GateNode(GateNodeType type, int value)
     inputNode2 = nullptr;
     outputNode = nullptr;
     output = -1;
+    endGateLocation = -1;
     if(gType == START)
     {
         output = value;
@@ -141,8 +142,9 @@ int GateNode::xorGate()
     else return 0;
 }
 
-bool GateNode::processGate()
+QVector<int> GateNode::processGate()
 {
+    QVector<int> endResults;
     switch(gType)
     {
        case AND:
@@ -165,15 +167,17 @@ bool GateNode::processGate()
         break;
     case END:
         output = inputNode1->getOutput();
-        return true;
+        endResults.append(endGateLocation);
+        endResults.append(output);
+        return endResults;
     default:
-        return false;
+        return endResults;
     }
     if(output > -1)
     {
-            outputNode->processGate();
+        endResults = outputNode->processGate();
     }
-    return false;
+    return endResults;
 }
 
 void GateNode::setGateType(GateNodeType type)
@@ -207,4 +211,22 @@ void GateNode::addInput(int inputNum, GateNode *node)
             return;
         }
     }
+}
+
+int GateNode::getEndGateLocation()
+{
+    return endGateLocation;
+}
+
+void GateNode::setEndGateLocation(int location)
+{
+    if(endGateLocation < 0)
+    {
+        endGateLocation = location;
+    }
+}
+
+bool GateNode::hasTwoInputs()
+{
+    return inputNode2 != nullptr;
 }

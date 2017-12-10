@@ -105,12 +105,12 @@ QGraphicsPixmapItem* BasicScene::createSprite(QPointF pos, QSize scale, QString 
 QGraphicsPixmapItem* BasicScene::createGate(QPointF pos, QSize scale, QString gate)
 {
     int frame = -1;
-    if (gate == "andgate") frame = 0;
-    else if(gate == "nandgate") frame = 1;
-    else if(gate == "orgate") frame = 2;
-    else if(gate == "xorgate") frame = 3;
-    else if(gate == "norgate") frame = 4;
-    else if(gate == "notgate") frame = 5;
+    if (gate == "and") frame = 0;
+    else if(gate == "nand") frame = 1;
+    else if(gate == "or") frame = 2;
+    else if(gate == "xor") frame = 3;
+    else if(gate == "nor") frame = 4;
+    else if(gate == "not") frame = 5;
     else return new QGraphicsPixmapItem();
 
     return createSprite(pos, scale, ":/images/sprites/gatesSheet.png", QSize(64, 64), frame);
@@ -131,8 +131,10 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
     g->setDropAction(Qt::CopyAction); // not sure about this
     qDebug() << g->scenePos();
 }
+
 // drop event for buttons
-void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
+void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
+{
     // if (checkOutPuts is true)
         //uppdate isComplete
         //update score accordingly (bonus from ticker too?)
@@ -152,14 +154,34 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
 
     if (currentLevel.getLayout()[xL/gridWidth + yL/gridHeight*numCols] == UG) {
 
+        int gateNodeLocation = currentLevel.getGateNodeIndex(yL/gridHeight*numCols + xL/gridWidth);
+        qDebug() << currentSelectedGate->accessibleDescription();
+        if(currentSelectedGate->accessibleDescription() == "3")
+        {
+            if(currentLevel.hasTwoInputs(gateNodeLocation))
+            {
+                  return;
+            }
+
+        }
         createGate(QPointF(xL, yL), QSize(gridWidth, gridHeight),  currentSelectedGate->accessibleName());
         qDebug() << gateDes[currentSelectedGate->accessibleDescription().toInt()];
         qDebug() <<  yL/gridHeight << xL/gridWidth;
         qDebug() << yL/gridHeight*numCols+ xL/gridWidth;
         qDebug() << numCols;
-     //  this
+
+
         SoundEffectSelect(1);
-        currentLevel.setGateType(currentLevel.getGateNodeIndex(yL/gridHeight*numCols + xL/gridWidth), gateDes[currentSelectedGate->accessibleDescription().toInt()]);
+        QVector<int> endGateUpdate;
+        endGateUpdate = currentLevel.setGateType(gateNodeLocation,
+                                                 gateDes[currentSelectedGate->accessibleDescription().toInt()]);
+
+        //If the endGate is updated and returns a vector of the location and new value
+        //Update the endGate Sprite
+        if(endGateUpdate.size() > 0)
+        {
+            updateEndGateSprite(endGateUpdate[0], endGateUpdate[1], gridWidth, gridHeight);
+        }
     }
     else {
         //Sound for when the drag didnt work.
@@ -418,6 +440,24 @@ void BasicScene::addGatesOnToolbar()
     font.setPointSize(24);
     QGraphicsTextItem *easy = addText(goalSequence, font);
     easy->setPos(sceneRect().width()*0.8, sceneRect().height()*0.88);
+}
+
+void BasicScene::updateEndGateSprite(int location, int value, int gridWidth, int gridHeight)
+{
+    int y = (location/numCols)*gridHeight;
+    int x = (location - ((y/gridHeight)*numCols))*gridWidth;
+    qDebug() << y << x;
+    int frame;
+    if(value == 0)
+    {
+        frame = 3;
+    }
+    else
+    {
+        frame = 1;
+    }
+
+    createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), ":/images/sprites/otherGates.png", QSize(64, 64), frame);
 }
 
 // returns desired log gate pixmap from sheet
