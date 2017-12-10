@@ -124,10 +124,10 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
         createSprite(QPointF(xL, yL), QSize(gridWidth, gridHeight),  currentSelectedGate->accessibleName());
         qDebug() << gateDes[currentSelectedGate->accessibleDescription().toInt()];
         qDebug() <<  yL/gridHeight << xL/gridWidth;
-        qDebug() << yL/gridWidth + xL/gridHeight*numCols;
+        qDebug() << yL/gridHeight*numCols+ xL/gridWidth;
         qDebug() << numCols;
      //  this
-       // currentLevel.setGateType(yL/gridWidth*numCols + xL/gridHeight, gateDes[currentSelectedGate->accessibleDescription().toInt()]);
+        currentLevel.setGateType(currentLevel.getGateNodeIndex(yL/gridHeight*numCols + xL/gridWidth), gateDes[currentSelectedGate->accessibleDescription().toInt()]);
     }
     //TODO update back end..add gate to vecctor of in use gates?
 }
