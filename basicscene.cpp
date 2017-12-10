@@ -193,7 +193,11 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
         if (currentLevel.completedPerfectLevel())
             mBox.setInformativeText("Perfect level bonus!\n");
         mBox.exec();
-        emit changeScene(currentLevel.nextLevel());
+
+        // Change the scene on next tick.
+        connect(&timer, &QTimer::timeout, this, [=](){
+            emit changeScene(currentLevel.nextLevel());
+        });
 	}
 
     //TODO update back end..add gate to vecctor of in use gates?
