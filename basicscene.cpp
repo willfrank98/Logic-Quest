@@ -11,6 +11,8 @@
 #include <iostream>
 #include <QButtonGroup>
 
+bool enableMusic = true;
+
 // Initializes the world and such
 BasicScene::BasicScene(QObject *parent, int cols, int rows, int *inputs, QVector<int> goals, QVector<GatePipeTags> grid) : QGraphicsScene(parent)
 {

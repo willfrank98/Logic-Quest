@@ -23,6 +23,9 @@
 #include <QGraphicsProxyWidget>
 #include <QApplication>
 #include <QGraphicsSceneDragDropEvent>
+#include <QtGlobal>
+
+extern bool enableMusic;
 
 class BasicScene : public QGraphicsScene
 {

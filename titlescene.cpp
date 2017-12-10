@@ -44,6 +44,7 @@ void TitleScene::onInit()
     musicPlayer = new QMediaPlayer;
     musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_02_-_Royal_Entrance.mp3"));
     musicPlayer->setVolume(50);
+    if(enableMusic)
     musicPlayer->play();
 
     // Creates a vector that contains a pixmap of each logic gate.
@@ -66,6 +67,8 @@ void TitleScene::onInit()
 //    prompt->setData(Direction, 1.0);
 
     QPixmap *soundPix = new QPixmap(":/images/icons/EnableSound.png");
+    if(!enableMusic)
+    soundPix = new QPixmap(":/images/icons/DisableSound.png");
     soundItem = new QIcon(*soundPix);
     soundButton = new QPushButton();
     soundButton->setGeometry(QRect(sceneRect().width() * .80, sceneRect().height() * .81, sceneRect().width() * .10, sceneRect().height() * .10));
@@ -215,19 +218,19 @@ void TitleScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 //Handles the enabling and disabling of the title scene sound.
 void TitleScene::enableDisableSound() {
 
-    if(!soundDisabled) {
+    if(enableMusic) {
     QPixmap *soundPix = new QPixmap(":/images/icons/DisableSound.png");
     soundItem = new QIcon(*soundPix);
     soundButton->setIcon(*soundItem);
     musicPlayer->stop();
-    soundDisabled = true;
+    enableMusic = false;
     }
     else {
     QPixmap *soundPix = new QPixmap(":/images/icons/EnableSound.png");
         soundItem = new QIcon(*soundPix);
         soundButton->setIcon(*soundItem);
         musicPlayer->play();
-        soundDisabled = false;
+        enableMusic = true;
     }
 }
 
