@@ -445,7 +445,7 @@ void BasicScene::addGatesOnToolbar()
 void BasicScene::updateEndGateSprite(int location, int value, int gridWidth, int gridHeight)
 {
     int y = (location/numCols)*gridHeight;
-    int x = (location - ((y/gridHeight)*numCols))*gridHeight;
+    int x = (location - ((y/gridHeight)*numCols))*gridWidth;
     qDebug() << y << x;
     int frame;
     if(value == 0)
