@@ -25,6 +25,7 @@
 #include <QGraphicsSceneDragDropEvent>
 #include <QActionGroup>
 #include <QtGlobal>
+#include <QMediaPlayer>
 
 extern bool enableMusic;
 
@@ -45,10 +46,12 @@ public:
 
 	void createUI();
     void addGatesOnToolbar();
+    int getScore();
 //    void gateClicked(int row, int col);
 private:
     QTimer timer;
     QElapsedTimer deltaKeeper;
+    QMediaPlayer *soundEffect, *musicPlayer;
     SpriteLoader *sl = new SpriteLoader();
     QGraphicsProxyWidget* backToHomeProxy;
     QGraphicsProxyWidget* selectMenuProxy;
@@ -61,6 +64,10 @@ private:
     virtual void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
     virtual void dropEvent(QGraphicsSceneDragDropEvent *event);
 
+    void SoundEffectSelect(int);
+    void endMusic();
+
+    int score;
     int numCols;
     int numRows;
     int *inputs;

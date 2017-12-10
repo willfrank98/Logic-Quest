@@ -4,6 +4,8 @@
         <file alias="BackArrow.png">res/icons/BackArrow.png</file>
         <file alias="DisableSound.png">res/icons/DisableSound.png</file>
         <file alias="EnableSound.png">res/icons/EnableSound.png</file>
+        <file alias="Home.png">res/icons/Home.png</file>
+        <file alias="logoWithoutGates.png">res/logos/logoWithoutGates.png</file>
     </qresource>
     <qresource prefix="/images/sprites">
         <file alias="gatesSheet.png">res/sprites/logic_gates_64x64.png</file>
@@ -18,6 +20,9 @@
     <qresource prefix="/sounds">
         <file alias="Visager_-_02_-_Royal_Entrance.mp3">res/sounds/Visager_-_02_-_Royal_Entrance.mp3</file>
         <file alias="Visager_-_04_-_Factory_Time.mp3">res/sounds/Visager_-_04_-_Factory_Time.mp3</file>
+        <file alias="ErrorAlert.mp3">res/sounds/ErrorAlert.mp3</file>
+        <file alias="MetalClick.mp3">res/sounds/MetalClick.mp3</file>
+        <file alias="Visager_-_05_-_Battle.mp3">res/sounds/Visager_-_05_-_Battle.mp3</file>
     </qresource>
     <qresource prefix="/levels">
         <file alias="tutorial.txt">levels/tutorial.txt</file>
@@ -28,5 +33,4 @@
         <file>levels/tutorial5.txt</file>
         <file>levels/tutorial6.txt</file>
     </qresource>
-    <qresource prefix="/images/logos"/>
 </RCC>

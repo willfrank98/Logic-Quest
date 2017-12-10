@@ -25,6 +25,7 @@ BasicScene::BasicScene(QObject *parent, int cols, int rows, int *inputs, QVector
         deltaKeeper.restart();
     });
 
+    this->score = 0;
     this->numCols = cols;
     this->numRows = rows;
     this->inputs = inputs;
@@ -37,8 +38,15 @@ BasicScene::BasicScene(Level level)
     timer.setInterval(8);
     connect(&timer, &QTimer::timeout, this, [=](){
         onUpdate(deltaKeeper.elapsed() / 1000.0);
+        // update bonus
         deltaKeeper.restart();
     });
+
+    soundEffect = new QMediaPlayer;
+    musicPlayer = new QMediaPlayer;
+    musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_05_-_Battle.mp3"));
+    musicPlayer->setVolume(50);
+    if(enableMusic) musicPlayer->play();
 
     currentLevel = level;
     this->numCols = level.getNumColumns();
@@ -127,8 +135,9 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
 // drop event for buttons
 void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
-    qDebug()<< currentLevel.getGoals().size() << ",,:pppp";
-    qDebug()<< currentLevel.getEndGates().size() <<"<gg";
+    // if (checkOutPuts is true)
+        //uppdate isComplete
+        //update score accordingly (bonus from ticker too?)
     currentSelectedGate->setEnabled(true);
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
     qreal width = sceneRect().width();
@@ -160,8 +169,9 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
         qDebug() <<  yL/gridHeight << xL/gridWidth;
         qDebug() << yL/gridHeight*numCols+ xL/gridWidth;
         qDebug() << numCols;
-     //  this
 
+
+        SoundEffectSelect(1);
         QVector<int> endGateUpdate;
         endGateUpdate = currentLevel.setGateType(gateNodeLocation,
                                                  gateDes[currentSelectedGate->accessibleDescription().toInt()]);
@@ -173,15 +183,13 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
             updateEndGateSprite(endGateUpdate[0], endGateUpdate[1], gridWidth, gridHeight);
         }
     }
+    else {
+        //Sound for when the drag didnt work.
+        SoundEffectSelect(2);
+    }
+
     //TODO update back end..add gate to vecctor of in use gates?
 }
-
-
-//GateNodeType getGateNodeType(QString name) {
-//	return nullptr;
-//}
-
-
 
 // Intercept events from the GraphicsView and do things with them.
 bool BasicScene::eventFilter(QObject *watched, QEvent *event)
@@ -247,7 +255,7 @@ void BasicScene::createUI()
 //    createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
     createBox(QRectF(0, height-trayHeight, width, trayHeight), QColor(166, 170, 178), QColor(166, 170, 178), false);
 
-    QPixmap *backPix = new QPixmap(":/images/icons/BackArrow.png");
+    QPixmap *backPix = new QPixmap(":/images/icons/Home.png");
     QIcon *backIcon = new QIcon(*backPix);
     QPushButton* backButton = new QPushButton();
     backButton->setGeometry(QRect(10, sceneRect().height()*0.87, 60, 40));
@@ -267,10 +275,12 @@ void BasicScene::createUI()
     backToHomeProxy = addWidget(backButton);
     backToHomeProxy->setZValue(10.0);
 
-    QPushButton* selectMenuButton = new QPushButton();
+    QPixmap *levelPix = new QPixmap(":/images/icons/BackArrow.png");
+    QIcon *levelIcon = new QIcon(*levelPix);
+    QPushButton* selectMenuButton = new QPushButton(); 
     selectMenuButton->setGeometry(QRect(10, sceneRect().height()*0.93, 60, 40));
+    selectMenuButton->setIcon(*levelIcon);
     selectMenuButton->setAttribute(Qt::WA_TranslucentBackground);
-    selectMenuButton->setText("Level Menu");
     selectMenuButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
                                "color: white;"
@@ -288,6 +298,11 @@ void BasicScene::createUI()
     /* Add Connection to get Back to home screen */
     connect(backButton, &QPushButton::clicked, this, [=](){emit(changeScene("title"));}, Qt::QueuedConnection);
     connect(selectMenuButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
+
+    /*End music*/
+    connect(backButton, &QPushButton::clicked, this, &BasicScene::endMusic);
+    connect(selectMenuButton, &QPushButton::clicked, this, &BasicScene::endMusic);
+
 
 	int gridWidth = width / numCols;
     int gridHeight = (height - trayHeight) / numRows;
@@ -367,6 +382,7 @@ void BasicScene::addGatesOnToolbar()
     int index = 0;
     QPushButton *logicGates[6];
     QButtonGroup *btnGroup = new QButtonGroup();
+    QList<QString> gateNames = sl->getGateNames();
 
     for (QPixmap gate : sl->getGates())
     {
@@ -379,7 +395,8 @@ void BasicScene::addGatesOnToolbar()
         logicGates[index]->setCheckable(true);
         logicGates[index]->setAccessibleName(gateNames[index]);
         logicGates[index]->setAccessibleDescription(QString::number(index));
-        qDebug() << logicGates[index]->accessibleName() << logicGates[index]->accessibleDescription();
+        logicGates[index]->setToolTip(gateNames[index]);
+        qDebug() << logicGates[index]->accessibleName();
         btnGroup->addButton(logicGates[index]);
         addWidget(logicGates[index]);
 
@@ -456,4 +473,31 @@ QPixmap BasicScene::getGatePixmap(QString string)
     else qDebug() << "error in gate selection for dragMISTAKE!!!!!!";
 
     return sl->getSprite(":/images/sprites/gatesSheet.png", QSize(64, 64), frame);
+}
+
+void BasicScene::SoundEffectSelect(int sound) {
+
+    if(enableMusic) {
+        switch(sound) {
+        case 1:
+            soundEffect->setMedia(QUrl("qrc:/sounds/MetalClick.mp3"));
+            soundEffect->setVolume(90);
+            soundEffect->play();
+            break;
+        case 2:
+            soundEffect->setMedia(QUrl("qrc:/sounds/ErrorAlert.mp3"));
+            soundEffect->setVolume(90);
+            soundEffect->play();
+            break;
+        }
+    }
+}
+
+//Ends music when user exits Scene
+void BasicScene::endMusic() {
+    musicPlayer->stop();
+}
+
+int BasicScene::getScore() {
+    return score;
 }

@@ -8,6 +8,7 @@
 #include "level.h"
 #include <QFile>
 #include <QDebug>
+#include <regex>
 
 Level::Level()
 {
@@ -19,6 +20,19 @@ Level::Level()
 Level::Level(QString filename)
 {
     QFile file(filename);
+
+    std::regex easy("^easy");
+    std::regex medium("^medium");
+
+    if (std::regex_match(filename.toStdString(), easy)) {
+        difficulty = 1;
+    }
+    else if (std::regex_match(filename.toStdString(), medium)) {
+        difficulty = 2;
+    }
+    else {
+        difficulty = 3;
+    }
 
     if(file.open(QIODevice::ReadOnly))
     {
