@@ -38,6 +38,12 @@ BasicScene::BasicScene(Level level)
         deltaKeeper.restart();
     });
 
+    soundEffect = new QMediaPlayer;
+    musicPlayer = new QMediaPlayer;
+    musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_05_-_Battle.mp3"));
+    musicPlayer->setVolume(50);
+    if(enableMusic) musicPlayer->play();
+
     currentLevel = level;
     this->numCols = level.getNumColumns();
     this->numRows = level.getNumRows();
@@ -128,8 +134,14 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event){
         qDebug() << yL/gridHeight*numCols+ xL/gridWidth;
         qDebug() << numCols;
      //  this
+        SoundEffectSelect(1);
         currentLevel.setGateType(currentLevel.getGateNodeIndex(yL/gridHeight*numCols + xL/gridWidth), gateDes[currentSelectedGate->accessibleDescription().toInt()]);
     }
+    else {
+        //Sound for when the drag didnt work.
+        SoundEffectSelect(2);
+    }
+
     //TODO update back end..add gate to vecctor of in use gates?
 }
 
@@ -392,6 +404,24 @@ QPixmap BasicScene::getGatePixmap(QString string)
     QPixmap pm(":/images/sprites/gatesSheet.png");
     QRect rec(64*col, 64*row, 64, 64);
     return pm.copy(rec);
+}
+
+void BasicScene::SoundEffectSelect(int sound) {
+
+    if(enableMusic) {
+        switch(sound) {
+        case 1:
+            soundEffect->setMedia(QUrl("qrc:/sounds/MetalClick.mp3"));
+            soundEffect->setVolume(90);
+            soundEffect->play();
+            break;
+        case 2:
+            soundEffect->setMedia(QUrl("qrc:/sounds/ErrorAlert.mp3"));
+            soundEffect->setVolume(90);
+            soundEffect->play();
+            break;
+        }
+    }
 }
 
 // forwarding methods for dragging gates

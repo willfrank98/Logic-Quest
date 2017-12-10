@@ -18,6 +18,10 @@
     <qresource prefix="/sounds">
         <file alias="Visager_-_02_-_Royal_Entrance.mp3">res/sounds/Visager_-_02_-_Royal_Entrance.mp3</file>
         <file>Visager_-_04_-_Factory_Time.mp3</file>
+        <file>ClunkSound.mp3</file>
+        <file>Visager_-_05_-_Battle.mp3</file>
+        <file>MetalClick.mp3</file>
+        <file>ErrorAlert.mp3</file>
     </qresource>
     <qresource prefix="/levels">
         <file alias="tutorial.txt">levels/tutorial.txt</file>

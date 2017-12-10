@@ -24,6 +24,7 @@
 #include <QApplication>
 #include <QGraphicsSceneDragDropEvent>
 #include <QtGlobal>
+#include <QMediaPlayer>
 
 extern bool enableMusic;
 
@@ -47,6 +48,7 @@ public:
 private:
     QTimer timer;
     QElapsedTimer deltaKeeper;
+    QMediaPlayer *soundEffect, *musicPlayer;
     SpriteLoader *sl = new SpriteLoader();
 
     virtual void onInit();
@@ -61,6 +63,8 @@ private:
 
     virtual void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
     virtual void dropEvent(QGraphicsSceneDragDropEvent *event);
+
+    void SoundEffectSelect(int);
 
     int numCols;
     int numRows;
