@@ -41,7 +41,6 @@ void TitleScene::onInit()
     QPixmap *logoPix = new QPixmap(":/images/icons/mainLogo.png");
     QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
 
-//    //Commented out for now
     musicPlayer = new QMediaPlayer;
     musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_02_-_Royal_Entrance.mp3"));
     musicPlayer->setVolume(50);
@@ -83,6 +82,7 @@ void TitleScene::onInit()
                               "background-color: rgb(31, 65, 81);"
                               "}");
     soundButtonProxy = addWidget(soundButton);
+    soundButtonProxy->setZValue(10.0);
 
     //Sets up menu buttons
     QPushButton *startButton = new QPushButton();
