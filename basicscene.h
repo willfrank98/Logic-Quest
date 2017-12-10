@@ -48,6 +48,7 @@ private:
     QTimer timer;
     QElapsedTimer deltaKeeper;
     SpriteLoader *sl = new SpriteLoader();
+    QGraphicsProxyWidget* backToHomeProxy;
 
     virtual void onInit();
     virtual void onUpdate(qreal delta);
