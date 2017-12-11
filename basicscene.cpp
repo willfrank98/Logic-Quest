@@ -418,7 +418,6 @@ void BasicScene::addGatesOnToolbar()
         connect(currentButton, &QPushButton::pressed, this, [=](){
             currentButton->setChecked(true);
             // need to set name property of QPush button logic gates
-            //currentButton->setAccessibleName("nandgate");    // TODO needs to be done correcctly..at time of setting buttons on bottom of sreen
             currentSelectedGate = currentButton;
             currentSelectedGate->setChecked(true);
             currentSelectedGate->setEnabled(false);
@@ -428,11 +427,11 @@ void BasicScene::addGatesOnToolbar()
             // drag for log gate onto game space
             QDrag *drag = new QDrag(this);
             QMimeData *mimeData = new QMimeData;
-            QPixmap pmc = getGatePixmap(currentButton->accessibleName()); //change row and col THIS IS WHERE DRAG GATE is made
+            QPixmap pmc = getGatePixmap(currentButton->accessibleName());
             drag->setMimeData(mimeData);
             drag->setPixmap(pmc);
             QApplication::setOverrideCursor(Qt::ClosedHandCursor);
-			/*Qt::DropAction da = */drag->exec(Qt::MoveAction);//???
+            drag->exec(Qt::MoveAction);
             QApplication::restoreOverrideCursor();
         });
         index++;
@@ -508,7 +507,7 @@ void BasicScene::SoundEffectSelect(int sound) {
 void BasicScene::endMusic() {
     musicPlayer->stop();
 }
-
+// get the current level score
 int BasicScene::getScore() {
     return score;
 }
