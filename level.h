@@ -44,9 +44,12 @@ public:
     int getNumColumns();
     int getNumRows();
     int getGateNodeIndex(int layoutIndex);
-    int getScore();
+    int getLevelScore();
+    void setLevelScore(int score);
+    int getDifficulty();
     bool hasTwoInputs(int index);
     bool completedPerfectLevel();
+    void setPerfectLevel(bool perfLevelVal);
 	QString nextLevel();
 };
 

@@ -26,12 +26,13 @@ BasicScene::BasicScene(QObject *parent, int cols, int rows, int *inputs, QVector
         deltaKeeper.restart();
     });
 
-    this->score = 0;
+    gameScore = 0;
     this->numCols = cols;
     this->numRows = rows;
     this->inputs = inputs;
     this->goals = goals;
     this->grid = grid;
+    this->scoreBoard = new QLCDNumber(3);
 }
 
 BasicScene::BasicScene(Level level)
@@ -42,7 +43,6 @@ BasicScene::BasicScene(Level level)
         // update bonus
         deltaKeeper.restart();
     });
-
     soundEffect = new QMediaPlayer;
     musicPlayer = new QMediaPlayer;
     musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_05_-_Battle.mp3"));
@@ -54,6 +54,8 @@ BasicScene::BasicScene(Level level)
     this->numRows = level.getNumRows();
     this->goals = level.getGoals();
     this->grid = level.getLayout();
+    gameScore = 0;
+    this->scoreBoard = new QLCDNumber(3);
 }
 
 BasicScene::~BasicScene()
@@ -83,8 +85,8 @@ QGraphicsItem* BasicScene::createBox(QRectF rect, QColor line, QColor fill, bool
     item->setPos(rect.x(), rect.y());
 
     // TODO: Make sure setting all of these is still necessary
-//    item->setData(Bounds, rect);
-//    item->setData(Draggable, draggable);
+    //    item->setData(Bounds, rect);
+    //    item->setData(Draggable, draggable);
 
     return item;
 }
@@ -101,7 +103,7 @@ QGraphicsPixmapItem* BasicScene::createSprite(QPointF pos, QSize scale, QString 
     return item;
 }
 
-// creates a logic gate pixmap based on user selected gate
+// creates a logic gate pixmap
 QGraphicsPixmapItem* BasicScene::createGate(QPointF pos, QSize scale, QString gate)
 {
     int frame = -1;
@@ -125,11 +127,12 @@ void BasicScene::setItemPos(QGraphicsItem *item, QPointF pos)
     }
 }
 // drag for palcing buttons
-void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
+void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
+{
     // maybe highlight something or set somehting active if over certain space, etc
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
     g->setDropAction(Qt::CopyAction); // not sure about this
-    qDebug() << g->scenePos();
+    //qDebug() << g->scenePos();
 }
 
 // drop event for buttons
@@ -188,8 +191,11 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 	//LEVEL COMPLETE
     if (currentLevel.checkOutputs())
     {
+        gameScore = (currentLevel.getLevelScore());
+        scoreBoard->display(gameScore);
+        //qDebug() << getScore();
         QMessageBox mBox;
-        mBox.setText("Level Complete with a score of: " + QString::number(currentLevel.getScore()) + "\n");
+        mBox.setText("Level Complete with a score of: " + QString::number(currentLevel.getLevelScore()) + "\n");
         if (currentLevel.completedPerfectLevel())
             mBox.setInformativeText("Perfect level bonus!\n");
         mBox.exec();
@@ -258,6 +264,7 @@ void BasicScene::createUI()
 	qreal width = sceneRect().width();
 	qreal height = sceneRect().height();
 	int trayHeight = 100;
+    currentLevel.setLevelScore(0);
 //    createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
     createBox(QRectF(0, height-trayHeight, width, trayHeight), QColor(166, 170, 178), QColor(166, 170, 178), false);
 
@@ -375,6 +382,11 @@ void BasicScene::createUI()
             itemNum++;
 		}
     }
+    scoreBoard->setSegmentStyle(QLCDNumber::Filled);
+    scoreBoard->setGeometry(width-245,height-40,65,35);
+    scoreBoard->display(QString::number(gameScore));
+    qDebug() << "just showed game score";
+    addWidget(scoreBoard);
 }
 
 //  create push button for each logic gate and place in tool bar
@@ -400,7 +412,7 @@ void BasicScene::addGatesOnToolbar()
         logicGates[index]->setAccessibleName(gateNames[index]);
         logicGates[index]->setAccessibleDescription(QString::number(index));
         logicGates[index]->setToolTip(gateNames[index]);
-        qDebug() << logicGates[index]->accessibleName();
+        //qDebug() << logicGates[index]->accessibleName();
         logicGates[index]->setToolTip(gateNames[index].toUpper() + " Gate");
         btnGroup->addButton(logicGates[index]);
         addWidget(logicGates[index]);
@@ -413,7 +425,7 @@ void BasicScene::addGatesOnToolbar()
             currentSelectedGate = currentButton;
             currentSelectedGate->setChecked(true);
             currentSelectedGate->setEnabled(false);
-            qDebug()<< "currentButton->accessibleName() = "+ currentButton->accessibleName();
+            //qDebug()<< "currentButton->accessibleName() = "+ currentButton->accessibleName();
             currentSelectedGate->setAccessibleName(currentButton->accessibleName());
             currentSelectedGate->setAccessibleDescription(currentButton->accessibleDescription());
             // drag for log gate onto game space
@@ -428,7 +440,6 @@ void BasicScene::addGatesOnToolbar()
         });
         index++;
     }
-
     QString goalSequence = "Goal: ";
     int size = currentLevel.getGoals().size();
     QVector<int> allGoals = currentLevel.getGoals();
@@ -472,7 +483,6 @@ QPixmap BasicScene::getGatePixmap(QString string)
     else if(string == "xor") frame = 3;
     else if(string == "nor") frame = 4;
     else if(string == "not") frame = 5;
-    else qDebug() << "error in gate selection for dragMISTAKE!!!!!!";
 
     return sl->getSprite(":/images/sprites/gatesSheet.png", QSize(64, 64), frame);
 }
@@ -499,7 +509,18 @@ void BasicScene::SoundEffectSelect(int sound) {
 void BasicScene::endMusic() {
     musicPlayer->stop();
 }
-// get the current level score
-int BasicScene::getScore() {
-    return score;
-}
+//// get the game score
+//int BasicScene::getScore() {
+//    return this->gameScore;
+//}
+//// set the game score
+//void BasicScene::setScore(int levelPoints)
+//{   qDebug() << levelPoints;
+//    qDebug() << getScore();
+//    this->gameScore += levelPoints;
+//    qDebug() << getScore();
+//    qDebug() << "just showed game score meth";
+//    qDebug() << "gScoremth is " << getScore();
+//    qDebug() << "just showed game score";
+//    //scoreBoard->display(double(getScore()));
+//}
