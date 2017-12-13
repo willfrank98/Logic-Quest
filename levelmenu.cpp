@@ -6,9 +6,7 @@
  */
 
 #include "levelmenu.h"
-#include <QGraphicsItem>
-#include <QGraphicsProxyWidget>
-#include <QPushButton>
+
 
 LevelMenu::LevelMenu()
 {

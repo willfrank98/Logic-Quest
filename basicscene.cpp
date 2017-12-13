@@ -6,14 +6,7 @@
  */
 
 #include "basicscene.h"
-#include <QDrag>
-#include <QMimeData>
-#include <iostream>
-#include <QButtonGroup>
-#include <string>
-#include <QString>
-#include <QGraphicsItem>
-#include <QMessageBox>
+
 
 bool enableMusic = true;
 

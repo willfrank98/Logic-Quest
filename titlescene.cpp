@@ -6,13 +6,7 @@
  */
 
 #include "titlescene.h"
-#include <QDebug>
-#include <QGraphicsRectItem>
-#include <QGraphicsView>
-#include <QPushButton>
-#include <QPainter>
-#include <QGraphicsProxyWidget>
-#include <QLabel>
+
 
 // Simple example of a title scene
 TitleScene::TitleScene()
@@ -157,7 +151,7 @@ void TitleScene::onInit()
     exitButtonProxy->setZValue(10.0);
 
     //Connects menu buttons
-	connect(startButton, &QPushButton::clicked, this, [=](){emit(changeScene(":/levels/tutorial.txt"));}, Qt::QueuedConnection);
+    connect(startButton, &QPushButton::clicked, this, [=](){tutorialMessage(); emit(changeScene(":/levels/tutorial.txt"));}, Qt::QueuedConnection);
     connect(levelSelectButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
     connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("options"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
@@ -167,6 +161,8 @@ void TitleScene::onInit()
     connect(levelSelectButton, &QPushButton::clicked, this, &TitleScene::endMusic);
     connect(optionsButton, &QPushButton::clicked, this, &TitleScene::endMusic);
     connect(exitButton, &QPushButton::clicked, this, &TitleScene::endMusic);
+
+    //connect(startButton, &QPushButton::clicked, this, &TitleScene::tutorialMessage, Qt::QueuedConnection);
 }
 
 // This gets run every 'tick'
@@ -239,8 +235,19 @@ void TitleScene::enableDisableSound() {
 }
 
 //Ends music when user exits Scene
-void TitleScene::endMusic() {
+void TitleScene::endMusic()
+{
     musicPlayer->stop();
+}
+
+void TitleScene::tutorialMessage()
+{
+    QMessageBox mbox;
+    mbox.setText("The next few levels are tutorial levels to get you aquainted with the different logic gates in the game.  "
+                 "Each tutorial level focuses on one gate at a time to help you get a feel for the effects of each gate type.  "
+                 "After the tutorial levels you are on your own to solve each puzzle.  "
+                 "Good luck and have fun!");
+    mbox.exec();
 }
 
 void TitleScene::keyPressEvent(QKeyEvent *event)
@@ -249,12 +256,13 @@ void TitleScene::keyPressEvent(QKeyEvent *event)
 //    if (event->key() == Qt::Key_Space)
 //    {
 //        // Switch to the tutorial
+//        musicPlayer->stop();
 //        emit changeScene("tutorial");
 //    }
 
     if (event->key() == Qt::Key_Return)
     {
+        musicPlayer->stop();
         emit changeScene("levelmenu");
     }
-    musicPlayer->stop();
 }

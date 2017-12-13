@@ -6,9 +6,7 @@
  */
 
 #include "level.h"
-#include <QFile>
-#include <QDebug>
-#include <regex>
+
 
 Level::Level()
 {

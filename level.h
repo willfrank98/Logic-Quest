@@ -10,6 +10,9 @@
 
 #include <QVector>
 #include <gatenode.h>
+#include <QFile>
+#include <QDebug>
+#include <regex>
 
 class Level
 {

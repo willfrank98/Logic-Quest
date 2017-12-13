@@ -26,6 +26,13 @@
 #include <QActionGroup>
 #include <QtGlobal>
 #include <QMediaPlayer>
+#include <QDrag>
+#include <QMimeData>
+#include <iostream>
+#include <QButtonGroup>
+#include <string>
+#include <QString>
+#include <QMessageBox>
 
 extern bool enableMusic;
 
