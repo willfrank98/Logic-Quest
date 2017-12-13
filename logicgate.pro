@@ -67,7 +67,7 @@ win32:contains(QT_ARCH, x86_64) {
     CONFIG(release, debug|release): LIBS += -L$$PWD/thirdparty/Box2D/win64/release -lBox2D
     INCLUDEPATH += $$PWD/thirdparty/Box2D/include
     DEPENDPATH += $$PWD/thirdparty/Box2D/include
-
+    CONFIG += resources_big
     # SFML (DLLs are also in the lib directory)
     CONFIG(debug, debug|release): LIBS += -L$$PWD/thirdparty/SFML/win64/lib  -lsfml-system-d -lsfml-window-d -lsfml-graphics-d -lsfml-audio-d
     CONFIG(release, debug|release): LIBS += -L$$PWD/thirdparty/SFML/win64/lib  -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio

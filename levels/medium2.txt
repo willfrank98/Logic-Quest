@@ -5,3 +5,4 @@ NL NL NL NL UG WE EG
 S1 WE WS NL NS NL NL
 S1 WE AND UG WN NL NL
 0
+N :/levels/medium3.txt

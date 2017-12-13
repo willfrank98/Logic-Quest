@@ -6,34 +6,35 @@
  */
 
 #include "level.h"
-#include <QFile>
-#include <QDebug>
-#include <regex>
+
 
 Level::Level()
 {
     isComplete = false;
     numCols = 0;
     numRows = 0;
+    levelScore = 0;
+    perfLevel = true;
 }
 
 Level::Level(QString filename)
 {
     QFile file(filename);
 
-    std::regex easy("^easy");
-    std::regex medium("^medium");
-
-    if (std::regex_match(filename.toStdString(), easy)) {
+    if (std::regex_match(filename.toStdString(),  std::regex(":/levels/easy(.*)"))){
+        qDebug() << "[INFO] EASY____!!!";
         difficulty = 1;
     }
-    else if (std::regex_match(filename.toStdString(), medium)) {
+    else if (std::regex_match(filename.toStdString(), std::regex(":/levels/medium(.*)"))){
+        qDebug() << "[INFO] MEDIUM____!!!";
         difficulty = 2;
     }
     else {
+        qDebug() << "[INFO] HARD____!!!";
         difficulty = 3;
     }
 
+    levelScore = 0;
     if(file.open(QIODevice::ReadOnly))
     {
 
@@ -118,6 +119,12 @@ Level::Level(QString filename)
                 endGates[egIndex]->setEndGateLocation(endGateLocations[egIndex]);
             }
 
+			//gets the next level's address
+			if (list[0] == "N")
+			{
+				nextLevelAddress = list[1];
+			}
+
         }
     }
     file.close();
@@ -130,16 +137,27 @@ bool Level::checkOutputs()
         if(goals[i] != endGates[i]->getOutput())
         {
             isComplete = false;
+            perfLevel = false;
+            levelScore = abs(--levelScore);
             return isComplete;
         }
     }
+    levelScore++;
     isComplete = true;
     return isComplete;
 }
 
 QVector<int> Level::setGateType(int gateIndex, GateNodeType type)
 {
-    gates[gateIndex]->setGateType(type);
+    // it seems this is the crash is related to this line(first drag & drop on medium levels 4 or 5)
+    // but this try does not seem to catch it? other possible location is 176 in basicscene.cpp
+    try {
+        gates[gateIndex]->setGateType(type);
+    }
+    catch (const std::exception& e){
+        qDebug() << "[INFO] " << e.what();
+    }
+
     QVector<int> results = gates[gateIndex]->processGate();
     if(results.size() > 0)
     {
@@ -304,8 +322,19 @@ int Level::getGateNodeIndex(int layoutIndex)
 {
     return gateNodeIndex[layoutIndex];
 }
-
 bool Level::hasTwoInputs(int index)
 {
     return gates[index]->hasTwoInputs();
+}
+bool Level::completedPerfectLevel()
+{
+    return perfLevel;
+}
+int Level::getScore()
+{
+    return levelScore;
+}
+QString Level::nextLevel()
+{
+	return this->nextLevelAddress;
 }

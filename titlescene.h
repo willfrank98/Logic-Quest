@@ -11,6 +11,13 @@
 #include <physicsscene.h>
 #include <QVector>
 #include <QMediaPlayer>
+#include <QDebug>
+#include <QGraphicsRectItem>
+#include <QGraphicsView>
+#include <QWidget>
+#include <QPainter>
+#include <QGraphicsProxyWidget>
+#include <QMessageBox>
 
 
 class TitleScene : public PhysicsScene
@@ -23,7 +30,7 @@ signals:
     //void endProgram();
 
 private slots:
-    //void tutorial();
+    void tutorialMessage();
 
 private:
     int currentButton = Qt::NoButton;

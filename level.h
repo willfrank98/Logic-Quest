@@ -10,6 +10,9 @@
 
 #include <QVector>
 #include <gatenode.h>
+#include <QFile>
+#include <QDebug>
+#include <regex>
 
 class Level
 {
@@ -25,16 +28,18 @@ private:
     int numRows;
     int difficulty;
     bool isComplete;
+    bool perfLevel;
+    int levelScore;
     void addGateWithStartGateInput(int gIndex, int sgIndex, int sgValue);
     void addGateWithGateInput(int gIndex, int igIndex);
     void addEndGateWithGateInput(int egIndex, int gIndex);
     GatePipeTags getLayOutEnum(QString str);
-
+	QString nextLevelAddress;
 
 public:
     Level();
     Level(QString filename);
-    bool checkOutputs();
+	bool checkOutputs();
     QVector<int> setGateType(int gateIndex, GateNodeType type);
     QVector<int> getGoals();
     QVector<GatePipeTags> getLayout();
@@ -42,7 +47,10 @@ public:
     int getNumColumns();
     int getNumRows();
     int getGateNodeIndex(int layoutIndex);
+    int getScore();
     bool hasTwoInputs(int index);
+    bool completedPerfectLevel();
+	QString nextLevel();
 };
 
 #endif // LEVEL_H

@@ -6,13 +6,7 @@
  */
 
 #include "basicscene.h"
-#include <QDrag>
-#include <QMimeData>
-#include <iostream>
-#include <QButtonGroup>
-#include <string>
-#include <QString>
-#include <QGraphicsItem>
+
 
 bool enableMusic = true;
 
@@ -53,7 +47,6 @@ BasicScene::BasicScene(Level level)
     this->numRows = level.getNumRows();
     this->goals = level.getGoals();
     this->grid = level.getLayout();
-
 }
 
 BasicScene::~BasicScene()
@@ -66,7 +59,6 @@ void BasicScene::onInit()
 {
 	createUI();
     addGatesOnToolbar();
-
 }
 
 // This gets called every 'tick'
@@ -102,6 +94,7 @@ QGraphicsPixmapItem* BasicScene::createSprite(QPointF pos, QSize scale, QString 
     return item;
 }
 
+// creates a logic gate pixmap based on user selected gate
 QGraphicsPixmapItem* BasicScene::createGate(QPointF pos, QSize scale, QString gate)
 {
     int frame = -1;
@@ -136,15 +129,14 @@ void BasicScene::setScore(int points){
 }
 // drop event for buttons
 void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
-{        qDebug() << "gg";
-         qDebug() << currentLevel.checkOutputs();
+{
+//    qDebug() << currentLevel.checkOutputs();
     if (currentLevel.checkOutputs()){
         setScore(3);
         int gg = getScore();
-        qDebug() << "gg";
-        qDebug() << gg;
     }
     //update score accordingly (bonus from ticker too?)
+
     currentSelectedGate->setEnabled(true);
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
     qreal width = sceneRect().width();
@@ -172,12 +164,12 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 
         }
         createGate(QPointF(xL, yL), QSize(gridWidth, gridHeight),  currentSelectedGate->accessibleName());
-        qDebug() << gateDes[currentSelectedGate->accessibleDescription().toInt()];
-        qDebug() <<  yL/gridHeight << xL/gridWidth;
-        qDebug() << yL/gridHeight*numCols+ xL/gridWidth;
-        qDebug() << numCols;
+//        qDebug() << gateDes[currentSelectedGate->accessibleDescription().toInt()];
+//        qDebug() <<  yL/gridHeight << xL/gridWidth;
+//        qDebug() << yL/gridHeight*numCols+ xL/gridWidth;
+//        qDebug() << numCols;
 
-
+        // update back end with gate played by user
         SoundEffectSelect(1);
         QVector<int> endGateUpdate;
         endGateUpdate = currentLevel.setGateType(gateNodeLocation,
@@ -195,7 +187,20 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
         SoundEffectSelect(2);
     }
 
-    //TODO update back end..add gate to vecctor of in use gates?
+	//LEVEL COMPLETE
+    if (currentLevel.checkOutputs())
+    {
+        QMessageBox mBox;
+        mBox.setText("Level Complete with a score of: " + QString::number(currentLevel.getScore()) + "\n");
+        if (currentLevel.completedPerfectLevel())
+            mBox.setInformativeText("Perfect level bonus!\n");
+        mBox.exec();
+
+        // Change the scene on next tick.
+        connect(&timer, &QTimer::timeout, this, [=](){
+            emit changeScene(currentLevel.nextLevel());
+        });
+	}
 }
 
 // Intercept events from the GraphicsView and do things with them.
@@ -242,12 +247,10 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
 
             int x = (mev->x() - trayWidth)/gridWidth;
             int y = mev->y()/gridHeight;
-
-            qDebug() << "x, y :" << x << y;
-            qDebug() << itemAt(mev->localPos(), QTransform())->data(Name);
+            //qDebug() << "x, y :" << x << y;
+            //qDebug() << itemAt(mev->localPos(), QTransform())->data(Name);
         }
     }
-
     // Passes the event to be handled in the default manner
     return QGraphicsScene::eventFilter(watched, event);
 }
@@ -256,8 +259,6 @@ void BasicScene::createUI()
 {
 	qreal width = sceneRect().width();
 	qreal height = sceneRect().height();
-
-	//int trayWidth = width/12;
 	int trayHeight = 100;
 //    createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
     createBox(QRectF(0, height-trayHeight, width, trayHeight), QColor(166, 170, 178), QColor(166, 170, 178), false);
@@ -369,14 +370,13 @@ void BasicScene::createUI()
                 break;
             }
 
-            createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), sheet, QSize(64, 64), frame);
             if (sheet != "")
             {
                 createSprite(QPointF(x, y), QSize(gridWidth, gridHeight), sheet, QSize(64, 64), frame);
             }
             itemNum++;
 		}
-	}
+    }
 }
 
 //  create push button for each logic gate and place in tool bar
@@ -385,7 +385,6 @@ void BasicScene::addGatesOnToolbar()
     qreal width = sceneRect().width();
     qreal height = sceneRect().height();
     int gateLocation = width/10;
-	//int space = gateLocation;
     int index = 0;
     QPushButton *logicGates[6];
     QButtonGroup *btnGroup = new QButtonGroup();
@@ -413,8 +412,6 @@ void BasicScene::addGatesOnToolbar()
         QPushButton* currentButton = logicGates[index];
         connect(currentButton, &QPushButton::pressed, this, [=](){
             currentButton->setChecked(true);
-            // need to set name property of QPush button logic gates
-            //currentButton->setAccessibleName("nandgate");    // TODO needs to be done correcctly..at time of setting buttons on bottom of sreen
             currentSelectedGate = currentButton;
             currentSelectedGate->setChecked(true);
             currentSelectedGate->setEnabled(false);
@@ -424,11 +421,11 @@ void BasicScene::addGatesOnToolbar()
             // drag for log gate onto game space
             QDrag *drag = new QDrag(this);
             QMimeData *mimeData = new QMimeData;
-            QPixmap pmc = getGatePixmap(currentButton->accessibleName()); //change row and col THIS IS WHERE DRAG GATE is made
+            QPixmap pmc = getGatePixmap(currentButton->accessibleName());
             drag->setMimeData(mimeData);
             drag->setPixmap(pmc);
             QApplication::setOverrideCursor(Qt::ClosedHandCursor);
-			/*Qt::DropAction da = */drag->exec(Qt::MoveAction);//???
+            drag->exec(Qt::MoveAction);
             QApplication::restoreOverrideCursor();
         });
         index++;
@@ -436,7 +433,6 @@ void BasicScene::addGatesOnToolbar()
 
     QString goalSequence = "Goal: ";
     int size = currentLevel.getGoals().size();
-    qDebug()<< size;
     QVector<int> allGoals = currentLevel.getGoals();
 
     for (int i = 0; i < size; i ++) {
@@ -450,6 +446,7 @@ void BasicScene::addGatesOnToolbar()
     easy->setPos(sceneRect().width()*0.8, sceneRect().height()*0.88);
 }
 
+// updates the end sprite based on gates placed by user
 void BasicScene::updateEndGateSprite(int location, int value, int gridWidth, int gridHeight)
 {
     int y = (location/numCols)*gridHeight;
@@ -504,7 +501,7 @@ void BasicScene::SoundEffectSelect(int sound) {
 void BasicScene::endMusic() {
     musicPlayer->stop();
 }
-
+// get the current level score
 int BasicScene::getScore() {
     return score;
 }

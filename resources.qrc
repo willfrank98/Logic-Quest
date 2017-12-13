@@ -23,6 +23,7 @@
         <file alias="ErrorAlert.mp3">res/sounds/ErrorAlert.mp3</file>
         <file alias="MetalClick.mp3">res/sounds/MetalClick.mp3</file>
         <file alias="Visager_-_05_-_Battle.mp3">res/sounds/Visager_-_05_-_Battle.mp3</file>
+        <file alias="Africa.mp3">res/sounds/Africa.mp3</file>
     </qresource>
     <qresource prefix="/levels">
         <file alias="tutorial.txt">levels/tutorial.txt</file>
@@ -32,5 +33,20 @@
         <file alias="tutorial4.txt">levels/tutorial4.txt</file>
         <file alias="tutorial5.txt">levels/tutorial5.txt</file>
         <file alias="tutorial6.txt">levels/tutorial6.txt</file>
+        <file alias="easy1.txt">levels/easy1.txt</file>
+        <file alias="easy2.txt">levels/easy2.txt</file>
+        <file alias="easy3.txt">levels/easy3.txt</file>
+        <file alias="easy4.txt">levels/easy4.txt</file>
+        <file alias="easy5.txt">levels/easy5.txt</file>
+        <file alias="medium1.txt">levels/medium1.txt</file>
+        <file alias="medium2.txt">levels/medium2.txt</file>
+        <file alias="medium3.txt">levels/medium3.txt</file>
+        <file alias="medium4.txt">levels/medium4.txt</file>
+        <file alias="medium5.txt">levels/medium5.txt</file>
+        <file alias="hard1.txt">levels/hard1.txt</file>
+        <file alias="hard2.txt">levels/hard2.txt</file>
+        <file alias="hard3.txt">levels/hard3.txt</file>
+        <file alias="hard4.txt">levels/hard4.txt</file>
+        <file alias="hard5.txt">levels/hard5.txt</file>
     </qresource>
 </RCC>

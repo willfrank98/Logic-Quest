@@ -6,10 +6,7 @@
  */
 
 #include "physicsscene.h"
-#include <QDebug>
-#include <QGraphicsView>
-#include <QGraphicsItem>
-#include <QResizeEvent>
+
 
 // Initializes the world and such
 PhysicsScene::PhysicsScene(QObject *parent) : QGraphicsScene(parent)

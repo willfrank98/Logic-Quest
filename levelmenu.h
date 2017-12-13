@@ -11,6 +11,9 @@
 #include "basicscene.h"
 #include "physicsscene.h"
 #include <QMediaPlayer>
+#include <QGraphicsItem>
+#include <QGraphicsProxyWidget>
+#include <QPushButton>
 
 class LevelMenu : public BasicScene
 {

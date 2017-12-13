@@ -7,3 +7,4 @@ NL NL NL NL NL
 S 0 1 0
 S 1 0 0
 E 0 0
+N :/levels/tutorial1.txt

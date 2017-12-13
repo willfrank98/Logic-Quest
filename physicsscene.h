@@ -10,6 +10,10 @@
 
 #include <Box2D.h>
 #include <basicscene.h>
+#include <QDebug>
+#include <QGraphicsView>
+#include <QGraphicsItem>
+#include <QResizeEvent>
 
 class PhysicsScene : public QGraphicsScene
 {

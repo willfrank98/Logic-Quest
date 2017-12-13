@@ -6,9 +6,7 @@
  */
 
 #include "levelmenu.h"
-#include <QGraphicsItem>
-#include <QGraphicsProxyWidget>
-#include <QPushButton>
+
 
 LevelMenu::LevelMenu()
 {
@@ -325,25 +323,25 @@ void LevelMenu::onInit() {
     connect(backButton, &QPushButton::clicked, this, [=](){emit(changeScene("title"));}, Qt::QueuedConnection);
 
     /*All easy level button connections (defaults to tutorial scene for now)*/
-    connect(levelOneEasyButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
-    connect(levelTwoEasyButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial1"));}, Qt::QueuedConnection);
-    connect(levelThreeEasyButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial2"));}, Qt::QueuedConnection);
-    connect(levelFourEasyButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial3"));}, Qt::QueuedConnection);
-    connect(levelFiveEasyButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial4"));}, Qt::QueuedConnection);
+    connect(levelOneEasyButton, &QPushButton::clicked, this, [=](){emit(changeScene("easy1"));}, Qt::QueuedConnection);
+    connect(levelTwoEasyButton, &QPushButton::clicked, this, [=](){emit(changeScene("easy2"));}, Qt::QueuedConnection);
+    connect(levelThreeEasyButton, &QPushButton::clicked, this, [=](){emit(changeScene("easy3"));}, Qt::QueuedConnection);
+    connect(levelFourEasyButton, &QPushButton::clicked, this, [=](){emit(changeScene("easy4"));}, Qt::QueuedConnection);
+    connect(levelFiveEasyButton, &QPushButton::clicked, this, [=](){emit(changeScene("easy5"));}, Qt::QueuedConnection);
 
     /*All medium level button connections (defaults to tutorial scene for now)*/
-    connect(levelOneMediumButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
-    connect(levelTwoMediumButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
-    connect(levelThreeMediumButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
-    connect(levelFourMediumButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
-    connect(levelFiveMediumButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
+    connect(levelOneMediumButton, &QPushButton::clicked, this, [=](){emit(changeScene("medium1"));}, Qt::QueuedConnection);
+    connect(levelTwoMediumButton, &QPushButton::clicked, this, [=](){emit(changeScene("medium2"));}, Qt::QueuedConnection);
+    connect(levelThreeMediumButton, &QPushButton::clicked, this, [=](){emit(changeScene("medium3"));}, Qt::QueuedConnection);
+    connect(levelFourMediumButton, &QPushButton::clicked, this, [=](){emit(changeScene("medium4"));}, Qt::QueuedConnection);
+    connect(levelFiveMediumButton, &QPushButton::clicked, this, [=](){emit(changeScene("medium5"));}, Qt::QueuedConnection);
 
     /*All hard level button connections (defaults to tutorial scene for now)*/
-    connect(levelOneHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
-    connect(levelTwoHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
-    connect(levelThreeHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
-    connect(levelFourHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
-    connect(levelFiveHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("tutorial"));}, Qt::QueuedConnection);
+    connect(levelOneHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("hard1"));}, Qt::QueuedConnection);
+    connect(levelTwoHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("hard2"));}, Qt::QueuedConnection);
+    connect(levelThreeHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("hard3"));}, Qt::QueuedConnection);
+    connect(levelFourHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("hard4"));}, Qt::QueuedConnection);
+    connect(levelFiveHardButton, &QPushButton::clicked, this, [=](){emit(changeScene("hard5"));}, Qt::QueuedConnection);
 
     /*Stops music on all buttons*/
     connect(backButton, &QPushButton::clicked, this, &LevelMenu::endMusic);
