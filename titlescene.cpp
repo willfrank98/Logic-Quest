@@ -61,8 +61,7 @@ void TitleScene::onInit()
 
     //Sound Enable/Disbale Icon.
     QPixmap *soundPix = new QPixmap(":/images/icons/EnableSound.png");
-    if(!enableMusic)
-    soundPix = new QPixmap(":/images/icons/DisableSound.png");
+    if(!enableMusic) soundPix = new QPixmap(":/images/icons/DisableSound.png");
     soundItem = new QIcon(*soundPix);
     soundButton = new QPushButton();
     soundButton->setGeometry(QRect(sceneRect().width() * .80, sceneRect().height() * .81, sceneRect().width() * .10, sceneRect().height() * .10));
