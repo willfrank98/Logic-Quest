@@ -35,6 +35,8 @@ private:
     void addEndGateWithGateInput(int egIndex, int gIndex);
     GatePipeTags getLayOutEnum(QString str);
 	QString nextLevelAddress;
+    QString levelNumber;
+    QString difficultyString;
 
 public:
     Level();
@@ -51,6 +53,10 @@ public:
     bool hasTwoInputs(int index);
     bool completedPerfectLevel();
 	QString nextLevel();
+    QString getLevelNumber();
+    void setLevelNumber(QString name);
+    QString getDifficultyString();
+    void setDifficultyString(QString diff);
 };
 
 #endif // LEVEL_H

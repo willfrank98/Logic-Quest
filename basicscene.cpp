@@ -7,7 +7,6 @@
 
 #include "basicscene.h"
 
-
 bool enableMusic = true;
 
 // Initializes the world and such
@@ -133,7 +132,6 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 //    qDebug() << currentLevel.checkOutputs();
     if (currentLevel.checkOutputs()){
         setScore(3);
-        int gg = getScore();
     }
     //update score accordingly (bonus from ticker too?)
 
@@ -424,7 +422,7 @@ void BasicScene::addGatesOnToolbar()
         logicGates[index]->setAccessibleName(gateNames[index]);
         logicGates[index]->setAccessibleDescription(QString::number(index));
         logicGates[index]->setToolTip(gateNames[index]);
-        qDebug() << logicGates[index]->accessibleName();
+        //qDebug() << logicGates[index]->accessibleName();
         logicGates[index]->setToolTip(gateNames[index].toUpper() + " Gate");
         btnGroup->addButton(logicGates[index]);
         addWidget(logicGates[index]);
@@ -453,7 +451,7 @@ void BasicScene::addGatesOnToolbar()
         index++;
     }
 
-    QString goalSequence = "Goal: ";
+    QString goalSequence = "OUTPUT: ";
     int size = currentLevel.getGoals().size();
     QVector<int> allGoals = currentLevel.getGoals();
 
@@ -464,8 +462,16 @@ void BasicScene::addGatesOnToolbar()
 
     QFont font = QFont("Helvetica");
     font.setPointSize(24);
-    QGraphicsTextItem *easy = addText(goalSequence, font);
-    easy->setPos(sceneRect().width()*0.8, sceneRect().height()*0.88);
+    //Output goal for current level
+    QGraphicsTextItem *output = addText(goalSequence, font);
+    output->setPos(sceneRect().width()*0.78, sceneRect().height()*0.86);
+
+    //Displays which level is being played
+    QGraphicsTextItem *lvlNum = addText(currentLevel.getLevelNumber(), font);
+    lvlNum->setPos(sceneRect().width()*0.78, sceneRect().height()*0.91);
+
+    QGraphicsTextItem *diff = addText(currentLevel.getDifficultyString(), font);
+    diff->setPos(sceneRect().width()*0.78, sceneRect().height()*0.96);
 }
 
 // updates the end sprite based on gates placed by user
