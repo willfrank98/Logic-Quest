@@ -60,8 +60,10 @@ private:
     QElapsedTimer deltaKeeper;
     QMediaPlayer *soundEffect, *musicPlayer;
     SpriteLoader *sl = new SpriteLoader();
+    QPushButton* enableMusicButton;
     QGraphicsProxyWidget* backToHomeProxy;
     QGraphicsProxyWidget* selectMenuProxy;
+    QGraphicsProxyWidget* enableMusicButtonProxy;
 
     virtual void onInit();
     virtual void onUpdate(qreal delta);
@@ -71,6 +73,7 @@ private:
     virtual void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
     virtual void dropEvent(QGraphicsSceneDragDropEvent *event);
 
+    void enableDisableSound();
     void SoundEffectSelect(int);
     void endMusic();
 

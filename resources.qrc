@@ -24,6 +24,7 @@
         <file alias="MetalClick.mp3">res/sounds/MetalClick.mp3</file>
         <file alias="Visager_-_05_-_Battle.mp3">res/sounds/Visager_-_05_-_Battle.mp3</file>
         <file alias="Africa.mp3">res/sounds/Africa.mp3</file>
+        <file alias="Thriller.mp3">res/sounds/Thriller.mp3</file>
     </qresource>
     <qresource prefix="/levels">
         <file alias="tutorial.txt">levels/tutorial.txt</file>

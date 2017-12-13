@@ -38,7 +38,7 @@ BasicScene::BasicScene(Level level)
 
     soundEffect = new QMediaPlayer;
     musicPlayer = new QMediaPlayer;
-    musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_05_-_Battle.mp3"));
+    musicPlayer->setMedia(QUrl("qrc:/sounds/Thriller.mp3"));
     musicPlayer->setVolume(50);
     if(enableMusic) musicPlayer->play();
 
@@ -283,6 +283,27 @@ void BasicScene::createUI()
     backToHomeProxy = addWidget(backButton);
     backToHomeProxy->setZValue(10.0);
 
+    QPixmap *musicPix = new QPixmap(":/images/icons/EnableSound.png");
+    if(!enableMusic) musicPix = new QPixmap(":/images/icons/DisableSound.png");
+    QIcon *soundMusicIcon = new QIcon(*musicPix);
+    enableMusicButton = new QPushButton();
+    enableMusicButton->setGeometry(QRect(95, sceneRect().height()*0.93, 60, 40));
+    enableMusicButton->setIcon(*soundMusicIcon);
+    enableMusicButton->setAttribute(Qt::WA_TranslucentBackground);
+    enableMusicButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 10px;"
+                               "border-style: solid;"
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}"
+                              );
+    enableMusicButtonProxy = addWidget(enableMusicButton);
+    enableMusicButtonProxy->setZValue(10.0);
+
     QPixmap *levelPix = new QPixmap(":/images/icons/BackArrow.png");
     QIcon *levelIcon = new QIcon(*levelPix);
     QPushButton* selectMenuButton = new QPushButton(); 
@@ -310,6 +331,7 @@ void BasicScene::createUI()
     /*End music*/
     connect(backButton, &QPushButton::clicked, this, &BasicScene::endMusic);
     connect(selectMenuButton, &QPushButton::clicked, this, &BasicScene::endMusic);
+    connect(enableMusicButton, &QPushButton::clicked, this, &BasicScene::enableDisableSound);
 
 
 	int gridWidth = width / numCols;
@@ -494,6 +516,27 @@ void BasicScene::SoundEffectSelect(int sound) {
             soundEffect->play();
             break;
         }
+    }
+}
+
+//Handles the enabling and disabling of the title scene sound.
+void BasicScene::enableDisableSound() {
+
+    if(enableMusic) {
+    QPixmap *soundPix = new QPixmap(":/images/icons/DisableSound.png");
+    QIcon *soundItem = new QIcon(*soundPix);
+    enableMusicButton->setIcon(*soundItem);
+    musicPlayer->stop();
+    soundEffect->stop();
+    enableMusic = false;
+    }
+    else {
+        QPixmap *soundPix = new QPixmap(":/images/icons/EnableSound.png");
+        QIcon *soundItem = new QIcon(*soundPix);
+        enableMusicButton->setIcon(*soundItem);
+        musicPlayer->play();
+        soundEffect->play();
+        enableMusic = true;
     }
 }
 
