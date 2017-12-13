@@ -30,29 +30,22 @@ Level::Level(QString filename)
     this->setLevelNumber("LVL: " + QString::fromStdString(num));
 
     if (std::regex_match(filename.toStdString(),  std::regex(":/levels/easy(.*)"))){
-        qDebug() << "[INFO] EASY____!!!";
 
-//        std::smatch match;
-//        std::string name;
-//        std::regex reg("easy");
-//        std::regex_search(filename.toStdString(), match, reg);
-//        name = match.str();
+        qDebug() << "[INFO] EASY____!!!";
 
         difficulty = 1;
         this->setDifficultyString("DIFFICULTY: EASY");
     }
     else if (std::regex_match(filename.toStdString(), std::regex(":/levels/medium(.*)"))){
-        qDebug() << "[INFO] MEDIUM____!!!";
         difficulty = 2;
         this->setDifficultyString("DIFFICULTY: MEDIUM");
     }
     else {
-        qDebug() << "[INFO] HARD____!!!";
         difficulty = 3;
         this->setDifficultyString("DIFFICULTY: HARD");
     }
-
     levelScore = 0;
+    qDebug() << "goals..end of level const size is " <<goals.size();
     if(file.open(QIODevice::ReadOnly))
     {
 
@@ -107,8 +100,10 @@ Level::Level(QString filename)
             {
 
                 for (QString s : list)
-                {
+                {   qDebug() << s;
+                    qDebug() << s.toInt();
                     goals.append(s.toInt());
+                   // gates.append(ga]);
                 }
                 currentLine++;
                 continue;
@@ -145,6 +140,9 @@ Level::Level(QString filename)
 
         }
     }
+    qDebug() << "goals..end of level const size is " <<goals.size();
+    qDebug() << "gates size is " <<gates.size();
+    qDebug() << "end gates size is " <<endGates.size();
     file.close();
 }
 
