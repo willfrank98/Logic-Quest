@@ -7,7 +7,6 @@
 
 #include "basicscene.h"
 
-
 bool enableMusic = true;
 
 // Initializes the world and such

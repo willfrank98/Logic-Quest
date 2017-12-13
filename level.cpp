@@ -7,7 +7,6 @@
 
 #include "level.h"
 
-
 Level::Level()
 {
     isComplete = false;
