@@ -12,26 +12,30 @@
 
 Level::Level()
 {
+    isComplete = false;
     numCols = 0;
     numRows = 0;
+    levelScore = 0;
+    perfLevel = true;
 }
 
 Level::Level(QString filename)
 {
     QFile file(filename);
 
-    if (std::regex_match(filename.toStdString(), std::regex("^easy"))){
+    std::regex easy("^easy");
+    std::regex medium("^medium");
+
+    if (std::regex_match(filename.toStdString(), easy)) {
         difficulty = 1;
     }
-    else if (std::regex_match(filename.toStdString(), std::regex("^medium"))){
+    else if (std::regex_match(filename.toStdString(), medium)) {
         difficulty = 2;
     }
     else {
         difficulty = 3;
     }
     levelScore = 0;
-    perfLevel = true;
-    isComplete = false;
     if(file.open(QIODevice::ReadOnly))
     {
 
@@ -135,19 +139,11 @@ bool Level::checkOutputs()
         {
             isComplete = false;
             perfLevel = false;
-            --levelScore;
+            levelScore = abs(--levelScore);
             return isComplete;
         }
     }
     levelScore++;
-    if (perfLevel)
-    {
-        levelScore += difficulty;
-    }
-    if (levelScore <= 0)
-    {
-        levelScore = 1;
-    }
     isComplete = true;
     return isComplete;
 }
@@ -327,24 +323,11 @@ bool Level::completedPerfectLevel()
 {
     return perfLevel;
 }
-void Level::setPerfectLevel(bool perfLevelVal)
-{
-    perfLevel = perfLevelVal;
-}
-int Level::getLevelScore()
+int Level::getScore()
 {
     return levelScore;
 }
-void Level::setLevelScore(int score)
-{
-    levelScore = score;
-}
 QString Level::nextLevel()
 {
-    return nextLevelAddress;
+	return this->nextLevelAddress;
 }
-int Level::getDifficulty()
-{
-    return difficulty;
-}
-

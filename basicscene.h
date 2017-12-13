@@ -26,7 +26,6 @@
 #include <QActionGroup>
 #include <QtGlobal>
 #include <QMediaPlayer>
-#include <QLCDNumber>
 
 extern bool enableMusic;
 
@@ -34,8 +33,7 @@ class BasicScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    explicit BasicScene(QObject *parent = nullptr, int numCols = 0, int numRows = 0, int *inputs = nullptr,
-                        QVector<int> goals = QVector<int>(), QVector<GatePipeTags> grid = QVector<GatePipeTags>());
+    explicit BasicScene(QObject *parent = nullptr, int numCols = 0, int numRows = 0, int *inputs = nullptr, QVector<int> goals = QVector<int>(), QVector<GatePipeTags> grid = QVector<GatePipeTags>());
     ~BasicScene();
 
     BasicScene(Level level);
@@ -45,11 +43,10 @@ public:
     QGraphicsPixmapItem* createSprite(QPointF pos, QSize scale, QString sheet, QSize frameSize, int frame);
     QGraphicsPixmapItem* createGate(QPointF pos, QSize scale, QString gate);
     void setItemPos(QGraphicsItem *item, QPointF pos);
+
     void createUI();
     void addGatesOnToolbar();
-    void setScore(int gameScore);
-    int getScore();
-
+//    void gateClicked(int row, int col);
 private:
     QTimer timer;
     QElapsedTimer deltaKeeper;
@@ -57,7 +54,6 @@ private:
     SpriteLoader *sl = new SpriteLoader();
     QGraphicsProxyWidget* backToHomeProxy;
     QGraphicsProxyWidget* selectMenuProxy;
-    QLCDNumber *scoreBoard;
 
     virtual void onInit();
     virtual void onUpdate(qreal delta);
@@ -70,7 +66,7 @@ private:
     void SoundEffectSelect(int);
     void endMusic();
 
-    int gameScore;
+    int score;
     int numCols;
     int numRows;
     int *inputs;
@@ -78,11 +74,15 @@ private:
     QVector<int> goals;
     QVector<GatePipeTags> grid;
     QPushButton *currentSelectedGate;
+//    void addGatesOnToolbar();
+//    void gateClicked(int row, int col);
     QPixmap getGatePixmap(QString string);
     QString gateNames[6] = {"andgate", "nandgate", "norgate", "notgate", "orgate", "xorgate"};
     GateNodeType gateDes[6] = {AND, NAND, NOR, NOT, OR, XOR};
     GateNodeType getGateNodeType(QString name);
     void updateEndGateSprite(int location, int value, int gridWidth, int gridHeight);
+    int getScore();
+//    QPushButton *setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc);
 
 signals:
     void changeScene(QString);
