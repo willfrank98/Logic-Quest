@@ -21,17 +21,35 @@ Level::Level(QString filename)
 {
     QFile file(filename);
 
+    std::regex levelNumber("[0-9]");
+    std::smatch lvl;
+    std::string num;
+    std::regex_search(filename.toStdString(), lvl, levelNumber);
+    num = lvl.str();
+
+    this->setLevelNumber("LVL: " + QString::fromStdString(num));
+
     if (std::regex_match(filename.toStdString(),  std::regex(":/levels/easy(.*)"))){
         qDebug() << "[INFO] EASY____!!!";
+
+//        std::smatch match;
+//        std::string name;
+//        std::regex reg("easy");
+//        std::regex_search(filename.toStdString(), match, reg);
+//        name = match.str();
+
         difficulty = 1;
+        this->setDifficultyString("DIFFICULTY: EASY");
     }
     else if (std::regex_match(filename.toStdString(), std::regex(":/levels/medium(.*)"))){
         qDebug() << "[INFO] MEDIUM____!!!";
         difficulty = 2;
+        this->setDifficultyString("DIFFICULTY: MEDIUM");
     }
     else {
         qDebug() << "[INFO] HARD____!!!";
         difficulty = 3;
+        this->setDifficultyString("DIFFICULTY: HARD");
     }
 
     levelScore = 0;
@@ -337,4 +355,20 @@ int Level::getScore()
 QString Level::nextLevel()
 {
 	return this->nextLevelAddress;
+}
+QString Level::getLevelNumber()
+{
+    return this->levelNumber;
+}
+void Level::setLevelNumber(QString name)
+{
+    this->levelNumber = name;
+}
+QString Level::getDifficultyString()
+{
+    return this->difficultyString;
+}
+void Level::setDifficultyString(QString diff)
+{
+    this->difficultyString = diff;
 }

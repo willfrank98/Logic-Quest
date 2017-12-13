@@ -431,7 +431,7 @@ void BasicScene::addGatesOnToolbar()
         index++;
     }
 
-    QString goalSequence = "Goal: ";
+    QString goalSequence = "OUTPUT: ";
     int size = currentLevel.getGoals().size();
     QVector<int> allGoals = currentLevel.getGoals();
 
@@ -442,8 +442,16 @@ void BasicScene::addGatesOnToolbar()
 
     QFont font = QFont("Helvetica");
     font.setPointSize(24);
-    QGraphicsTextItem *easy = addText(goalSequence, font);
-    easy->setPos(sceneRect().width()*0.8, sceneRect().height()*0.88);
+    //Output goal for current level
+    QGraphicsTextItem *output = addText(goalSequence, font);
+    output->setPos(sceneRect().width()*0.78, sceneRect().height()*0.86);
+
+    //Displays which level is being played
+    QGraphicsTextItem *lvlNum = addText(currentLevel.getLevelNumber(), font);
+    lvlNum->setPos(sceneRect().width()*0.78, sceneRect().height()*0.91);
+
+    QGraphicsTextItem *diff = addText(currentLevel.getDifficultyString(), font);
+    diff->setPos(sceneRect().width()*0.78, sceneRect().height()*0.96);
 }
 
 // updates the end sprite based on gates placed by user
