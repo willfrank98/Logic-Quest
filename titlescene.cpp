@@ -19,7 +19,7 @@ void TitleScene::onInit()
     // Create a static box representing the ground
     // Just gonna leave this enabled until the sprite loading is working
     createBox(QRectF(0.0, sceneRect().height() - 16.0, sceneRect().width(), 16.0),
-              QColor(0, 0, 0), QColor(100, 120, 255));
+              QColor(0, 0, 0), QColor(18,127,155));
 
     // Define a font
     QFont font = QFont("Helvetica");
