@@ -8,4 +8,28 @@ S1 WE UG WS NL NL NL NS NL NL
 S0 WE WE UG UG WS NL NS NL NL
 S0 WE UG WE WE UG UG WN NL NL
 1
+S 0 0 0
+S 1 0 1
+G 1 2
+G 0 3
+G 2 3
+S 2 1 4
+G 4 5
+G 5 6
+G 3 7
+G 6 7
+E 7 0
+S 3 1 8
+G 8 9
+G 9 5
+S 4 1 10
+S 5 1 10
+G 10 11
+S 6 0 11
+G 11 12
+S 7 0 13
+G 12 14
+G 13 14
+G 14 15
+G 15 6
 N :/levels/hard5.txt
