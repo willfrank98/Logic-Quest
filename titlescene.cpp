@@ -149,7 +149,7 @@ void TitleScene::onInit()
     exitButtonProxy->setZValue(10.0);
 
     //Connects menu buttons
-    connect(startButton, &QPushButton::clicked, this, [=](){tutorialMessage(); emit(changeScene(":/levels/tutorial.txt"));}, Qt::QueuedConnection);
+    connect(startButton, &QPushButton::clicked, this, [=](){tutorialMessage(); emit(changeScene(":/levels/tutorial1.txt"));}, Qt::QueuedConnection);
     connect(levelSelectButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
     connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("options"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
