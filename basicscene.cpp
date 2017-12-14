@@ -116,6 +116,7 @@ void BasicScene::setItemPos(QGraphicsItem *item, QPointF pos)
         item->setPos(pos);
     }
 }
+
 // drag for palcing buttons
 void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
     // maybe highlight something or set somehting active if over certain space, etc
@@ -123,6 +124,7 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
     g->setDropAction(Qt::CopyAction); // not sure about this
     //qDebug() << g->scenePos();
 }
+
 void BasicScene::setScore(int points){
     score+=points;
 }
@@ -386,6 +388,14 @@ void BasicScene::createUI()
             case UG:
                 sheet = ":/images/sprites/otherGates.png";
                 frame = 5;
+                break;
+            case AG:
+                sheet = ":/images/sprites/gatesSheet.png";
+                frame = 0;
+                break;
+            case OG:
+                sheet = ":/images/sprites/gatesSheet.png";
+                frame = 2;
                 break;
             default:
                 break;

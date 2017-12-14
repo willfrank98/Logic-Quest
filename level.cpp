@@ -130,6 +130,12 @@ Level::Level(QString filename)
                 endGates[egIndex]->setEndGateLocation(endGateLocations[egIndex]);
             }
 
+            //Sets the type of preset gates
+            if (list[0] == "SET")
+            {
+                setGateType(list[1].toInt(), getGateTypeEnum(list[2]));
+            }
+
 			//gets the next level's address
 			if (list[0] == "N")
 			{
@@ -231,8 +237,15 @@ void Level::addGateWithGateInput(int gIndex, int igIndex)
     bool isNewGate = false;
     GateNode *gate;
 
-    //If the a gate with index gIndex does not already exist in gates,
-    //A new gate is created and added
+    //If the a gate with index igIndex and or gIndex does not already exist in gates,
+    //A new gate(s) is created and added
+    if(gates.size() == igIndex)
+    {
+        gate = new GateNode(UNSET, -1);
+        gates.append(gate);
+        isNewGate = true;
+    }
+
     if(gates.size() == gIndex)
     {
         gate = new GateNode(UNSET, -1);
@@ -265,6 +278,34 @@ void Level::addEndGateWithGateInput(int egIndex, int gIndex)
 
     endGates[egIndex]->addInput(1, gates[gIndex]);
 
+}
+
+GateNodeType Level::getGateTypeEnum(QString str)
+{
+    if(str == "NOT")
+    {
+        return NOT;
+    }
+    if(str == "NOR")
+    {
+        return NOR;
+    }
+    if(str == "NAND")
+    {
+        return NAND;
+    }
+    if(str == "AND")
+    {
+        return AND;
+    }
+    if(str == "OR")
+    {
+        return OR;
+    }
+    if(str == "XOR")
+    {
+        return XOR;
+    }
 }
 
 GatePipeTags Level::getLayOutEnum(QString str)
@@ -319,6 +360,14 @@ GatePipeTags Level::getLayOutEnum(QString str)
     {
         return NS;
     }
+    if(str == "AG")
+    {
+        return AG;
+    }
+    if(str == "OG")
+    {
+        return OG;
+    }
     return NL;
 }
 
@@ -326,34 +375,42 @@ int Level::getGateNodeIndex(int layoutIndex)
 {
     return gateNodeIndex[layoutIndex];
 }
+
 bool Level::hasTwoInputs(int index)
 {
     return gates[index]->hasTwoInputs();
 }
+
 bool Level::completedPerfectLevel()
 {
     return perfLevel;
 }
+
 int Level::getScore()
 {
     return levelScore;
 }
+
 QString Level::nextLevel()
 {
 	return this->nextLevelAddress;
 }
+
 QString Level::getLevelNumber()
 {
     return this->levelNumber;
 }
+
 void Level::setLevelNumber(QString name)
 {
     this->levelNumber = name;
 }
+
 QString Level::getDifficultyString()
 {
     return this->difficultyString;
 }
+
 void Level::setDifficultyString(QString diff)
 {
     this->difficultyString = diff;

@@ -33,6 +33,7 @@ private:
     void addGateWithStartGateInput(int gIndex, int sgIndex, int sgValue);
     void addGateWithGateInput(int gIndex, int igIndex);
     void addEndGateWithGateInput(int egIndex, int gIndex);
+    GateNodeType getGateTypeEnum(QString str);
     GatePipeTags getLayOutEnum(QString str);
 	QString nextLevelAddress;
     QString levelNumber;

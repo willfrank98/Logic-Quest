@@ -23,5 +23,7 @@ enum GatePipeTags {
     S1, // Start gate for 1 input
     EG, // End gate
     UG, // Unset gate
+    AG, // And gate
+    OG, // Or gate
     NL  // Empty/null space
 };
