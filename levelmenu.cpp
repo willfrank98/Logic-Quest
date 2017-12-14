@@ -50,8 +50,11 @@ void LevelMenu::onInit() {
 
 
     /* Header for the Easy levels */
-    QGraphicsTextItem *easy = addText("EASY", font);
-    easy->setPos(sceneRect().width() / 2.0 - easy->boundingRect().width()/2.0, sceneRect().height()*0.1);
+    //QGraphicsTextItem *easy = addText("EASY", font);
+    QPixmap *easyPix = new QPixmap(":/images/icons/Easy.png");
+    QGraphicsPixmapItem *easyItem = addPixmap(*easyPix);
+    easyItem->setScale(0.5);
+    easyItem->setPos(sceneRect().width() / 2.0 - easyItem->boundingRect().width()/4.0, sceneRect().height()*0.1);
 
     /* Set the position, width, height, and color for EASY buttons*/
     QPushButton* levelOneEasyButton = new QPushButton();
@@ -139,9 +142,10 @@ void LevelMenu::onInit() {
     levelFiveEasyProxy = addWidget(levelFiveEasyButton);
     levelFiveEasyProxy->setZValue(10.0);
 
-    /* Header for the Medium levels */
-    QGraphicsTextItem *medium = addText("MEDIUM", font);
-    medium->setPos(sceneRect().width() / 2.0 - medium->boundingRect().width()/2.0, sceneRect().height()*0.35);
+    QPixmap *mediumPix = new QPixmap(":/images/icons/Medium.png");
+    QGraphicsPixmapItem *mediumItem = addPixmap(*mediumPix);
+    mediumItem->setScale(0.5);
+    mediumItem->setPos(sceneRect().width() / 2.0 - mediumItem->boundingRect().width()/4.0, sceneRect().height()*0.35);
 
     /* Set the position, width, height, and color for MEDIUM buttons*/
     QPushButton* levelOneMediumButton = new QPushButton();
@@ -230,8 +234,10 @@ void LevelMenu::onInit() {
     levelFiveMediumProxy->setZValue(10.0);
 
     /* Header for the Hard levels */
-    QGraphicsTextItem *hard = addText("HARD", font);
-    hard->setPos(sceneRect().width() / 2.0 - hard->boundingRect().width()/2.0, sceneRect().height()*0.6);
+    QPixmap *hardPix = new QPixmap(":/images/icons/Hard.png");
+    QGraphicsPixmapItem *hardItem = addPixmap(*hardPix);
+    hardItem->setScale(0.5);
+    hardItem->setPos(sceneRect().width() / 2.0 - hardItem->boundingRect().width()/4.0, sceneRect().height()*0.6);
 
     /* Set the position, width, height, and color for HARD buttons*/
     QPushButton* levelOneHardButton = new QPushButton();

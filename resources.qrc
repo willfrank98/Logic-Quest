@@ -6,6 +6,9 @@
         <file alias="EnableSound.png">res/icons/EnableSound.png</file>
         <file alias="Home.png">res/icons/Home.png</file>
         <file alias="logoWithoutGates.png">res/logos/logoWithoutGates.png</file>
+        <file alias="Hard.png">res/icons/Hard.png</file>
+        <file alias="Medium.png">res/icons/Medium.png</file>
+        <file alias="Easy.png">res/icons/Easy.png</file>
     </qresource>
     <qresource prefix="/images/sprites">
         <file alias="gatesSheet.png">res/sprites/logic_gates_64x64.png</file>
@@ -49,5 +52,8 @@
         <file alias="hard3.txt">levels/hard3.txt</file>
         <file alias="hard4.txt">levels/hard4.txt</file>
         <file alias="hard5.txt">levels/hard5.txt</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file alias="Geo-Oblique.ttf">res/Geo-Oblique.ttf</file>
     </qresource>
 </RCC>

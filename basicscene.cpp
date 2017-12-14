@@ -200,6 +200,7 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
         connect(&timer, &QTimer::timeout, this, [=](){
             emit changeScene(currentLevel.nextLevel());
         });
+        musicPlayer->stop();
 	}
 }
 
@@ -262,6 +263,9 @@ void BasicScene::createUI()
 	int trayHeight = 100;
 //    createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
     createBox(QRectF(0, height-trayHeight, width, trayHeight), QColor(166, 170, 178), QColor(166, 170, 178), false);
+    QPixmap *logoPix = new QPixmap(":/images/icons/mainLogo.png");
+    QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
+    pixItem->setPos(height-trayHeight, width);
 
     QPixmap *backPix = new QPixmap(":/images/icons/Home.png");
     QIcon *backIcon = new QIcon(*backPix);
