@@ -19,6 +19,12 @@
         <file alias="otherGates.png">res/sprites/other_gates_64x64.png</file>
         <file alias="da1t_driving.png">res/sprites/ds_1t_driving.png</file>
         <file alias="ds1t_talking.png">res/sprites/ds_1t_talking.png</file>
+        <file alias="and_tut.png">res/sprites/and_tut_by_letter.png</file>
+        <file alias="nand_tut.png">res/sprites/nand_tut_by_letter.png</file>
+        <file alias="nor_tut.png">res/sprites/nor_tut_by_letter.png</file>
+        <file alias="not_tut.png">res/sprites/not_tut_by_letter.png</file>
+        <file alias="or_tut.png">res/sprites/or_tut_by_letter.png</file>
+        <file alias="xor_tut.png">res/sprites/xor_tut_by_letter.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file alias="ErrorAlert.mp3">res/sounds/ErrorAlert.mp3</file>
