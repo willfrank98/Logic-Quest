@@ -246,6 +246,17 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
         QMouseEvent* mev = (QMouseEvent*)event;
         if (itemAt(mev->localPos(), QTransform()) != nullptr)
         {
+            qreal width = sceneRect().width();
+            qreal height = sceneRect().height();
+            int trayHeight = 100;
+
+            if (mev->localPos().y() > height - trayHeight)
+            {
+                for (QPushButton* qbtn : gateButtons)
+                {
+                    qbtn->setEnabled(true);
+                }
+            }
 //            qreal width = sceneRect().width();
 //            qreal height = sceneRect().height();
 
@@ -448,6 +459,7 @@ void BasicScene::addGatesOnToolbar()
         logicGates[index]->setToolTip(gateNames[index].toUpper() + " Gate");
         btnGroup->addButton(logicGates[index]);
         addWidget(logicGates[index]);
+        gateButtons.append(logicGates[index]);
 
         // It might be easier to just toggle the active gate to place in a spot
         // Would just have to store the currently selected gate and check against it
