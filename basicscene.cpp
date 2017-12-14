@@ -139,6 +139,7 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
     if (currentLevel.checkOutputs()){
         setScore(3);
     }
+
     //update score accordingly (bonus from ticker too?)
 
     currentSelectedGate->setEnabled(true);
@@ -438,7 +439,7 @@ void BasicScene::addGatesOnToolbar()
         logicGates[index]->setAttribute(Qt::WA_TranslucentBackground);
         logicGates[index]->setIcon(QIcon(gate));
         logicGates[index]->setIconSize(gate.size());
-		logicGates[index]->setGeometry(gateLocation+=gate.width(), height-68, gate.width() + 2, gate.height() + 2);
+        logicGates[index]->setGeometry(gateLocation+=gate.width(), height-80, gate.width() + 2, gate.height() + 2);
         logicGates[index]->setEnabled(true);
         logicGates[index]->setCheckable(true);
         logicGates[index]->setAccessibleName(gateNames[index]);
@@ -542,6 +543,10 @@ void BasicScene::SoundEffectSelect(int sound) {
             soundEffect->setVolume(90);
             soundEffect->play();
             break;
+        case 3:
+            soundEffect->setMedia(QUrl("qrc:/sounds/FalconFail.mp3"));
+            soundEffect->setVolume(90);
+            soundEffect->play();
         }
     }
 }

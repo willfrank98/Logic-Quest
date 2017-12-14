@@ -20,7 +20,6 @@
 #include <QGraphicsProxyWidget>
 #include <QMessageBox>
 
-
 class TitleScene : public PhysicsScene
 {
 public:
