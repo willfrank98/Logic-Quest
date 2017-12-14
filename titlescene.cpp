@@ -86,11 +86,11 @@ void TitleScene::onInit()
     soundButtonProxy = addWidget(soundButton);
     soundButtonProxy->setZValue(10.0);
 
-//    QPixmap *helpPix = new QPixmap(":/images/icons/Help.png");
+//    QPixmap *helpPix = new QPixmap(":/images/icons/EnableSound.png");
     QPushButton *helpButton = new QPushButton();
     helpButton->setGeometry(QRect(sceneRect().width() * .80, sceneRect().height() * .69, sceneRect().width() * .10, sceneRect().height() * .10));
-    helpButton->setIcon(QIcon(*helpPix));
-    helpButton->setIconSize(QSize(180,180));
+    helpButton->setIcon(QIcon(":/images/icons/Help.png"));
+    helpButton->setIconSize(QSize(70,70));
     helpButton->setAttribute(Qt::WA_TranslucentBackground);
     helpButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
@@ -184,6 +184,7 @@ void TitleScene::onInit()
     connect(levelSelectButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
     connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("options"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
+    connect(helpButton, &QPushButton::clicked, this, [=](){emit(changeScene("helpscene"));}, Qt::QueuedConnection);
     connect(soundButton, &QPushButton::clicked, this, &TitleScene::enableDisableSound, Qt::QueuedConnection);
 
     connect(startButton, &QPushButton::clicked, this, &TitleScene::endMusic);
