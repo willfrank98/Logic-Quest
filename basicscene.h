@@ -55,7 +55,8 @@ public:
     void addGatesOnToolbar();
     int getScore();
     void setScore(int points);
-//    void gateClicked(int row, int col);
+    QVector<QPushButton*> gateButtons;
+
 private:
     QTimer timer;
     QElapsedTimer deltaKeeper;
