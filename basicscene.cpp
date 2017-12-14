@@ -167,6 +167,13 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
             }
 
         }
+        else
+        {
+            if(!currentLevel.hasTwoInputs(gateNodeLocation))
+            {
+                return;
+            }
+        }
         createGate(QPointF(xL, yL), QSize(gridWidth, gridHeight),  currentSelectedGate->accessibleName());
 
         // update back end with gate played by user

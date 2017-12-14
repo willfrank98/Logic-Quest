@@ -230,3 +230,8 @@ bool GateNode::hasTwoInputs()
 {
     return inputNode2 != nullptr;
 }
+
+bool GateNode::hasOneInput()
+{
+    return inputNode1 != nullptr;
+}

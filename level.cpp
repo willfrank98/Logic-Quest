@@ -80,6 +80,11 @@ Level::Level(QString filename)
                         gateNodeIndex.append(gateIndex);
                         gateIndex++;
                     }
+                    else if(s == "AG" || s == "OG")
+                    {
+                        gateIndex++;
+                        gateNodeIndex.append(-1);
+                    }
                     else
                     {
                         gateNodeIndex.append(-1);
@@ -166,6 +171,7 @@ bool Level::checkOutputs()
 
 QVector<int> Level::setGateType(int gateIndex, GateNodeType type)
 {
+    qDebug() << gateIndex;
     gates[gateIndex]->setGateType(type);
 
     QVector<int> results = gates[gateIndex]->processGate();
@@ -206,13 +212,11 @@ int Level::getNumRows()
 
 void Level::addGateWithStartGateInput(int gIndex, int sgIndex, int sgValue)
 {
-    bool isNewGate = false;
     GateNode *gate, *startGate;
     if(gates.size() == gIndex)
     {
         gate = new GateNode(UNSET, -1);
         gates.append(gate);
-        isNewGate = true;
     }
     if(startGates.size() == sgIndex)
     {
@@ -221,7 +225,7 @@ void Level::addGateWithStartGateInput(int gIndex, int sgIndex, int sgValue)
     }
 
     //If the gate at gIndex is new, add startGate at sgIndex as input 1
-    if(isNewGate)
+    if(!gates[gIndex]->hasOneInput())
     {
         gates[gIndex]->addInput(1, startGates[sgIndex]);
     }
@@ -234,7 +238,6 @@ void Level::addGateWithStartGateInput(int gIndex, int sgIndex, int sgValue)
 
 void Level::addGateWithGateInput(int gIndex, int igIndex)
 {
-    bool isNewGate = false;
     GateNode *gate;
 
     //If the a gate with index igIndex and or gIndex does not already exist in gates,
@@ -243,20 +246,16 @@ void Level::addGateWithGateInput(int gIndex, int igIndex)
     {
         gate = new GateNode(UNSET, -1);
         gates.append(gate);
-        isNewGate = true;
     }
 
     if(gates.size() == gIndex)
     {
         gate = new GateNode(UNSET, -1);
         gates.append(gate);
-        isNewGate = true;
     }
 
-    //It is assumed that a gate already exists in gates at index igIndex.
-
     //If the gate at gIndex is new, add gate at igIndex as input 1
-    if(isNewGate)
+    if(!gates[gIndex]->hasOneInput())
     {
         gates[gIndex]->addInput(1, gates[igIndex]);
     }

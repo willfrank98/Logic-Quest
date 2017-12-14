@@ -40,6 +40,7 @@ public:
     void addInput(int inputNum, GateNode *node);
     void setEndGateLocation(int location);
     bool hasTwoInputs();
+    bool hasOneInput();
 };
 
 #endif // GATENODE_H
