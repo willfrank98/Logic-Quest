@@ -7,7 +7,6 @@
 
 #include "basicscene.h"
 
-
 bool enableMusic = true;
 
 // Initializes the world and such
@@ -122,7 +121,7 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
     // maybe highlight something or set somehting active if over certain space, etc
     QGraphicsSceneDragDropEvent *g = (QGraphicsSceneDragDropEvent*)event;
     g->setDropAction(Qt::CopyAction); // not sure about this
-    qDebug() << g->scenePos();
+    //qDebug() << g->scenePos();
 }
 void BasicScene::setScore(int points){
     score+=points;

@@ -8,7 +8,6 @@
 #include "level.h"
 #include <QRegularExpression>
 
-
 Level::Level()
 {
     isComplete = false;
@@ -105,10 +104,8 @@ Level::Level(QString filename)
             {
 
                 for (QString s : list)
-                {   qDebug() << s;
-                    qDebug() << s.toInt();
+                {
                     goals.append(s.toInt());
-                   // gates.append(ga]);
                 }
                 currentLine++;
                 continue;
@@ -145,9 +142,6 @@ Level::Level(QString filename)
 
         }
     }
-    qDebug() << "goals..end of level const size is " <<goals.size();
-    qDebug() << "gates size is " <<gates.size();
-    qDebug() << "end gates size is " <<endGates.size();
     file.close();
 }
 
@@ -170,14 +164,7 @@ bool Level::checkOutputs()
 
 QVector<int> Level::setGateType(int gateIndex, GateNodeType type)
 {
-    // it seems this is the crash is related to this line(first drag & drop on medium levels 4 or 5)
-    // but this try does not seem to catch it? other possible location is 176 in basicscene.cpp
-    try {
-        gates[gateIndex]->setGateType(type);
-    }
-    catch (const std::exception& e){
-        qDebug() << "[INFO] " << e.what();
-    }
+    gates[gateIndex]->setGateType(type);
 
     QVector<int> results = gates[gateIndex]->processGate();
     if(results.size() > 0)

@@ -7,7 +7,6 @@
 
 #include "titlescene.h"
 
-
 // Simple example of a title scene
 TitleScene::TitleScene()
 {
