@@ -6,6 +6,7 @@
  */
 
 #include "level.h"
+#include <QRegularExpression>
 
 
 Level::Level()
@@ -21,13 +22,17 @@ Level::Level(QString filename)
 {
     QFile file(filename);
 
-    std::regex levelNumber("[0-9]");
-    std::smatch lvl;
-    std::string num;
-    std::regex_search(filename.toStdString(), lvl, levelNumber);
-    num = lvl.str();
+//    std::regex levelNumber("[0-9]");
+    QRegularExpression levelNumber("[0-9]");
+    QRegularExpressionMatch num = levelNumber.match(filename);
 
-    this->setLevelNumber("LVL: " + QString::fromStdString(num));
+//    qDebug()<< "REGEX RETURNED..... " << num.captured();
+//    std::smatch lvl;
+//    std::string num;
+//    std::regex_search(filename.toStdString(), lvl, levelNumber);
+//    num = lvl.str();
+
+    this->setLevelNumber("LVL: " + num.captured());
 
     if (std::regex_match(filename.toStdString(),  std::regex(":/levels/easy(.*)"))){
 
