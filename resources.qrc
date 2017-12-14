@@ -18,6 +18,7 @@
         <file alias="Two.png">res/icons/Two.png</file>
         <file alias="Exit.png">res/icons/Exit.png</file>
         <file alias="Options.png">res/icons/Options.png</file>
+        <file alias="Help.png">res/icons/Help.png</file>
     </qresource>
     <qresource prefix="/images/sprites">
         <file alias="gatesSheet.png">res/sprites/logic_gates_64x64.png</file>
