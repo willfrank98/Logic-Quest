@@ -49,6 +49,7 @@ private:
     QGraphicsProxyWidget *soundButtonProxy;
     QGraphicsProxyWidget *helpButtonProxy;
     QVector<QPixmap> logicGatesPM;
+    QVector<QPixmap> roboBlocksPM;
 
     void onInit();
     void onUpdate(qreal delta);

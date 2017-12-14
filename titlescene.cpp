@@ -57,6 +57,21 @@ void TitleScene::onInit()
         }
     }
 
+    // TODO may not need entire sheet?
+    // Also help scene
+    // Creates a vector that contains a pixmap of the robo
+    QPixmap roboPM(":images/sprites/da1t_driving.png");
+    for (int row = 0; row < 4; row++){
+        for (int col = 0; col < 3; col++){
+            QRect rec(col*64, row*64, 64, 64);
+            QPixmap pmc = roboPM.copy(rec);
+            roboBlocksPM.append(pmc);
+        }
+    }
+    // places robo guide on screen, in bottom left.
+    createGate(roboBlocksPM[lgIndex] , QRectF(8, sceneRect().height() - 69, 64.0, 64.0),
+              QColor(0, 0, 0, 0), QColor(0, 0, 0, 0), Dynamic);
+
 // Adds more text
 //    font.setPointSize(14);
 //    QGraphicsTextItem *prompt = addText("Press SPACE to play!", font);
@@ -86,7 +101,7 @@ void TitleScene::onInit()
     soundButtonProxy = addWidget(soundButton);
     soundButtonProxy->setZValue(10.0);
 
-//    QPixmap *helpPix = new QPixmap(":/images/icons/EnableSound.png");
+    //QPixmap *helpPix = new QPixmap(":/images/icons/Help.png");
     QPushButton *helpButton = new QPushButton();
     helpButton->setGeometry(QRect(sceneRect().width() * .80, sceneRect().height() * .69, sceneRect().width() * .10, sceneRect().height() * .10));
     helpButton->setIcon(QIcon(":/images/icons/Help.png"));
@@ -213,7 +228,6 @@ void TitleScene::onUpdate(qreal delta)
             lgIndex = 0;
         }
     }
-
     tickCounter++;
 }
 /*
