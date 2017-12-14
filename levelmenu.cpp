@@ -17,8 +17,13 @@ void LevelMenu::onInit() {
     QFont font = QFont("Helvetica");
     font.setPointSize(24);
 
-    musicPlayer = new QMediaPlayer;
-    musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_04_-_Factory_Time.mp3"));
+
+    playlist = new QMediaPlaylist(this);
+    playlist->addMedia(QUrl("qrc:/sounds/ThroneRoom.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+    playlist->setCurrentIndex(1);
+    musicPlayer = new QMediaPlayer(this);
+    musicPlayer->setPlaylist(playlist);
     musicPlayer->setVolume(50);
     if(enableMusic) musicPlayer->play();
 

@@ -23,6 +23,7 @@ public:
 
 private:
 
+    QMediaPlaylist* playlist;
     QMediaPlayer *musicPlayer;
 
     //Back button to redirect to main menu
