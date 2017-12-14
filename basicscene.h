@@ -26,6 +26,7 @@
 #include <QActionGroup>
 #include <QtGlobal>
 #include <QMediaPlayer>
+#include <QMediaPlaylist>
 #include <QDrag>
 #include <QMimeData>
 #include <iostream>
@@ -58,6 +59,7 @@ public:
 private:
     QTimer timer;
     QElapsedTimer deltaKeeper;
+    QMediaPlaylist *playlist;
     QMediaPlayer *soundEffect, *musicPlayer;
     SpriteLoader *sl = new SpriteLoader();
     QPushButton* enableMusicButton;
