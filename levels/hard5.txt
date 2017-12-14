@@ -5,4 +5,14 @@ NL NL NL NL NL NL NL NL NL NL NL
 NL NL NL NL NL NL NL NL NL NL NL
 NL NL NL NL NL NL NL NL NL NL NL
 1
+S 0 1 0
+G 0 1
+G 1 2
+G 2 3
+G 3 4
+G 4 5
+G 5 6
+G 6 7
+G 7 8
+E 8 0
 N :/levels/tutorial.txt
