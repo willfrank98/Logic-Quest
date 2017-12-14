@@ -198,7 +198,7 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
         connect(&timer, &QTimer::timeout, this, [=](){
             emit changeScene(currentLevel.nextLevel());
         });
-        musicPlayer->stop();
+        //musicPlayer->stop();
 	}
 }
 
