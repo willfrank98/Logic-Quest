@@ -246,6 +246,23 @@ void TitleScene::endMusic()
 void TitleScene::tutorialMessage()
 {
     QMessageBox mbox;
+    mbox.setStyleSheet(QString::fromUtf8("QMessageBox {"
+                                         "background-color: rgb(35, 45, 51);"
+                                         "color: white;"
+                                         "}"
+                                         "QMessageBox QLabel {"
+                                         "color: white;"
+                                         "}"
+                                         "QMessageBox QPushButton {"
+                                         "background-color: rgb(68, 89, 99);"
+                                         "color: white;"
+                                         "width: 50px;"
+                                         "height: 25px;"
+                                         "border-radius: 5px;"
+                                         "}"
+                                         "QMessageBox QPushButton:pressed {"
+                                         "background-color: rgb(31, 65, 81);"
+                                         "}"));
     mbox.setText("The next few levels are tutorial levels to get you aquainted with the different logic gates in the game.  "
                  "Each tutorial level focuses on one gate at a time to help you get a feel for the effects of each gate type.  "
                  "After the tutorial levels you are on your own to solve each puzzle.  "
