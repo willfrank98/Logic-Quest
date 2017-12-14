@@ -22,7 +22,7 @@ void TitleScene::onInit()
               QColor(0, 0, 0), QColor(18,127,155));
 
     // Define a font
-    QFont font = QFont("Helvetica");
+    QFont font = QFont("Times");
 
     // Add some text, ignores physics
     // Perhaps move this to a 'createText' method or something
@@ -35,7 +35,6 @@ void TitleScene::onInit()
 
 
     //Intro music.
-
     playlist = new QMediaPlaylist(this);
     playlist->addMedia(QUrl("qrc:/sounds/Africa.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
@@ -44,6 +43,9 @@ void TitleScene::onInit()
     musicPlayer->setPlaylist(playlist);
     musicPlayer->setVolume(50);
     if(enableMusic) musicPlayer->play();
+
+    soundEffect = new QMediaPlayer;
+    soundEffect->setMedia(QUrl("qrc:/sounds/Photon.mp3"));
 
     // Creates a vector that contains a pixmap of each logic gate.
     QPixmap gatesPM(":images/sprites/gatesSheet.png");
@@ -84,10 +86,31 @@ void TitleScene::onInit()
     soundButtonProxy = addWidget(soundButton);
     soundButtonProxy->setZValue(10.0);
 
+//    QPixmap *helpPix = new QPixmap(":/images/icons/Help.png");
+    QPushButton *helpButton = new QPushButton();
+    helpButton->setGeometry(QRect(sceneRect().width() * .80, sceneRect().height() * .69, sceneRect().width() * .10, sceneRect().height() * .10));
+    helpButton->setIcon(QIcon(*helpPix));
+    helpButton->setIconSize(QSize(180,180));
+    helpButton->setAttribute(Qt::WA_TranslucentBackground);
+    helpButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 16px;"
+                               "border-style: solid;"
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}");
+    helpButtonProxy = addWidget(helpButton);
+    helpButtonProxy->setZValue(10.0);
+
+
     //Sets up menu buttons
     QPushButton *startButton = new QPushButton();
     startButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .45, sceneRect().width() * .30, sceneRect().height() * .10));
-    startButton->setText("Start Game");
+    startButton->setIcon(QIcon(":/images/icons/StartGame.png"));
+    startButton->setIconSize(QSize(180,180));
     startButton->setAttribute(Qt::WA_TranslucentBackground);
     startButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
@@ -104,7 +127,8 @@ void TitleScene::onInit()
 
     QPushButton *levelSelectButton = new QPushButton();
     levelSelectButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .57, sceneRect().width() * .30, sceneRect().height() * .10));
-    levelSelectButton->setText("Level Select");
+    levelSelectButton->setIcon(QIcon(":/images/icons/LevelSelect.png"));
+    levelSelectButton->setIconSize(QSize(190,190));
     levelSelectButton->setAttribute(Qt::WA_TranslucentBackground);
     levelSelectButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
@@ -121,7 +145,8 @@ void TitleScene::onInit()
 
     QPushButton *optionsButton = new QPushButton();
     optionsButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .69, sceneRect().width() * .30, sceneRect().height() * .10));
-    optionsButton->setText("Options");
+    optionsButton->setIcon(QIcon(":/images/icons/Options.png"));
+    optionsButton->setIconSize(QSize(120,120));
     optionsButton->setAttribute(Qt::WA_TranslucentBackground);
     optionsButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
@@ -138,7 +163,8 @@ void TitleScene::onInit()
 
     QPushButton *exitButton = new QPushButton();
     exitButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .81, sceneRect().width() * .30, sceneRect().height() * .10));
-    exitButton->setText("Exit");
+    exitButton->setIcon(QIcon(":/images/icons/Exit.png"));
+    exitButton->setIconSize(QSize(64,64));
     exitButton->setAttribute(Qt::WA_TranslucentBackground);
     exitButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
@@ -240,6 +266,8 @@ void TitleScene::enableDisableSound() {
 //Ends music when user exits Scene
 void TitleScene::endMusic()
 {
+    if(enableMusic)
+    soundEffect->play();
     musicPlayer->stop();
 }
 

@@ -20,7 +20,6 @@
 #include <QGraphicsProxyWidget>
 #include <QMessageBox>
 
-
 class TitleScene : public PhysicsScene
 {
 public:
@@ -41,12 +40,14 @@ private:
     QPushButton *soundButton;
     QMediaPlaylist* playlist;
     QMediaPlayer* musicPlayer;
+    QMediaPlayer* soundEffect;
     QGraphicsItem *clickedItem;
     QGraphicsProxyWidget *startButtonProxy;
     QGraphicsProxyWidget *levelSelectButtonProxy;
     QGraphicsProxyWidget *optionsButtonProxy;
     QGraphicsProxyWidget *exitButtonProxy;
     QGraphicsProxyWidget *soundButtonProxy;
+    QGraphicsProxyWidget *helpButtonProxy;
     QVector<QPixmap> logicGatesPM;
 
     void onInit();

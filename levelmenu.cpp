@@ -17,10 +17,17 @@ void LevelMenu::onInit() {
     QFont font = QFont("Helvetica");
     font.setPointSize(24);
 
-    musicPlayer = new QMediaPlayer;
-    musicPlayer->setMedia(QUrl("qrc:/sounds/Visager_-_04_-_Factory_Time.mp3"));
+    playlist = new QMediaPlaylist(this);
+    playlist->addMedia(QUrl("qrc:/sounds/ThroneRoom.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+    playlist->setCurrentIndex(1);
+    musicPlayer = new QMediaPlayer(this);
+    musicPlayer->setPlaylist(playlist);
     musicPlayer->setVolume(50);
     if(enableMusic) musicPlayer->play();
+
+    soundEffect = new QMediaPlayer;
+    soundEffect->setMedia(QUrl("qrc:/sounds/Photon.mp3"));
 
     QPixmap *backPix = new QPixmap(":/images/icons/Home.png");
     QIcon *backIcon = new QIcon(*backPix);
@@ -58,7 +65,8 @@ void LevelMenu::onInit() {
     /* Set the position, width, height, and color for EASY buttons*/
     QPushButton* levelOneEasyButton = new QPushButton();
     levelOneEasyButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.2, sceneRect().width()*0.1, sceneRect().height()*0.12));
-    levelOneEasyButton->setText("1");
+    levelOneEasyButton->setIcon(QIcon(":/images/icons/One.png"));
+    levelOneEasyButton->setIconSize(QSize(64,64));
     levelOneEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelOneEasyButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 249, 158);"
@@ -75,7 +83,8 @@ void LevelMenu::onInit() {
 
     QPushButton* levelTwoEasyButton = new QPushButton();
     levelTwoEasyButton->setGeometry(QRect(sceneRect().width()*0.25, sceneRect().height()*0.2, sceneRect().width()*0.1, sceneRect().height()*0.12));
-    levelTwoEasyButton->setText("2");
+    levelTwoEasyButton->setIcon(QIcon(":/images/icons/Two.png"));
+    levelTwoEasyButton->setIconSize(QSize(64,64));
     levelTwoEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelTwoEasyButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 249, 158);"
@@ -92,7 +101,8 @@ void LevelMenu::onInit() {
 
     QPushButton* levelThreeEasyButton = new QPushButton();
     levelThreeEasyButton->setGeometry(QRect(sceneRect().width()*0.45, sceneRect().height()*0.2, sceneRect().width()*0.1, sceneRect().height()*0.12));
-    levelThreeEasyButton->setText("3");
+    levelThreeEasyButton->setIcon(QIcon(":/images/icons/Three.png"));
+    levelThreeEasyButton->setIconSize(QSize(64,64));
     levelThreeEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelThreeEasyButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 249, 158);"
@@ -109,7 +119,8 @@ void LevelMenu::onInit() {
 
     QPushButton* levelFourEasyButton = new QPushButton();
     levelFourEasyButton->setGeometry(QRect(sceneRect().width()*0.65, sceneRect().height()*0.2, sceneRect().width()*0.1, sceneRect().height()*0.12));
-    levelFourEasyButton->setText("4");
+    levelFourEasyButton->setIcon(QIcon(":/images/icons/Four.png"));
+    levelFourEasyButton->setIconSize(QSize(64,64));
     levelFourEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFourEasyButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 249, 158);"
@@ -126,7 +137,8 @@ void LevelMenu::onInit() {
 
     QPushButton* levelFiveEasyButton = new QPushButton();
     levelFiveEasyButton->setGeometry(QRect(sceneRect().width()*0.85, sceneRect().height()*0.2, sceneRect().width()*0.1, sceneRect().height()*0.12));
-    levelFiveEasyButton->setText("5");
+    levelFiveEasyButton->setIcon(QIcon(":/images/icons/Five.png"));
+    levelFiveEasyButton->setIconSize(QSize(64,64));
     levelFiveEasyButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFiveEasyButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 249, 158);"
@@ -149,7 +161,8 @@ void LevelMenu::onInit() {
     /* Set the position, width, height, and color for MEDIUM buttons*/
     QPushButton* levelOneMediumButton = new QPushButton();
     levelOneMediumButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.45, sceneRect().width()*0.1, sceneRect().height()*0.12));
-    levelOneMediumButton->setText("1");
+    levelOneMediumButton->setIcon(QIcon(":/images/icons/One.png"));
+    levelOneMediumButton->setIconSize(QSize(64,64));
     levelOneMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelOneMediumButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 235, 249);"
@@ -166,7 +179,8 @@ void LevelMenu::onInit() {
 
     QPushButton* levelTwoMediumButton = new QPushButton();
     levelTwoMediumButton->setGeometry(QRect(sceneRect().width()*0.25, sceneRect().height()*0.45, sceneRect().width()*0.1, sceneRect().height()*0.12));
-    levelTwoMediumButton->setText("2");
+    levelTwoMediumButton->setIcon(QIcon(":/images/icons/Two.png"));
+    levelTwoMediumButton->setIconSize(QSize(64,64));
     levelTwoMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelTwoMediumButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 235, 249);"
@@ -183,7 +197,8 @@ void LevelMenu::onInit() {
 
     QPushButton* levelThreeMediumButton = new QPushButton();
     levelThreeMediumButton->setGeometry(QRect(sceneRect().width()*0.45, sceneRect().height()*0.45, sceneRect().width()*0.1, sceneRect().height()*0.12));
-    levelThreeMediumButton->setText("3");
+    levelThreeMediumButton->setIcon(QIcon(":/images/icons/Three.png"));
+    levelThreeMediumButton->setIconSize(QSize(64,64));
     levelThreeMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelThreeMediumButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 235, 249);"
@@ -200,7 +215,8 @@ void LevelMenu::onInit() {
 
     QPushButton* levelFourMediumButton = new QPushButton();
     levelFourMediumButton->setGeometry(QRect(sceneRect().width()*0.65, sceneRect().height()*0.45, sceneRect().width()*0.1, sceneRect().height()*0.12));
-    levelFourMediumButton->setText("4");
+    levelFourMediumButton->setIcon(QIcon(":/images/icons/Four.png"));
+    levelFourMediumButton->setIconSize(QSize(64,64));
     levelFourMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFourMediumButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 235, 249);"
@@ -217,7 +233,8 @@ void LevelMenu::onInit() {
 
     QPushButton* levelFiveMediumButton = new QPushButton();
     levelFiveMediumButton->setGeometry(sceneRect().width()*0.85, sceneRect().height()*0.45, sceneRect().width()*0.1, sceneRect().height()*0.12);
-    levelFiveMediumButton->setText("5");
+    levelFiveMediumButton->setIcon(QIcon(":/images/icons/Five.png"));
+    levelFiveMediumButton->setIconSize(QSize(64,64));
     levelFiveMediumButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFiveMediumButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(92, 235, 249);"
@@ -241,7 +258,8 @@ void LevelMenu::onInit() {
     /* Set the position, width, height, and color for HARD buttons*/
     QPushButton* levelOneHardButton = new QPushButton();
     levelOneHardButton->setGeometry(sceneRect().width()*0.05, sceneRect().height()*0.7, sceneRect().width()*0.1, sceneRect().height()*0.12);
-    levelOneHardButton->setText("1");
+    levelOneHardButton->setIcon(QIcon(":/images/icons/One.png"));
+    levelOneHardButton->setIconSize(QSize(64,64));
     levelOneHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelOneHardButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(249, 92, 131);"
@@ -258,7 +276,8 @@ void LevelMenu::onInit() {
 
     QPushButton* levelTwoHardButton = new QPushButton();
     levelTwoHardButton->setGeometry(sceneRect().width()*0.25, sceneRect().height()*0.7, sceneRect().width()*0.1, sceneRect().height()*0.12);
-    levelTwoHardButton->setText("2");
+    levelTwoHardButton->setIcon(QIcon(":/images/icons/Two.png"));
+    levelTwoHardButton->setIconSize(QSize(64,64));
     levelTwoHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelTwoHardButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(249, 92, 131);"
@@ -275,7 +294,8 @@ void LevelMenu::onInit() {
 
     QPushButton* levelThreeHardButton = new QPushButton();
     levelThreeHardButton->setGeometry(sceneRect().width()*0.45, sceneRect().height()*0.7, sceneRect().width()*0.1, sceneRect().height()*0.12);
-    levelThreeHardButton->setText("3");
+    levelThreeHardButton->setIcon(QIcon(":/images/icons/Three.png"));
+    levelThreeHardButton->setIconSize(QSize(64,64));
     levelThreeHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelThreeHardButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(249, 92, 131);"
@@ -292,7 +312,8 @@ void LevelMenu::onInit() {
 
     QPushButton* levelFourHardButton = new QPushButton();
     levelFourHardButton->setGeometry(sceneRect().width()*0.65, sceneRect().height()*0.7, sceneRect().width()*0.1, sceneRect().height()*0.12);
-    levelFourHardButton->setText("4");
+    levelFourHardButton->setIcon(QIcon(":/images/icons/Four.png"));
+    levelFourHardButton->setIconSize(QSize(64,64));
     levelFourHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFourHardButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(249, 92, 131);"
@@ -309,7 +330,8 @@ void LevelMenu::onInit() {
 
     QPushButton* levelFiveHardButton = new QPushButton();
     levelFiveHardButton->setGeometry(sceneRect().width()*0.85, sceneRect().height()*0.7, sceneRect().width()*0.1, sceneRect().height()*0.12);
-    levelFiveHardButton->setText("5");
+    levelFiveHardButton->setIcon(QIcon(":/images/icons/Five.png"));
+    levelFiveHardButton->setIconSize(QSize(64,64));
     levelFiveHardButton->setAttribute(Qt::WA_TranslucentBackground);
     levelFiveHardButton->setStyleSheet("QPushButton {"
                                       "background-color: rgb(249, 92, 131);"
@@ -369,5 +391,7 @@ void LevelMenu::onInit() {
 
 //Ends music when user exits Scene
 void LevelMenu::endMusic() {
+    if(enableMusic)
+    soundEffect->play();
     musicPlayer->stop();
 }

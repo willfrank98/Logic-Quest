@@ -139,6 +139,7 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
     if (currentLevel.checkOutputs()){
         setScore(3);
     }
+
     //update score accordingly (bonus from ticker too?)
 
     currentSelectedGate->setEnabled(true);
@@ -245,6 +246,17 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
         QMouseEvent* mev = (QMouseEvent*)event;
         if (itemAt(mev->localPos(), QTransform()) != nullptr)
         {
+            qreal width = sceneRect().width();
+            qreal height = sceneRect().height();
+            int trayHeight = 100;
+
+            if (mev->localPos().y() > height - trayHeight)
+            {
+                for (QPushButton* qbtn : gateButtons)
+                {
+                    qbtn->setEnabled(true);
+                }
+            }
 //            qreal width = sceneRect().width();
 //            qreal height = sceneRect().height();
 
@@ -438,7 +450,7 @@ void BasicScene::addGatesOnToolbar()
         logicGates[index]->setAttribute(Qt::WA_TranslucentBackground);
         logicGates[index]->setIcon(QIcon(gate));
         logicGates[index]->setIconSize(gate.size());
-		logicGates[index]->setGeometry(gateLocation+=gate.width(), height-68, gate.width() + 2, gate.height() + 2);
+        logicGates[index]->setGeometry(gateLocation+=gate.width(), height-80, gate.width() + 2, gate.height() + 2);
         logicGates[index]->setEnabled(true);
         logicGates[index]->setCheckable(true);
         logicGates[index]->setAccessibleName(gateNames[index]);
@@ -447,6 +459,7 @@ void BasicScene::addGatesOnToolbar()
         logicGates[index]->setToolTip(gateNames[index].toUpper() + " Gate");
         btnGroup->addButton(logicGates[index]);
         addWidget(logicGates[index]);
+        gateButtons.append(logicGates[index]);
 
         // It might be easier to just toggle the active gate to place in a spot
         // Would just have to store the currently selected gate and check against it
@@ -542,6 +555,10 @@ void BasicScene::SoundEffectSelect(int sound) {
             soundEffect->setVolume(90);
             soundEffect->play();
             break;
+        case 3:
+            soundEffect->setMedia(QUrl("qrc:/sounds/FalconFail.mp3"));
+            soundEffect->setVolume(90);
+            soundEffect->play();
         }
     }
 }
