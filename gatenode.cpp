@@ -94,7 +94,7 @@ int GateNode::norGate()
 int GateNode::notGate()
 {
     //checks if output from input nodes are set
-    if(inputNode1->getOutput() < 0 || inputNode2->getOutput() < 0) {
+    if(inputNode1->getOutput() < 0) {
         return -1;
     }
 
