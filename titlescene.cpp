@@ -44,6 +44,9 @@ void TitleScene::onInit()
     musicPlayer->setVolume(50);
     if(enableMusic) musicPlayer->play();
 
+    soundEffect = new QMediaPlayer;
+    soundEffect->setMedia(QUrl("qrc:/sounds/Photon.mp3"));
+
     // Creates a vector that contains a pixmap of each logic gate.
     QPixmap gatesPM(":images/sprites/gatesSheet.png");
     for (int row = 0; row < 3; row++){
@@ -243,6 +246,8 @@ void TitleScene::enableDisableSound() {
 //Ends music when user exits Scene
 void TitleScene::endMusic()
 {
+    if(enableMusic)
+    soundEffect->play();
     musicPlayer->stop();
 }
 

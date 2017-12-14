@@ -25,6 +25,7 @@ private:
 
     QMediaPlaylist* playlist;
     QMediaPlayer *musicPlayer;
+    QMediaPlayer* soundEffect;
 
     //Back button to redirect to main menu
     QGraphicsProxyWidget* backToHomeProxy;

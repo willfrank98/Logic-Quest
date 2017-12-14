@@ -17,7 +17,6 @@ void LevelMenu::onInit() {
     QFont font = QFont("Helvetica");
     font.setPointSize(24);
 
-
     playlist = new QMediaPlaylist(this);
     playlist->addMedia(QUrl("qrc:/sounds/ThroneRoom.mp3"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
@@ -26,6 +25,9 @@ void LevelMenu::onInit() {
     musicPlayer->setPlaylist(playlist);
     musicPlayer->setVolume(50);
     if(enableMusic) musicPlayer->play();
+
+    soundEffect = new QMediaPlayer;
+    soundEffect->setMedia(QUrl("qrc:/sounds/Photon.mp3"));
 
     QPixmap *backPix = new QPixmap(":/images/icons/Home.png");
     QIcon *backIcon = new QIcon(*backPix);
@@ -389,5 +391,7 @@ void LevelMenu::onInit() {
 
 //Ends music when user exits Scene
 void LevelMenu::endMusic() {
+    if(enableMusic)
+    soundEffect->play();
     musicPlayer->stop();
 }

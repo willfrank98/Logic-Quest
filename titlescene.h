@@ -40,6 +40,7 @@ private:
     QPushButton *soundButton;
     QMediaPlaylist* playlist;
     QMediaPlayer* musicPlayer;
+    QMediaPlayer* soundEffect;
     QGraphicsItem *clickedItem;
     QGraphicsProxyWidget *startButtonProxy;
     QGraphicsProxyWidget *levelSelectButtonProxy;

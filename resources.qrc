@@ -36,6 +36,7 @@
         <file alias="Thriller.mp3">res/sounds/Thriller.mp3</file>
         <file alias="FalconFail.mp3">res/sounds/FalconFail.mp3</file>
         <file alias="ThroneRoom.mp3">res/sounds/ThroneRoom.mp3</file>
+        <file alias="Photon.mp3">res/sounds/Photon.mp3</file>
     </qresource>
     <qresource prefix="/levels">
         <file alias="tutorial.txt">levels/tutorial.txt</file>
