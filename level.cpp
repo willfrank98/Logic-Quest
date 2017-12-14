@@ -7,7 +7,6 @@
 
 #include "level.h"
 
-
 Level::Level()
 {
     isComplete = false;
@@ -21,20 +20,31 @@ Level::Level(QString filename)
 {
     QFile file(filename);
 
+    std::regex levelNumber("[0-9]");
+    std::smatch lvl;
+    std::string num;
+    std::regex_search(filename.toStdString(), lvl, levelNumber);
+    num = lvl.str();
+
+    this->setLevelNumber("LVL: " + QString::fromStdString(num));
+
     if (std::regex_match(filename.toStdString(),  std::regex(":/levels/easy(.*)"))){
+
         qDebug() << "[INFO] EASY____!!!";
+
         difficulty = 1;
+        this->setDifficultyString("DIFFICULTY: EASY");
     }
     else if (std::regex_match(filename.toStdString(), std::regex(":/levels/medium(.*)"))){
-        qDebug() << "[INFO] MEDIUM____!!!";
         difficulty = 2;
+        this->setDifficultyString("DIFFICULTY: MEDIUM");
     }
     else {
-        qDebug() << "[INFO] HARD____!!!";
         difficulty = 3;
+        this->setDifficultyString("DIFFICULTY: HARD");
     }
-
     levelScore = 0;
+    qDebug() << "goals..end of level const size is " <<goals.size();
     if(file.open(QIODevice::ReadOnly))
     {
 
@@ -149,14 +159,7 @@ bool Level::checkOutputs()
 
 QVector<int> Level::setGateType(int gateIndex, GateNodeType type)
 {
-    // it seems this is the crash is related to this line(first drag & drop on medium levels 4 or 5)
-    // but this try does not seem to catch it? other possible location is 176 in basicscene.cpp
-    try {
-        gates[gateIndex]->setGateType(type);
-    }
-    catch (const std::exception& e){
-        qDebug() << "[INFO] " << e.what();
-    }
+    gates[gateIndex]->setGateType(type);
 
     QVector<int> results = gates[gateIndex]->processGate();
     if(results.size() > 0)
@@ -337,4 +340,20 @@ int Level::getScore()
 QString Level::nextLevel()
 {
 	return this->nextLevelAddress;
+}
+QString Level::getLevelNumber()
+{
+    return this->levelNumber;
+}
+void Level::setLevelNumber(QString name)
+{
+    this->levelNumber = name;
+}
+QString Level::getDifficultyString()
+{
+    return this->difficultyString;
+}
+void Level::setDifficultyString(QString diff)
+{
+    this->difficultyString = diff;
 }

@@ -7,7 +7,6 @@
 
 #include "physicsscene.h"
 
-
 // Initializes the world and such
 PhysicsScene::PhysicsScene(QObject *parent) : QGraphicsScene(parent)
 {
