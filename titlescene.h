@@ -11,6 +11,7 @@
 #include <physicsscene.h>
 #include <QVector>
 #include <QMediaPlayer>
+#include <QMediaPlaylist>
 #include <QDebug>
 #include <QGraphicsRectItem>
 #include <QGraphicsView>
@@ -38,6 +39,7 @@ private:
     int lgIndex = 0;    //used for alternating which logic block is dropped
     QIcon *soundItem;
     QPushButton *soundButton;
+    QMediaPlaylist* playlist;
     QMediaPlayer* musicPlayer;
     QGraphicsItem *clickedItem;
     QGraphicsProxyWidget *startButtonProxy;

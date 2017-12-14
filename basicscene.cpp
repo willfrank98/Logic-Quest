@@ -35,9 +35,13 @@ BasicScene::BasicScene(Level level)
         deltaKeeper.restart();
     });
 
+    playlist = new QMediaPlaylist(this);
+    playlist->addMedia(QUrl("qrc:/sounds/Thriller.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+    playlist->setCurrentIndex(1);
     soundEffect = new QMediaPlayer;
-    musicPlayer = new QMediaPlayer;
-    musicPlayer->setMedia(QUrl("qrc:/sounds/Thriller.mp3"));
+    musicPlayer = new QMediaPlayer(this);
+    musicPlayer->setPlaylist(playlist);
     musicPlayer->setVolume(50);
     if(enableMusic) musicPlayer->play();
 

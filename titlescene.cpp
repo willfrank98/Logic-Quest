@@ -19,7 +19,7 @@ void TitleScene::onInit()
     // Create a static box representing the ground
     // Just gonna leave this enabled until the sprite loading is working
     createBox(QRectF(0.0, sceneRect().height() - 16.0, sceneRect().width(), 16.0),
-              QColor(0, 0, 0), QColor(100, 120, 255));
+              QColor(0, 0, 0), QColor(18,127,155));
 
     // Define a font
     QFont font = QFont("Helvetica");
@@ -35,8 +35,13 @@ void TitleScene::onInit()
 
 
     //Intro music.
-    musicPlayer = new QMediaPlayer;
-    musicPlayer->setMedia(QUrl("qrc:/sounds/Africa.mp3"));
+
+    playlist = new QMediaPlaylist(this);
+    playlist->addMedia(QUrl("qrc:/sounds/Africa.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+    playlist->setCurrentIndex(1);
+    musicPlayer = new QMediaPlayer(this);
+    musicPlayer->setPlaylist(playlist);
     musicPlayer->setVolume(50);
     if(enableMusic) musicPlayer->play();
 
@@ -149,7 +154,7 @@ void TitleScene::onInit()
     exitButtonProxy->setZValue(10.0);
 
     //Connects menu buttons
-    connect(startButton, &QPushButton::clicked, this, [=](){tutorialMessage(); emit(changeScene(":/levels/tutorial.txt"));}, Qt::QueuedConnection);
+    connect(startButton, &QPushButton::clicked, this, [=](){tutorialMessage(); emit(changeScene(":/levels/tutorial1.txt"));}, Qt::QueuedConnection);
     connect(levelSelectButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
     connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("options"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
@@ -241,6 +246,23 @@ void TitleScene::endMusic()
 void TitleScene::tutorialMessage()
 {
     QMessageBox mbox;
+    mbox.setStyleSheet(QString::fromUtf8("QMessageBox {"
+                                         "background-color: rgb(35, 45, 51);"
+                                         "color: white;"
+                                         "}"
+                                         "QMessageBox QLabel {"
+                                         "color: white;"
+                                         "}"
+                                         "QMessageBox QPushButton {"
+                                         "background-color: rgb(68, 89, 99);"
+                                         "color: white;"
+                                         "width: 50px;"
+                                         "height: 25px;"
+                                         "border-radius: 5px;"
+                                         "}"
+                                         "QMessageBox QPushButton:pressed {"
+                                         "background-color: rgb(31, 65, 81);"
+                                         "}"));
     mbox.setText("The next few levels are tutorial levels to get you aquainted with the different logic gates in the game.  "
                  "Each tutorial level focuses on one gate at a time to help you get a feel for the effects of each gate type.  "
                  "After the tutorial levels you are on your own to solve each puzzle.  "
