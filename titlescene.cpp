@@ -86,6 +86,26 @@ void TitleScene::onInit()
     soundButtonProxy = addWidget(soundButton);
     soundButtonProxy->setZValue(10.0);
 
+//    QPixmap *helpPix = new QPixmap(":/images/icons/EnableSound.png");
+    QPushButton *helpButton = new QPushButton();
+    helpButton->setGeometry(QRect(sceneRect().width() * .80, sceneRect().height() * .69, sceneRect().width() * .10, sceneRect().height() * .10));
+    helpButton->setIcon(QIcon(":/images/icons/StartGame.png"));
+    helpButton->setIconSize(QSize(180,180));
+    helpButton->setAttribute(Qt::WA_TranslucentBackground);
+    helpButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 16px;"
+                               "border-style: solid;"
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}");
+    helpButtonProxy = addWidget(helpButton);
+    helpButtonProxy->setZValue(10.0);
+
+
     //Sets up menu buttons
     QPushButton *startButton = new QPushButton();
     startButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .45, sceneRect().width() * .30, sceneRect().height() * .10));

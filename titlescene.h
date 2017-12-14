@@ -47,6 +47,7 @@ private:
     QGraphicsProxyWidget *optionsButtonProxy;
     QGraphicsProxyWidget *exitButtonProxy;
     QGraphicsProxyWidget *soundButtonProxy;
+    QGraphicsProxyWidget *helpButtonProxy;
     QVector<QPixmap> logicGatesPM;
 
     void onInit();
