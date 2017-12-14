@@ -13,6 +13,7 @@ public:
     void onInit();
 
 private:
+    QGraphicsProxyWidget* backToHomeProxy;
     QGraphicsProxyWidget* andGateProxy;
     QGraphicsProxyWidget* nandGateProxy;
     QGraphicsProxyWidget* orGateProxy;

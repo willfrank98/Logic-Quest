@@ -7,6 +7,26 @@ HelpScene::HelpScene()
 
 void HelpScene::onInit()
 {
+    QPixmap *backPix = new QPixmap(":/images/icons/Home.png");
+    QIcon *backIcon = new QIcon(*backPix);
+    QPushButton* backButton = new QPushButton();
+    backButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.05, 60, 40));
+    backButton->setIcon(*backIcon);
+    backButton->setAttribute(Qt::WA_TranslucentBackground);
+    backButton->setStyleSheet("QPushButton {"
+                               "background-color: rgb(68, 89, 99);"
+                               "color: white;"
+                               "font-size: 16px;"
+                               "border-style: solid;"
+                               "border-radius: 10px;"
+                               "}"
+                              "QPushButton:pressed {"
+                              "background-color: rgb(31, 65, 81);"
+                              "}"
+                              );
+    backToHomeProxy = addWidget(backButton);
+    backToHomeProxy->setZValue(10.0);
+
     QPushButton* andGateButton = new QPushButton();
     andGateButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .1, sceneRect().width() * .30, sceneRect().height() * .10));
     andGateButton->setText("AND");
@@ -115,6 +135,10 @@ void HelpScene::onInit()
     notGateProxy = addWidget(notGateButton);
     notGateProxy-> setZValue(10.0);
 
+    /* Draw the ground on to this scene exactly like the title scene*/
     createBox(QRectF(0.0, sceneRect().height() - 16.0, sceneRect().width(), 16.0),
               QColor(0, 0, 0), QColor(18,127,155));
+
+    /* Back button connection to link back to main menu */
+    connect(backButton, &QPushButton::clicked, this, [=](){emit(changeScene("title"));}, Qt::QueuedConnection);
 }
