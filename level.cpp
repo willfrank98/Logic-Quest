@@ -23,14 +23,12 @@ Level::Level(QString filename)
     std::regex levelNumber("[0-9]");
     std::smatch lvl;
     std::string num;
-    std::regex_search(filename.toStdString(), lvl, levelNumber);
+    //std::regex_search(filename.toStdString(), lvl, levelNumber);
     num = lvl.str();
 
     this->setLevelNumber("LVL: " + QString::fromStdString(num));
 
     if (std::regex_match(filename.toStdString(),  std::regex(":/levels/easy(.*)"))){
-
-        qDebug() << "[INFO] EASY____!!!";
 
         difficulty = 1;
         this->setDifficultyString("DIFFICULTY: EASY");
@@ -44,7 +42,6 @@ Level::Level(QString filename)
         this->setDifficultyString("DIFFICULTY: HARD");
     }
     levelScore = 0;
-    qDebug() << "goals..end of level const size is " <<goals.size();
     if(file.open(QIODevice::ReadOnly))
     {
 
