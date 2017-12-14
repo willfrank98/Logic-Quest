@@ -152,7 +152,7 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
     if (currentLevel.getLayout()[xL/gridWidth + yL/gridHeight*numCols] == UG) {
 
         int gateNodeLocation = currentLevel.getGateNodeIndex(yL/gridHeight*numCols + xL/gridWidth);
-        qDebug() << currentSelectedGate->accessibleDescription();
+        //qDebug() << currentSelectedGate->accessibleDescription();
         if(currentSelectedGate->accessibleDescription() == "3")
         {
             if(currentLevel.hasTwoInputs(gateNodeLocation))
@@ -162,10 +162,6 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 
         }
         createGate(QPointF(xL, yL), QSize(gridWidth, gridHeight),  currentSelectedGate->accessibleName());
-//        qDebug() << gateDes[currentSelectedGate->accessibleDescription().toInt()];
-//        qDebug() <<  yL/gridHeight << xL/gridWidth;
-//        qDebug() << yL/gridHeight*numCols+ xL/gridWidth;
-//        qDebug() << numCols;
 
         // update back end with gate played by user
         SoundEffectSelect(1);
@@ -229,26 +225,27 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
         timer.start();
     }
 
+    /***** should this remain or be removed ??????????? *****/
     // Handles clicks on the scene, can't click through ProxyWidgets
     else if (event->type() == QEvent::MouseButtonPress)
     {
         QMouseEvent* mev = (QMouseEvent*)event;
         if (itemAt(mev->localPos(), QTransform()) != nullptr)
         {
-            qreal width = sceneRect().width();
-            qreal height = sceneRect().height();
+//            qreal width = sceneRect().width();
+//            qreal height = sceneRect().height();
 
-            int trayWidth = width/12;
-            int trayHeight = 100;
+//            int trayWidth = width/12;
+//            int trayHeight = 100;
 
-            int gridWidth = (width - (2 * trayWidth)) / numCols;
-            int gridHeight = (height - trayHeight) / numRows;
+//            int gridWidth = (width - (2 * trayWidth)) / numCols;
+//            int gridHeight = (height - trayHeight) / numRows;
 
-            int x = (mev->x() - trayWidth)/gridWidth;
-            int y = mev->y()/gridHeight;
-            //qDebug() << "x, y :" << x << y;
-            //qDebug() << itemAt(mev->localPos(), QTransform())->data(Name);
+//             int x = (mev->x() - trayWidth)/gridWidth;
+//             int y = mev->y()/gridHeight;
+
         }
+        /*****                                    *****/
     }
     // Passes the event to be handled in the default manner
     return QGraphicsScene::eventFilter(watched, event);
@@ -426,7 +423,6 @@ void BasicScene::addGatesOnToolbar()
         logicGates[index]->setAccessibleName(gateNames[index]);
         logicGates[index]->setAccessibleDescription(QString::number(index));
         logicGates[index]->setToolTip(gateNames[index]);
-        //qDebug() << logicGates[index]->accessibleName();
         logicGates[index]->setToolTip(gateNames[index].toUpper() + " Gate");
         btnGroup->addButton(logicGates[index]);
         addWidget(logicGates[index]);
@@ -439,7 +435,7 @@ void BasicScene::addGatesOnToolbar()
             currentSelectedGate = currentButton;
             currentSelectedGate->setChecked(true);
             currentSelectedGate->setEnabled(false);
-            qDebug()<< "currentButton->accessibleName() = "+ currentButton->accessibleName();
+            //qDebug()<< "[INFO]" << "currentButton->accessibleName() ="+ currentButton->accessibleName();
             currentSelectedGate->setAccessibleName(currentButton->accessibleName());
             currentSelectedGate->setAccessibleDescription(currentButton->accessibleDescription());
             // drag for log gate onto game space
@@ -506,7 +502,7 @@ QPixmap BasicScene::getGatePixmap(QString string)
     else if(string == "xor") frame = 3;
     else if(string == "nor") frame = 4;
     else if(string == "not") frame = 5;
-    else qDebug() << "error in gate selection for dragMISTAKE!!!!!!";
+    else qDebug() << "[INFO]" << " error in gate selection for drag MISTAKE!!!!!!";
 
     return sl->getSprite(":/images/sprites/gatesSheet.png", QSize(64, 64), frame);
 }
