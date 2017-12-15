@@ -17,6 +17,9 @@ void HelpScene::onInit()
     musicPlayer->setVolume(75);
     if(enableMusic) musicPlayer->play();
 
+    truthTable = new QPixmap();
+    truthTableItem = addPixmap(*truthTable);
+
     QPixmap *backPix = new QPixmap(":/images/icons/Home.png");
     QIcon *backIcon = new QIcon(*backPix);
     QPushButton* backButton = new QPushButton();
@@ -184,6 +187,27 @@ void HelpScene::onUpdate(qreal delta)
 
 void HelpScene::updateTruthTable(QString name)
 {
+    if(name == "and") {
+       truthTable = new QPixmap(":/images/icons/andTT.png");
+       truthTableItem = addPixmap(*truthTable);
+    } else if(name == "or") {
+       truthTable = new QPixmap(":/images/icons/orTT.png");
+       truthTableItem = addPixmap(*truthTable);
+    } else if(name == "nand") {
+       truthTable = new QPixmap(":/images/icons/nandTT.png");
+       truthTableItem = addPixmap(*truthTable);
+    } else if(name == "nor") {
+       truthTable = new QPixmap(":/images/icons/norTT.png");
+       truthTableItem = addPixmap(*truthTable);
+    } else if(name == "xor") {
+       truthTable = new QPixmap(":/images/icons/xorTT.png");
+       truthTableItem = addPixmap(*truthTable);
+    } else {
+       truthTable = new QPixmap(":/images/icons/notTT.png");
+       truthTableItem = addPixmap(*truthTable);
+    }
+    truthTableItem->setScale(.5);
+    truthTableItem->setPos(sceneRect().width()/1.2 - truthTableItem->boundingRect().width()/3.5, 200);
     //TODO: switch the pixmap to the correct truth table
     qDebug() << name;
 }
