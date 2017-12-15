@@ -130,12 +130,12 @@ void TitleScene::onInit()
     levelSelectButtonProxy = addWidget(levelSelectButton);
     levelSelectButtonProxy->setZValue(10.0);
 
-    QPushButton *optionsButton = new QPushButton();
-    optionsButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .69, sceneRect().width() * .30, sceneRect().height() * .10));
-    optionsButton->setIcon(QIcon(":/images/icons/Options.png"));
-    optionsButton->setIconSize(QSize(120,120));
-    optionsButton->setAttribute(Qt::WA_TranslucentBackground);
-    optionsButton->setStyleSheet("QPushButton {"
+	QPushButton *exitButton = new QPushButton();
+	exitButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .69, sceneRect().width() * .30, sceneRect().height() * .10));
+	exitButton->setIcon(QIcon(":/images/icons/Exit.png"));
+	exitButton->setIconSize(QSize(64,64));
+	exitButton->setAttribute(Qt::WA_TranslucentBackground);
+	exitButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"
                                "color: white;"
                                "font-size: 16px;"
@@ -145,38 +145,38 @@ void TitleScene::onInit()
                               "QPushButton:pressed {"
                               "background-color: rgb(31, 65, 81);"
                               "}");
-    optionsButtonProxy = addWidget(optionsButton);
-    optionsButtonProxy->setZValue(10.0);
+	exitButtonProxy = addWidget(exitButton);
+	exitButtonProxy->setZValue(10.0);
 
-    QPushButton *exitButton = new QPushButton();
-    exitButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .81, sceneRect().width() * .30, sceneRect().height() * .10));
-    exitButton->setIcon(QIcon(":/images/icons/Exit.png"));
-    exitButton->setIconSize(QSize(64,64));
-    exitButton->setAttribute(Qt::WA_TranslucentBackground);
-    exitButton->setStyleSheet("QPushButton {"
-                               "background-color: rgb(68, 89, 99);"
-                               "color: white;"
-                               "font-size: 16px;"
-                               "border-style: solid;"
-                               "border-radius: 10px;"
-                               "}"
-                              "QPushButton:pressed {"
-                              "background-color: rgb(31, 65, 81);"
-                              "}");
-    exitButtonProxy = addWidget(exitButton);
-    exitButtonProxy->setZValue(10.0);
+//    QPushButton *exitButton = new QPushButton();
+//    exitButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .81, sceneRect().width() * .30, sceneRect().height() * .10));
+//    exitButton->setIcon(QIcon(":/images/icons/Exit.png"));
+//    exitButton->setIconSize(QSize(64,64));
+//    exitButton->setAttribute(Qt::WA_TranslucentBackground);
+//    exitButton->setStyleSheet("QPushButton {"
+//                               "background-color: rgb(68, 89, 99);"
+//                               "color: white;"
+//                               "font-size: 16px;"
+//                               "border-style: solid;"
+//                               "border-radius: 10px;"
+//                               "}"
+//                              "QPushButton:pressed {"
+//                              "background-color: rgb(31, 65, 81);"
+//                              "}");
+//    exitButtonProxy = addWidget(exitButton);
+//    exitButtonProxy->setZValue(10.0);
 
     //Connects menu buttons
     connect(startButton, &QPushButton::clicked, this, [=](){tutorialMessage(); emit(changeScene(":/levels/tutorial1.txt"));}, Qt::QueuedConnection);
     connect(levelSelectButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
-    connect(optionsButton, &QPushButton::clicked, this, [=](){emit(changeScene("options"));}, Qt::QueuedConnection);
+	//connect(exitButton, &QPushButton::clicked, this, [=](){emit(changeScene("options"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
     connect(helpButton, &QPushButton::clicked, this, [=](){emit(changeScene("helpscene"));}, Qt::QueuedConnection);
     connect(soundButton, &QPushButton::clicked, this, &TitleScene::enableDisableSound, Qt::QueuedConnection);
 
     connect(startButton, &QPushButton::clicked, this, &TitleScene::endMusic);
     connect(levelSelectButton, &QPushButton::clicked, this, &TitleScene::endMusic);
-    connect(optionsButton, &QPushButton::clicked, this, &TitleScene::endMusic);
+	connect(exitButton, &QPushButton::clicked, this, &TitleScene::endMusic);
     connect(exitButton, &QPushButton::clicked, this, &TitleScene::endMusic);
     connect(helpButton, &QPushButton::clicked, this, &TitleScene::endMusic);
 
