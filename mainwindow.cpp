@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Logic Quest");
 
     // Set the initial scene to the title scene
     ui->graphicsView->setScene(scenes->getScene("Title"));

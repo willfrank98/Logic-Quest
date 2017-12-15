@@ -12,7 +12,10 @@ public:
     HelpScene();
     void onInit();
 
-private:
+private: 
+    QMediaPlaylist* playlist;
+    QMediaPlayer* musicPlayer;
+
     QGraphicsProxyWidget* backToHomeProxy;
     QGraphicsProxyWidget* andGateProxy;
     QGraphicsProxyWidget* nandGateProxy;

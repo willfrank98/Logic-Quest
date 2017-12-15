@@ -7,6 +7,16 @@ HelpScene::HelpScene()
 
 void HelpScene::onInit()
 {
+
+    playlist = new QMediaPlaylist(this);
+    playlist->addMedia(QUrl("qrc:/sounds/ReyTheme.mp3"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+    playlist->setCurrentIndex(1);
+    musicPlayer = new QMediaPlayer(this);
+    musicPlayer->setPlaylist(playlist);
+    musicPlayer->setVolume(50);
+    if(enableMusic) musicPlayer->play();
+
     QPixmap *backPix = new QPixmap(":/images/icons/Home.png");
     QIcon *backIcon = new QIcon(*backPix);
     QPushButton* backButton = new QPushButton();

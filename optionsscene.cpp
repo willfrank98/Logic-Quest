@@ -17,10 +17,17 @@ void OptionsScene::onInit()
 	QFont font = QFont("Helvetica");
 	font.setPointSize(24);
 
+    QPixmap *logoPix = new QPixmap(":/images/icons/logoWithoutGates.png");
+    QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
+    pixItem->setScale(0.5);
+    pixItem->setPos(pixItem->boundingRect().width() * 1.60, 40);
+
 	//draw back button
+    QPixmap *backPix = new QPixmap(":/images/icons/Home.png");
+    QIcon *backIcon = new QIcon(*backPix);
 	QPushButton* backButton = new QPushButton();
 	backButton->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.05, 60, 40));
-	backButton->setText("Back");
+    backButton->setIcon(*backIcon);
 	backButton->setAttribute(Qt::WA_TranslucentBackground);
 	backButton->setStyleSheet("QPushButton {"
 							   "background-color: rgb(68, 89, 99);"
@@ -36,11 +43,12 @@ void OptionsScene::onInit()
 	backToHomeProxy = addWidget(backButton);
 	backToHomeProxy->setZValue(10.0);
 
-	QGraphicsTextItem *easy = addText("Resolution", font);
-	easy->setPos(sceneRect().width() / 2.0 - easy->boundingRect().width()/2.0, sceneRect().height()*0.1);
+    QPixmap *resPix = new QPixmap(":/images/icons/Resolution.png");
+    QGraphicsPixmapItem *resItem = addPixmap(*resPix);
+    resItem->setScale(0.5);
+    resItem->setPos(sceneRect().width()/1.05 - resItem->boundingRect().width()/1.02, sceneRect().height()*0.1);
 
 
-	/* Set the position, width, height, and color for EASY buttons*/
 	QPushButton* r600Button = new QPushButton();
 	r600Button->setGeometry(QRect(sceneRect().width()*0.05, sceneRect().height()*0.2, 90, 50));
 	r600Button->setText("600x480");
