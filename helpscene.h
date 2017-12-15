@@ -1,3 +1,10 @@
+/*
+ * Death Star IT Support
+ * CS3505 - A8: An Agile Educational Application
+ *
+ * helpscene.h
+ */
+
 #ifndef HELPSCENE_H
 #define HELPSCENE_H
 #include "basicscene.h"
