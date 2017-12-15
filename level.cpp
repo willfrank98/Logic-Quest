@@ -30,7 +30,11 @@ Level::Level(QString filename)
 
     this->setLevelNumber("LVL: " + num.captured());
 
-    if (std::regex_match(filename.toStdString(),  std::regex(":/levels/easy(.*)"))){
+	if (std::regex_match(filename.toStdString(),  std::regex(":/levels/tutorial(.*)"))){
+		difficulty = 0;
+		this->setDifficultyString("TUTORIAL");
+	}
+	else if (std::regex_match(filename.toStdString(),  std::regex(":/levels/easy(.*)"))){
 
         difficulty = 1;
         this->setDifficultyString("DIFFICULTY: EASY");
