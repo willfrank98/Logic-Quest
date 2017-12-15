@@ -155,7 +155,7 @@ void HelpScene::onInit()
               QColor(0, 0, 0), QColor(18,127,155));
 
     mascotFrames = sl->getSprites(":/images/sprites/ds1t_talking.png", QSize(64, 64));
-    mascot = createSprite(QPointF(0.0, sceneRect().height() - 136), QSize(128, 128), ":/images/sprites/ds1t_talking.png", QSize(64, 64), 0);
+    mascot = createSprite(QPointF(0.0, sceneRect().height() - 266), QSize(128, 128), ":/images/sprites/ds1t_talking.png", QSize(64, 64), 0);
 
     /* Back button connection to link back to main menu */
     connect(backButton, &QPushButton::clicked, this, [=](){emit(changeScene("title"));}, Qt::QueuedConnection);
@@ -166,7 +166,7 @@ void HelpScene::onUpdate(qreal delta)
     if (tickTracker > 10 && mascot != nullptr)
     {
         if (mascotFrame >= mascotFrames.size()) mascotFrame = 0;
-        ((QGraphicsPixmapItem*)mascot)->setPixmap(mascotFrames[mascotFrame++].scaled(QSize(128, 128)));
+        ((QGraphicsPixmapItem*)mascot)->setPixmap(mascotFrames[mascotFrame++].scaled(QSize(256, 256)));
         tickTracker = 0;
     }
     tickTracker++;
