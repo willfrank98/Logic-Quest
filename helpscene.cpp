@@ -170,8 +170,6 @@ void HelpScene::onInit()
     connect(norGateButton, &QPushButton::clicked, this, [=](){HelpScene::updateTruthTable("nor");}, Qt::QueuedConnection);
     connect(xorGateButton, &QPushButton::clicked, this, [=](){HelpScene::updateTruthTable("xor");}, Qt::QueuedConnection);
     connect(notGateButton, &QPushButton::clicked, this, [=](){HelpScene::updateTruthTable("not");}, Qt::QueuedConnection);
-
-    //TODO:Initialize the rect for the pixmap of truth table
 }
 
 void HelpScene::onUpdate(qreal delta)
@@ -215,7 +213,5 @@ void HelpScene::updateTruthTable(QString name)
        truthTableItem = addPixmap(*truthTable);
     }
     truthTableItem->setScale(.5);
-    truthTableItem->setPos(sceneRect().width()/1.2 - truthTableItem->boundingRect().width()/3.5, 200);
-    //TODO: switch the pixmap to the correct truth table
-    qDebug() << name;
+    truthTableItem->setPos(sceneRect().width() - truthTableItem->boundingRect().width()/1.9, sceneRect().height()*0.2);
 }
