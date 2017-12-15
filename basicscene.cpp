@@ -116,6 +116,10 @@ void BasicScene::onUpdate(qreal delta)
             ((QGraphicsPixmapItem*)mascot)->setPixmap(mascotTalkFrames[mascotFrame++].scaled(96, 96));
             ((QGraphicsPixmapItem*)mascotDialog)->setPixmap(dialogFrames[dialogFrame++].scaled(96, 96));
         }
+        else
+        {
+            ((QGraphicsPixmapItem*)mascot)->setPixmap(mascotTalkFrames.first().scaled(96, 96));
+        }
 
         tickTracker = 0;
     }
