@@ -187,6 +187,8 @@ void HelpScene::onUpdate(qreal delta)
 
 void HelpScene::updateTruthTable(QString name)
 {
+    truthTableItem->setVisible(false);
+
     if(name == "and") {
         delete truthTableItem;
        truthTable = new QPixmap(":/images/icons/andTT.png");
