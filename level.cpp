@@ -10,6 +10,7 @@
 
 Level::Level()
 {
+    levelIsTut = false;
     isComplete = false;
     numCols = 0;
     numRows = 0;
@@ -20,6 +21,9 @@ Level::Level()
 Level::Level(QString filename)
 {
     QFile file(filename);
+
+    // Hackity-hack
+    levelIsTut = filename.toLower().contains("tutorial");
 
     QRegularExpression levelNumber("[0-9]");
     QRegularExpressionMatch num = levelNumber.match(filename);
@@ -407,4 +411,9 @@ QString Level::getDifficultyString()
 void Level::setDifficultyString(QString diff)
 {
     this->difficultyString = diff;
+}
+
+bool Level::isTutorial()
+{
+    return levelIsTut;
 }

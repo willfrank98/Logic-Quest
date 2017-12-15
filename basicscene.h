@@ -83,6 +83,13 @@ private:
     int numCols;
     int numRows;
     int *inputs;
+    int tickTracker = 0;
+    int mascotFrame = 0;
+    int dialogFrame = 0;
+    QGraphicsItem* mascot;
+    QGraphicsItem* mascotDialog;
+    QList<QPixmap> mascotTalkFrames;
+    QList<QPixmap> mascotMoveFrames;
     Level currentLevel;
     QVector<int> goals;
     QVector<GatePipeTags> grid;
