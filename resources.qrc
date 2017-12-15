@@ -32,6 +32,12 @@
         <file alias="xorTT.png">res/icons/xorTT.png</file>
         <file alias="notTT.png">res/icons/notTT.png</file>
         <file alias="andTT.png">res/icons/andTT.png</file>
+        <file alias="andBlip.png">res/icons/andBlip.png</file>
+        <file alias="xorBlip.png">res/icons/xorBlip.png</file>
+        <file alias="orBlip.png">res/icons/orBlip.png</file>
+        <file alias="nandBlip.png">res/icons/nandBlip.png</file>
+        <file alias="norBlip.png">res/icons/norBlip.png</file>
+        <file alias="notBlip.png">res/icons/notBlip.png</file>
     </qresource>
     <qresource prefix="/images/sprites">
         <file alias="gatesSheet.png">res/sprites/logic_gates_64x64.png</file>

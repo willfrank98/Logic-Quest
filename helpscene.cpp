@@ -194,40 +194,41 @@ void HelpScene::updateTruthTable(QString name)
     soundEffect->play();
 
     delete truthTableItem;
-    //delete speechBubbleItem;
+    delete speechBubbleItem;
 
     if(name == "and") {
        truthTable = new QPixmap(":/images/icons/andTT.png");
        truthTableItem = addPixmap(*truthTable);
-//       speechBubble = new QPixmap(":/images/icons/andBlip.png");
-//       speechBubbleItem = addPixmap(*speechBubble);
+       speechBubble = new QPixmap(":/images/icons/andBlip.png");
+       speechBubbleItem = addPixmap(*speechBubble);
     } else if(name == "or") {
        truthTable = new QPixmap(":/images/icons/orTT.png");
        truthTableItem = addPixmap(*truthTable);
-//       speechBubble = new QPixmap(":/images/icons/orBlip.png");
-//       speechBubbleItem = addPixmap(*speechBubble);
+       speechBubble = new QPixmap(":/images/icons/orBlip.png");
+       speechBubbleItem = addPixmap(*speechBubble);
     } else if(name == "nand") {
        truthTable = new QPixmap(":/images/icons/nandTT.png");
        truthTableItem = addPixmap(*truthTable);
-//       speechBubble = new QPixmap(":/images/icons/nandBlip.png");
-//       speechBubbleItem = addPixmap(*speechBubble);
+       speechBubble = new QPixmap(":/images/icons/nandBlip.png");
+       speechBubbleItem = addPixmap(*speechBubble);
     } else if(name == "nor") {
        truthTable = new QPixmap(":/images/icons/norTT.png");
        truthTableItem = addPixmap(*truthTable);
-//       speechBubble = new QPixmap(":/images/icons/norBlip.png");
-//       speechBubbleItem = addPixmap(*speechBubble);
+       speechBubble = new QPixmap(":/images/icons/norBlip.png");
+       speechBubbleItem = addPixmap(*speechBubble);
     } else if(name == "xor") {
        truthTable = new QPixmap(":/images/icons/xorTT.png");
        truthTableItem = addPixmap(*truthTable);
-//       speechBubble = new QPixmap(":/images/icons/xorBlip.png");
-//       speechBubbleItem = addPixmap(*speechBubble);
+       speechBubble = new QPixmap(":/images/icons/xorBlip.png");
+       speechBubbleItem = addPixmap(*speechBubble);
     } else {
        truthTable = new QPixmap(":/images/icons/notTT.png");
        truthTableItem = addPixmap(*truthTable);
-//       speechBubble = new QPixmap(":/images/icons/notBlip.png");
-//       speechBubbleItem = addPixmap(*speechBubble);
+       speechBubble = new QPixmap(":/images/icons/notBlip.png");
+       speechBubbleItem = addPixmap(*speechBubble);
     }
     truthTableItem->setScale(.5);
     truthTableItem->setPos(sceneRect().width() - truthTableItem->boundingRect().width()/1.9, sceneRect().height()*0.2);
-    speechBubbleItem->setPos(sceneRect().width()*0.5, sceneRect().height()*0.2);
+    speechBubbleItem->setScale(.25);
+    speechBubbleItem->setPos(185, sceneRect().height()*0.5);
 }
