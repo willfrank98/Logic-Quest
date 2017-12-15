@@ -155,7 +155,7 @@ void HelpScene::onInit()
               QColor(0, 0, 0), QColor(18,127,155));
 
     mascotFrames = sl->getSprites(":/images/sprites/ds1t_talking.png", QSize(64, 64));
-    mascot = createSprite(QPointF(0.0, sceneRect().height() - 266), QSize(128, 128), ":/images/sprites/ds1t_talking.png", QSize(64, 64), 0);
+    mascot = createSprite(QPointF(0.0, sceneRect().height() - 266), QSize(256, 256), ":/images/sprites/ds1t_talking.png", QSize(64, 64), 0);
 
     /* Back button connection to link back to main menu */
     connect(backButton, &QPushButton::clicked, this, [=](){emit(changeScene("title"));}, Qt::QueuedConnection);
