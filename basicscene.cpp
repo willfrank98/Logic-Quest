@@ -83,6 +83,7 @@ void BasicScene::onUpdate(qreal delta)
         ((QGraphicsPixmapItem*)mascot)->setPixmap(mascotTalkFrames[mascotFrame++].scaled(96, 96));
 
         QString sheet;
+        int frameCount = 25;
 
         // Hackity-hack too
         switch (currentLevel.getLevelNumber().split(" ").last().toInt())
@@ -92,6 +93,7 @@ void BasicScene::onUpdate(qreal delta)
             break;
         case 2:
             sheet = ":/images/sprites/nand_tut.png";
+            frameCount++;
             break;
         case 3:
             sheet = ":/images/sprites/nor_tut.png";
@@ -101,6 +103,7 @@ void BasicScene::onUpdate(qreal delta)
             break;
         case 5:
             sheet = ":/images/sprites/or_tut.png";
+            frameCount--;
             break;
         case 6:
             sheet = ":/images/sprites/xor_tut.png";
@@ -111,7 +114,7 @@ void BasicScene::onUpdate(qreal delta)
 
         QList<QPixmap> dialogFrames = sl->getSprites(sheet, QSize(64, 64));
         qDebug() << "FRAMES:" << dialogFrame;
-        if (dialogFrame < dialogFrames.size())
+        if (dialogFrame < frameCount)
         {
             ((QGraphicsPixmapItem*)mascotDialog)->setPixmap(dialogFrames[dialogFrame++].scaled(96, 96));
         }
