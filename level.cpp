@@ -23,7 +23,7 @@ Level::Level(QString filename)
     QFile file(filename);
 
     // Hackity-hack
-    if (filename.toLower().contains("tut")) levelIsTut = true;
+    levelIsTut = filename.toLower().contains("tutorial");
 
     QRegularExpression levelNumber("[0-9]");
     QRegularExpressionMatch num = levelNumber.match(filename);

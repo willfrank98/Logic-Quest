@@ -69,6 +69,7 @@ void BasicScene::onInit()
         mascotTalkFrames = sl->getSprites(":/images/sprites/ds1t_talking.png", QSize(64, 64));
         mascotMoveFrames = sl->getSprites(":/images/sprites/ds1t_driving.png", QSize(64, 64));
         mascot = createSprite(QPointF(sceneRect().width() / 2.0, sceneRect().height() - 96), QSize(96, 96), ":/images/sprites/ds1t_talking.png", QSize(64, 64), 0);
+        mascotDialog = createSprite(QPoint((sceneRect().width() / 2.0) + 96, sceneRect().height() - 96), QSize(96, 96), ":/images/sprites/transparent.png", QSize(64, 64), 0);
     }
 }
 
@@ -76,12 +77,47 @@ void BasicScene::onInit()
 void BasicScene::onUpdate(qreal delta)
 {
     // Update the mascot if in a tutorial
-    if (currentLevel.isTutorial())
+    if (tickTracker > 10 && currentLevel.isTutorial())
     {
         if (mascotFrame == mascotTalkFrames.size()) mascotFrame = 0;
         ((QGraphicsPixmapItem*)mascot)->setPixmap(mascotTalkFrames[mascotFrame++].scaled(96, 96));
-        tickTracker++;
+
+        QString sheet;
+
+        // Hackity-hack too
+        switch (currentLevel.getLevelNumber().split(" ").last().toInt())
+        {
+        case 1:
+            sheet = ":/images/sprites/and_tut.png";
+            break;
+        case 2:
+            sheet = ":/images/sprites/nand_tut.png";
+            break;
+        case 3:
+            sheet = ":/images/sprites/nor_tut.png";
+            break;
+        case 4:
+            sheet = ":/images/sprites/not_tut.png";
+            break;
+        case 5:
+            sheet = ":/images/sprites/or_tut.png";
+            break;
+        case 6:
+            sheet = ":/images/sprites/xor_tut.png";
+            break;
+        default:
+            return;
+        }
+
+        QList<QPixmap> dialogFrames = sl->getSprites(sheet, QSize(64, 64));
+        qDebug() << "FRAMES:" << dialogFrame;
+        if (dialogFrame < dialogFrames.size())
+        {
+            ((QGraphicsPixmapItem*)mascotDialog)->setPixmap(dialogFrames[dialogFrame++].scaled(96, 96));
+        }
+        tickTracker = 0;
     }
+    tickTracker++;
 
 //    qDebug() << "Override the onUpdate method, dummy!";
 }
