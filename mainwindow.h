@@ -31,7 +31,6 @@ public:
 private:
     Ui::MainWindow *ui;
     void swapScene(QString s);
-	void changeResolution(QString s);
     void hookupScene();
     SceneHolder *scenes = new SceneHolder();
     QMediaPlayer* musicPlayer;

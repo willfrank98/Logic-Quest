@@ -187,22 +187,30 @@ void HelpScene::onUpdate(qreal delta)
 
 void HelpScene::updateTruthTable(QString name)
 {
+    truthTableItem->setVisible(false);
+
     if(name == "and") {
+        delete truthTableItem;
        truthTable = new QPixmap(":/images/icons/andTT.png");
        truthTableItem = addPixmap(*truthTable);
     } else if(name == "or") {
+        delete truthTableItem;
        truthTable = new QPixmap(":/images/icons/orTT.png");
        truthTableItem = addPixmap(*truthTable);
     } else if(name == "nand") {
+        delete truthTableItem;
        truthTable = new QPixmap(":/images/icons/nandTT.png");
        truthTableItem = addPixmap(*truthTable);
     } else if(name == "nor") {
+        delete truthTableItem;
        truthTable = new QPixmap(":/images/icons/norTT.png");
        truthTableItem = addPixmap(*truthTable);
     } else if(name == "xor") {
+        delete truthTableItem;
        truthTable = new QPixmap(":/images/icons/xorTT.png");
        truthTableItem = addPixmap(*truthTable);
     } else {
+        delete truthTableItem;
        truthTable = new QPixmap(":/images/icons/notTT.png");
        truthTableItem = addPixmap(*truthTable);
     }
