@@ -51,28 +51,6 @@ void MainWindow::swapScene(QString s)
     qDebug() << "[INFO]" << "Scene changed to:" << s.replace("\"", "");
 }
 
-
-//void MainWindow::changeResolution(QString s)
-//{
-//	//Gets the width and height from the action name
-//	int width = s.split('x').first().toInt();
-//	int height = s.split('x').last().toInt();
-
-//	// Just make fullscreen if unable to parse correctly
-//	if (s == "Fullscreen")
-//	{
-//	setWindowState(Qt::WindowFullScreen);
-//	}
-//	else  // Resize things to the desired dimensions
-//	{
-//		setWindowState(Qt::WindowNoState);
-//		resize(width, height);
-//		setGeometry(QApplication::desktop()->size().width() / 2.0 - size().width() / 2.0,
-//					QApplication::desktop()->size().height() / 2.0 - size().height() / 2.0,
-//					size().width(), size().height());
-//	}
-//}
-
 // (Re)connects to some signals from a scene.
 void MainWindow::hookupScene()
 {

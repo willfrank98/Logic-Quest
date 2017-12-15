@@ -17,7 +17,6 @@ TitleScene::TitleScene()
 void TitleScene::onInit()
 {
     // Create a static box representing the ground
-    // Just gonna leave this enabled until the sprite loading is working
     createBox(QRectF(0.0, sceneRect().height() - 16.0, sceneRect().width(), 16.0),
               QColor(0, 0, 0), QColor(18,127,155));
 
@@ -43,8 +42,6 @@ void TitleScene::onInit()
     // Creates a vector that contains a pixmap of each logic gate.
     logicGatesPM = sl->getSprites(":/images/sprites/gatesSheet.png", QSize(64, 64)).toVector();
 
-    // TODO may not need entire sheet?
-    // Also help scene
     // Creates a vector that contains a pixmap of the robo
     roboBlocksPM = sl->getSprites(":/images/sprites/da1t_driving.png", QSize(64, 64)).toVector();
 
@@ -148,28 +145,9 @@ void TitleScene::onInit()
 	exitButtonProxy = addWidget(exitButton);
 	exitButtonProxy->setZValue(10.0);
 
-//    QPushButton *exitButton = new QPushButton();
-//    exitButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .81, sceneRect().width() * .30, sceneRect().height() * .10));
-//    exitButton->setIcon(QIcon(":/images/icons/Exit.png"));
-//    exitButton->setIconSize(QSize(64,64));
-//    exitButton->setAttribute(Qt::WA_TranslucentBackground);
-//    exitButton->setStyleSheet("QPushButton {"
-//                               "background-color: rgb(68, 89, 99);"
-//                               "color: white;"
-//                               "font-size: 16px;"
-//                               "border-style: solid;"
-//                               "border-radius: 10px;"
-//                               "}"
-//                              "QPushButton:pressed {"
-//                              "background-color: rgb(31, 65, 81);"
-//                              "}");
-//    exitButtonProxy = addWidget(exitButton);
-//    exitButtonProxy->setZValue(10.0);
-
     //Connects menu buttons
     connect(startButton, &QPushButton::clicked, this, [=](){tutorialMessage(); emit(changeScene(":/levels/tutorial1.txt"));}, Qt::QueuedConnection);
     connect(levelSelectButton, &QPushButton::clicked, this, [=](){emit(changeScene("levelmenu"));}, Qt::QueuedConnection);
-	//connect(exitButton, &QPushButton::clicked, this, [=](){emit(changeScene("options"));}, Qt::QueuedConnection);
     connect(exitButton, &QPushButton::clicked, this, [=](){emit(endProgram());}, Qt::QueuedConnection);
     connect(helpButton, &QPushButton::clicked, this, [=](){emit(changeScene("helpscene"));}, Qt::QueuedConnection);
     connect(soundButton, &QPushButton::clicked, this, &TitleScene::enableDisableSound, Qt::QueuedConnection);
@@ -179,8 +157,6 @@ void TitleScene::onInit()
 	connect(exitButton, &QPushButton::clicked, this, &TitleScene::endMusic);
     connect(exitButton, &QPushButton::clicked, this, &TitleScene::endMusic);
     connect(helpButton, &QPushButton::clicked, this, &TitleScene::endMusic);
-
-    //connect(startButton, &QPushButton::clicked, this, &TitleScene::tutorialMessage, Qt::QueuedConnection);
 }
 
 // This gets run every 'tick'
@@ -206,7 +182,6 @@ void TitleScene::onUpdate(qreal delta)
     {
         if (mascotFrame == roboBlocksPM.size()) mascotFrame = 0;
         ((QGraphicsPixmapItem*)mascot)->setPixmap(roboBlocksPM[mascotFrame++].scaled(128, 128));
-//        setItemPos(mascot, QPointF(mascot->pos().x() + 10.0, mascot->pos().y()));
     }
     tickCounter++;
 }

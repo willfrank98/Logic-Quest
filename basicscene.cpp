@@ -380,7 +380,6 @@ void BasicScene::createUI()
 	int gridWidth = width / numCols;
     int gridHeight = (height - trayHeight) / numRows;
 
-    //TODO: make grid fill available space better
     int itemNum = 0;
     for (int y = 0; y < height - trayHeight - numRows; y += gridHeight)
     {

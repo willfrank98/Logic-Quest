@@ -26,7 +26,6 @@ public:
                    PhysicsBodyType physicsType = Static, bool draggable = false);
     QGraphicsItem* createSprite(QPixmap& pm, QRectF rect, QColor line, QColor fill,
                    PhysicsBodyType physicsType = Static, bool draggable = false);
-    void setItemPos(QGraphicsItem *item, QPointF pos);
 
 private:
     QTimer timer;

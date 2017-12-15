@@ -55,10 +55,10 @@ void PhysicsScene::updateBodies()
 			timer.stop();
 			if (!QRectF(0.0 - itemWidth, 0.0 - itemHeight, sceneRect().width() + itemWidth, sceneRect().height() + itemHeight).contains(item->pos()))
 			{
-                //world->DestroyBody(body);
-                //removeItem(item);
-                //delete item;
-                //continue;
+				world->DestroyBody(body);
+				removeItem(item);
+				delete item;
+				continue;
 			}
 			timer.start();
 
@@ -137,29 +137,6 @@ void PhysicsScene::attachBody(QGraphicsItem *item, PhysicsBodyType bodyType)
 
     // Store the item in the body for easy access when looping over bodies
     dynBody->SetUserData(item);
-}
-
-// Sets the position of a body (and by extension, an item)
-// TODO: Review if this is actually necessary.
-void PhysicsScene::setItemPos(QGraphicsItem *item, QPointF pos)
-{
-    QGraphicsItem *temp;
-    if (item->data(Draggable).toBool())
-    {
-        for (b2Body *body = world->GetBodyList(); body; body = body->GetNext())
-        {
-            // Grab the GraphicsItem that was stored as user data in the body
-            temp = static_cast<QGraphicsItem*>(body->GetUserData());
-            if (temp == item)
-            {
-//                b2Vec2 displacement = body->GetPosition() - body->GetWorldCenter();
-                body->SetTransform(b2Vec2(pos.x(), pos.y()), body->GetAngle());
-//                body->SetTransform(b2Vec2(pos.x() + displacement.x, pos.y() + displacement.y), body->GetAngle());
-                body->SetAwake(true);
-            }
-        }
-        item->setPos(pos);
-    }
 }
 
 // Intercept events from the GraphicsView and do things with them.
