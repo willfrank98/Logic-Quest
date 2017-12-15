@@ -36,7 +36,7 @@ void PhysicsScene::onInit()
 // This gets called every 'tick'
 void PhysicsScene::onUpdate(qreal delta)
 {
-//    qDebug() << "Override the onUpdate method, dummy!";
+	delta;
 }
 
 // Updates physics bodies
@@ -90,9 +90,9 @@ void PhysicsScene::createBox(QRectF rect, QColor line, QColor fill, PhysicsBodyT
 }
 
 // Creates a Gate from the sprite sheet and links it to a physics body
-QGraphicsItem* PhysicsScene::createSprite(QPixmap& pm, QRectF rect, QColor line, QColor fill, PhysicsBodyType physicsType, bool draggable)
+QGraphicsItem* PhysicsScene::createSprite(QPixmap& pm, QRectF rect, PhysicsBodyType physicsType, bool draggable)
 {
-    if (world->GetBodyCount() > 20) return nullptr;
+	if (world->GetBodyCount() > 100) return nullptr;
 
     // Create the GraphicsItem (visual part of the body)
     QGraphicsPixmapItem *item = addPixmap(pm.scaled(rect.width(), rect.height()));
@@ -138,6 +138,7 @@ void PhysicsScene::attachBody(QGraphicsItem *item, PhysicsBodyType bodyType)
     // Store the item in the body for easy access when looping over bodies
     dynBody->SetUserData(item);
 }
+
 
 // Intercept events from the GraphicsView and do things with them.
 bool PhysicsScene::eventFilter(QObject *watched, QEvent *event)

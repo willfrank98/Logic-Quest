@@ -46,8 +46,7 @@ void TitleScene::onInit()
     roboBlocksPM = sl->getSprites(":/images/sprites/da1t_driving.png", QSize(64, 64)).toVector();
 
     // places robo guide on screen, in bottom left.
-    mascot = createSprite(roboBlocksPM[mascotFrame] , QRectF(8, sceneRect().height() - 128, 128.0, 128.0),
-              QColor(0, 0, 0, 0), QColor(0, 0, 0, 0), Dynamic);
+	mascot = createSprite(roboBlocksPM[mascotFrame] , QRectF(8, sceneRect().height() - 128, 128.0, 128.0), Dynamic);
 
     //Sound Enable/Disbale Icon.
     QPixmap *soundPix = new QPixmap(":/images/icons/EnableSound.png");
@@ -166,11 +165,10 @@ void TitleScene::onUpdate(qreal delta)
     int pos = qrand()%(int)sceneRect().width();
     // Drops a gate every 50 ticks
     // A tick is the length of the 'timer' interval in the BasicScene/PhysicsScene
-    if (tickCounter > 50)
+	if (tickCounter > 25)
     {
         // generates a random index used to grab a pixmap.
-        createSprite(logicGatesPM[lgIndex] , QRectF(pos, 8.0, 64.0, 64.0),
-                  QColor(0, 0, 0, 0), QColor(0, 0, 0, 0), Dynamic);
+		createSprite(logicGatesPM[lgIndex] , QRectF(pos, 8.0, 64.0, 64.0), Dynamic);
         tickCounter = 0;
         lgIndex++;
         if(lgIndex > 5) {

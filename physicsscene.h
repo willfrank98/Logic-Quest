@@ -24,8 +24,8 @@ public:
 
     void createBox(QRectF rect, QColor line = QColor(0, 0, 0), QColor fill = QColor(255, 255, 255),
                    PhysicsBodyType physicsType = Static, bool draggable = false);
-    QGraphicsItem* createSprite(QPixmap& pm, QRectF rect, QColor line, QColor fill,
-                   PhysicsBodyType physicsType = Static, bool draggable = false);
+	QGraphicsItem* createSprite(QPixmap& pm, QRectF rect,
+				   PhysicsBodyType physicsType = Static, bool draggable = false);
 
 private:
     QTimer timer;
@@ -36,7 +36,7 @@ private:
 
     virtual void updateBodies();
     virtual void onInit();
-    virtual void onUpdate(qreal delta);
+	virtual void onUpdate(qreal delta);
     void attachBody(QGraphicsItem *item, PhysicsBodyType bodyType);
 
     virtual bool eventFilter(QObject *watched, QEvent *event);
