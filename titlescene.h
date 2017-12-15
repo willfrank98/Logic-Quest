@@ -45,8 +45,8 @@ private:
     QGraphicsItem *clickedItem;
     QGraphicsProxyWidget *startButtonProxy;
     QGraphicsProxyWidget *levelSelectButtonProxy;
-    QGraphicsProxyWidget *optionsButtonProxy;
     QGraphicsProxyWidget *exitButtonProxy;
+	//QGraphicsProxyWidget *exitButtonProxy;
     QGraphicsProxyWidget *soundButtonProxy;
     QGraphicsProxyWidget *helpButtonProxy;
     QVector<QPixmap> logicGatesPM;

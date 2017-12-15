@@ -46,8 +46,7 @@ public:
 
     BasicScene(Level level);
 
-    QGraphicsItem* createBox(QRectF rect, QColor line = QColor(0, 0, 0), QColor fill = QColor(255, 255, 255),
-                   bool draggable = false);
+	QGraphicsItem* createBox(QRectF rect, QColor line = QColor(0, 0, 0), QColor fill = QColor(255, 255, 255));
     QGraphicsPixmapItem* createSprite(QPointF pos, QSize scale, QString sheet, QSize frameSize, int frame);
     QGraphicsPixmapItem* createGate(QPointF pos, QSize scale, QString gate);
     void setItemPos(QGraphicsItem *item, QPointF pos);
@@ -69,7 +68,7 @@ private:
     QGraphicsProxyWidget* enableMusicButtonProxy;
 
     virtual void onInit();
-    virtual void onUpdate(qreal delta);
+	virtual void onUpdate(qreal delta);
 
     virtual bool eventFilter(QObject *watched, QEvent *event);
 

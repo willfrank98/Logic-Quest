@@ -18,7 +18,6 @@ QGraphicsScene* SceneHolder::getScene(QString sceneName)
 {
     if (sceneName.toLower() == "title") return new TitleScene();
     else if (sceneName.toLower() == "levelmenu") return new LevelMenu();
-    else if (sceneName.toLower() == "options") return new OptionsScene();
     else if (sceneName.toLower() == "helpscene") return new HelpScene();
     else
     {

@@ -67,11 +67,11 @@ void BasicScene::onInit()
 // This gets called every 'tick'
 void BasicScene::onUpdate(qreal delta)
 {
-//    qDebug() << "Override the onUpdate method, dummy!";
+	delta;
 }
 
 // Creates a box
-QGraphicsItem* BasicScene::createBox(QRectF rect, QColor line, QColor fill, bool draggable)
+QGraphicsItem* BasicScene::createBox(QRectF rect, QColor line, QColor fill)
 {
     // Create the GraphicsItem
     QGraphicsRectItem *item = addRect(QRectF(0.0, 0.0, rect.width(), rect.height()), QPen(line), QBrush(fill));
@@ -243,7 +243,7 @@ void BasicScene::createUI()
 	qreal width = sceneRect().width();
 	qreal height = sceneRect().height();
     int trayHeight = 100;
-    createBox(QRectF(0, height-trayHeight, width, trayHeight), QColor(166, 170, 178), QColor(166, 170, 178), false);
+	createBox(QRectF(0, height-trayHeight, width, trayHeight), QColor(166, 170, 178), QColor(166, 170, 178));
     QPixmap *logoPix = new QPixmap(":/images/icons/mainLogo.png");
     QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
     pixItem->setPos(height-trayHeight, width);
