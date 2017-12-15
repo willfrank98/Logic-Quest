@@ -9,6 +9,7 @@
 #define TITLESCENE_H
 
 #include <physicsscene.h>
+#include <spriteloader.h>
 #include <QVector>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
@@ -50,6 +51,9 @@ private:
     QGraphicsProxyWidget *helpButtonProxy;
     QVector<QPixmap> logicGatesPM;
     QVector<QPixmap> roboBlocksPM;
+    SpriteLoader *sl = new SpriteLoader();
+    QGraphicsItem* mascot;
+    int mascotFrame = 0;
 
     void onInit();
     void onUpdate(qreal delta);

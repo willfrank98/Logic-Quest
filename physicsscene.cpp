@@ -91,12 +91,12 @@ void PhysicsScene::createBox(QRectF rect, QColor line, QColor fill, PhysicsBodyT
 }
 
 // Creates a Gate from the sprite sheet and links it to a physics body
-void PhysicsScene::createGate(QPixmap& pm, QRectF rect, QColor line, QColor fill, PhysicsBodyType physicsType, bool draggable)
+QGraphicsItem* PhysicsScene::createSprite(QPixmap& pm, QRectF rect, QColor line, QColor fill, PhysicsBodyType physicsType, bool draggable)
 {
-    if (world->GetBodyCount() > 20) return;
+    if (world->GetBodyCount() > 20) return nullptr;
 
     // Create the GraphicsItem (visual part of the body)
-    QGraphicsPixmapItem *item = addPixmap(pm);
+    QGraphicsPixmapItem *item = addPixmap(pm.scaled(rect.width(), rect.height()));
     item->setTransformOriginPoint(rect.width() / 2.0, rect.height() / 2.0);
     item->setPos(rect.x(), rect.y());
 
@@ -107,6 +107,8 @@ void PhysicsScene::createGate(QPixmap& pm, QRectF rect, QColor line, QColor fill
 
     // Store the item in the body for easier updating (Yay!)
     attachBody(item, physicsType);
+
+    return item;
 }
 
 // Moved the physics stuff here so there's less duplication of code

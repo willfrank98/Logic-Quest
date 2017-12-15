@@ -48,28 +48,15 @@ void TitleScene::onInit()
     soundEffect->setMedia(QUrl("qrc:/sounds/Photon.mp3"));
 
     // Creates a vector that contains a pixmap of each logic gate.
-    QPixmap gatesPM(":images/sprites/gatesSheet.png");
-    for (int row = 0; row < 3; row++){
-        for (int col = 0; col < 2; col++){
-            QRect rec(col*64, row*64, 64, 64);
-            QPixmap pmc = gatesPM.copy(rec);
-            logicGatesPM.append(pmc);
-        }
-    }
+    logicGatesPM = sl->getSprites(":/images/sprites/gatesSheet.png", QSize(64, 64)).toVector();
 
     // TODO may not need entire sheet?
     // Also help scene
     // Creates a vector that contains a pixmap of the robo
-    QPixmap roboPM(":images/sprites/da1t_driving.png");
-    for (int row = 0; row < 4; row++){
-        for (int col = 0; col < 3; col++){
-            QRect rec(col*64, row*64, 64, 64);
-            QPixmap pmc = roboPM.copy(rec);
-            roboBlocksPM.append(pmc);
-        }
-    }
+    roboBlocksPM = sl->getSprites(":/images/sprites/da1t_driving.png", QSize(64, 64)).toVector();
+
     // places robo guide on screen, in bottom left.
-    createGate(roboBlocksPM[lgIndex] , QRectF(8, sceneRect().height() - 69, 64.0, 64.0),
+    mascot = createSprite(roboBlocksPM[mascotFrame] , QRectF(8, sceneRect().height() - 128, 128.0, 128.0),
               QColor(0, 0, 0, 0), QColor(0, 0, 0, 0), Dynamic);
 
 // Adds more text
@@ -220,7 +207,7 @@ void TitleScene::onUpdate(qreal delta)
     if (tickCounter > 50)
     {
         // generates a random index used to grab a pixmap.
-        createGate(logicGatesPM[lgIndex] , QRectF(pos, 8.0, 64.0, 64.0),
+        createSprite(logicGatesPM[lgIndex] , QRectF(pos, 8.0, 64.0, 64.0),
                   QColor(0, 0, 0, 0), QColor(0, 0, 0, 0), Dynamic);
         tickCounter = 0;
         lgIndex++;
@@ -228,36 +215,15 @@ void TitleScene::onUpdate(qreal delta)
             lgIndex = 0;
         }
     }
+
+    if (tickCounter % 5 == 0 && mascot != nullptr)
+    {
+        if (mascotFrame == roboBlocksPM.size()) mascotFrame = 0;
+        ((QGraphicsPixmapItem*)mascot)->setPixmap(roboBlocksPM[mascotFrame++].scaled(128, 128));
+//        setItemPos(mascot, QPointF(mascot->pos().x() + 10.0, mascot->pos().y()));
+    }
     tickCounter++;
 }
-/*
-void TitleScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    currentButton = event->button();
-    QGraphicsItem *item = itemAt(event->scenePos(), QTransform());
-    if (item != nullptr) clickedItem = item;
-}
-
-void TitleScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-    currentButton = Qt::NoButton;
-    clickedItem = nullptr;
-}
-
-
-void TitleScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (currentButton == Qt::LeftButton && clickedItem != nullptr)
-    {
-        QPointF newPos = event->scenePos() -
-                QPointF(clickedItem->boundingRect().size().width(), clickedItem->boundingRect().size().height()) / 2.0;
-
-        // Perhaps pass a bool that awakens the moved physics body upon mouse release?
-        setItemPos(clickedItem, newPos);
-    }
-}
-*/
-
 
 //Handles the enabling and disabling of the title scene sound.
 void TitleScene::enableDisableSound() {
