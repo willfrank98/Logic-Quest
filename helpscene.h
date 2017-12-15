@@ -1,6 +1,7 @@
 #ifndef HELPSCENE_H
 #define HELPSCENE_H
 #include "basicscene.h"
+#include "spriteloader.h"
 #include <QGraphicsItem>
 #include <QGraphicsProxyWidget>
 #include <QPushButton>
@@ -22,6 +23,14 @@ private:
     QGraphicsProxyWidget* norGateProxy;
     QGraphicsProxyWidget* xorGateProxy;
     QGraphicsProxyWidget* notGateProxy;
+
+    SpriteLoader* sl = new SpriteLoader();
+    QGraphicsItem* mascot;
+    QList<QPixmap> mascotFrames;
+    int mascotFrame = 0;
+    int tickTracker = 0;
+
+    void onUpdate(qreal delta);
 
 };
 
