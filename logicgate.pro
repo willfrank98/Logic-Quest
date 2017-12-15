@@ -35,7 +35,6 @@ SOURCES += \
     gatenode.cpp \
     level.cpp \
     spriteloader.cpp \
-    optionsscene.cpp \
     helpscene.cpp
 
 HEADERS += \
@@ -49,7 +48,6 @@ HEADERS += \
     gatenode.h \
     level.h \
     spriteloader.h \
-    optionsscene.h \
     helpscene.h
 
 FORMS += \
