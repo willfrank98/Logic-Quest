@@ -27,6 +27,7 @@ private:
     int numCols;
     int numRows;
     int difficulty;
+    bool levelIsTut;
     bool isComplete;
     bool perfLevel;
     int levelScore;
@@ -58,6 +59,7 @@ public:
     void setLevelNumber(QString name);
     QString getDifficultyString();
     void setDifficultyString(QString diff);
+    bool isTutorial();
 };
 
 #endif // LEVEL_H

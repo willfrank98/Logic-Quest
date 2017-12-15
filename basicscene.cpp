@@ -62,11 +62,27 @@ void BasicScene::onInit()
 {
 	createUI();
     addGatesOnToolbar();
+
+    // Add the mascot if the level is a tutorial
+    if (currentLevel.isTutorial())
+    {
+        mascotTalkFrames = sl->getSprites(":/images/sprites/ds1t_talking.png", QSize(64, 64));
+        mascotMoveFrames = sl->getSprites(":/images/sprites/ds1t_driving.png", QSize(64, 64));
+        mascot = createSprite(QPointF(sceneRect().width() / 2.0, sceneRect().height() - 96), QSize(96, 96), ":/images/sprites/ds1t_talking.png", QSize(64, 64), 0);
+    }
 }
 
 // This gets called every 'tick'
 void BasicScene::onUpdate(qreal delta)
 {
+    // Update the mascot if in a tutorial
+    if (currentLevel.isTutorial())
+    {
+        if (mascotFrame == mascotTalkFrames.size()) mascotFrame = 0;
+        ((QGraphicsPixmapItem*)mascot)->setPixmap(mascotTalkFrames[mascotFrame++].scaled(96, 96));
+        tickTracker++;
+    }
+
 //    qDebug() << "Override the onUpdate method, dummy!";
 }
 
