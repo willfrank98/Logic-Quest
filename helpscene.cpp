@@ -154,6 +154,20 @@ void HelpScene::onInit()
     createBox(QRectF(0.0, sceneRect().height() - 16.0, sceneRect().width(), 16.0),
               QColor(0, 0, 0), QColor(18,127,155));
 
+    mascotFrames = sl->getSprites(":/images/sprites/ds1t_talking.png", QSize(64, 64));
+    mascot = createSprite(QPointF(0.0, sceneRect().height() - 266), QSize(256, 256), ":/images/sprites/ds1t_talking.png", QSize(64, 64), 0);
+
     /* Back button connection to link back to main menu */
     connect(backButton, &QPushButton::clicked, this, [=](){emit(changeScene("title"));}, Qt::QueuedConnection);
+}
+
+void HelpScene::onUpdate(qreal delta)
+{
+    if (tickTracker > 10 && mascot != nullptr)
+    {
+        if (mascotFrame >= mascotFrames.size()) mascotFrame = 0;
+        ((QGraphicsPixmapItem*)mascot)->setPixmap(mascotFrames[mascotFrame++].scaled(QSize(256, 256)));
+        tickTracker = 0;
+    }
+    tickTracker++;
 }

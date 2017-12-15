@@ -88,14 +88,11 @@ private:
     QVector<int> goals;
     QVector<GatePipeTags> grid;
     QPushButton *currentSelectedGate;
-//    void addGatesOnToolbar();
-//    void gateClicked(int row, int col);
     QPixmap getGatePixmap(QString string);
     QString gateNames[6] = {"andgate", "nandgate", "norgate", "notgate", "orgate", "xorgate"};
     GateNodeType gateDes[6] = {AND, NAND, NOR, NOT, OR, XOR};
     GateNodeType getGateNodeType(QString name);
     void updateEndGateSprite(int location, int value, int gridWidth, int gridHeight);
-//    QPushButton *setGateInToolbar(QPushButton *pb, QPixmap *pm, int xLoc, int yLoc);
 
 signals:
     void changeScene(QString);

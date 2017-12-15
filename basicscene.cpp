@@ -78,13 +78,10 @@ QGraphicsItem* BasicScene::createBox(QRectF rect, QColor line, QColor fill, bool
     item->setTransformOriginPoint(rect.width() / 2.0, rect.height() / 2.0);
     item->setPos(rect.x(), rect.y());
 
-    // TODO: Make sure setting all of these is still necessary
-//    item->setData(Bounds, rect);
-//    item->setData(Draggable, draggable);
-
     return item;
 }
 
+// Creates a sprite on the screen
 QGraphicsPixmapItem* BasicScene::createSprite(QPointF pos, QSize scale, QString sheet, QSize frameSize, int frame)
 {
     QPixmap sprite = sl->getSprite(sheet, frameSize, frame).scaled(scale);
@@ -132,10 +129,10 @@ void BasicScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event){
 void BasicScene::setScore(int points){
     score+=points;
 }
+
 // drop event for buttons
 void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
-//    qDebug() << currentLevel.checkOutputs();
     if (currentLevel.checkOutputs()){
         setScore(3);
     }
@@ -159,7 +156,6 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
     if (currentLevel.getLayout()[xL/gridWidth + yL/gridHeight*numCols] == UG) {
 
         int gateNodeLocation = currentLevel.getGateNodeIndex(yL/gridHeight*numCols + xL/gridWidth);
-        //qDebug() << currentSelectedGate->accessibleDescription();
         if(currentSelectedGate->accessibleDescription() == "3")
         {
             if(currentLevel.hasTwoInputs(gateNodeLocation))
@@ -208,7 +204,6 @@ void BasicScene::dropEvent(QGraphicsSceneDragDropEvent *event)
         connect(&timer, &QTimer::timeout, this, [=](){
             emit changeScene(currentLevel.nextLevel());
         });
-        //musicPlayer->stop();
 	}
 }
 
@@ -239,39 +234,6 @@ bool BasicScene::eventFilter(QObject *watched, QEvent *event)
         timer.start();
     }
 
-    /***** should this remain or be removed ??????????? *****/
-    // Handles clicks on the scene, can't click through ProxyWidgets
-    else if (event->type() == QEvent::MouseButtonPress)
-    {
-        QMouseEvent* mev = (QMouseEvent*)event;
-        if (itemAt(mev->localPos(), QTransform()) != nullptr)
-        {
-            qreal width = sceneRect().width();
-            qreal height = sceneRect().height();
-            int trayHeight = 100;
-
-            if (mev->localPos().y() > height - trayHeight)
-            {
-                for (QPushButton* qbtn : gateButtons)
-                {
-                    qbtn->setEnabled(true);
-                }
-            }
-//            qreal width = sceneRect().width();
-//            qreal height = sceneRect().height();
-
-//            int trayWidth = width/12;
-//            int trayHeight = 100;
-
-//            int gridWidth = (width - (2 * trayWidth)) / numCols;
-//            int gridHeight = (height - trayHeight) / numRows;
-
-//             int x = (mev->x() - trayWidth)/gridWidth;
-//             int y = mev->y()/gridHeight;
-
-        }
-        /*****                                    *****/
-    }
     // Passes the event to be handled in the default manner
     return QGraphicsScene::eventFilter(watched, event);
 }
@@ -280,8 +242,7 @@ void BasicScene::createUI()
 {
 	qreal width = sceneRect().width();
 	qreal height = sceneRect().height();
-	int trayHeight = 100;
-//    createBox(QRectF(0, height-trayHeight, width, trayHeight)); //draws draggables tray
+    int trayHeight = 100;
     createBox(QRectF(0, height-trayHeight, width, trayHeight), QColor(166, 170, 178), QColor(166, 170, 178), false);
     QPixmap *logoPix = new QPixmap(":/images/icons/mainLogo.png");
     QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
@@ -469,7 +430,6 @@ void BasicScene::addGatesOnToolbar()
             currentSelectedGate = currentButton;
             currentSelectedGate->setChecked(true);
             currentSelectedGate->setEnabled(false);
-            //qDebug()<< "[INFO]" << "currentButton->accessibleName() ="+ currentButton->accessibleName();
             currentSelectedGate->setAccessibleName(currentButton->accessibleName());
             currentSelectedGate->setAccessibleDescription(currentButton->accessibleDescription());
             // drag for log gate onto game space
