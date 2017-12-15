@@ -1,3 +1,10 @@
+/*
+ * Death Star IT Support
+ * CS3505 - A8: An Agile Educational Application
+ *
+ * helpscene.h
+ */
+
 #ifndef HELPSCENE_H
 #define HELPSCENE_H
 #include "basicscene.h"
@@ -29,6 +36,8 @@ private:
     void updateTruthTable(QString name);
     QPixmap* truthTable;
     QGraphicsPixmapItem *truthTableItem;
+    QPixmap* speechBubble;
+    QGraphicsPixmapItem *speechBubbleItem;
 
     SpriteLoader* sl = new SpriteLoader();
     QGraphicsItem* mascot;
