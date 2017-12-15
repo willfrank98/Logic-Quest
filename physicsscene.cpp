@@ -68,7 +68,6 @@ void PhysicsScene::updateBodies()
         item->setRotation(-body->GetAngle() * 180/b2_pi);
     }
     world->Step(0.25, 8, 4);
-//    qDebug() << "Bodies:" << world->GetBodyCount();
 }
 
 // Creates a box and links it to a physics body

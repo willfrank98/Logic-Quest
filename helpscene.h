@@ -1,7 +1,6 @@
 #ifndef HELPSCENE_H
 #define HELPSCENE_H
 #include "basicscene.h"
-#include "physicsscene.h"
 #include <QGraphicsItem>
 #include <QGraphicsProxyWidget>
 #include <QPushButton>

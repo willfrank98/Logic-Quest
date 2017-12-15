@@ -24,12 +24,6 @@ Level::Level(QString filename)
     QRegularExpression levelNumber("[0-9]");
     QRegularExpressionMatch num = levelNumber.match(filename);
 
-//    qDebug()<< "REGEX RETURNED..... " << num.captured();
-//    std::smatch lvl;
-//    std::string num;
-//    std::regex_search(filename.toStdString(), lvl, levelNumber);
-//    num = lvl.str();
-
     this->setLevelNumber("LVL: " + num.captured());
 
     if (std::regex_match(filename.toStdString(),  std::regex(":/levels/easy(.*)"))){

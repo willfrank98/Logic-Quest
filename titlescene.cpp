@@ -21,13 +21,6 @@ void TitleScene::onInit()
     createBox(QRectF(0.0, sceneRect().height() - 16.0, sceneRect().width(), 16.0),
               QColor(0, 0, 0), QColor(18,127,155));
 
-    // Define a font
-    QFont font = QFont("Times");
-
-    // Add some text, ignores physics
-    // Perhaps move this to a 'createText' method or something
-    font.setPointSize(28);
-
     //Logo
     QPixmap *logoPix = new QPixmap(":/images/icons/mainLogo.png");
     QGraphicsPixmapItem *pixItem = addPixmap(*logoPix);
@@ -58,14 +51,6 @@ void TitleScene::onInit()
     // places robo guide on screen, in bottom left.
     mascot = createSprite(roboBlocksPM[mascotFrame] , QRectF(8, sceneRect().height() - 128, 128.0, 128.0),
               QColor(0, 0, 0, 0), QColor(0, 0, 0, 0), Dynamic);
-
-// Adds more text
-//    font.setPointSize(14);
-//    QGraphicsTextItem *prompt = addText("Press SPACE to play!", font);
-//    prompt->setPos(sceneRect().width() / 2.0 - prompt->boundingRect().width() / 2.0, sceneRect().height() / 2.0);
-//    prompt->setZValue(1.0);
-//    prompt->setData(Name, "prompt");
-//    prompt->setData(Direction, 1.0);
 
     //Sound Enable/Disbale Icon.
     QPixmap *soundPix = new QPixmap(":/images/icons/EnableSound.png");
@@ -282,14 +267,6 @@ void TitleScene::tutorialMessage()
 
 void TitleScene::keyPressEvent(QKeyEvent *event)
 {
-
-//    if (event->key() == Qt::Key_Space)
-//    {
-//        // Switch to the tutorial
-//        musicPlayer->stop();
-//        emit changeScene("tutorial");
-//    }
-
     if (event->key() == Qt::Key_Return)
     {
         musicPlayer->stop();
