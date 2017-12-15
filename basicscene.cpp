@@ -458,14 +458,14 @@ void BasicScene::addGatesOnToolbar()
     font.setPointSize(24);
     //Output goal for current level
     QGraphicsTextItem *output = addText(goalSequence, font);
-    output->setPos(sceneRect().width()*0.78, sceneRect().height()*0.86);
+    output->setPos(sceneRect().width()*0.78-55, height - 109);
 
     //Displays which level is being played
     QGraphicsTextItem *lvlNum = addText(currentLevel.getLevelNumber(), font);
-    lvlNum->setPos(sceneRect().width()*0.78, sceneRect().height()*0.91);
+    lvlNum->setPos(sceneRect().width()*0.78-55, height - 77);
 
     QGraphicsTextItem *diff = addText(currentLevel.getDifficultyString(), font);
-    diff->setPos(sceneRect().width()*0.78, sceneRect().height()*0.96);
+    diff->setPos(sceneRect().width()*0.78-55, height - 45);
 }
 
 // updates the end sprite based on gates placed by user
