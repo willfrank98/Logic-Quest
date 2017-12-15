@@ -79,9 +79,6 @@ void BasicScene::onUpdate(qreal delta)
     // Update the mascot if in a tutorial
     if (tickTracker > 10 && currentLevel.isTutorial())
     {
-        if (mascotFrame == mascotTalkFrames.size()) mascotFrame = 0;
-        ((QGraphicsPixmapItem*)mascot)->setPixmap(mascotTalkFrames[mascotFrame++].scaled(96, 96));
-
         QString sheet;
         int frameCount = 25;
 
@@ -113,11 +110,17 @@ void BasicScene::onUpdate(qreal delta)
         }
 
         QList<QPixmap> dialogFrames = sl->getSprites(sheet, QSize(64, 64));
-        qDebug() << "FRAMES:" << dialogFrame;
         if (dialogFrame < frameCount)
         {
+            if (mascotFrame == mascotTalkFrames.size()) mascotFrame = 0;
+            ((QGraphicsPixmapItem*)mascot)->setPixmap(mascotTalkFrames[mascotFrame++].scaled(96, 96));
             ((QGraphicsPixmapItem*)mascotDialog)->setPixmap(dialogFrames[dialogFrame++].scaled(96, 96));
         }
+        else
+        {
+            ((QGraphicsPixmapItem*)mascot)->setPixmap(mascotTalkFrames.first().scaled(96, 96));
+        }
+
         tickTracker = 0;
     }
     tickTracker++;
