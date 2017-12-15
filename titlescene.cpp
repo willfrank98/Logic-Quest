@@ -143,7 +143,7 @@ void TitleScene::onInit()
     QPushButton *levelSelectButton = new QPushButton();
     levelSelectButton->setGeometry(QRect(sceneRect().width() * .35, sceneRect().height() * .57, sceneRect().width() * .30, sceneRect().height() * .10));
     levelSelectButton->setIcon(QIcon(":/images/icons/LevelSelect.png"));
-    levelSelectButton->setIconSize(QSize(190,190));
+    levelSelectButton->setIconSize(QSize(195,195));
     levelSelectButton->setAttribute(Qt::WA_TranslucentBackground);
     levelSelectButton->setStyleSheet("QPushButton {"
                                "background-color: rgb(68, 89, 99);"

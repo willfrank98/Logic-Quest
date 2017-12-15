@@ -19,6 +19,12 @@
         <file alias="Exit.png">res/icons/Exit.png</file>
         <file alias="Options.png">res/icons/Options.png</file>
         <file alias="Help.png">res/icons/Help.png</file>
+        <file alias="Not.png">res/icons/Not.png</file>
+        <file alias="Xor.png">res/icons/Xor.png</file>
+        <file alias="Nor.png">res/icons/Nor.png</file>
+        <file alias="Or.png">res/icons/Or.png</file>
+        <file alias="And.png">res/icons/And.png</file>
+        <file alias="Nand.png">res/icons/Nand.png</file>
     </qresource>
     <qresource prefix="/images/sprites">
         <file alias="gatesSheet.png">res/sprites/logic_gates_64x64.png</file>
