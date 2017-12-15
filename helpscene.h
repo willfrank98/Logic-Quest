@@ -27,6 +27,7 @@ private:
 
     void updateTruthTable(QString name);
     QPixmap* truthTable;
+    QGraphicsPixmapItem *truthTableItem;
 
     SpriteLoader* sl = new SpriteLoader();
     QGraphicsItem* mascot;
