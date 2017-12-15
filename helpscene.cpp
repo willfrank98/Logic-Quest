@@ -17,6 +17,9 @@ void HelpScene::onInit()
     musicPlayer->setVolume(75);
     if(enableMusic) musicPlayer->play();
 
+    soundEffect = new QMediaPlayer;
+    soundEffect->setMedia(QUrl("qrc:/sounds/Photon.mp3"));
+
     truthTable = new QPixmap();
     truthTableItem = addPixmap(*truthTable);
 
@@ -185,6 +188,9 @@ void HelpScene::onUpdate(qreal delta)
 
 void HelpScene::updateTruthTable(QString name)
 {
+    if(enableMusic)
+    soundEffect->play();
+
     delete truthTableItem;
 
     if(name == "and") {

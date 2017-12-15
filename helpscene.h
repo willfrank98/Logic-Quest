@@ -15,6 +15,7 @@ public:
 private: 
     QMediaPlaylist* playlist;
     QMediaPlayer* musicPlayer;
+    QMediaPlayer* soundEffect;
 
     QGraphicsProxyWidget* backToHomeProxy;
     QGraphicsProxyWidget* andGateProxy;
