@@ -29,6 +29,8 @@ private:
     void updateTruthTable(QString name);
     QPixmap* truthTable;
     QGraphicsPixmapItem *truthTableItem;
+    QPixmap* speechBubble;
+    QGraphicsPixmapItem *speechBubbleItem;
 
     SpriteLoader* sl = new SpriteLoader();
     QGraphicsItem* mascot;
