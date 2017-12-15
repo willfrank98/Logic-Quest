@@ -159,6 +159,16 @@ void HelpScene::onInit()
 
     /* Back button connection to link back to main menu */
     connect(backButton, &QPushButton::clicked, this, [=](){emit(changeScene("title"));}, Qt::QueuedConnection);
+
+    /* Add functionality to buttons so the truth tables display on click events */
+    connect(andGateButton, &QPushButton::clicked, this, [=](){HelpScene::updateTruthTable("and");}, Qt::QueuedConnection);
+    connect(nandGateButton, &QPushButton::clicked, this, [=](){HelpScene::updateTruthTable("nand");}, Qt::QueuedConnection);
+    connect(orGateButton, &QPushButton::clicked, this, [=](){HelpScene::updateTruthTable("or");}, Qt::QueuedConnection);
+    connect(norGateButton, &QPushButton::clicked, this, [=](){HelpScene::updateTruthTable("nor");}, Qt::QueuedConnection);
+    connect(xorGateButton, &QPushButton::clicked, this, [=](){HelpScene::updateTruthTable("xor");}, Qt::QueuedConnection);
+    connect(notGateButton, &QPushButton::clicked, this, [=](){HelpScene::updateTruthTable("not");}, Qt::QueuedConnection);
+
+    //TODO:Initialize the rect for the pixmap of truth table
 }
 
 void HelpScene::onUpdate(qreal delta)
@@ -170,4 +180,10 @@ void HelpScene::onUpdate(qreal delta)
         tickTracker = 0;
     }
     tickTracker++;
+}
+
+void HelpScene::updateTruthTable(QString name)
+{
+    //TODO: switch the pixmap to the correct truth table
+    qDebug() << name;
 }

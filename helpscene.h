@@ -23,6 +23,10 @@ private:
     QGraphicsProxyWidget* norGateProxy;
     QGraphicsProxyWidget* xorGateProxy;
     QGraphicsProxyWidget* notGateProxy;
+    QGraphicsProxyWidget* truthTableProxy;
+
+    void updateTruthTable(QString name);
+    QPixmap* truthTable;
 
     SpriteLoader* sl = new SpriteLoader();
     QGraphicsItem* mascot;
