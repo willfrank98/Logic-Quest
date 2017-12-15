@@ -26,6 +26,12 @@
         <file alias="And.png">res/icons/And.png</file>
         <file alias="Nand.png">res/icons/Nand.png</file>
         <file alias="Resolution.png">res/icons/Resolution.png</file>
+        <file alias="nandTT.png">res/icons/nandTT.png</file>
+        <file alias="norTT.png">res/icons/norTT.png</file>
+        <file alias="orTT.png">res/icons/orTT.png</file>
+        <file alias="xorTT.png">res/icons/xorTT.png</file>
+        <file alias="notTT.png">res/icons/notTT.png</file>
+        <file alias="andTT.png">res/icons/andTT.png</file>
     </qresource>
     <qresource prefix="/images/sprites">
         <file alias="gatesSheet.png">res/sprites/logic_gates_64x64.png</file>

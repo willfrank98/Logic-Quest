@@ -14,7 +14,7 @@ void HelpScene::onInit()
     playlist->setCurrentIndex(1);
     musicPlayer = new QMediaPlayer(this);
     musicPlayer->setPlaylist(playlist);
-    musicPlayer->setVolume(50);
+    musicPlayer->setVolume(75);
     if(enableMusic) musicPlayer->play();
 
     QPixmap *backPix = new QPixmap(":/images/icons/Home.png");
