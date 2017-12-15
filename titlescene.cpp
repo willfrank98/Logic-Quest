@@ -206,6 +206,7 @@ void TitleScene::onInit()
     connect(levelSelectButton, &QPushButton::clicked, this, &TitleScene::endMusic);
     connect(optionsButton, &QPushButton::clicked, this, &TitleScene::endMusic);
     connect(exitButton, &QPushButton::clicked, this, &TitleScene::endMusic);
+    connect(helpButton, &QPushButton::clicked, this, &TitleScene::endMusic);
 
     //connect(startButton, &QPushButton::clicked, this, &TitleScene::tutorialMessage, Qt::QueuedConnection);
 }

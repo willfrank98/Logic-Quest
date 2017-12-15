@@ -25,6 +25,7 @@
         <file alias="Or.png">res/icons/Or.png</file>
         <file alias="And.png">res/icons/And.png</file>
         <file alias="Nand.png">res/icons/Nand.png</file>
+        <file alias="Resolution.png">res/icons/Resolution.png</file>
     </qresource>
     <qresource prefix="/images/sprites">
         <file alias="gatesSheet.png">res/sprites/logic_gates_64x64.png</file>

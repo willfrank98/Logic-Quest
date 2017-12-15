@@ -56,7 +56,6 @@ void LevelMenu::onInit() {
 
 
     /* Header for the Easy levels */
-    //QGraphicsTextItem *easy = addText("EASY", font);
     QPixmap *easyPix = new QPixmap(":/images/icons/Easy.png");
     QGraphicsPixmapItem *easyItem = addPixmap(*easyPix);
     easyItem->setScale(0.5);
