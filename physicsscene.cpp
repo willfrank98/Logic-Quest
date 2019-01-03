@@ -36,7 +36,7 @@ void PhysicsScene::onInit()
 // This gets called every 'tick'
 void PhysicsScene::onUpdate(qreal delta)
 {
-	delta;
+	//delta;
 }
 
 // Updates physics bodies
